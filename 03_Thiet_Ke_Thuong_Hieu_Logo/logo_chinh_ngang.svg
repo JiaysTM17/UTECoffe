@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" width="1600" height="500">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap');
+      .c1h-title {
+        font-family: 'Montserrat', 'Century Gothic', -apple-system, sans-serif;
+        font-size: 74px;
+        font-weight: 700;
+        letter-spacing: 18px;
+        fill: #181615;
+      }
+      .c1h-subtitle {
+        font-family: 'Montserrat', 'Century Gothic', sans-serif;
+        font-size: 21px;
+        font-weight: 500;
+        letter-spacing: 10px;
+        fill: #947844;
+      }
+      .c1h-meta {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 6px;
+        fill: #5C554E;
+      }
+    </style>
+    <linearGradient id="goldDropH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D6B87B"/>
+      <stop offset="50%" stop-color="#C5A463"/>
+      <stop offset="100%" stop-color="#A68344"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="500" fill="#FFFFFF"/>
+
+  <!-- ICON LEFT (Center X=250, Y=250, Scale 0.65) -->
+  <g transform="translate(250, 250) scale(0.68)">
+    <path d="M 0,-150 C 40,-80 130,-10 130,85 C 130,175 60,230 0,230 C -25,230 -50,220 -70,205 C -45,185 -20,150 -20,105 C -20,25 0,-80 0,-150 Z" 
+          fill="#181615"/>
+    <path d="M 0,-150 C -40,-80 -130,-10 -130,85 C -130,175 -60,230 0,230 C 15,230 30,225 45,215 C 10,185 -10,140 -10,95 C -10,20 0,-80 0,-150 Z" 
+          fill="url(#goldDropH)"/>
+    <path d="M 0,-15 L 12,0 L 0,15 L -12,0 Z" fill="#FFFFFF"/>
+    <path d="M 0,-130 C -8,-40 12,40 0,210" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Clean Minimalist Divider -->
+  <line x1="440" y1="130" x2="440" y2="370" stroke="#EAE4D8" stroke-width="1.5"/>
+
+  <!-- TYPOGRAPHY RIGHT -->
+  <g transform="translate(510, 0)">
+    <text x="0" y="235" class="c1h-title">UTECOFFE</text>
+    <g transform="translate(4, 272)">
+      <line x1="0" y1="0" x2="680" y2="0" stroke="url(#goldDropH)" stroke-width="1.5"/>
+    </g>
+    <text x="4" y="325" class="c1h-subtitle">SPECIALTY TEA &amp; COFFEE ROASTERY</text>
+    <text x="4" y="375" class="c1h-meta">EST. 2026 • ARTISANAL ROASTERS • VIETNAM</text>
+  </g>
+</svg>

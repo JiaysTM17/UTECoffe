@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bản Phân Tích Ý Nghĩa &amp; Quy Chuẩn Thiết Kế Logo Thương Hiệu UTECoffe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #FFFFFF;
+    --bg-subtle: #FAF9F6;
+    --color-noir: #181615;
+    --color-gold: #C5A463;
+    --color-gold-dark: #8E703E;
+    --color-border: #EFEBE4;
+    --text-muted: #666057;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: var(--bg-main);
+    color: var(--color-noir);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.7;
+    padding: 60px 20px;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  header {
+    text-align: center;
+    padding-bottom: 40px;
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: 40px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 6px 18px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold-dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+  }
+  h1 {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    color: var(--color-noir);
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+  }
+
+  .main-logo-hero {
+    background: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+    margin-bottom: 50px;
+  }
+  .main-logo-hero img {
+    max-width: 85%;
+    height: auto;
+  }
+  .caption {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 15px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::before {
+    content: "■";
+    color: var(--color-gold);
+    font-size: 14px;
+  }
+
+  .content-box {
+    background: var(--bg-subtle);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-gold);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 30px;
+    font-size: 14.5px;
+  }
+
+  .anatomy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+  .anatomy-card {
+    background: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+  }
+  .anatomy-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-noir);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .anatomy-card h4::before {
+    content: "✦";
+    color: var(--color-gold);
+  }
+  .anatomy-card p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .swatch {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .swatch-box {
+    height: 90px;
+    width: 100%;
+  }
+  .swatch-info {
+    padding: 16px;
+    background: #FFFFFF;
+  }
+  .swatch-title {
+    font-weight: 700;
+    font-size: 13.5px;
+    margin-bottom: 4px;
+  }
+  .swatch-code {
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    font-size: 13.5px;
+  }
+  th, td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+  th {
+    background: var(--bg-subtle);
+    font-weight: 700;
+    color: var(--color-noir);
+  }
+
+  .pitch-box {
+    background: #181615;
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 40px;
+  }
+  .pitch-box h3 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-gold);
+    margin-bottom: 12px;
+  }
+  .pitch-box p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #DDD8D0;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 25px;
+    border-top: 1px solid var(--color-border);
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="badge">BÁO CÁO THUYẾT MINH THƯƠNG HIỆU • UTECOFFE 2026</div>
+    <h1>UTECOFFE</h1>
+    <div class="subtitle">BẢN PHÂN TÍCH Ý NGHĨA BIỂU TƯỢNG VÀ QUY CHUẨN THIẾT KẾ LOGO</div>
+  </header>
+
+  <div class="main-logo-hero">
+    <img src="logo_chinh_ngang.png" alt="Logo UTECoffe Chính Thức">
+    <div class="caption">Hình 1: Master Logo UTECoffe - Bản Phối Ngang Chuẩn Cho Header Website &amp; Ấn Phẩm Thương Hiệu</div>
+  </div>
+
+  <h2 class="section-title">1. TỔNG QUAN &amp; TRIẾT LÝ SÁNG TẠO (BRAND PHILOSOPHY)</h2>
+  <div class="content-box">
+    <p style="margin-bottom: 12px;">
+      Trong đề tài <strong>"Xây dựng website chuỗi bán trà và cafe UTECoffe"</strong>, thương hiệu được định vị là chuỗi thức uống đặc sản kết hợp nền tảng thương mại điện tử đa kênh (Omnichannel eCommerce). UTECoffe không chỉ cung cấp thức uống giải khát đơn thuần mà còn hướng tới trải nghiệm phong cách sống hiện đại (Lifestyle &amp; Specialty Coffee/Tea).
+    </p>
+    <p>
+      Lấy cảm hứng từ trường phái <strong>tối giản đương đại (Contemporary Minimalist)</strong> của các thương hiệu hàng đầu thế giới như <em>% Arabica (Kyoto), Blue Bottle Coffee (California) và Nespresso</em>, biểu tượng UTECoffe hoàn toàn thoát ly khỏi lối mòn của các con dấu tròn rập khuôn, tập trung vào <strong>hình học đặc trưng (Iconic Mark)</strong> sắc sảo trên nền trắng thuần khiết (#FFFFFF).
+    </p>
+  </div>
+
+  <h2 class="section-title">2. PHÂN TÍCH CHI TIẾT CÁC THÀNH TỐ BIỂU TƯỢNG (SYMBOLIC ANATOMY)</h2>
+  <div class="anatomy-grid">
+    <div class="anatomy-card">
+      <h4>Giọt Tinh Hoa Chiết Xuất (The Essence Drop)</h4>
+      <p>
+        Hình dáng tổng thể mô phỏng một giọt chất lỏng đang rơi xuống – kết tinh của từng giọt cà phê Espresso mộc đậm đặc và từng giọt trà được ủ chuẩn nhiệt độ. Biểu tượng cho sự chắt lọc tinh túy, tâm huyết của nghệ nhân pha chế (Barista Craft).
+      </p>
+    </div>
+
+    <div class="anatomy-card">
+      <h4>Búp Trà Non Camellia (Mạn Trái - Vàng Champagne)</h4>
+      <p>
+        Mạn trái là đường cong nhẹ nhàng của lá trà non <em>Camellia Sinensis</em> vươn lên đón nắng. Đại diện cho nguồn nguyên liệu tự nhiên thuần khiết từ các nông trường chè Tây Nguyên, mang lại vị thanh tao, dịu nhẹ và thư thái cho tâm hồn.
+      </p>
+    </div>
+
+    <div class="anatomy-card">
+      <h4>Hạt Cà Phê Mộc (Mạn Phải - Đen Khói Obsidian)</h4>
+      <p>
+        Mạn phải mang dáng hình hạt cà phê Arabica đặc sản với đường cong đầy đặn, chắc khỏe. Tượng trưng cho sự nồng nàn, chiều sâu, tính kiên định và phong cách thưởng thức cà phê rang mộc nguyên bản đầy cá tính.
+      </p>
+    </div>
+
+    <div class="anatomy-card">
+      <h4>Viên Ngọc Tâm Điểm (The Diamond Core)</h4>
+      <p>
+        Chi tiết hình thoi/kim cương trắng nằm ngay trên rãnh trung tâm là biểu tượng của "Chuẩn Mực Vàng" (Golden Ratio) trong kiểm soát chất lượng. Đồng thời, nó gợi liên tưởng đến ngòi bút tri thức và công nghệ của sinh viên UTE.
+      </p>
+    </div>
+
+    <div class="anatomy-card">
+      <h4>Chữ "U" Ẩn Tàng (Subtle Monogram U)</h4>
+      <p>
+        Đáy tròn của giọt nước cùng hai cánh vươn lên khéo léo tạo hình chữ "U" mềm mại – chữ cái đầu tiên của UTE và UTECoffe, ghi dấu ấn thương hiệu một cách tinh tế mà không phô trương.
+      </p>
+    </div>
+
+    <div class="anatomy-card">
+      <h4>Sự Cân Bằng Âm - Dương (Duality &amp; Harmony)</h4>
+      <p>
+        Hai nửa sáng - tối, trà - cà phê, thanh tao - đậm đà ôm trọn lấy nhau tạo nên một khối thống nhất hài hòa, thể hiện tôn chỉ phục vụ đa dạng nhu cầu của khách hàng trên cùng một nền tảng bán hàng.
+      </p>
+    </div>
+  </div>
+
+  <h2 class="section-title">3. HỆ THỐNG MÃ MÀU CHUẨN THƯƠNG HIỆU (COLOR SPECIFICATIONS)</h2>
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-box" style="background: #181615;"></div>
+      <div class="swatch-info">
+        <div class="swatch-title">Obsidian Charcoal Noir</div>
+        <div class="swatch-code">HEX: #181615</div>
+        <div class="swatch-code">RGB: 24, 22, 21</div>
+        <p style="font-size: 11.5px; color: var(--text-muted); margin-top: 6px;">Màu hạt cà phê rang mộc. Biểu thị sự vững chãi, cao cấp và nguyên bản.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-box" style="background: #C5A463;"></div>
+      <div class="swatch-info">
+        <div class="swatch-title">Satin Champagne Gold</div>
+        <div class="swatch-code">HEX: #C5A463</div>
+        <div class="swatch-code">RGB: 197, 164, 99</div>
+        <p style="font-size: 11.5px; color: var(--text-muted); margin-top: 6px;">Màu búp trà non &amp; sự xa xỉ. Biểu thị chất lượng thượng hạng và thịnh vượng.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-box" style="background: #FFFFFF; border-bottom: 1px solid var(--color-border);"></div>
+      <div class="swatch-info">
+        <div class="swatch-title">Pure Crisp White</div>
+        <div class="swatch-code">HEX: #FFFFFF</div>
+        <div class="swatch-code">RGB: 255, 255, 255</div>
+        <p style="font-size: 11.5px; color: var(--text-muted); margin-top: 6px;">Nền không gian bắt buộc. Tôn vinh hình khối, tạo độ thoáng và sạch sẽ.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">4. NGHỆ THUẬT CHỮ &amp; BỐ CỤC KHÔNG GIAN (TYPOGRAPHY DYNAMICS)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Thành Phần</th>
+        <th>Kiểu Font &amp; Đặc Tính</th>
+        <th>Ý Nghĩa Thiết Kế</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tên Thương Hiệu (UTECOFFE)</strong></td>
+        <td>Geometric Sans-serif, nét dày (Bold 700), khoảng cách giãn chữ (Tracking 18px) rộng thoáng.</td>
+        <td>Thể hiện tinh thần hiện đại, minh bạch, năng động của thế hệ trẻ và tư duy công nghệ mở.</td>
+      </tr>
+      <tr>
+        <td><strong>Định Vị (SPECIALTY TEA &amp; COFFEE)</strong></td>
+        <td>Chữ in hoa nét mảnh thanh lịch (Medium 500), màu vàng Champagne Gold.</td>
+        <td>Khẳng định phân khúc đồ uống đặc sản (Specialty) và xưởng rang thủ công (Roastery).</td>
+      </tr>
+      <tr>
+        <td><strong>Đường Chỉ Phân Cách (Vertical Divider)</strong></td>
+        <td>Đường nét thanh 1.5px màu be ấm (`#EAE4D8`).</td>
+        <td>Tạo nhịp nghỉ thị giác, phân định rành mạch giữa biểu tượng nghệ thuật và tên thương hiệu.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-title">5. TÀI NGUYÊN FILE SẴN SÀNG CHO LẬP TRÌNH WEB (WEB ASSETS)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tên File</th>
+        <th>Định Dạng</th>
+        <th>Mục Đích Sử Dụng Trong Source Code Web</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>logo_chinh_ngang.png / .svg</code></td>
+        <td>PNG 1600x500 &amp; SVG</td>
+        <td>Đặt trên Header Navbar chính của trang chủ, trang thanh toán giỏ hàng và hóa đơn VAT.</td>
+      </tr>
+      <tr>
+        <td><code>logo_chinh_doc.png / .svg</code></td>
+        <td>PNG 1000x1200 &amp; SVG</td>
+        <td>Đặt tại trang Đăng nhập / Đăng ký (Login modal), trang giới thiệu (About us) và Footer.</td>
+      </tr>
+      <tr>
+        <td><code>logo_bieu_tuong_app_icon_512.png / .svg</code></td>
+        <td>PNG 512x512 &amp; SVG</td>
+        <td>Làm icon ứng dụng PWA (Progressive Web App) và ảnh đại diện mạng xã hội OpenGraph.</td>
+      </tr>
+      <tr>
+        <td><code>favicon.ico, favicon_32x32.png</code></td>
+        <td>ICO &amp; PNG</td>
+        <td>Nhúng trực tiếp vào thẻ <code>&lt;head&gt;</code> của layout Decorator Sitemesh / JSP.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pitch-box">
+    <h3>THÔNG ĐIỆP BẢO VỆ ĐỒ ÁN TRƯỚC HỘI ĐỒNG (ELEVATOR PITCH)</h3>
+    <p>
+      "Kính thưa Thầy/Cô Hội đồng, biểu tượng UTECoffe được thiết kế dựa trên sự hợp nhất tinh hoa giữa <strong>Giọt cà phê mộc đậm đà</strong> và <strong>Búp trà non thanh khiết</strong> theo tỷ lệ vàng tối giản. Trung tâm là điểm nhấn tâm điểm biểu trưng cho ngòi bút tri thức UTE và công nghệ chiết xuất thủ công. Logo hoàn toàn thoát ly khỏi các khuôn mẫu rập khuôn cũ, mang phong cách phong cách tối giản hiện đại, giúp nâng tầm trải nghiệm của khách hàng trên nền tảng thương mại điện tử Spring Boot hiện đại."
+    </p>
+  </div>
+
+  <footer>
+    <p><strong>Đồ Án: Xây Dựng Hệ Thống Thương Mại Điện Tử Chuỗi Trà &amp; Cà Phê UTECoffe</strong></p>
+    <p style="margin-top: 5px;">Tài liệu phân tích nhận diện thương hiệu đặc trưng • Năm phát hành: 2026</p>
+  </footer>
+</div>
+</body>
+</html>
