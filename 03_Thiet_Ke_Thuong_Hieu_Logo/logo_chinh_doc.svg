@@ -1,67 +1,58 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" width="1000" height="1200">
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Cinzel:wght@600;700&amp;display=swap');
-      .c1-title {
-        font-family: 'Montserrat', 'Century Gothic', -apple-system, sans-serif;
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap');
+      .c1v-title-dark {
+        font-family: 'Montserrat', sans-serif;
         font-size: 64px;
         font-weight: 700;
         letter-spacing: 16px;
-        fill: #181615;
+        fill: #F5F2EB;
         text-anchor: middle;
       }
-      .c1-subtitle {
-        font-family: 'Montserrat', 'Century Gothic', sans-serif;
+      .c1v-subtitle-dark {
+        font-family: 'Montserrat', sans-serif;
         font-size: 18px;
         font-weight: 500;
         letter-spacing: 9px;
-        fill: #947844;
+        fill: #E5C37E;
         text-anchor: middle;
       }
-      .c1-meta {
+      .c1v-meta-dark {
         font-family: 'Montserrat', sans-serif;
         font-size: 13px;
         font-weight: 600;
         letter-spacing: 6px;
-        fill: #5C554E;
+        fill: #A89F94;
         text-anchor: middle;
       }
     </style>
-    <linearGradient id="goldDrop" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#D6B87B"/>
-      <stop offset="50%" stop-color="#C5A463"/>
-      <stop offset="100%" stop-color="#A68344"/>
+    <linearGradient id="goldDropVDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EED59B"/>
+      <stop offset="45%" stop-color="#DEB76A"/>
+      <stop offset="100%" stop-color="#B88E44"/>
+    </linearGradient>
+    <linearGradient id="beanDropVDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D2824"/>
+      <stop offset="100%" stop-color="#1A1715"/>
     </linearGradient>
   </defs>
 
-  <!-- Pure White Background -->
-  <rect width="1000" height="1200" fill="#FFFFFF"/>
-
-  <!-- ICON: THE GEOMETRIC DROP & LEAF (Center at X=500, Y=440) -->
   <g transform="translate(500, 440)">
-    <!-- Right Shape: Pure Coffee Drop in Deep Obsidian Espresso -->
     <path d="M 0,-150 C 40,-80 130,-10 130,85 C 130,175 60,230 0,230 C -25,230 -50,220 -70,205 C -45,185 -20,150 -20,105 C -20,25 0,-80 0,-150 Z" 
-          fill="#181615"/>
-
-    <!-- Left Shape: Camellia Tea Leaf in Satin Champagne Gold -->
+          fill="url(#beanDropVDark)" stroke="#4A423A" stroke-width="2"/>
     <path d="M 0,-150 C -40,-80 -130,-10 -130,85 C -130,175 -60,230 0,230 C 15,230 30,225 45,215 C 10,185 -10,140 -10,95 C -10,20 0,-80 0,-150 Z" 
-          fill="url(#goldDrop)"/>
-
-    <!-- Central Floating Diamond/Star - The Perfect Extraction Essence -->
+          fill="url(#goldDropVDark)"/>
     <path d="M 0,-15 L 12,0 L 0,15 L -12,0 Z" fill="#FFFFFF"/>
-
-    <!-- Minimalist S-Curve Fissure dividing the essence -->
     <path d="M 0,-130 C -8,-40 12,40 0,210" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
   </g>
 
-  <!-- Divider Line -->
   <g transform="translate(500, 770)">
-    <line x1="-60" y1="0" x2="60" y2="0" stroke="url(#goldDrop)" stroke-width="2"/>
-    <circle cx="0" cy="0" r="3.5" fill="#C5A463"/>
+    <line x1="-60" y1="0" x2="60" y2="0" stroke="url(#goldDropVDark)" stroke-width="2"/>
+    <circle cx="0" cy="0" r="3.5" fill="#E5C37E"/>
   </g>
 
-  <!-- TYPOGRAPHY -->
-  <text x="508" y="860" class="c1-title">UTECOFFE</text>
-  <text x="504" y="915" class="c1-subtitle">SPECIALTY TEA &amp; COFFEE ROASTERY</text>
-  <text x="503" y="965" class="c1-meta">EST. 2026 • ARTISANAL CRAFT</text>
+  <text x="508" y="860" class="c1v-title-dark">UTECOFFE</text>
+  <text x="504" y="915" class="c1v-subtitle-dark">SPECIALTY TEA &amp; COFFEE ROASTERY</text>
+  <text x="503" y="965" class="c1v-meta-dark">EST. 2026 • ARTISANAL CRAFT</text>
 </svg>

@@ -1,22 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="favDropGold" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="favDropGoldT" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#D6B87B"/>
       <stop offset="50%" stop-color="#C5A463"/>
       <stop offset="100%" stop-color="#A68344"/>
     </linearGradient>
   </defs>
 
-  <!-- Pure White Background with rounded squircle border -->
-  <rect width="512" height="512" rx="112" fill="#FFFFFF"/>
-  <rect width="510" height="510" x="1" y="1" rx="111" fill="none" stroke="#EFEBE4" stroke-width="2"/>
-
-  <!-- Center Icon Scale 0.95 -->
   <g transform="translate(256, 256) scale(0.95)">
     <path d="M 0,-150 C 40,-80 130,-10 130,85 C 130,175 60,230 0,230 C -25,230 -50,220 -70,205 C -45,185 -20,150 -20,105 C -20,25 0,-80 0,-150 Z" 
           fill="#181615"/>
     <path d="M 0,-150 C -40,-80 -130,-10 -130,85 C -130,175 -60,230 0,230 C 15,230 30,225 45,215 C 10,185 -10,140 -10,95 C -10,20 0,-80 0,-150 Z" 
-          fill="url(#favDropGold)"/>
+          fill="url(#favDropGoldT)"/>
     <path d="M 0,-15 L 12,0 L 0,15 L -12,0 Z" fill="#FFFFFF"/>
     <path d="M 0,-130 C -8,-40 12,40 0,210" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
   </g>
