@@ -1,6 +1,8 @@
 package com.utecoffe.controller.mvc;
 
+import com.utecoffe.entity.Product;
 import com.utecoffe.service.ProductService;
+import com.utecoffe.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,9 @@ public class MenuController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping
     public String menu(@RequestParam(required = false) Long categoryId, Model model) {
@@ -27,7 +32,10 @@ public class MenuController {
 
     @GetMapping("/{slug}")
     public String productDetail(@PathVariable String slug, Model model) {
-        model.addAttribute("product", productService.getProductBySlug(slug));
+        Product product = productService.getProductBySlug(slug);
+        model.addAttribute("product", product);
+        model.addAttribute("reviews", reviewService.getApprovedReviewsByProduct(product.getId()));
+        model.addAttribute("avgRating", reviewService.getProductAverageRating(product.getId()));
         return "customer/product-detail";
     }
 }
