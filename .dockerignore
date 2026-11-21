@@ -1,0 +1,10 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.log
+.git
+.gitignore
+.idea
+*.iml
+.vscode
+01_Tai_Lieu_Bao_Cao_Word/
+02_Tai_Lieu_Nguon_Markdown_Backup/

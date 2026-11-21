@@ -1,0 +1,65 @@
+services:
+  # 1. PostgreSQL 16 Database
+  utecoffe-db:
+    image: postgres:16-alpine
+    container_name: utecoffe-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: utecoffe_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: utecoffe_secure_password_2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - utecoffe_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d utecoffe_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - utecoffe-network
+
+  # 2. UTECoffe Spring Boot Application
+  utecoffe-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: utecoffe-platform
+    restart: always
+    depends_on:
+      utecoffe-db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://utecoffe-db:5432/utecoffe_db
+      DB_USERNAME: postgres
+      DB_PASSWORD: utecoffe_secure_password_2026
+      JWT_SECRET: UtecoffeSecretKeyForJwtAuthenticationTokenGeneration2026SecureKey
+      JWT_EXPIRATION_MS: 86400000
+    ports:
+      - "8080:8080"
+    networks:
+      - utecoffe-network
+
+  # 3. pgAdmin 4 Database Administration Web UI (Optional)
+  utecoffe-pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: utecoffe-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@utecoffe.vn
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - utecoffe-db
+    networks:
+      - utecoffe-network
+
+volumes:
+  utecoffe_pgdata:
+    driver: local
+
+networks:
+  utecoffe-network:
+    driver: bridge
