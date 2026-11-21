@@ -49,6 +49,8 @@ class OrderServiceTest {
     private CouponRepository couponRepository;
     @Mock
     private InventoryService inventoryService;
+    @Mock
+    private com.utecoffe.service.LoyaltyService loyaltyService;
 
     @InjectMocks
     private OrderServiceImpl orderService;

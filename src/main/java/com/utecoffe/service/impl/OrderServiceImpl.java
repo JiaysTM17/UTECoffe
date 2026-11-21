@@ -57,6 +57,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private InventoryService inventoryService;
 
+    @Autowired
+    private com.utecoffe.service.LoyaltyService loyaltyService;
+
     @Override
     @Transactional
     public Order createOrder(OrderCreateRequest request, Long userId) {
@@ -221,6 +224,11 @@ public class OrderServiceImpl implements OrderService {
         // If order moves to PREPARING, deduct ingredients BOM
         if (newStatus == OrderStatus.PREPARING) {
             inventoryService.deductStockForOrder(order);
+        }
+
+        // If order is COMPLETED, automatically accumulate UTEClub loyalty points
+        if (newStatus == OrderStatus.COMPLETED) {
+            loyaltyService.accumulatePointsForOrder(order);
         }
 
         OrderTracking tracking = OrderTracking.builder()
