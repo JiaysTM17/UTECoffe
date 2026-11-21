@@ -1,0 +1,36 @@
+name: UTECoffe CI/CD Build & Test Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build, Verify and Package
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code Repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 21 Temurin
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Run Automated Test Suites (JUnit 5 & SpringBootTest)
+      run: mvn test --batch-mode
+
+    - name: Build Executable WAR Package
+      run: mvn package -DskipTests --batch-mode
+
+    - name: Upload Build Artifact (WAR)
+      uses: actions/upload-artifact@v4
+      with:
+        name: utecoffe-platform-war
+        path: target/*.war
+        retention-days: 7
