@@ -59,6 +59,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.ignoringRequestMatchers("/ws-utecoffe/**"))
             .authorizeHttpRequests(auth -> auth
                 // Static resources
+                .requestMatchers("/actuator/health", "/actuator/info").permitAll()
                 .requestMatchers("/static/**", "/assets/**", "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
                 // Public storefront pages
                 .requestMatchers("/", "/menu/**", "/stores/**", "/story/**", "/reservation/**", "/cart/**").permitAll()
