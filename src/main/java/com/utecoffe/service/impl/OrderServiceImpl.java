@@ -60,6 +60,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private com.utecoffe.service.LoyaltyService loyaltyService;
 
+    @Autowired(required = false)
+    private com.utecoffe.service.EmailService emailService;
+
     @Override
     @Transactional
     public Order createOrder(OrderCreateRequest request, Long userId) {
@@ -187,6 +190,11 @@ public class OrderServiceImpl implements OrderService {
                 .message("Don hang da duoc tao thanh cong va cho xac nhan")
                 .build();
         orderTrackingRepository.save(tracking);
+
+        // Async email confirmation dispatch
+        if (emailService != null) {
+            emailService.sendOrderReceipt(savedOrder);
+        }
 
         return savedOrder;
     }
