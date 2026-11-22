@@ -292,6 +292,9 @@ Sau khi ứng dụng khởi chạy thành công, truy cập các cổng chức n
 - **Cổng Khách Hàng (Web Store):** `http://localhost:8080/`
 - **Màn Hình Barista KDS:** `http://localhost:8080/barista/orders`
 - **Trang Quản Trị Hệ Thống (Admin):** `http://localhost:8080/admin/dashboard`
+- **Tài Liệu REST API Tương Tác (Swagger UI / OpenAPI 3.0):** `http://localhost:8080/swagger-ui.html`
+- **Hệ Thống Giám Sát & Sức Khỏe Ứng Dụng (Spring Boot Actuator):** `http://localhost:8080/actuator/health`
+- **Xuất Báo Cáo Doanh Thu & Đơn Hàng Định Dạng Excel (.xlsx):** `http://localhost:8080/admin/orders/export`
 
 ---
 
