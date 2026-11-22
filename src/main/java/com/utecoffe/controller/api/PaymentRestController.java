@@ -35,6 +35,9 @@ public class PaymentRestController {
     private VnPayService vnPayService;
 
     @Autowired
+    private com.utecoffe.service.MoMoPaymentService moMoPaymentService;
+
+    @Autowired
     private PaymentRepository paymentRepository;
 
     @Autowired
@@ -87,5 +90,37 @@ public class PaymentRestController {
         } else {
             response.sendRedirect("/orders/tracking/" + orderCode + "?payment=failed");
         }
+    }
+
+    @GetMapping("/momo/create-url/{orderCode}")
+    public ResponseEntity<ApiResponse<String>> createMoMoUrl(@PathVariable String orderCode) {
+        Order order = orderService.getOrderByCode(orderCode);
+        String url = moMoPaymentService.createPaymentRequest(order);
+        return ResponseEntity.ok(ApiResponse.success(url, "Tao URL thanh toan MoMo thanh cong"));
+    }
+
+    @PostMapping("/momo/callback")
+    public ResponseEntity<Map<String, Object>> momoCallback(@RequestBody Map<String, String> payload) {
+        boolean valid = moMoPaymentService.verifySignature(payload);
+        String orderCode = payload.get("orderId");
+        String resultCode = payload.get("resultCode");
+
+        Map<String, Object> resp = new HashMap<>();
+        if (valid && "0".equals(resultCode)) {
+            Order order = orderService.getOrderByCode(orderCode);
+            Payment payment = paymentRepository.findByOrderId(order.getId()).orElse(null);
+            if (payment != null) {
+                payment.setStatus(PaymentStatus.PAID);
+                payment.setTransactionId(payload.get("transId"));
+                payment.setPaymentTime(LocalDateTime.now());
+                paymentRepository.save(payment);
+            }
+            orderService.updateOrderStatus(order.getId(), OrderStatus.CONFIRMED, "Thanh toan MoMo thanh cong");
+            notificationService.notifyOrderStatusChanged(order, "Thanh toan MoMo thanh cong!");
+            resp.put("message", "Success");
+            return ResponseEntity.ok(resp);
+        }
+        resp.put("message", "Invalid signature or failed transaction");
+        return ResponseEntity.badRequest().body(resp);
     }
 }
