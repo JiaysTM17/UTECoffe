@@ -6,6 +6,7 @@ import com.utecoffe.enums.OrderStatus;
 import com.utecoffe.enums.PaymentStatus;
 import com.utecoffe.repository.*;
 import com.utecoffe.service.InventoryService;
+import com.utecoffe.aspect.Auditable;
 import com.utecoffe.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +66,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
+    @Auditable(action = "CREATE_ORDER", entityName = "Order")
     public Order createOrder(OrderCreateRequest request, Long userId) {
         Store store = storeRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new RuntimeException("Chi nhanh khong ton tai"));
@@ -224,6 +226,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
+    @Auditable(action = "UPDATE_ORDER_STATUS", entityName = "Order")
     public Order updateOrderStatus(Long orderId, OrderStatus newStatus, String note) {
         Order order = getOrderById(orderId);
         order.setStatus(newStatus);
