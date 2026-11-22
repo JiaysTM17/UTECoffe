@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4 class="fw-bold mb-0">Danh Sách Đơn Hàng Toàn Hệ Thống</h4>
         <div class="d-flex gap-2">
-            <button class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-export me-1"></i> Xuất Excel</button>
+            <a href="${pageContext.request.contextPath}/admin/orders/export" class="btn btn-success btn-sm"><i class="fa-solid fa-file-excel me-1"></i> Xuất Excel (.xlsx)</a>
         </div>
     </div>
 

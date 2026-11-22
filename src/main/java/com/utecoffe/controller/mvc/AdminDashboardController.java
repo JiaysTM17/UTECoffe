@@ -45,6 +45,18 @@ public class AdminDashboardController {
         return "admin/dashboard";
     }
 
+    @Autowired
+    private com.utecoffe.service.ExcelExportService excelExportService;
+
+    @GetMapping("/orders/export")
+    public void exportOrders(jakarta.servlet.http.HttpServletResponse response) throws java.io.IOException {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        String headerValue = "attachment; filename=orders_export_" + java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")) + ".xlsx";
+        response.setHeader("Content-Disposition", headerValue);
+        java.util.List<com.utecoffe.entity.Order> orders = orderRepository.findAll();
+        excelExportService.exportOrdersToExcel(orders, response.getOutputStream());
+    }
+
     @GetMapping("/orders")
     public String orders(Model model) {
         model.addAttribute("orders", orderRepository.findAll());
