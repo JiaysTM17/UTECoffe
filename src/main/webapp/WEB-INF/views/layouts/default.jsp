@@ -38,71 +38,72 @@
 
     <!-- Top Luxury Announcement Banner (High Contrast) -->
     <div class="top-announcement-bar">
-        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <div class="d-none d-lg-flex align-items-center gap-2 top-bar-info">
+        <div class="container-fluid px-3 px-xl-5 d-flex justify-content-between align-items-center flex-nowrap" style="max-width: 1720px; margin: 0 auto;">
+            <div class="d-none d-lg-flex align-items-center gap-2 top-bar-info flex-shrink-0 text-nowrap">
                 <i class="fa-solid fa-location-dot text-gold"></i>
                 <span data-i18n="topbar.location">Flagship: 01 Võ Văn Ngân, TP. Thủ Đức, TP.HCM</span>
             </div>
-            <div class="mx-auto text-center top-bar-promo">
+            <div class="mx-auto text-center top-bar-promo text-nowrap px-2">
                 <i class="fa-solid fa-gem text-gold me-1"></i>
                 <span class="top-bar-promo-text" data-i18n="topbar.promo">ƯU ĐÃI 20% ĐƠN ĐẦU TIÊN • FREESHIP TOÀN QUỐC TỪ 150.000₫</span>
             </div>
-            <div class="d-none d-md-flex align-items-center gap-3 top-bar-right">
-                <span class="text-secondary"><i class="fa-solid fa-clock text-gold me-1"></i><span data-i18n="topbar.hours">07:00 - 22:30</span></span>
+            <div class="d-none d-md-flex align-items-center gap-3 top-bar-right flex-shrink-0 text-nowrap">
+                <span class="text-secondary"><i class="fa-regular fa-clock text-gold me-1"></i><span data-i18n="topbar.hours">07:00 - 22:30</span></span>
+                <span class="opacity-50">|</span>
                 <a href="tel:19002026" class="top-bar-hotline"><i class="fa-solid fa-phone text-gold me-1"></i>1900 2026</a>
             </div>
         </div>
     </div>
 
     <!-- Glassmorphism Sticky Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-luxury sticky-top">
-        <div class="container">
+    <nav class="navbar navbar-expand-xl navbar-luxury sticky-top">
+        <div class="container-fluid px-3 px-xl-5 d-flex align-items-center justify-content-between flex-nowrap" style="max-width: 1720px; margin: 0 auto;">
             <!-- Brand Logo (Official Vector SVG Transparent) -->
-            <a class="navbar-brand py-0 me-3 me-xl-4" href="${pageContext.request.contextPath}/">
-                <img id="navbarLogo" src="${pageContext.request.contextPath}/assets/images/logo_dark.svg" alt="UTECOFFE Specialty Roastery" height="46" class="brand-logo-img d-inline-block align-text-top">
+            <a class="navbar-brand py-0 me-3 me-xxl-4 flex-shrink-0" href="${pageContext.request.contextPath}/">
+                <img id="navbarLogo" src="${pageContext.request.contextPath}/assets/images/logo_dark.svg" alt="UTECOFFE Specialty Roastery" height="48" class="brand-logo-img d-inline-block align-text-top">
             </a>
 
             <!-- Mobile Toggle -->
-            <button class="navbar-toggler border-gold text-gold" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                <i class="fa-solid fa-bars-staggered"></i>
+            <button class="navbar-toggler border-gold text-gold p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars-staggered fa-lg"></i>
             </button>
 
             <!-- Nav Items -->
             <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-xl-0 flex-row flex-nowrap align-items-center gap-1 gap-xxl-2">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-luxury" data-i18n="nav.home" href="${pageContext.request.contextPath}/">Trang Chủ</a>
+                        <a class="nav-link nav-link-luxury text-nowrap" data-i18n="nav.home" href="${pageContext.request.contextPath}/">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-luxury" data-i18n="nav.menu" href="${pageContext.request.contextPath}/menu">Thực Đơn</a>
+                        <a class="nav-link nav-link-luxury text-nowrap" data-i18n="nav.menu" href="${pageContext.request.contextPath}/menu">Thực Đơn</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-luxury" data-i18n="nav.story" href="${pageContext.request.contextPath}/story">Câu Chuyện</a>
+                        <a class="nav-link nav-link-luxury text-nowrap" data-i18n="nav.story" href="${pageContext.request.contextPath}/story">Câu Chuyện</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-luxury" data-i18n="nav.reservation" href="${pageContext.request.contextPath}/reservation">Đặt Bàn</a>
+                        <a class="nav-link nav-link-luxury text-nowrap" data-i18n="nav.reservation" href="${pageContext.request.contextPath}/reservation">Đặt Bàn</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-luxury" data-i18n="nav.stores" href="${pageContext.request.contextPath}/stores">Chi Nhánh</a>
+                        <a class="nav-link nav-link-luxury text-nowrap" data-i18n="nav.stores" href="${pageContext.request.contextPath}/stores">Chi Nhánh</a>
                     </li>
                 </ul>
 
                 <!-- Right Actions: Language + Theme Switcher + Cart + User -->
-                <div class="d-flex align-items-center gap-2 gap-lg-3">
+                <div class="d-flex align-items-center gap-2 gap-xl-3 flex-nowrap ms-auto header-actions-group">
                     <!-- Bilingual Language Toggle -->
-                    <div class="lang-switcher" role="group" aria-label="Bilingual selector">
+                    <div class="lang-switcher flex-shrink-0" role="group" aria-label="Bilingual selector">
                         <button type="button" class="btn-lang-toggle active" data-lang="vi" title="Tiếng Việt">VN</button>
                         <button type="button" class="btn-lang-toggle" data-lang="en" title="English">EN</button>
                     </div>
 
                     <!-- Theme Switcher (Dark / Light) -->
-                    <button id="themeToggleBtn" class="btn btn-theme-toggle" type="button" title="Chuyển đổi giao diện Sáng / Tối" aria-label="Toggle theme">
+                    <button id="themeToggleBtn" class="btn btn-theme-toggle flex-shrink-0" type="button" title="Chuyển đổi giao diện Sáng / Tối" aria-label="Toggle theme">
                         <i class="fa-solid fa-sun icon-sun text-gold"></i>
                         <i class="fa-solid fa-moon icon-moon text-gold"></i>
                     </button>
 
                     <!-- Cart Button -->
-                    <a href="${pageContext.request.contextPath}/cart" class="btn btn-outline-gold btn-sm px-3 position-relative">
+                    <a href="${pageContext.request.contextPath}/cart" class="btn btn-outline-gold btn-sm px-3 flex-shrink-0 text-nowrap position-relative">
                         <i class="fa-solid fa-bag-shopping me-1"></i> <span data-i18n="nav.cart">Giỏ Hàng</span>
                     </a>
 
@@ -133,7 +134,7 @@
                     </sec:authorize>
 
                     <sec:authorize access="!isAuthenticated()">
-                        <a href="${pageContext.request.contextPath}/auth/login" class="btn btn-gold btn-sm">
+                        <a href="${pageContext.request.contextPath}/auth/login" class="btn btn-gold btn-sm px-3 flex-shrink-0 text-nowrap">
                             <i class="fa-solid fa-arrow-right-to-bracket me-1"></i> <span data-i18n="nav.login">Đăng Nhập</span>
                         </a>
                     </sec:authorize>
