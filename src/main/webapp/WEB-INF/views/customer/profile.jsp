@@ -141,7 +141,7 @@
                                                 <td class="small text-light">${ord.store.name}</td>
                                                 <td><span class="badge bg-espresso border border-secondary text-light small">${ord.orderType}</span></td>
                                                 <td class="text-gold fw-bold font-monospace">
-                                                    <fmt:formatNumber value="${ord.finalAmount}" type="currency" currencySymbol="₫"/>
+                                                    <fmt:formatNumber value="${ord.finalAmount}" pattern="#,##0"/> VNĐ
                                                 </td>
                                                 <td>
                                                     <span class="badge bg-gold-subtle text-gold border border-gold-subtle small">${ord.status}</span>

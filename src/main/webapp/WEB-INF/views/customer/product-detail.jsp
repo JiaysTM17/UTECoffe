@@ -37,18 +37,50 @@
                         </h6>
                         
                         <div class="mb-3">
-                            <div class="d-flex justify-content-between small text-secondary mb-1">
-                                <span>Vùng trồng / Xuất xứ:</span>
-                                <strong class="text-gold">Cầu Đất Terroir (1.600m)</strong>
-                            </div>
-                            <div class="d-flex justify-content-between small text-secondary mb-1">
-                                <span>Phương pháp sơ chế:</span>
-                                <strong class="text-gold">Honey Process (Mật ong)</strong>
-                            </div>
-                            <div class="d-flex justify-content-between small text-secondary mb-3">
-                                <span>Mức độ rang:</span>
-                                <strong class="text-gold">Medium Roast (Rang vừa)</strong>
-                            </div>
+                            <c:choose>
+                                <c:when test="${product.category.id == 2}">
+                                    <div class="d-flex justify-content-between small text-secondary mb-1">
+                                        <span>Vùng đồi chè:</span>
+                                        <strong class="text-gold">Mộc Châu &amp; Tây Hồ</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-secondary mb-1">
+                                        <span>Phương pháp lên men:</span>
+                                        <strong class="text-gold">Bán phần thủ công 40%</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-secondary mb-3">
+                                        <span>Công nghệ sấy:</span>
+                                        <strong class="text-gold">Sấy lạnh giữ trọn hương hoa</strong>
+                                    </div>
+                                </c:when>
+                                <c:when test="${product.category.id == 3}">
+                                    <div class="d-flex justify-content-between small text-secondary mb-1">
+                                        <span>Nguyên liệu hảo hạng:</span>
+                                        <strong class="text-gold">Bơ Pháp Elle &amp; Vire 100%</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-secondary mb-1">
+                                        <span>Phương pháp ủ bột:</span>
+                                        <strong class="text-gold">Lên men chậm tự nhiên 24h</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-secondary mb-3">
+                                        <span>Kỹ thuật nướng:</span>
+                                        <strong class="text-gold">Lò nướng đối lưu vàng giòn</strong>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="d-flex justify-content-between small text-secondary mb-1">
+                                        <span>Vùng trồng / Xuất xứ:</span>
+                                        <strong class="text-gold">Cầu Đất Terroir (1.600m)</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-secondary mb-1">
+                                        <span>Phương pháp sơ chế:</span>
+                                        <strong class="text-gold">Honey Process (Mật ong)</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-secondary mb-3">
+                                        <span>Mức độ rang:</span>
+                                        <strong class="text-gold">Medium Roast (Rang vừa)</strong>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
 
                         <!-- Taste Attributes -->
@@ -124,9 +156,9 @@
                     <!-- Price Box -->
                     <div class="p-3 rounded-4 bg-espresso border border-gold mb-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
                         <div>
-                            <span class="small text-secondary d-block font-accent text-uppercase" style="letter-spacing: 0.08em;">Giá Thưởng Thức:</span>
-                            <span class="price-gold display-6 fw-bold" id="liveDisplayPrice">
-                                <fmt:formatNumber value="${product.basePrice}" type="currency" currencySymbol="₫"/>
+                            <span class="small text-secondary d-block font-accent text-uppercase" style="letter-spacing: 0.08em;" data-i18n="detail.price_label">Giá Thưởng Thức:</span>
+                            <span class="price-gold display-6 fw-bold" id="liveDisplayPrice" data-raw-price="${product.basePrice}">
+                                <fmt:formatNumber value="${product.basePrice}" pattern="#,##0"/> VNĐ
                             </span>
                         </div>
                         <div class="badge bg-gold-subtle border border-gold text-gold py-2 px-3 small">
@@ -134,73 +166,74 @@
                         </div>
                     </div>
 
-                    <!-- Specialty Customizer Options -->
-                    <div class="card-luxury p-4 mb-4">
-                        <h5 class="font-serif fw-bold text-gold mb-3 border-bottom border-gold pb-2">
-                            <i class="fa-solid fa-sliders me-2"></i>Tùy Chỉnh Khẩu Vị Barista
+                    <!-- Specialty Customizer Options (Refined Artisanal Minimalist) -->
+                    <div class="card-luxury p-4 mb-4 customizer-box">
+                        <h5 class="font-serif fw-bold text-gold mb-4 pb-2 border-bottom border-gold d-flex align-items-center justify-content-between">
+                            <span><i class="fa-solid fa-sliders me-2 text-gold"></i><span data-i18n="customizer.title">Tùy Chỉnh Khẩu Vị Barista</span></span>
+                            <span class="badge bg-gold-subtle text-gold small fw-normal font-sans" style="font-size: 0.72rem;" data-i18n="customizer.badge">Chuẩn Vị Nghệ Nhân</span>
                         </h5>
 
                         <!-- 1. Size Selection -->
                         <div class="mb-4">
-                            <label class="form-label text-gold small fw-bold text-uppercase d-flex justify-content-between" style="letter-spacing: 0.08em;">
-                                <span>1. Chọn Kích Cỡ Ly:</span>
-                                <span class="text-secondary fw-normal" id="selectedSizeLabel">Size M (Grande) +10.000₫</span>
-                            </label>
+                            <div class="customizer-section-title">
+                                <span><span class="section-step-num">1.</span> <span data-i18n="customizer.step1">Chọn Kích Cỡ Ly:</span></span>
+                                <span class="current-selection-badge" id="selectedSizeLabel">Size M (Grande) +10.000 VNĐ</span>
+                            </div>
                             <div class="d-flex flex-wrap gap-2" role="group">
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="size" data-value="S" data-extra="0" onclick="selectOption('size', this)">
+                                <button type="button" class="btn-option-pill" data-type="size" data-value="S" data-extra="0" onclick="selectOption('size', this)">
                                     Size S (Regular)
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn active" data-type="size" data-value="M" data-extra="10000" onclick="selectOption('size', this)">
-                                    Size M (Grande) +10k
+                                <button type="button" class="btn-option-pill active" data-type="size" data-value="M" data-extra="10000" onclick="selectOption('size', this)">
+                                    Size M (Grande) <span class="opacity-75 small">+10k</span>
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="size" data-value="L" data-extra="18000" onclick="selectOption('size', this)">
-                                    Size L (Venti) +18k
+                                <button type="button" class="btn-option-pill" data-type="size" data-value="L" data-extra="18000" onclick="selectOption('size', this)">
+                                    Size L (Venti) <span class="opacity-75 small">+18k</span>
                                 </button>
                             </div>
                         </div>
 
                         <!-- 2. Temperature & Ice -->
                         <div class="mb-4">
-                            <label class="form-label text-gold small fw-bold text-uppercase d-flex justify-content-between" style="letter-spacing: 0.08em;">
-                                <span>2. Mức Đá &amp; Nhiệt Độ:</span>
-                                <span class="text-secondary fw-normal" id="selectedIceLabel">100% Đá (Tiêu Chuẩn)</span>
-                            </label>
+                            <div class="customizer-section-title">
+                                <span><span class="section-step-num">2.</span> <span data-i18n="customizer.step2">Mức Đá &amp; Nhiệt Độ:</span></span>
+                                <span class="current-selection-badge" id="selectedIceLabel">100% Đá (Tiêu Chuẩn)</span>
+                            </div>
                             <div class="d-flex flex-wrap gap-2" role="group">
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn active" data-type="ice" data-value="100" onclick="selectOption('ice', this)">
+                                <button type="button" class="btn-option-pill active" data-type="ice" data-value="100" onclick="selectOption('ice', this)">
                                     100% Đá
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="ice" data-value="70" onclick="selectOption('ice', this)">
+                                <button type="button" class="btn-option-pill" data-type="ice" data-value="70" onclick="selectOption('ice', this)">
                                     70% Đá
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="ice" data-value="30" onclick="selectOption('ice', this)">
+                                <button type="button" class="btn-option-pill" data-type="ice" data-value="30" onclick="selectOption('ice', this)">
                                     30% Đá
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="ice" data-value="0" onclick="selectOption('ice', this)">
+                                <button type="button" class="btn-option-pill" data-type="ice" data-value="0" onclick="selectOption('ice', this)">
                                     Không Đá
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="ice" data-value="HOT" onclick="selectOption('ice', this)">
-                                    🔥 Uống Nóng
+                                <button type="button" class="btn-option-pill" data-type="ice" data-value="HOT" onclick="selectOption('ice', this)">
+                                    <i class="fa-solid fa-mug-hot text-danger me-1"></i> Uống Nóng
                                 </button>
                             </div>
                         </div>
 
                         <!-- 3. Sweetness -->
                         <div class="mb-4">
-                            <label class="form-label text-gold small fw-bold text-uppercase d-flex justify-content-between" style="letter-spacing: 0.08em;">
-                                <span>3. Mức Đường / Ngọt:</span>
-                                <span class="text-secondary fw-normal" id="selectedSugarLabel">100% Tiêu Chuẩn</span>
-                            </label>
+                            <div class="customizer-section-title">
+                                <span><span class="section-step-num">3.</span> <span data-i18n="customizer.step3">Mức Đường / Ngọt:</span></span>
+                                <span class="current-selection-badge" id="selectedSugarLabel">100% Tiêu Chuẩn</span>
+                            </div>
                             <div class="d-flex flex-wrap gap-2" role="group">
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn active" data-type="sugar" data-value="100" onclick="selectOption('sugar', this)">
+                                <button type="button" class="btn-option-pill active" data-type="sugar" data-value="100" onclick="selectOption('sugar', this)">
                                     100% Chuẩn
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="sugar" data-value="70" onclick="selectOption('sugar', this)">
-                                    70% Vừa
+                                <button type="button" class="btn-option-pill" data-type="sugar" data-value="70" onclick="selectOption('sugar', this)">
+                                    70% Ngọt Vừa
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="sugar" data-value="30" onclick="selectOption('sugar', this)">
+                                <button type="button" class="btn-option-pill" data-type="sugar" data-value="30" onclick="selectOption('sugar', this)">
                                     30% Ít Ngọt
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="sugar" data-value="0" onclick="selectOption('sugar', this)">
+                                <button type="button" class="btn-option-pill" data-type="sugar" data-value="0" onclick="selectOption('sugar', this)">
                                     0% Không Đường
                                 </button>
                             </div>
@@ -208,44 +241,44 @@
 
                         <!-- 4. Milk Choice -->
                         <div class="mb-4">
-                            <label class="form-label text-gold small fw-bold text-uppercase d-flex justify-content-between" style="letter-spacing: 0.08em;">
-                                <span>4. Tùy Chọn Sữa:</span>
-                                <span class="text-secondary fw-normal" id="selectedMilkLabel">Sữa Thanh Trùng Đà Lạt</span>
-                            </label>
+                            <div class="customizer-section-title">
+                                <span><span class="section-step-num">4.</span> <span data-i18n="customizer.step4">Tùy Chọn Sữa:</span></span>
+                                <span class="current-selection-badge" id="selectedMilkLabel">Sữa Thanh Trùng Đà Lạt</span>
+                            </div>
                             <div class="d-flex flex-wrap gap-2" role="group">
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn active" data-type="milk" data-value="fresh" data-extra="0" onclick="selectOption('milk', this)">
+                                <button type="button" class="btn-option-pill active" data-type="milk" data-value="fresh" data-extra="0" onclick="selectOption('milk', this)">
                                     Sữa Đà Lạt (Mặc Định)
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="milk" data-value="oat" data-extra="12000" onclick="selectOption('milk', this)">
-                                    🌾 Sữa Yến Mạch Oatly (+12k)
+                                <button type="button" class="btn-option-pill" data-type="milk" data-value="oat" data-extra="12000" onclick="selectOption('milk', this)">
+                                    <i class="fa-solid fa-wheat-awn me-1 text-gold"></i> Sữa Yến Mạch Oatly (+12k)
                                 </button>
-                                <button type="button" class="btn btn-outline-gold btn-sm px-3 custom-option-btn" data-type="milk" data-value="almond" data-extra="12000" onclick="selectOption('milk', this)">
-                                    🥜 Sữa Hạnh Nhân (+12k)
+                                <button type="button" class="btn-option-pill" data-type="milk" data-value="almond" data-extra="12000" onclick="selectOption('milk', this)">
+                                    <i class="fa-solid fa-seedling me-1 text-gold"></i> Sữa Hạnh Nhân (+12k)
                                 </button>
                             </div>
                         </div>
 
                         <!-- 5. Artisanal Toppings -->
                         <div>
-                            <label class="form-label text-gold small fw-bold text-uppercase d-flex justify-content-between" style="letter-spacing: 0.08em;">
-                                <span>5. Thêm Topping Thượng Hạng:</span>
-                                <span class="text-secondary fw-normal">Chọn nhiều tùy thích</span>
-                            </label>
+                            <div class="customizer-section-title">
+                                <span><span class="section-step-num">5.</span> <span data-i18n="customizer.step5">Thêm Topping Thượng Hạng:</span></span>
+                                <span class="text-secondary small font-sans fw-normal" data-i18n="customizer.topping_hint">Chọn nhiều tùy thích</span>
+                            </div>
                             <div class="d-flex flex-wrap gap-2">
-                                <label class="btn btn-outline-gold btn-sm px-3 cursor-pointer d-flex align-items-center gap-2">
-                                    <input type="checkbox" class="form-check-input mt-0 topping-check" value="jelly" data-price="8000" onchange="calculateLiveTotal()">
+                                <label class="topping-pill-check">
+                                    <input type="checkbox" class="form-check-input topping-check" value="jelly" data-price="8000" onchange="toggleTopping(this.parentElement)">
                                     <span>Thạch Cà Phê (+8k)</span>
                                 </label>
-                                <label class="btn btn-outline-gold btn-sm px-3 cursor-pointer d-flex align-items-center gap-2">
-                                    <input type="checkbox" class="form-check-input mt-0 topping-check" value="cheese" data-price="12000" onchange="calculateLiveTotal()">
+                                <label class="topping-pill-check">
+                                    <input type="checkbox" class="form-check-input topping-check" value="cheese" data-price="12000" onchange="toggleTopping(this.parentElement)">
                                     <span>Kem Cheese Macchiato (+12k)</span>
                                 </label>
-                                <label class="btn btn-outline-gold btn-sm px-3 cursor-pointer d-flex align-items-center gap-2">
-                                    <input type="checkbox" class="form-check-input mt-0 topping-check" value="pearl" data-price="8000" onchange="calculateLiveTotal()">
+                                <label class="topping-pill-check">
+                                    <input type="checkbox" class="form-check-input topping-check" value="pearl" data-price="8000" onchange="toggleTopping(this.parentElement)">
                                     <span>Trân Châu Trắng (+8k)</span>
                                 </label>
-                                <label class="btn btn-outline-gold btn-sm px-3 cursor-pointer d-flex align-items-center gap-2">
-                                    <input type="checkbox" class="form-check-input mt-0 topping-check" value="shot" data-price="15000" onchange="calculateLiveTotal()">
+                                <label class="topping-pill-check">
+                                    <input type="checkbox" class="form-check-input topping-check" value="shot" data-price="15000" onchange="toggleTopping(this.parentElement)">
                                     <span>Extra Double Shot (+15k)</span>
                                 </label>
                             </div>
@@ -265,11 +298,11 @@
                         </div>
 
                         <button type="button" class="btn btn-gold btn-sm px-4 flex-grow-1 text-nowrap py-3" onclick="handleAddToCart()">
-                            <i class="fa-solid fa-bag-shopping me-2"></i> Thêm Vào Giỏ Hàng
+                            <i class="fa-solid fa-bag-shopping me-2"></i> <span data-i18n="customizer.add_to_cart">Thêm Vào Giỏ Hàng</span>
                         </button>
-                        
+
                         <a href="${pageContext.request.contextPath}/cart" class="btn btn-outline-gold btn-sm px-4 text-nowrap py-3">
-                            <i class="fa-solid fa-bolt me-2"></i> Xem Giỏ Hàng
+                            <i class="fa-solid fa-bolt me-2"></i> <span data-i18n="customizer.view_cart">Xem Giỏ Hàng</span>
                         </a>
                     </div>
 
@@ -402,28 +435,60 @@
 
         function selectOption(type, btn) {
             const container = btn.parentElement;
-            container.querySelectorAll('.custom-option-btn').forEach(b => b.classList.remove('active'));
+            container.querySelectorAll('.btn-option-pill').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             const val = btn.getAttribute('data-value');
             const extra = parseFloat(btn.getAttribute('data-extra')) || 0;
+            const currentLang = localStorage.getItem('utecoffe_lang') || 'vi';
+            const isEn = (currentLang === 'en');
 
             if (type === 'size') {
                 selectedSizeExtra = extra;
-                const label = val === 'S' ? 'Size S (Regular)' : val === 'M' ? 'Size M (Grande) +10.000₫' : 'Size L (Venti) +18.000₫';
-                document.getElementById('selectedSizeLabel').innerText = label;
+                const label = val === 'S' 
+                    ? (isEn ? 'Size S (Regular)' : 'Size S (Tiêu Chuẩn)') 
+                    : val === 'M' 
+                        ? (isEn ? 'Size M (Grande) +10,000 VND' : 'Size M (Grande) +10.000 VNĐ') 
+                        : (isEn ? 'Size L (Venti) +18,000 VND' : 'Size L (Venti) +18.000 VNĐ');
+                const el = document.getElementById('selectedSizeLabel');
+                if (el) el.innerText = label;
             } else if (type === 'ice') {
-                const label = val === 'HOT' ? 'Uống Nóng (Hot Cup)' : (val + '% Đá');
-                document.getElementById('selectedIceLabel').innerText = label;
+                const label = val === 'HOT' 
+                    ? (isEn ? 'Hot Beverage (Cup)' : 'Uống Nóng (Hot Cup)') 
+                    : (val + '% ' + (isEn ? 'Ice' : 'Đá'));
+                const el = document.getElementById('selectedIceLabel');
+                if (el) el.innerText = label;
             } else if (type === 'sugar') {
-                const label = val === '100' ? '100% Tiêu Chuẩn' : val === '70' ? '70% Ngọt Vừa' : val === '30' ? '30% Ít Ngọt' : '0% Không Đường';
-                document.getElementById('selectedSugarLabel').innerText = label;
+                const label = val === '100' 
+                    ? (isEn ? '100% Standard' : '100% Tiêu Chuẩn') 
+                    : val === '70' 
+                        ? (isEn ? '70% Medium Sweet' : '70% Ngọt Vừa') 
+                        : val === '30' 
+                            ? (isEn ? '30% Less Sweet' : '30% Ít Ngọt') 
+                            : (isEn ? '0% Unsweetened' : '0% Không Đường');
+                const el = document.getElementById('selectedSugarLabel');
+                if (el) el.innerText = label;
             } else if (type === 'milk') {
                 selectedMilkExtra = extra;
-                const label = val === 'fresh' ? 'Sữa Thanh Trùng Đà Lạt' : val === 'oat' ? 'Sữa Yến Mạch Oatly (+12.000₫)' : 'Sữa Hạnh Nhân (+12.000₫)';
-                document.getElementById('selectedMilkLabel').innerText = label;
+                const label = val === 'fresh' 
+                    ? (isEn ? 'Dalat Fresh Milk (Default)' : 'Sữa Thanh Trùng Đà Lạt') 
+                    : val === 'oat' 
+                        ? (isEn ? 'Oatly Oat Milk (+12,000 VND)' : 'Sữa Yến Mạch Oatly (+12.000 VNĐ)') 
+                        : (isEn ? 'Almond Milk (+12,000 VND)' : 'Sữa Hạnh Nhân (+12.000 VNĐ)');
+                const el = document.getElementById('selectedMilkLabel');
+                if (el) el.innerText = label;
             }
 
+            calculateLiveTotal();
+        }
+
+        function toggleTopping(labelEl) {
+            const cb = labelEl.querySelector('.topping-check');
+            if (cb.checked) {
+                labelEl.classList.add('active');
+            } else {
+                labelEl.classList.remove('active');
+            }
             calculateLiveTotal();
         }
 
@@ -436,9 +501,26 @@
             const unitPrice = BASE_PRICE + selectedSizeExtra + selectedMilkExtra + toppingsTotal;
             const totalPrice = unitPrice * quantity;
 
-            const formatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice);
-            document.getElementById('liveDisplayPrice').innerText = formatted;
+            const currentLang = localStorage.getItem('utecoffe_lang') || 'vi';
+            const isEn = (currentLang === 'en');
+            const formatted = isEn 
+                ? Math.round(totalPrice).toLocaleString('en-US') + ' VND' 
+                : Math.round(totalPrice).toLocaleString('vi-VN') + ' VNĐ';
+            
+            const displayEl = document.getElementById('liveDisplayPrice');
+            if (displayEl) {
+                displayEl.innerText = formatted;
+                displayEl.setAttribute('data-raw-price', totalPrice);
+            }
         }
+
+        window.addEventListener('utecoffe:langchange', function() {
+            calculateLiveTotal();
+            const activeSize = document.querySelector('.btn-option-pill[data-type="size"].active');
+            if (activeSize) selectOption('size', activeSize);
+            const activeMilk = document.querySelector('.btn-option-pill[data-type="milk"].active');
+            if (activeMilk) selectOption('milk', activeMilk);
+        });
 
         function changeQty(delta) {
             quantity = Math.max(1, quantity + delta);

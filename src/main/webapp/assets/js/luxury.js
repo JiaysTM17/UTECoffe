@@ -66,7 +66,30 @@
             'footer.newsletter': 'Bản Tin Nghệ Nhân',
             'footer.newsletter_desc': 'Đăng ký nhận thông tin mẻ rang mới và ưu đãi hội viên:',
             'footer.subscribe': 'Đăng Ký',
-            'footer.rights': 'Bản quyền thuộc về UTECoffe Roastery. Thiết kế & phát triển cho đồ án F&B Thương mại điện tử 2026.'
+            'footer.rights': 'Bản quyền thuộc về UTECoffe Roastery. Thiết kế & phát triển cho đồ án F&B Thương mại điện tử 2026.',
+
+            // Menu & Products
+            'menu.title': 'Thực Đơn Nghệ Nhân',
+            'menu.subtitle': 'BỘ SƯU TẬP HƯƠNG VỊ 2026',
+            'menu.filter_all': 'Tất Cả Món',
+            'menu.original_price': 'Giá nguyên bản:',
+            'menu.customize': 'Tùy Chỉnh',
+            'terroir.coffee': 'Cao Nguyên Cầu Đất 1.600m',
+            'terroir.tea': 'Trà Cổ Thụ & Sen Tây Hồ',
+            'terroir.pastry': 'Bơ Pháp Elle & Vire 100%',
+
+            // Customizer & Detail
+            'detail.price_label': 'Giá Thưởng Thức:',
+            'customizer.title': 'Tùy Chỉnh Khẩu Vị Barista',
+            'customizer.badge': 'Chuẩn Vị Nghệ Nhân',
+            'customizer.step1': 'Chọn Kích Cỡ Ly:',
+            'customizer.step2': 'Mức Đá & Nhiệt Độ:',
+            'customizer.step3': 'Mức Đường / Ngọt:',
+            'customizer.step4': 'Tùy Chọn Sữa:',
+            'customizer.step5': 'Thêm Topping Thượng Hạng:',
+            'customizer.topping_hint': 'Chọn nhiều tùy thích',
+            'customizer.add_to_cart': 'Thêm Vào Giỏ Hàng',
+            'customizer.view_cart': 'Xem Giỏ Hàng'
         },
         en: {
             // Top Announcement Bar
@@ -119,7 +142,30 @@
             'footer.newsletter': 'Roaster Digest',
             'footer.newsletter_desc': 'Subscribe for exclusive fresh batch releases and member privileges:',
             'footer.subscribe': 'Subscribe',
-            'footer.rights': 'All rights reserved © UTECoffe Roastery. Designed & developed for 2026 F&B Ecommerce Platform.'
+            'footer.rights': 'All rights reserved © UTECoffe Roastery. Designed & developed for 2026 F&B Ecommerce Platform.',
+
+            // Menu & Products
+            'menu.title': 'Artisan Menu',
+            'menu.subtitle': '2026 FLAVOR SELECTION',
+            'menu.filter_all': 'All Items',
+            'menu.original_price': 'Original Price:',
+            'menu.customize': 'Customize',
+            'terroir.coffee': 'Cau Dat Highlands 1,600m',
+            'terroir.tea': 'Ancient Camellia & Tay Ho Lotus',
+            'terroir.pastry': '100% French Elle & Vire Butter',
+
+            // Customizer & Detail
+            'detail.price_label': 'Crafted Price:',
+            'customizer.title': 'Barista Taste Customizer',
+            'customizer.badge': 'Artisan Precision',
+            'customizer.step1': 'Choose Cup Size:',
+            'customizer.step2': 'Ice & Temperature:',
+            'customizer.step3': 'Sweetness Level:',
+            'customizer.step4': 'Milk Selection:',
+            'customizer.step5': 'Artisan Toppings:',
+            'customizer.topping_hint': 'Select multiple toppings',
+            'customizer.add_to_cart': 'Add to Cart',
+            'customizer.view_cart': 'View Cart'
         }
     };
 
@@ -200,8 +246,23 @@
             }
         });
 
+        // Update raw prices uniformly
+        document.querySelectorAll('[data-raw-price]').forEach(el => {
+            const raw = parseFloat(el.getAttribute('data-raw-price'));
+            if (!isNaN(raw) && raw > 0) {
+                if (lang === 'en') {
+                    el.textContent = Math.round(raw).toLocaleString('en-US') + ' VND';
+                } else {
+                    el.textContent = Math.round(raw).toLocaleString('vi-VN') + ' VNĐ';
+                }
+            }
+        });
+
         // Update document lang attribute
         document.documentElement.setAttribute('lang', lang);
+
+        // Notify page-specific listeners
+        window.dispatchEvent(new CustomEvent('utecoffe:langchange', { detail: { lang } }));
     }
 
     // -------------------------------------------------------------------------

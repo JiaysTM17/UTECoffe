@@ -81,7 +81,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="font-monospace text-secondary">
-                                                    <fmt:formatNumber value="${item.unitPrice}" type="currency" currencySymbol="₫"/>
+                                                    <fmt:formatNumber value="${item.unitPrice}" pattern="#,##0"/> VNĐ
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="input-group input-group-sm mx-auto" style="width: 105px;">
@@ -91,7 +91,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-end fw-bold text-gold font-monospace item-subtotal-cell">
-                                                    <fmt:formatNumber value="${item.subtotal}" type="currency" currencySymbol="₫"/>
+                                                    <fmt:formatNumber value="${item.subtotal}" pattern="#,##0"/> VNĐ
                                                 </td>
                                                 <td class="text-end">
                                                     <form action="${pageContext.request.contextPath}/cart/remove/${item.id}" method="post" class="d-inline">
@@ -134,7 +134,7 @@
                             <div class="d-flex justify-content-between mb-2 small text-secondary">
                                 <span>Tổng tiền món:</span>
                                 <span class="text-light fw-bold font-monospace" id="cartSubtotalText">
-                                    <fmt:formatNumber value="${cart.totalAmount}" type="currency" currencySymbol="₫"/>
+                                    <fmt:formatNumber value="${cart.totalAmount}" pattern="#,##0"/> VNĐ
                                 </span>
                             </div>
                             <div class="d-flex justify-content-between mb-2 small text-secondary">
@@ -143,14 +143,14 @@
                             </div>
                             <div class="d-flex justify-content-between mb-3 small text-secondary">
                                 <span>Giảm giá voucher:</span>
-                                <span class="text-gold fw-bold font-monospace" id="cartDiscountText">-0₫</span>
+                                <span class="text-gold fw-bold font-monospace" id="cartDiscountText">-0 VNĐ</span>
                             </div>
 
                             <hr class="border-secondary opacity-25">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <span class="fw-bold fs-6">Thành Tiền:</span>
                                 <span class="price-gold fs-3 fw-bold" id="cartFinalTotalText">
-                                    <fmt:formatNumber value="${cart.totalAmount}" type="currency" currencySymbol="₫"/>
+                                    <fmt:formatNumber value="${cart.totalAmount}" pattern="#,##0"/> VNĐ
                                 </span>
                             </div>
 

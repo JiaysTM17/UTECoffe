@@ -132,52 +132,96 @@ public class DatabaseSeeder implements CommandLineRunner {
         Category cTea = categoryRepository.save(Category.builder().name("Trà Thượng Hạng").slug("tra-thuong-hang").displayOrder(2).isActive(true).build());
         Category cPastry = categoryRepository.save(Category.builder().name("Bánh Ngọt Thủ Công").slug("banh-ngot-thu-cong").displayOrder(3).isActive(true).build());
 
-        Product p1 = productRepository.save(Product.builder()
-                .category(cCoffee)
-                .name("Cold Brew Cam Vàng Specialty")
-                .slug("cold-brew-cam-vang-specialty")
-                .description("Cà phê Arabica ủ lạnh 18 tiếng kết hợp nước cam vàng Sunkist nguyên chất")
-                .imageUrl("https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=600")
-                .basePrice(BigDecimal.valueOf(59000))
-                .isAvailable(true)
-                .isFeatured(true)
-                .build());
+        // Specialty Coffee (6 items)
+        createProductWithSizes(cCoffee, "Cold Brew Cam Vàng Specialty", "cold-brew-cam-vang-specialty",
+                "Cà phê Arabica ủ lạnh 18 tiếng kết hợp nước cam vàng Sunkist mọng nước nguyên chất.",
+                "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=800", 59000, true);
 
-        productSizeRepository.save(ProductSize.builder().product(p1).sizeName("Regular (M)").extraPrice(BigDecimal.ZERO).build());
-        productSizeRepository.save(ProductSize.builder().product(p1).sizeName("Large (L)").extraPrice(BigDecimal.valueOf(10000)).build());
+        createProductWithSizes(cCoffee, "Espresso Tonic Signature", "espresso-tonic-signature",
+                "Double shot Espresso Cầu Đất đậm đà trên nền nước tonic cao cấp và lát chanh vàng tươi mát.",
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800", 55000, true);
 
-        productRepository.save(Product.builder()
-                .category(cCoffee)
-                .name("Espresso Tonic Signature")
-                .slug("espresso-tonic-signature")
-                .description("Double shot Espresso Cầu Đất trên nền Tonic cao cấp và lát chanh vàng")
-                .imageUrl("https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600")
-                .basePrice(BigDecimal.valueOf(55000))
-                .isAvailable(true)
-                .isFeatured(true)
-                .build());
+        createProductWithSizes(cCoffee, "Cà Phê Muối Hoàng Gia", "ca-phe-muoi-hoang-gia",
+                "Cà phê Robusta mộc Cầu Đất kết hợp lớp kem béo mặn caramel hoàng gia bùng nổ vị giác.",
+                "https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=800", 52000, true);
 
-        productRepository.save(Product.builder()
-                .category(cTea)
-                .name("Trà Oolong Kem Phô Mai Vàng")
-                .slug("tra-oolong-kem-phomai-vang")
-                .description("Trà Oolong nướng Mộc Châu kết hợp lớp macchiato cheese béo ngậy")
-                .imageUrl("https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=600")
-                .basePrice(BigDecimal.valueOf(62000))
-                .isAvailable(true)
-                .isFeatured(true)
-                .build());
+        createProductWithSizes(cCoffee, "Pour-Over V60 Bourbon Cầu Đất", "pour-over-v60-bourbon-cau-dat",
+                "Chiết xuất thủ công từng giọt tinh hoa, dải hương hoa nhài trắng và quả mọng thanh khiết.",
+                "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800", 68000, false);
 
-        productRepository.save(Product.builder()
-                .category(cPastry)
-                .name("Croissant Bơ Pháp Thủ Công")
-                .slug("croissant-bo-phap-thu-cong")
-                .description("Bánh sừng bò nướng giòn tan với 100% bơ Elle & Vire cao cấp")
-                .imageUrl("https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=600")
-                .basePrice(BigDecimal.valueOf(45000))
-                .isAvailable(true)
-                .isFeatured(false)
-                .build());
+        createProductWithSizes(cCoffee, "Latte Sữa Yến Mạch Oatly", "latte-sua-yen-mach-oatly",
+                "Espresso rang mộc hòa quyện sữa yến mạch Oatly Thụy Điển béo bùi, thuần thực vật.",
+                "https://images.unsplash.com/photo-1534778101976-62847782c213?q=80&w=800", 65000, false);
+
+        createProductWithSizes(cCoffee, "Flat White Cầu Đất Double Shot", "flat-white-cau-dat-double-shot",
+                "Lớp bọt sữa microfoam mịn màng hòa quyện 2 shot espresso đậm đà thơm ngậy.",
+                "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?q=80&w=800", 59000, false);
+
+        createProductWithSizes(cCoffee, "Affogato Gelato Vani", "affogato-gelato-vani",
+                "Single shot Espresso Cầu Đất đậm đà rót trực tiếp trên viên kem gelato vani Madagascar ngọt ngào, tạo độ tương phản nhiệt độ và hương vị đỉnh cao.",
+                "https://images.unsplash.com/photo-1592663527359-cf6642f54cff?q=80&w=800", 55000, false);
+
+        createProductWithSizes(cCoffee, "Cà Phê Trứng Hà Nội Specialty", "ca-phe-trung-ha-noi-specialty",
+                "Cà phê phin Cầu Đất hòa quyện cùng lớp kem trứng đánh bông mịn như mây, thơm bùi béo ngậy không tanh, chuẩn phong vị hoàng thành.",
+                "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800", 56000, false);
+
+        // Artisan Tea (7 items)
+        createProductWithSizes(cTea, "Trà Oolong Kem Phô Mai Vàng", "tra-oolong-kem-phomai-vang",
+                "Trà Oolong nướng Mộc Châu thơm lừng kết hợp lớp macchiato phô mai béo ngậy sánh mịn.",
+                "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800", 62000, true);
+
+        createProductWithSizes(cTea, "Trà Sen Vàng Macchiato Tây Hồ", "tra-sen-vang-macchiato-tay-ho",
+                "Trà xanh ướp hoa sen Tây Hồ thanh nhã, hạt sen bùi mềm và lớp kem sữa tươi béo dịu.",
+                "https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=800", 58000, true);
+
+        createProductWithSizes(cTea, "Trà Nhài Mãng Cầu Đắk Lắk", "tra-nhai-mang-cau-dak-lak",
+                "Nền trà hoa nhài hữu cơ kết hợp tép mãng cầu xiêm tươi mọng nước chua ngọt tự nhiên.",
+                "https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=800", 55000, false);
+
+        createProductWithSizes(cTea, "Trà Đào Cam Sả Thảo Mộc", "tra-dao-cam-sa-thao-moc",
+                "Hương thơm ấm nồng của sả tươi, cam vàng và những miếng đào giòn tan mọng nước.",
+                "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=800", 55000, false);
+
+        createProductWithSizes(cTea, "Matcha Latte Uji Kyoto Nguyên Bản", "matcha-latte-uji-kyoto",
+                "Bột trà xanh Uji Kyoto hảo hạng đánh bông truyền thống, hậu vị umami đậm đà thanh tao.",
+                "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?q=80&w=800", 65000, false);
+
+        createProductWithSizes(cTea, "Trà Sữa Oolong Rang Khói", "tra-sua-oolong-rang-khoi",
+                "Trà Oolong sấy than hoa Mộc Châu quyện cùng sữa tươi thanh trùng Đà Lạt, thơm nồng đượm khói và ngọt ngào thanh tao.",
+                "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?q=80&w=800", 58000, false);
+
+        createProductWithSizes(cTea, "Trà Vải Hoa Hồng Damask", "tra-vai-hoa-hong-damask",
+                "Trà sen trắng ủ lạnh chiết xuất cùng cánh hoa hồng hữu cơ và trái vải tươi giòn ngọt lịm mọng nước.",
+                "https://images.unsplash.com/photo-1556881286-fc6915169721?q=80&w=800", 55000, false);
+
+        // Craft Pastry & Bakery (7 items)
+        createProductWithSizes(cPastry, "Croissant Bơ Pháp Thủ Công", "croissant-bo-phap-thu-cong",
+                "Bánh sừng bò ngàn lớp nướng giòn rụm với 100% bơ Elle & Vire thơm lừng chuẩn vị Paris.",
+                "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800", 45000, true);
+
+        createProductWithSizes(cPastry, "Pain Au Chocolat Bơ Tươi", "pain-au-chocolat-bo-tuoi",
+                "Bánh cuộn bơ Pháp giòn tan bên ngoài, nhân socola đắng Bỉ tan chảy ngọt ngào bên trong.",
+                "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=800", 48000, false);
+
+        createProductWithSizes(cPastry, "Tiramisu Espresso Mascarpone", "tiramisu-espresso-mascarpone",
+                "Bánh Tiramisu Ý truyền thống tẩm đẫm espresso Cầu Đất, phô mai Mascarpone và bột cacao.",
+                "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=800", 58000, false);
+
+        createProductWithSizes(cPastry, "Canelé De Bordeaux Truyền Thống", "canele-de-bordeaux-truyen-thong",
+                "Bánh Pháp vỏ caramel giòn sẫm bóng bẩy, ruột mềm ẩm dẻo quánh hương vani và rượu rum.",
+                "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800", 42000, false);
+
+        createProductWithSizes(cPastry, "Mousse Dâu Tằm Rừng Đà Lạt", "mousse-dau-tam-rung-da-lat",
+                "Lớp bánh mousse mịn màng chế tác từ dâu tằm rừng Đà Lạt tươi chua ngọt sảng khoái.",
+                "https://images.unsplash.com/photo-1587314168485-3236d6710814?q=80&w=800", 52000, false);
+
+        createProductWithSizes(cPastry, "Basque Burnt Cheesecake Nướng Cháy", "basque-burnt-cheesecake",
+                "Bánh phô mai nướng cháy xém bề mặt theo phong cách San Sebastián với lớp kem phô mai béo ngậy tan chảy ở tâm.",
+                "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=800", 62000, false);
+
+        createProductWithSizes(cPastry, "Bánh Tart Dâu Tây & Quả Mọng", "banh-tart-dau-tay-qua-mong",
+                "Vỏ bánh tart bột hạnh nhân nướng vàng giòn, phủ kem pastry vani Pháp và dâu tây tươi Đà Lạt căng mọng.",
+                "https://images.unsplash.com/photo-1519869325930-281384150729?q=80&w=800", 55000, false);
 
         toppingRepository.save(Topping.builder().name("Trân Châu Oolong Hoàng Kim").price(BigDecimal.valueOf(10000)).isAvailable(true).build());
         toppingRepository.save(Topping.builder().name("Kem Cheese Kem Mặn Signature").price(BigDecimal.valueOf(15000)).isAvailable(true).build());
@@ -185,6 +229,22 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         ingredientRepository.save(Ingredient.builder().name("Hạt Cà Phê Arabica Cầu Đất").sku("ING-CF-ARA").unit("gram").minThreshold(BigDecimal.valueOf(5000)).currentCostPrice(BigDecimal.valueOf(320)).build());
         ingredientRepository.save(Ingredient.builder().name("Lá Trà Oolong Lâm Đồng").sku("ING-TEA-OOL").unit("gram").minThreshold(BigDecimal.valueOf(3000)).currentCostPrice(BigDecimal.valueOf(450)).build());
+    }
+
+    private void createProductWithSizes(Category cat, String name, String slug, String desc, String img, int price, boolean featured) {
+        Product p = productRepository.save(Product.builder()
+                .category(cat)
+                .name(name)
+                .slug(slug)
+                .description(desc)
+                .imageUrl(img)
+                .basePrice(BigDecimal.valueOf(price))
+                .isAvailable(true)
+                .isFeatured(featured)
+                .build());
+
+        productSizeRepository.save(ProductSize.builder().product(p).sizeName("Regular (M)").extraPrice(BigDecimal.ZERO).build());
+        productSizeRepository.save(ProductSize.builder().product(p).sizeName("Large (L)").extraPrice(BigDecimal.valueOf(10000)).build());
     }
 
     private void seedCoupons() {

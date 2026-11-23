@@ -109,9 +109,23 @@
                         <div class="card-body p-4 d-flex flex-column flex-grow-1">
                             <!-- Tasting Notes / Terroir Mini-Pill -->
                             <div class="mb-2">
-                                <span class="badge bg-espresso text-gold border border-gold-subtle px-2 py-1 rounded-pill" style="font-size: 0.72rem; letter-spacing: 0.05em;">
-                                    <i class="fa-solid fa-seedling me-1"></i> Cao Nguyên Cầu Đất
-                                </span>
+                                <c:choose>
+                                    <c:when test="${prod.category.id == 2}">
+                                        <span class="badge bg-espresso text-gold border border-gold-subtle px-2 py-1 rounded-pill" style="font-size: 0.72rem; letter-spacing: 0.05em;">
+                                            <i class="fa-solid fa-leaf me-1 text-success"></i> <span data-i18n="terroir.tea">Trà Cổ Thụ &amp; Sen Tây Hồ</span>
+                                        </span>
+                                    </c:when>
+                                    <c:when test="${prod.category.id == 3}">
+                                        <span class="badge bg-espresso text-gold border border-gold-subtle px-2 py-1 rounded-pill" style="font-size: 0.72rem; letter-spacing: 0.05em;">
+                                            <i class="fa-solid fa-wheat-awn me-1 text-warning"></i> <span data-i18n="terroir.pastry">Bơ Pháp Elle &amp; Vire 100%</span>
+                                        </span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="badge bg-espresso text-gold border border-gold-subtle px-2 py-1 rounded-pill" style="font-size: 0.72rem; letter-spacing: 0.05em;">
+                                            <i class="fa-solid fa-seedling me-1"></i> <span data-i18n="terroir.coffee">Cao Nguyên Cầu Đất 1.600m</span>
+                                        </span>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
 
                             <h5 class="font-serif fw-bold mb-2">
@@ -127,13 +141,13 @@
                             <!-- Price & Customization Action Button -->
                             <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold mt-auto">
                                 <div class="d-flex flex-column">
-                                    <span class="small text-secondary" style="font-size: 0.75rem;">Giá nguyên bản:</span>
-                                    <span class="price-gold fw-bold fs-5">
-                                        <fmt:formatNumber value="${prod.basePrice}" type="currency" currencySymbol="₫"/>
+                                    <span class="small text-secondary" style="font-size: 0.75rem;" data-i18n="menu.original_price">Giá nguyên bản:</span>
+                                    <span class="price-gold fw-bold fs-5" data-raw-price="${prod.basePrice}">
+                                        <fmt:formatNumber value="${prod.basePrice}" pattern="#,##0"/> VNĐ
                                     </span>
                                 </div>
                                 <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill fw-semibold">
-                                    <i class="fa-solid fa-sliders me-1"></i> Tùy Chỉnh
+                                    <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="menu.customize">Tùy Chỉnh</span>
                                 </a>
                             </div>
                         </div>

@@ -131,7 +131,7 @@
                                                 </td>
                                                 <td class="text-center font-monospace fw-bold">${item.quantity}</td>
                                                 <td class="text-end fw-bold text-gold">
-                                                    <fmt:formatNumber value="${item.subtotal}" type="currency" currencySymbol="₫"/>
+                                                    <fmt:formatNumber value="${item.subtotal}" pattern="#,##0"/> VNĐ
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -143,7 +143,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold">Tổng Thanh Toán:</span>
                                 <span class="price-gold fs-4">
-                                    <fmt:formatNumber value="${order.finalAmount}" type="currency" currencySymbol="₫"/>
+                                    <fmt:formatNumber value="${order.finalAmount}" pattern="#,##0"/> VNĐ
                                 </span>
                             </div>
                         </div>

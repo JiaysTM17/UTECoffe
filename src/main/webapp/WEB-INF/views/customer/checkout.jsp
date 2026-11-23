@@ -168,7 +168,7 @@
                         <div class="mb-3">
                             <div class="d-flex justify-content-between small text-secondary mb-2">
                                 <span>Tạm tính thức uống:</span>
-                                <span class="text-light fw-bold font-monospace">125.000₫</span>
+                                <span class="text-light fw-bold font-monospace">125.000 VNĐ</span>
                             </div>
                             <div class="d-flex justify-content-between small text-secondary mb-2">
                                 <span>Phí vận chuyển:</span>
@@ -176,7 +176,7 @@
                             </div>
                             <div class="d-flex justify-content-between small text-secondary mb-2">
                                 <span>Ưu đãi thành viên:</span>
-                                <span class="text-gold font-monospace fw-bold">-20.000₫</span>
+                                <span class="text-gold font-monospace fw-bold">-20.000 VNĐ</span>
                             </div>
                         </div>
 
@@ -184,7 +184,7 @@
 
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <span class="fw-bold fs-6">Tổng Thanh Toán:</span>
-                            <span class="price-gold fs-3 fw-bold">105.000₫</span>
+                            <span class="price-gold fs-3 fw-bold">105.000 VNĐ</span>
                         </div>
 
                         <!-- Submit Button -->

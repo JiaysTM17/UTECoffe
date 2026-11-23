@@ -732,3 +732,148 @@ h1, h2, h3, h4, h5, h6, .font-serif {
         display: none;
     }
 }
+
+/* ==========================================================================
+   Refined Artisanal Drink Customizer (Quiet, Elegant, Minimalist)
+   ========================================================================== */
+.customizer-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+}
+
+.customizer-section-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.customizer-section-title .section-step-num {
+    color: var(--text-gold);
+    font-weight: 700;
+    margin-right: 0.35rem;
+}
+
+.customizer-section-title .current-selection-badge {
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--text-gold);
+    background: var(--gold-subtle);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+/* Customizer Option Pills: Quiet unselected state */
+.btn-option-pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-secondary);
+    border-radius: var(--radius-pill);
+    padding: 0.45rem 1.05rem;
+    font-size: 0.84rem;
+    font-weight: 500;
+    font-family: var(--font-accent);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    user-select: none;
+    outline: none !important;
+}
+
+[data-theme="light"] .btn-option-pill {
+    background: #f8f6f0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #5c554e;
+}
+
+.btn-option-pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(212, 175, 55, 0.4);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .btn-option-pill:hover {
+    background: #f0ebe1;
+    border-color: rgba(197, 155, 39, 0.4);
+    color: #1a1614;
+}
+
+/* Selected Active State: Rich gold badge that stands out clearly */
+.btn-option-pill.active {
+    background: var(--gold-gradient) !important;
+    border-color: #d4af37 !important;
+    color: #0b0908 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.28) !important;
+    transform: translateY(-1px);
+}
+
+[data-theme="light"] .btn-option-pill.active {
+    background: var(--gold-gradient) !important;
+    border-color: #c59b27 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(197, 155, 39, 0.25) !important;
+}
+
+/* Checkbox Topping Card */
+.topping-pill-check {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-secondary);
+    border-radius: var(--radius-pill);
+    padding: 0.45rem 1.05rem;
+    font-size: 0.84rem;
+    font-weight: 500;
+    font-family: var(--font-accent);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    user-select: none;
+}
+
+[data-theme="light"] .topping-pill-check {
+    background: #f8f6f0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #5c554e;
+}
+
+.topping-pill-check:hover {
+    border-color: rgba(212, 175, 55, 0.35);
+    color: var(--text-primary);
+}
+
+.topping-pill-check.active {
+    background: rgba(212, 175, 55, 0.15) !important;
+    border-color: var(--text-gold) !important;
+    color: var(--text-gold) !important;
+    font-weight: 600 !important;
+}
+
+.topping-pill-check .form-check-input {
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.topping-pill-check.active .form-check-input {
+    background-color: var(--text-gold);
+    border-color: var(--text-gold);
+}
