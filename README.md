@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_light.png">
-    <img alt="UTECOFFE Master Logo" src="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_dark.png" width="620">
+    <source media="(prefers-color-scheme: dark)" srcset="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_light.svg">
+    <img alt="UTECOFFE Master Logo" src="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_dark.svg" width="680">
   </picture>
 </p>
 
@@ -221,9 +221,9 @@ Hệ thống tài liệu đồ án được biên soạn đầy đủ, khoa họ
 Hệ thống biểu tượng **UTECOFFE** được thiết kế theo phong cách tối giản hiện đại (*Contemporary Minimalist*), nền trong suốt (*Transparent Background*) và tương thích với cả giao diện tối (*Dark Theme*) lẫn giao diện sáng (*Light Theme*):
 
 <p align="center">
-  <img src="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_dark.png" alt="Logo Nền Tối" width="48%"/>
+  <img src="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_dark.svg" alt="Logo Nền Tối" width="48%"/>
   &nbsp;
-  <img src="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_light.png" alt="Logo Nền Sáng" width="48%"/>
+  <img src="03_Thiet_Ke_Thuong_Hieu_Logo/logo_chinh_ngang_light.svg" alt="Logo Nền Sáng" width="48%"/>
 </p>
 
 ### Ý Nghĩa Biểu Tượng (The Golden Drop & Camellia Leaf):
@@ -280,6 +280,18 @@ vnpay.pay-url=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
 ```
 
 ### 4. Khởi Chạy Ứng Dụng
+
+#### Cách 1: Chạy Thử Nhanh Không Cần Cài Đặt CSDL (Chế độ Local H2 In-Memory)
+Dự án tích hợp sẵn cấu hình Zero-Config (`application-local.properties`) kèm nạp dữ liệu mẫu ban đầu:
+```bash
+# Trên Windows PowerShell / Command Prompt
+mvn spring-boot:run -Dspring-boot.run.profiles=local
+
+# Hoặc khởi chạy file WAR đã build
+java -jar target/utecoffe-platform-1.0.0-SNAPSHOT.war --spring.profiles.active=local
+```
+
+#### Cách 2: Chạy Với Cơ Sở Dữ Liệu PostgreSQL Đầy Đủ
 ```bash
 # Trên Linux/macOS
 ./mvnw clean spring-boot:run
@@ -289,12 +301,24 @@ vnpay.pay-url=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
 ```
 
 Sau khi ứng dụng khởi chạy thành công, truy cập các cổng chức năng:
-- **Cổng Khách Hàng (Web Store):** `http://localhost:8080/`
-- **Màn Hình Barista KDS:** `http://localhost:8080/barista/orders`
-- **Trang Quản Trị Hệ Thống (Admin):** `http://localhost:8080/admin/dashboard`
+- **Cổng Khách Hàng (Artisanal Web Store):** `http://localhost:8080/`
+- **Thực Đơn Đặc Sản (Menu & Cupping Notes):** `http://localhost:8080/menu`
+- **Màn Hình Quầy Pha Chế Barista KDS:** `http://localhost:8080/barista/kds` (hoặc `/barista/orders`)
+- **Trang Quản Trị Hệ Thống (Executive Admin Dashboard):** `http://localhost:8080/admin/dashboard`
+- **Quản Lý Tồn Kho & Công Thức Định Lượng BOM:** `http://localhost:8080/admin/inventory`
 - **Tài Liệu REST API Tương Tác (Swagger UI / OpenAPI 3.0):** `http://localhost:8080/swagger-ui.html`
 - **Hệ Thống Giám Sát & Sức Khỏe Ứng Dụng (Spring Boot Actuator):** `http://localhost:8080/actuator/health`
 - **Xuất Báo Cáo Doanh Thu & Đơn Hàng Định Dạng Excel (.xlsx):** `http://localhost:8080/admin/orders/export`
+- **H2 Web Console (Chế độ Local):** `http://localhost:8080/h2-console` (JDBC URL: `jdbc:h2:mem:utecoffe_db`, user: `sa`, password: rỗng)
+
+### 5. Tài Khoản Thử Nghiệm Hệ Thống (Seed Accounts)
+Hệ thống cấp sẵn các tài khoản mẫu với mật khẩu mặc định để kiểm thử phân quyền Spring Security:
+
+| Vai Trò | Email Đăng Nhập | Mật Khẩu | Quyền Hạn & Phạm Vi |
+| :--- | :--- | :--- | :--- |
+| **Quản Trị Viên (ADMIN)** | `admin@utecoffe.vn` | `Admin@123` | Quản trị toàn chuỗi, xem doanh thu, kho BOM, nhân sự |
+| **Pha Chế Trưởng (BARISTA)** | `barista@utecoffe.vn` | `Barista@123` | Vận hành quầy KDS, nhận đơn, chuyển trạng thái chế biến |
+| **Khách Hàng VIP (CUSTOMER)** | `customer@utecoffe.vn` | `Customer@123` | Đặt hàng, tích điểm OMO, đặt bàn, xem lịch sử giao dịch |
 
 ---
 
