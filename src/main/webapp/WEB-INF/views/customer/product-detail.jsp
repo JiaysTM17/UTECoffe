@@ -21,9 +21,20 @@
                 <div class="position-sticky" style="top: 100px;">
                     <div class="card card-luxury overflow-hidden mb-4 p-2">
                         <div class="product-image-container rounded-4 overflow-hidden position-relative" style="aspect-ratio: 1/1;">
-                            <img src="${not empty product.imageUrl ? product.imageUrl : 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=800'}" 
-                                 alt="${product.name}" 
-                                 class="img-fluid w-100 h-100 object-fit-cover">
+                        <c:choose>
+                            <c:when test="${empty product.imageUrl}">
+                                <c:set var="curProdImg" value="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=800"/>
+                            </c:when>
+                            <c:when test="${product.imageUrl.startsWith('http')}">
+                                <c:set var="curProdImg" value="${product.imageUrl}"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="curProdImg" value="${pageContext.request.contextPath}${product.imageUrl}"/>
+                            </c:otherwise>
+                        </c:choose>
+                        <img src="${curProdImg}" 
+                             alt="${product.name}" 
+                             class="img-fluid w-100 h-100 object-fit-cover">
                             <span class="badge-luxury-tag position-absolute top-3 start-3">
                                 <i class="fa-solid fa-award text-gold me-1"></i> ${product.category.name}
                             </span>
@@ -513,6 +524,199 @@
                         <div class="col-sm-4 d-flex align-items-center gap-2">
                             <i class="fa-solid fa-truck-fast text-gold"></i> Giao siêu tốc giữ nhiệt 30'
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- SECTION: CÂU CHUYỆN NGHỆ NHÂN & MINH BẠCH THÀNH PHẦN, LƯU Ý DỊ ỨNG -->
+        <!-- ========================================================================= -->
+        <div class="card-luxury p-4 p-lg-5 mb-5 position-relative overflow-hidden">
+            <div class="position-absolute top-0 end-0 p-5 opacity-10 pointer-events-none d-none d-md-block">
+                <i class="fa-solid fa-leaf text-gold" style="font-size: 15rem;"></i>
+            </div>
+            
+            <div class="row g-4 g-lg-5 position-relative">
+                <!-- Column 1: Câu Chuyện Món & Cảm Hứng Nghệ Nhân -->
+                <div class="col-lg-7 border-end-lg border-gold pe-lg-5">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-gold-subtle text-gold small px-2 py-1 text-uppercase font-sans" style="letter-spacing: 0.1em;">
+                            <i class="fa-solid fa-feather-pointed me-1"></i> Heritage &amp; Craft
+                        </span>
+                        <span class="text-secondary small">&bull; Tuyệt Phẩm Chế Tác Độc Bản</span>
+                    </div>
+
+                    <h3 class="font-serif fw-bold text-gold-gradient mb-3">
+                        Câu Chuyện Nghệ Nhân &amp; Nguồn Cảm Hứng
+                    </h3>
+
+                    <p class="text-secondary leading-relaxed mb-4" style="line-height: 1.8;">
+                        <c:choose>
+                            <c:when test="${product.category.id == 2}">
+                                Mỗi búp trà trong <strong>${product.name}</strong> bắt đầu từ những sớm tinh sương trên những triền đồi bạt ngàn sương mù tại Mộc Châu và vùng đầm sen cổ Tây Hồ. Các nghệ nhân UTECoffe tuyển chọn thủ công từng lá trà non một tôm hai lá, sao trên chảo gang truyền thống để giữ trọn vẹn lớp mao trắng và hương hoa tự nhiên tinh tế. Sự hòa quyện nhịp nhàng giữa chất thanh tao cổ truyền và nghệ thuật pha chế đương đại mang đến trải nghiệm thưởng trà sâu lắng, an yên cho tâm hồn.
+                            </c:when>
+                            <c:when test="${product.category.id == 3}">
+                                Ra đời từ gian bếp bánh thủ công với tình yêu sâu sắc dành cho nghệ thuật ẩm thực Pháp, từng mẻ <strong>${product.name}</strong> là một tác phẩm của sự kiên nhẫn. Được nhào nặn hoàn toàn bằng bơ thượng hạng Elle &amp; Vire nhập khẩu từ vùng đất trù phú Normandy và trải qua quá trình lên men chậm tới 24-36 giờ để phát triển cấu trúc hương vị phức hợp. Khi nướng chín tới trong lò đối lưu nhiệt độ chuẩn mực, lớp vỏ bánh đạt được độ giòn tan tinh tế cùng lớp ruột xốp mềm béo ngậy ngát hương thơm bơ sữa tự nhiên.
+                            </c:when>
+                            <c:otherwise>
+                                <strong>${product.name}</strong> khởi nguồn từ những đồn điền cà phê cao nguyên Cầu Đất (Lâm Đồng) ở độ cao lý tưởng 1.600m trên mực nước biển &mdash; nơi thổ nhưỡng đất đỏ bazan và khí hậu se lạnh quanh năm sản sinh ra những hạt Arabica có phẩm chất dải hương phong phú bậc nhất. Từng mẻ hạt chín đỏ mọng 100% được sơ chế theo phương pháp mật ong (Honey Process) giữ trọn lớp vị ngọt tự nhiên, sau đó được chuyên gia Roaster của UTECoffe rang chậm trên máy rang khí nóng hiện đại để tôn vinh trọn vẹn nốt hương caramel, hoa quả chín và hậu vị ngọt sâu lắng.
+                            </c:otherwise>
+                        </c:choose>
+                    </p>
+
+                    <!-- Artisan Highlights Grid -->
+                    <div class="row g-3 pt-2">
+                        <div class="col-sm-6">
+                            <div class="p-3 rounded-3 bg-espresso border border-gold-subtle h-100">
+                                <div class="text-gold fw-bold small mb-1">
+                                    <i class="fa-solid fa-temperature-arrow-up me-1"></i> Kiểm Soát Chuẩn Mực
+                                </div>
+                                <div class="text-secondary small">
+                                    Nhiệt độ nước và áp suất pha chế được căn chỉnh vi mô tới từng giây để bộc lộ tầng hương cao nhất.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 rounded-3 bg-espresso border border-gold-subtle h-100">
+                                <div class="text-gold fw-bold small mb-1">
+                                    <i class="fa-solid fa-gem me-1"></i> Nguyên Liệu Độc Bản
+                                </div>
+                                <div class="text-secondary small">
+                                    Nguồn nông sản và trái cây địa phương đạt chuẩn canh tác hữu cơ bền vững, không hóa chất.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Minh Bạch Thành Phần & Lưu Ý Dị Ứng Cho Khách Hàng -->
+                <div class="col-lg-5 ps-lg-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-espresso text-gold border border-gold small px-2 py-1 text-uppercase font-sans" style="letter-spacing: 0.08em;">
+                            <i class="fa-solid fa-heart-pulse text-danger me-1"></i> An Toàn &amp; Sức Khỏe
+                        </span>
+                    </div>
+
+                    <h4 class="font-serif fw-bold text-gold mb-3">
+                        Thành Phần &amp; Lưu Ý Dị Ứng
+                    </h4>
+                    
+                    <p class="text-secondary small mb-3">
+                        UTECoffe luôn tôn trọng quyền được biết và sự an toàn sức khỏe của quý khách. Dưới đây là thông tin về các nhóm nguyên liệu cốt lõi và cảnh báo dị ứng thực phẩm:
+                    </p>
+
+                    <!-- Dietary & Allergen Badges -->
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <c:choose>
+                            <c:when test="${product.category.id == 3}">
+                                <span class="badge bg-espresso border border-warning text-warning small py-1 px-2">
+                                    <i class="fa-solid fa-wheat-awn me-1"></i> Chứa Gluten (Bột Mì)
+                                </span>
+                                <span class="badge bg-espresso border border-info text-info small py-1 px-2">
+                                    <i class="fa-solid fa-cow me-1"></i> Chứa Sữa &amp; Bơ Pháp (Dairy)
+                                </span>
+                                <span class="badge bg-espresso border border-light text-secondary small py-1 px-2">
+                                    <i class="fa-solid fa-egg me-1"></i> Có Trứng Thanh Trùng
+                                </span>
+                                <span class="badge bg-espresso border border-success text-success small py-1 px-2">
+                                    <i class="fa-solid fa-ban me-1"></i> 0% Mỡ Trừ (Trans-Fat)
+                                </span>
+                            </c:when>
+                            <c:when test="${product.category.id == 2}">
+                                <c:choose>
+                                    <c:when test="${product.slug.contains('cuc-la-ma')}">
+                                        <span class="badge bg-espresso border border-success text-success small py-1 px-2">
+                                            <i class="fa-solid fa-moon me-1"></i> 100% Caffeine-Free (Không Caffeine)
+                                        </span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="badge bg-espresso border border-secondary text-gold small py-1 px-2">
+                                            <i class="fa-solid fa-feather me-1"></i> Caffeine Thấp (Thanh Lọc)
+                                        </span>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${product.slug.contains('kem') or product.slug.contains('macchiato') or product.slug.contains('sua') or product.slug.contains('latte')}">
+                                        <span class="badge bg-espresso border border-info text-info small py-1 px-2">
+                                            <i class="fa-solid fa-cheese me-1"></i> Chứa Sữa &amp; Kem Phô Mai
+                                        </span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="badge bg-espresso border border-success text-success small py-1 px-2">
+                                            <i class="fa-solid fa-seedling me-1"></i> Thuần Chay (Vegan Friendly)
+                                        </span>
+                                    </c:otherwise>
+                                </c:choose>
+                                <span class="badge bg-espresso border border-success text-success small py-1 px-2">
+                                    <i class="fa-solid fa-apple-whole me-1"></i> 100% Trái Cây Tự Nhiên
+                                </span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="badge bg-espresso border border-warning text-warning small py-1 px-2">
+                                    <i class="fa-solid fa-bolt me-1"></i> Chứa Caffeine Tự Nhiên
+                                </span>
+                                <c:choose>
+                                    <c:when test="${product.slug.contains('latte') or product.slug.contains('bac-xiu') or product.slug.contains('flat-white') or product.slug.contains('muoi')}">
+                                        <span class="badge bg-espresso border border-info text-info small py-1 px-2">
+                                            <i class="fa-solid fa-cow me-1"></i> Chứa Lactose (Đổi Yến Mạch Được)
+                                        </span>
+                                    </c:when>
+                                    <c:when test="${product.slug.contains('trung')}">
+                                        <span class="badge bg-espresso border border-warning text-warning small py-1 px-2">
+                                            <i class="fa-solid fa-egg me-1"></i> Chứa Lòng Đỏ Trứng Gà
+                                        </span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="badge bg-espresso border border-success text-success small py-1 px-2">
+                                            <i class="fa-solid fa-seedling me-1"></i> Thuần Thực Vật (Black Coffee)
+                                        </span>
+                                    </c:otherwise>
+                                </c:choose>
+                                <span class="badge bg-espresso border border-gold text-gold small py-1 px-2">
+                                    <i class="fa-solid fa-circle-check me-1"></i> Không Phẩm Màu &amp; Hương Liệu
+                                </span>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+
+                    <!-- Transparent Base Ingredients List (Customer-centric, no recipe leak) -->
+                    <div class="bg-espresso p-3 rounded-3 border border-gold-subtle mb-3">
+                        <div class="text-gold fw-bold small mb-2">
+                            <i class="fa-solid fa-list-check me-1"></i> Nhóm Nguyên Liệu Chính:
+                        </div>
+                        <ul class="text-secondary small mb-0 ps-3" style="line-height: 1.7;">
+                            <c:choose>
+                                <c:when test="${product.category.id == 3}">
+                                    <li>Bột lúa mì chuyên dụng cho bánh nướng thủ công.</li>
+                                    <li>100% Bơ lạt tinh khiết Elle &amp; Vire cao cấp từ vùng Normandy (Pháp).</li>
+                                    <li>Đường mía tự nhiên, men sống tự nhiên ủ men chậm, muối biển tinh khiết.</li>
+                                    <li>Tùy món: Socola Bỉ nguyên chất, phô mai Cheddar/Mascarpone, dâu tây hoặc thịt nguội Jambon.</li>
+                                </c:when>
+                                <c:when test="${product.category.id == 2}">
+                                    <li>Lá trà búp thượng hạng (Oolong nướng Mộc Châu, Trà hoa sen Tây Hồ, Trà nhài hữu cơ).</li>
+                                    <li>Trái cây tươi dầm nguyên chất (bưởi hồng Ruby, dâu tây Đà Lạt, đào, vải, mãng cầu).</li>
+                                    <li>Mật ong hoa rừng tự nhiên và nước khoáng tinh lọc đa tầng.</li>
+                                    <li>Lớp foam béo ngậy chế tác từ kem tươi phô mai tiệt trùng (với các dòng Macchiato).</li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li>100% Hạt cà phê Specialty Arabica &amp; Robusta hái chín từ thổ nhưỡng Cầu Đất (1.600m).</li>
+                                    <li>Nước khoáng tinh khiết tiêu chuẩn Specialty Coffee Association (SCA).</li>
+                                    <li>Sữa tươi thanh trùng Đà Lạt Milk nguyên kem (hoặc sữa yến mạch Oatly Thụy Điển thuần chay).</li>
+                                    <li>Nguyên liệu phụ trợ tự nhiên: muối biển hầm caramel, nước cốt dừa Bến Tre tươi, trứng gà sạch.</li>
+                                </c:otherwise>
+                            </c:choose>
+                        </ul>
+                    </div>
+
+                    <!-- Allergen & Health Advisory Notice -->
+                    <div class="p-3 rounded-3" style="background: rgba(222, 183, 106, 0.08); border-left: 3px solid var(--accent-gold);">
+                        <div class="text-gold small fw-bold mb-1">
+                            <i class="fa-solid fa-circle-exclamation me-1"></i> Khuyến Nghị Dành Cho Khách Hàng:
+                        </div>
+                        <p class="text-secondary small mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                            Nếu quý khách có tiền sử dị ứng nghiêm trọng với sữa bò (Lactose), gluten lúa mì, trứng hoặc các loại hạt dinh dưỡng, vui lòng thông báo cho Barista hoặc lựa chọn phiên bản sữa yến mạch thuần chay trong mục <strong>Tùy Chỉnh</strong> phía trên.
+                        </p>
                     </div>
                 </div>
             </div>

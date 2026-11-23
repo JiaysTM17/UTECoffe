@@ -91,9 +91,20 @@
                      data-cat="${prod.category.id}"
                      data-price="${prod.basePrice}">
                     <div class="card card-luxury h-100 d-flex flex-column product-hover-lift">
-                        <!-- Product Image & Badges -->
-                        <div class="product-image-container position-relative overflow-hidden" style="aspect-ratio: 4/3;">
-                            <img src="${not empty prod.imageUrl ? prod.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80'}" 
+                        <!-- Product Image & Badges (Clickable directly to Story & Details) -->
+                        <c:choose>
+                            <c:when test="${empty prod.imageUrl}">
+                                <c:set var="curProdImg" value="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80"/>
+                            </c:when>
+                            <c:when test="${prod.imageUrl.startsWith('http')}">
+                                <c:set var="curProdImg" value="${prod.imageUrl}"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="curProdImg" value="${pageContext.request.contextPath}${prod.imageUrl}"/>
+                            </c:otherwise>
+                        </c:choose>
+                        <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="product-image-container position-relative overflow-hidden d-block text-decoration-none" style="aspect-ratio: 4/3; cursor: pointer;" title="${prod.name} - Khám phá câu chuyện &amp; thành phần">
+                            <img src="${curProdImg}" 
                                  alt="${prod.name}" 
                                  class="product-thumb-img w-100 h-100 object-fit-cover"
                                  loading="lazy">
@@ -103,7 +114,7 @@
                             <span class="badge bg-gold-gradient text-obsidian fw-bold position-absolute top-0 end-0 m-3 px-2 py-1 rounded-pill small">
                                 <i class="fa-solid fa-award me-1"></i> Special
                             </span>
-                        </div>
+                        </a>
 
                         <!-- Card Body -->
                         <div class="card-body p-4 d-flex flex-column flex-grow-1">
@@ -139,14 +150,14 @@
                             </p>
 
                             <!-- Price & Customization Action Button -->
-                            <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold mt-auto">
-                                <div class="d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold mt-auto gap-2">
+                                <div class="d-flex flex-column text-nowrap" style="min-width: 0;">
                                     <span class="small text-secondary" style="font-size: 0.75rem;" data-i18n="menu.original_price">Giá nguyên bản:</span>
-                                    <span class="price-gold fw-bold fs-5" data-raw-price="${prod.basePrice}">
+                                    <span class="price-gold fw-bold fs-5 text-nowrap" data-raw-price="${prod.basePrice}" style="white-space: nowrap !important; letter-spacing: -0.02em;">
                                         <fmt:formatNumber value="${prod.basePrice}" pattern="#,##0"/> VNĐ
                                     </span>
                                 </div>
-                                <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill fw-semibold">
+                                <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill fw-semibold text-nowrap flex-shrink-0">
                                     <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="menu.customize">Tùy Chỉnh</span>
                                 </a>
                             </div>
