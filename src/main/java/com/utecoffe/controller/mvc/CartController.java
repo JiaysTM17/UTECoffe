@@ -22,7 +22,7 @@ public class CartController {
         return "customer/cart";
     }
 
-    @GetMapping("/checkout")
+    @GetMapping({"/checkout", "/cart/checkout"})
     public String checkout(Model model) {
         model.addAttribute("stores", storeService.getAllActiveStores());
         return "customer/checkout";

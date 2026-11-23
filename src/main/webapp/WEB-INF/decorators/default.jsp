@@ -218,8 +218,176 @@
         </div>
     </footer>
 
+    <!-- Floating Speed-Dial Actions (Back to Top & Taste Quiz Assistant) -->
+    <div class="floating-speed-dial" style="position: fixed; bottom: 25px; right: 25px; z-index: 1050; display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
+        <!-- Taste Quiz Assistant Button -->
+        <button type="button" class="btn btn-gold rounded-pill px-3 py-2 shadow-gold d-flex align-items-center gap-2 font-accent fw-bold" data-bs-toggle="modal" data-bs-target="#tasteQuizModal" title="Trợ lý chọn cà phê theo gu">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span class="d-none d-sm-inline">Trợ Lý Vị Giác</span>
+        </button>
+
+        <!-- Direct Hotline Dial -->
+        <a href="tel:19002026" class="btn btn-outline-gold rounded-circle p-0 shadow-sm d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: var(--bg-card);" title="Tổng đài CSKH 1900 2026">
+            <i class="fa-solid fa-phone text-gold"></i>
+        </a>
+
+        <!-- Back to Top Button -->
+        <button type="button" id="backToTopBtn" class="btn btn-outline-gold rounded-circle p-0 shadow-sm d-none align-items-center justify-content-center" style="width: 44px; height: 44px; background: var(--bg-card);" title="Cuộn lên đầu trang">
+            <i class="fa-solid fa-arrow-up text-gold"></i>
+        </button>
+    </div>
+
+    <!-- Taste Quiz Modal -->
+    <div class="modal fade" id="tasteQuizModal" tabindex="-1" aria-labelledby="tasteQuizModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content card-luxury border-gold p-2">
+                <div class="modal-header border-0 pb-0">
+                    <div>
+                        <span class="badge bg-gold-subtle text-gold small font-accent mb-1">
+                            <i class="fa-solid fa-gem me-1"></i> UTECOFFE TASTE FINDER
+                        </span>
+                        <h5 class="modal-title font-serif fw-bold text-gold-gradient" id="tasteQuizModalLabel">Trợ Lý Khám Phá Gu Vị Giác</h5>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Step 1 -->
+                    <div id="quizStep1">
+                        <p class="small text-secondary mb-3">1. Bạn đang mong muốn tìm kiếm trải nghiệm hương vị nào hôm nay?</p>
+                        <div class="d-flex flex-column gap-2 mb-3">
+                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-option-btn" data-type="strong">
+                                <i class="fa-solid fa-fire-flame-curved me-2 text-gold"></i> Đậm đà, đánh thức năng lượng (Espresso &amp; Phin Mộc)
+                            </button>
+                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-option-btn" data-type="coldbrew">
+                                <i class="fa-solid fa-snowflake me-2 text-gold"></i> Thanh mát, thơm nốt cam quýt ủ lạnh (Specialty Cold Brew)
+                            </button>
+                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-option-btn" data-type="tea">
+                                <i class="fa-solid fa-leaf me-2 text-gold"></i> Tĩnh lặng, thư thái cùng trà hoa thượng hạng (Camellia Tea)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div id="quizStep2" class="d-none">
+                        <p class="small text-secondary mb-3">2. Bạn có thích kết hợp cùng sữa tươi nguyên bản không?</p>
+                        <div class="d-flex flex-column gap-2 mb-3">
+                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-answer-btn" data-milk="black">
+                                <i class="fa-solid fa-droplet me-2 text-gold"></i> Cà phê/Trà đen nguyên bản (Không sữa)
+                            </button>
+                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-answer-btn" data-milk="milk">
+                                <i class="fa-solid fa-cow me-2 text-gold"></i> Béo ngậy cùng Sữa Tươi Thanh Trùng Đà Lạt
+                            </button>
+                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-answer-btn" data-milk="oat">
+                                <i class="fa-solid fa-wheat-awn me-2 text-gold"></i> Thanh tao cùng Sữa Yến Mạch Oatly Thuần Chay
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recommendation Result -->
+                    <div id="quizResult" class="d-none text-center py-3">
+                        <div class="mb-3">
+                            <i class="fa-solid fa-champagne-glasses text-gold display-4 mb-2"></i>
+                            <h5 class="font-serif fw-bold text-gold-gradient mb-1" id="quizRecommendedTitle">Cold Brew Cam Vàng Hảo Hạng</h5>
+                            <p class="small text-secondary mx-auto" style="max-width: 320px;" id="quizRecommendedDesc">
+                                Tuyệt phẩm ủ lạnh 24 giờ với hương thơm cam vàng thanh mát, hậu vị ngọt sâu dịu nhẹ rất hợp với gu thưởng thức của bạn!
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold btn-sm px-4 rounded-pill" id="quizActionLink">
+                                <i class="fa-solid fa-sliders me-1"></i> Tùy Chỉnh &amp; Thưởng Thức
+                            </a>
+                            <button type="button" class="btn btn-outline-gold btn-sm px-3 rounded-pill" id="quizRestartBtn">
+                                <i class="fa-solid fa-rotate-left"></i> Chọn Lại
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap 5 JS Bundle & UTECoffe Luxury Interaction Engine -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/luxury.js"></script>
+
+    <!-- Floating Actions & Quiz Interaction Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Back to Top Scroll Behavior
+            const backToTopBtn = document.getElementById('backToTopBtn');
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 300) {
+                    if (backToTopBtn) {
+                        backToTopBtn.classList.remove('d-none');
+                        backToTopBtn.classList.add('d-flex');
+                    }
+                } else {
+                    if (backToTopBtn) {
+                        backToTopBtn.classList.add('d-none');
+                        backToTopBtn.classList.remove('d-flex');
+                    }
+                }
+            });
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', function () {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Taste Quiz Logic
+            let chosenType = 'coldbrew';
+            const step1 = document.getElementById('quizStep1');
+            const step2 = document.getElementById('quizStep2');
+            const result = document.getElementById('quizResult');
+            const titleEl = document.getElementById('quizRecommendedTitle');
+            const descEl = document.getElementById('quizRecommendedDesc');
+            const linkEl = document.getElementById('quizActionLink');
+            const restartBtn = document.getElementById('quizRestartBtn');
+
+            document.querySelectorAll('.quiz-option-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    chosenType = this.getAttribute('data-type');
+                    if (step1) step1.classList.add('d-none');
+                    if (step2) step2.classList.remove('d-none');
+                });
+            });
+
+            document.querySelectorAll('.quiz-answer-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const milk = this.getAttribute('data-milk');
+                    if (step2) step2.classList.add('d-none');
+                    if (result) result.classList.remove('d-none');
+
+                    if (chosenType === 'strong') {
+                        if (milk === 'milk') {
+                            titleEl.textContent = 'Espresso Tonic Signature';
+                            descEl.textContent = 'Double shot Espresso Cầu Đất trên nền Tonic cao cấp và lát chanh vàng bùng nổ năng lượng.';
+                            linkEl.href = '${pageContext.request.contextPath}/menu/espresso-tonic-signature';
+                        } else {
+                            titleEl.textContent = 'Espresso Cầu Đất Vàng Đượm';
+                            descEl.textContent = 'Chiết xuất áp suất cao từ 100% hạt Arabica Bourbon Cầu Đất, lớp crema vàng óng ánh với hương chocolate đen.';
+                            linkEl.href = '${pageContext.request.contextPath}/menu/espresso-tonic-signature';
+                        }
+                    } else if (chosenType === 'tea') {
+                        titleEl.textContent = 'Trà Oolong Kem Phomai Vàng';
+                        descEl.textContent = 'Trà Oolong nướng Mộc Châu kết hợp lớp macchiato cheese béo ngậy hảo hạng.';
+                        linkEl.href = '${pageContext.request.contextPath}/menu/tra-oolong-kem-phomai-vang';
+                    } else {
+                        titleEl.textContent = 'Specialty Cold Brew Cam Vàng';
+                        descEl.textContent = 'Ủ lạnh chậm suốt 18 giờ giữ trọn vị ngọt tự nhiên, hòa quyện nước cam vàng Sunkist mọng nước thanh mát.';
+                        linkEl.href = '${pageContext.request.contextPath}/menu/cold-brew-cam-vang-specialty';
+                    }
+                });
+            });
+
+            if (restartBtn) {
+                restartBtn.addEventListener('click', function () {
+                    if (result) result.classList.add('d-none');
+                    if (step2) step2.classList.add('d-none');
+                    if (step1) step1.classList.remove('d-none');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
