@@ -1,0 +1,447 @@
+/* ==========================================================================
+   UTECOFFE SPECIALTY TEA & COFFEE ROASTERY
+   High-End Luxury Artisanal Design System
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-obsidian: #0A0908;
+    --bg-primary: #12100E;
+    --bg-secondary: #1A1715;
+    --bg-tertiary: #24201D;
+    --bg-card: rgba(26, 23, 21, 0.85);
+    --bg-card-hover: rgba(36, 32, 29, 0.95);
+    --bg-glass: rgba(18, 16, 14, 0.75);
+
+    --gold-100: #F6EDD9;
+    --gold-200: #EED59B;
+    --gold-300: #DEB76A;
+    --gold-400: #C5A880;
+    --gold-500: #B88E44;
+    --gold-600: #8C6A2E;
+    --gold-gradient: linear-gradient(135deg, #F6EDD9 0%, #DEB76A 50%, #B88E44 100%);
+    --gold-gradient-hover: linear-gradient(135deg, #FFFFFF 0%, #EED59B 50%, #DEB76A 100%);
+    --gold-subtle: rgba(222, 183, 106, 0.12);
+
+    --text-primary: #FBF9F5;
+    --text-secondary: #C8BFB5;
+    --text-muted: #8E8478;
+    --text-gold: #DEB76A;
+
+    --border-gold: rgba(222, 183, 106, 0.25);
+    --border-gold-hover: rgba(222, 183, 106, 0.6);
+    --border-dark: rgba(255, 255, 255, 0.08);
+
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.55);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.75);
+    --shadow-gold: 0 8px 32px rgba(222, 183, 106, 0.22);
+
+    --font-heading: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    --font-subheading: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-accent: 'Montserrat', sans-serif;
+
+    --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --radius-pill: 9999px;
+}
+
+/* Base Reset & Typography */
+body {
+    background-color: var(--bg-obsidian);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    font-weight: 600;
+}
+
+.text-gold-gradient {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gold {
+    color: var(--gold-300) !important;
+}
+
+.bg-obsidian {
+    background-color: var(--bg-obsidian) !important;
+}
+
+.bg-dark-roast {
+    background-color: var(--bg-primary) !important;
+}
+
+.bg-espresso {
+    background-color: var(--bg-secondary) !important;
+}
+
+.border-gold {
+    border-color: var(--border-gold) !important;
+}
+
+.border-subtle {
+    border-color: var(--border-dark) !important;
+}
+
+/* Luxury Announcement Bar */
+.top-announcement-bar {
+    background: linear-gradient(90deg, #1A1715 0%, #24201D 50%, #1A1715 100%);
+    border-bottom: 1px solid var(--border-gold);
+    font-family: var(--font-accent);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-200);
+    padding: 0.5rem 0;
+}
+
+/* Glassmorphism Luxury Navbar */
+.navbar-luxury {
+    background: rgba(10, 9, 8, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-gold);
+    transition: var(--transition-smooth);
+    padding: 0.85rem 0;
+    z-index: 1040;
+}
+
+.navbar-luxury.scrolled {
+    background: rgba(10, 9, 8, 0.98);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    padding: 0.65rem 0;
+}
+
+.nav-link-luxury {
+    font-family: var(--font-accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    padding: 0.5rem 1.1rem !important;
+    position: relative;
+    transition: var(--transition-fast);
+}
+
+.nav-link-luxury:hover, .nav-link-luxury.active {
+    color: var(--gold-200) !important;
+}
+
+.nav-link-luxury::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--gold-gradient);
+    transition: var(--transition-smooth);
+}
+
+.nav-link-luxury:hover::after, .nav-link-luxury.active::after {
+    width: 60%;
+}
+
+/* Luxury Buttons */
+.btn-gold {
+    background: var(--gold-gradient);
+    color: #12100E !important;
+    font-family: var(--font-accent);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 0.75rem 1.85rem;
+    box-shadow: var(--shadow-gold);
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-gold:hover {
+    background: var(--gold-gradient-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(222, 183, 106, 0.35);
+    color: #0A0908 !important;
+}
+
+.btn-outline-gold {
+    background: transparent;
+    color: var(--gold-200) !important;
+    font-family: var(--font-accent);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--gold-300);
+    border-radius: var(--radius-pill);
+    padding: 0.7rem 1.85rem;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-outline-gold:hover {
+    background: var(--gold-gradient);
+    color: #12100E !important;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+/* Luxury Cards */
+.card-luxury {
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-smooth);
+    overflow: hidden;
+}
+
+.card-luxury:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-gold-hover);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md), 0 0 25px rgba(222, 183, 106, 0.1);
+}
+
+/* Product Card Elements */
+.product-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    aspect-ratio: 1 / 1;
+    background: #171513;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-luxury:hover .product-image-container img {
+    transform: scale(1.08);
+}
+
+.badge-luxury-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(10, 9, 8, 0.85);
+    border: 1px solid var(--gold-300);
+    color: var(--gold-200);
+    font-family: var(--font-accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-pill);
+    backdrop-filter: blur(8px);
+}
+
+/* Price Styling */
+.price-gold {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gold-200);
+    letter-spacing: -0.01em;
+}
+
+/* Hero Section */
+.hero-luxury {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(circle at 75% 30%, rgba(222, 183, 106, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(43, 35, 29, 0.4) 0%, transparent 70%),
+                var(--bg-obsidian);
+    border-bottom: 1px solid var(--border-gold);
+    overflow: hidden;
+}
+
+.hero-luxury::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(222, 183, 106, 0.08) 1px, transparent 0);
+    background-size: 32px 32px;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Section Header */
+.section-title-wrap {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    position: relative;
+}
+
+.section-subtitle {
+    font-family: var(--font-accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-300);
+    margin-bottom: 0.75rem;
+    display: inline-block;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.gold-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold-gradient);
+    margin: 1.2rem auto 0;
+}
+
+/* Form Controls in Luxury Theme */
+.form-control-luxury {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-gold) !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1.1rem;
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+}
+
+.form-control-luxury:focus {
+    background-color: var(--bg-tertiary) !important;
+    border-color: var(--gold-300) !important;
+    box-shadow: 0 0 0 3px rgba(222, 183, 106, 0.18) !important;
+    color: #FFFFFF !important;
+}
+
+.form-control-luxury::placeholder {
+    color: var(--text-muted);
+}
+
+/* Luxury Tables */
+.table-luxury {
+    color: var(--text-primary);
+    vertical-align: middle;
+}
+
+.table-luxury thead th {
+    background-color: #171412;
+    color: var(--gold-200);
+    font-family: var(--font-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-gold);
+    padding: 1rem;
+}
+
+.table-luxury tbody td {
+    padding: 1.1rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: transparent;
+}
+
+.table-luxury tbody tr:hover td {
+    background-color: rgba(222, 183, 106, 0.04);
+}
+
+/* Footer Luxury */
+.footer-luxury {
+    background-color: #070605;
+    border-top: 1px solid var(--border-gold);
+    padding: 5rem 0 2rem;
+    position: relative;
+}
+
+.footer-brand-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--gold-200);
+}
+
+.footer-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition-fast);
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 0.6rem;
+}
+
+.footer-link:hover {
+    color: var(--gold-200);
+    transform: translateX(4px);
+}
+
+/* Animations & Transitions */
+@keyframes goldPulse {
+    0% { box-shadow: 0 0 0 0 rgba(222, 183, 106, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(222, 183, 106, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(222, 183, 106, 0); }
+}
+
+.pulse-gold {
+    animation: goldPulse 2s infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0A0908;
+}
+::-webkit-scrollbar-thumb {
+    background: #2D2722;
+    border-radius: 4px;
+    border: 1px solid var(--border-gold);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-400);
+}
