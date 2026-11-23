@@ -56,10 +56,12 @@ public class SecurityConfig {
     @Order(2)
     public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/ws-utecoffe/**"))
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/ws-utecoffe/**", "/h2-console/**"))
+            .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
             .authorizeHttpRequests(auth -> auth
                 // Static resources
                 .requestMatchers("/actuator/health", "/actuator/info").permitAll()
+                .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                 .requestMatchers("/static/**", "/assets/**", "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
                 // Public storefront pages

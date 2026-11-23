@@ -94,11 +94,10 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- In-memory H2 Database for Testing & Offline Verification -->
+        <!-- In-memory H2 Database for Testing, Dev & Local Embedded Execution -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <!-- JSP & JSTL Support for Spring Boot 3 / Jakarta EE 10 -->
