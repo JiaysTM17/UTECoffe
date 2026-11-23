@@ -1,18 +1,19 @@
 /* ==========================================================================
    UTECOFFE SPECIALTY TEA & COFFEE ROASTERY
-   High-End Luxury Artisanal Design System
+   High-End Luxury Artisanal Design System (Dual Theme: Obsidian & Alabaster)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
+/* Default Theme: Obsidian Espresso Luxury (Dark) */
 :root {
     --bg-obsidian: #0A0908;
     --bg-primary: #12100E;
     --bg-secondary: #1A1715;
     --bg-tertiary: #24201D;
-    --bg-card: rgba(26, 23, 21, 0.85);
-    --bg-card-hover: rgba(36, 32, 29, 0.95);
-    --bg-glass: rgba(18, 16, 14, 0.75);
+    --bg-card: rgba(26, 23, 21, 0.90);
+    --bg-card-hover: rgba(36, 32, 29, 0.98);
+    --bg-glass: rgba(10, 9, 8, 0.88);
 
     --gold-100: #F6EDD9;
     --gold-200: #EED59B;
@@ -24,19 +25,19 @@
     --gold-gradient-hover: linear-gradient(135deg, #FFFFFF 0%, #EED59B 50%, #DEB76A 100%);
     --gold-subtle: rgba(222, 183, 106, 0.12);
 
-    --text-primary: #FBF9F5;
-    --text-secondary: #C8BFB5;
-    --text-muted: #8E8478;
+    --text-primary: #FCFAF6;
+    --text-secondary: #DDD5CB;
+    --text-muted: #B8AFA5;
     --text-gold: #DEB76A;
 
-    --border-gold: rgba(222, 183, 106, 0.25);
-    --border-gold-hover: rgba(222, 183, 106, 0.6);
-    --border-dark: rgba(255, 255, 255, 0.08);
+    --border-gold: rgba(222, 183, 106, 0.28);
+    --border-gold-hover: rgba(222, 183, 106, 0.65);
+    --border-dark: rgba(255, 255, 255, 0.10);
 
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.55);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.75);
-    --shadow-gold: 0 8px 32px rgba(222, 183, 106, 0.22);
+    --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.45);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.65);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.85);
+    --shadow-gold: 0 8px 32px rgba(222, 183, 106, 0.25);
 
     --font-heading: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
     --font-subheading: 'Cormorant Garamond', Georgia, serif;
@@ -51,6 +52,41 @@
     --radius-pill: 9999px;
 }
 
+/* Light Theme: Alabaster Cream & Antique Gold Luxury */
+[data-theme="light"] {
+    --bg-obsidian: #F7F5F0;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F3EFE8;
+    --bg-tertiary: #E8E2D6;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FAF7F2;
+    --bg-glass: rgba(247, 245, 240, 0.94);
+
+    --gold-100: #856122;
+    --gold-200: #9E7A35;
+    --gold-300: #B38C40;
+    --gold-400: #C5A463;
+    --gold-500: #D8B774;
+    --gold-600: #E6CE96;
+    --gold-gradient: linear-gradient(135deg, #B38C40 0%, #856122 100%);
+    --gold-gradient-hover: linear-gradient(135deg, #C5A463 0%, #9E7A35 100%);
+    --gold-subtle: rgba(179, 140, 64, 0.12);
+
+    --text-primary: #181513;
+    --text-secondary: #484038;
+    --text-muted: #6B6258;
+    --text-gold: #9E7A35;
+
+    --border-gold: rgba(179, 140, 64, 0.32);
+    --border-gold-hover: rgba(179, 140, 64, 0.70);
+    --border-dark: rgba(24, 21, 19, 0.10);
+
+    --shadow-sm: 0 4px 16px rgba(40, 30, 20, 0.06);
+    --shadow-md: 0 10px 30px rgba(40, 30, 20, 0.10);
+    --shadow-lg: 0 20px 50px rgba(40, 30, 20, 0.14);
+    --shadow-gold: 0 8px 24px rgba(179, 140, 64, 0.22);
+}
+
 /* Base Reset & Typography */
 body {
     background-color: var(--bg-obsidian);
@@ -62,6 +98,7 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--transition-smooth), color var(--transition-smooth);
 }
 
 h1, h2, h3, h4, h5, h6, .font-serif {
@@ -71,15 +108,28 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     font-weight: 600;
 }
 
+/* High Contrast Global Text Classes */
+.text-primary {
+    color: var(--text-primary) !important;
+}
+
+.text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-gold {
+    color: var(--text-gold) !important;
+}
+
 .text-gold-gradient {
     background: var(--gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-}
-
-.text-gold {
-    color: var(--gold-300) !important;
 }
 
 .bg-obsidian {
@@ -102,22 +152,62 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     border-color: var(--border-dark) !important;
 }
 
-/* Luxury Announcement Bar */
+/* ==========================================================================
+   Luxury Top Announcement Bar (High Contrast)
+   ========================================================================== */
 .top-announcement-bar {
-    background: linear-gradient(90deg, #1A1715 0%, #24201D 50%, #1A1715 100%);
+    background: var(--bg-secondary);
     border-bottom: 1px solid var(--border-gold);
     font-family: var(--font-accent);
-    font-size: 0.76rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold-200);
-    padding: 0.5rem 0;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+    padding: 0.55rem 0;
+    transition: var(--transition-smooth);
 }
 
-/* Glassmorphism Luxury Navbar */
+.top-announcement-bar .top-bar-info {
+    color: var(--text-secondary);
+    font-size: 0.76rem;
+    letter-spacing: 0.05em;
+}
+
+.top-announcement-bar .top-bar-promo {
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.top-announcement-bar .top-bar-promo-text {
+    color: var(--text-gold);
+    font-weight: 700;
+}
+
+.top-announcement-bar .top-bar-right {
+    color: var(--text-secondary);
+    font-size: 0.76rem;
+    letter-spacing: 0.05em;
+}
+
+.top-announcement-bar .top-bar-hotline {
+    color: var(--text-gold);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    transition: var(--transition-fast);
+}
+
+.top-announcement-bar .top-bar-hotline:hover {
+    color: var(--gold-200);
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Glassmorphism Luxury Navbar
+   ========================================================================== */
 .navbar-luxury {
-    background: rgba(10, 9, 8, 0.92);
+    background: var(--bg-glass);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-gold);
@@ -127,8 +217,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 .navbar-luxury.scrolled {
-    background: rgba(10, 9, 8, 0.98);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    box-shadow: var(--shadow-md);
     padding: 0.65rem 0;
 }
 
@@ -144,8 +233,14 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     transition: var(--transition-fast);
 }
 
-.nav-link-luxury:hover, .nav-link-luxury.active {
-    color: var(--gold-200) !important;
+.nav-link-luxury:hover {
+    color: var(--text-gold) !important;
+}
+
+/* Persistent Active State on Current Page */
+.nav-link-luxury.active {
+    color: var(--text-gold) !important;
+    font-weight: 700;
 }
 
 .nav-link-luxury::after {
@@ -155,16 +250,84 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     left: 50%;
     transform: translateX(-50%);
     width: 0;
-    height: 2px;
+    height: 2.5px;
     background: var(--gold-gradient);
+    border-radius: 2px;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link-luxury:hover::after,
+.nav-link-luxury.active::after {
+    width: 65% !important;
+}
+
+/* ==========================================================================
+   Theme & Language Switchers
+   ========================================================================== */
+.btn-theme-toggle {
+    background: var(--gold-subtle);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-pill);
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     transition: var(--transition-smooth);
+    padding: 0;
+    color: var(--text-gold);
 }
 
-.nav-link-luxury:hover::after, .nav-link-luxury.active::after {
-    width: 60%;
+.btn-theme-toggle:hover {
+    background: rgba(222, 183, 106, 0.22);
+    transform: rotate(20deg) scale(1.05);
 }
 
-/* Luxury Buttons */
+[data-theme="dark"] .icon-moon { display: none; }
+[data-theme="dark"] .icon-sun { display: inline-block; }
+[data-theme="light"] .icon-sun { display: none; }
+[data-theme="light"] .icon-moon { display: inline-block; }
+
+.lang-switcher {
+    background: var(--gold-subtle);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-pill);
+    padding: 2px;
+    display: inline-flex;
+}
+
+.btn-lang-toggle {
+    font-family: var(--font-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-pill);
+    transition: var(--transition-fast);
+    cursor: pointer;
+}
+
+.btn-lang-toggle:hover {
+    color: var(--text-primary);
+}
+
+.btn-lang-toggle.active {
+    background: var(--gold-gradient);
+    color: #12100E !important;
+    box-shadow: 0 2px 8px rgba(184, 142, 68, 0.35);
+}
+
+[data-theme="light"] .btn-lang-toggle.active {
+    color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   Luxury Buttons
+   ========================================================================== */
 .btn-gold {
     background: var(--gold-gradient);
     color: #12100E !important;
@@ -184,22 +347,25 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     gap: 0.5rem;
 }
 
+[data-theme="light"] .btn-gold {
+    color: #FFFFFF !important;
+}
+
 .btn-gold:hover {
     background: var(--gold-gradient-hover);
     transform: translateY(-2px);
     box-shadow: 0 12px 35px rgba(222, 183, 106, 0.35);
-    color: #0A0908 !important;
 }
 
 .btn-outline-gold {
     background: transparent;
-    color: var(--gold-200) !important;
+    color: var(--text-gold) !important;
     font-family: var(--font-accent);
     font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    border: 1.5px solid var(--gold-300);
+    border: 1.5px solid var(--border-gold);
     border-radius: var(--radius-pill);
     padding: 0.7rem 1.85rem;
     transition: var(--transition-smooth);
@@ -217,7 +383,13 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     box-shadow: var(--shadow-gold);
 }
 
-/* Luxury Cards */
+[data-theme="light"] .btn-outline-gold:hover {
+    color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   Luxury Cards
+   ========================================================================== */
 .card-luxury {
     background: var(--bg-card);
     border: 1px solid var(--border-gold);
@@ -233,7 +405,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     background: var(--bg-card-hover);
     border-color: var(--border-gold-hover);
     transform: translateY(-5px);
-    box-shadow: var(--shadow-md), 0 0 25px rgba(222, 183, 106, 0.1);
+    box-shadow: var(--shadow-md), 0 0 25px rgba(222, 183, 106, 0.12);
 }
 
 /* Product Card Elements */
@@ -242,7 +414,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     overflow: hidden;
     border-radius: var(--radius-md) var(--radius-md) 0 0;
     aspect-ratio: 1 / 1;
-    background: #171513;
+    background: var(--bg-secondary);
 }
 
 .product-image-container img {
@@ -260,9 +432,9 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     position: absolute;
     top: 14px;
     left: 14px;
-    background: rgba(10, 9, 8, 0.85);
-    border: 1px solid var(--gold-300);
-    color: var(--gold-200);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-gold);
+    color: var(--text-gold);
     font-family: var(--font-accent);
     font-size: 0.7rem;
     font-weight: 700;
@@ -278,30 +450,38 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     font-family: var(--font-body);
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--gold-200);
+    color: var(--text-gold);
     letter-spacing: -0.01em;
 }
 
-/* Hero Section */
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
 .hero-luxury {
     position: relative;
     min-height: 85vh;
     display: flex;
     align-items: center;
-    background: radial-gradient(circle at 75% 30%, rgba(222, 183, 106, 0.12) 0%, transparent 60%),
-                radial-gradient(circle at 20% 80%, rgba(43, 35, 29, 0.4) 0%, transparent 70%),
+    background: radial-gradient(circle at 75% 30%, rgba(222, 183, 106, 0.10) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(43, 35, 29, 0.3) 0%, transparent 70%),
                 var(--bg-obsidian);
     border-bottom: 1px solid var(--border-gold);
     overflow: hidden;
+}
+
+[data-theme="light"] .hero-luxury {
+    background: radial-gradient(circle at 75% 30%, rgba(184, 142, 68, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(230, 215, 195, 0.5) 0%, transparent 70%),
+                var(--bg-obsidian);
 }
 
 .hero-luxury::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(222, 183, 106, 0.08) 1px, transparent 0);
+    background-image: radial-gradient(var(--border-gold) 1px, transparent 0);
     background-size: 32px 32px;
-    opacity: 0.7;
+    opacity: 0.45;
     pointer-events: none;
 }
 
@@ -318,7 +498,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     font-weight: 700;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--gold-300);
+    color: var(--text-gold);
     margin-bottom: 0.75rem;
     display: inline-block;
 }
@@ -338,6 +518,25 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     margin: 1.2rem auto 0;
 }
 
+/* ==========================================================================
+   Numbers & Counter Animation Styling
+   ========================================================================== */
+.counter-metric {
+    font-variant-numeric: tabular-nums;
+    transition: transform 0.3s ease;
+}
+
+.hero-stat-card {
+    padding: 0.5rem 0.75rem;
+    border-left: 2px solid var(--border-gold);
+    transition: var(--transition-fast);
+}
+
+.hero-stat-card:hover {
+    border-left-color: var(--text-gold);
+    transform: translateX(4px);
+}
+
 /* Form Controls in Luxury Theme */
 .form-control-luxury {
     background-color: var(--bg-secondary) !important;
@@ -351,9 +550,9 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 
 .form-control-luxury:focus {
     background-color: var(--bg-tertiary) !important;
-    border-color: var(--gold-300) !important;
-    box-shadow: 0 0 0 3px rgba(222, 183, 106, 0.18) !important;
-    color: #FFFFFF !important;
+    border-color: var(--text-gold) !important;
+    box-shadow: 0 0 0 3px rgba(222, 183, 106, 0.20) !important;
+    color: var(--text-primary) !important;
 }
 
 .form-control-luxury::placeholder {
@@ -367,8 +566,8 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 .table-luxury thead th {
-    background-color: #171412;
-    color: var(--gold-200);
+    background-color: var(--bg-secondary);
+    color: var(--text-gold);
     font-family: var(--font-accent);
     font-size: 0.75rem;
     font-weight: 700;
@@ -380,20 +579,23 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 
 .table-luxury tbody td {
     padding: 1.1rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-dark);
     background-color: transparent;
 }
 
 .table-luxury tbody tr:hover td {
-    background-color: rgba(222, 183, 106, 0.04);
+    background-color: var(--gold-subtle);
 }
 
-/* Footer Luxury */
+/* ==========================================================================
+   Footer Luxury
+   ========================================================================== */
 .footer-luxury {
-    background-color: #070605;
+    background-color: var(--bg-primary);
     border-top: 1px solid var(--border-gold);
     padding: 5rem 0 2rem;
     position: relative;
+    transition: var(--transition-smooth);
 }
 
 .footer-brand-title {
@@ -401,7 +603,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 0.05em;
-    color: var(--gold-200);
+    color: var(--text-gold);
 }
 
 .footer-link {
@@ -414,8 +616,25 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 .footer-link:hover {
-    color: var(--gold-200);
+    color: var(--text-gold);
     transform: translateX(4px);
+}
+
+/* Dropdown Menu Theme Styling */
+.dropdown-menu.bg-espresso {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-gold) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.dropdown-item {
+    color: var(--text-secondary) !important;
+    transition: var(--transition-fast);
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: var(--gold-subtle) !important;
+    color: var(--text-gold) !important;
 }
 
 /* Animations & Transitions */
@@ -435,10 +654,10 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     height: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: #0A0908;
+    background: var(--bg-obsidian);
 }
 ::-webkit-scrollbar-thumb {
-    background: #2D2722;
+    background: var(--bg-tertiary);
     border-radius: 4px;
     border: 1px solid var(--border-gold);
 }

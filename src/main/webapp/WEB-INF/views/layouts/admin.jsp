@@ -19,6 +19,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/luxury.css">
     
+    <!-- Instant Theme Detection Script -->
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('utecoffe_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
     <style>
         .admin-sidebar {
             width: 270px;

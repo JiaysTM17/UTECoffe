@@ -8,10 +8,50 @@
     <section class="py-5 bg-espresso border-bottom border-gold text-center">
         <div class="container py-lg-4">
             <span class="section-subtitle">Khởi Nguồn Từ Đam Mê</span>
-            <h1 class="font-serif display-3 fw-bold text-gold-gradient mb-3">Hành Trình Di Sản Cà Phê</h1>
+            <h1 class="font-serif display-3 fw-bold text-gold-gradient mb-3" data-i18n="nav.story">Hành Trình Di Sản Cà Phê</h1>
             <p class="lead text-secondary mx-auto" style="max-width: 750px; font-weight: 300;">
                 Tại UTECoffe, chúng tôi tin rằng mỗi tách cà phê là một tác phẩm nghệ thuật, kết tinh từ thổ nhưỡng bazan huyền thoại Cầu Đất và tâm huyết của những nghệ nhân rang mộc thủ công.
             </p>
+        </div>
+    </section>
+
+    <!-- Key Craft Metrics (Animated Counters) -->
+    <section class="py-4 bg-dark-roast border-bottom border-gold">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-3 col-6">
+                    <div class="hero-stat-card border-0">
+                        <h2 class="font-serif text-gold fw-bold mb-1">
+                            <span class="counter-metric" data-counter="1600" data-counter-format="comma" data-counter-suffix="m">1.600m</span>
+                        </h2>
+                        <span class="text-secondary small text-uppercase font-accent fw-semibold">Độ Cao Thổ Nhưỡng</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="hero-stat-card border-0">
+                        <h2 class="font-serif text-gold fw-bold mb-1">
+                            <span class="counter-metric" data-counter="85" data-counter-suffix="+">85+</span>
+                        </h2>
+                        <span class="text-secondary small text-uppercase font-accent fw-semibold">Điểm Cupping Quốc Tế</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="hero-stat-card border-0">
+                        <h2 class="font-serif text-gold fw-bold mb-1">
+                            <span class="counter-metric" data-counter="100" data-counter-suffix="%">100%</span>
+                        </h2>
+                        <span class="text-secondary small text-uppercase font-accent fw-semibold">Trái Chín Hái Thủ Công</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="hero-stat-card border-0">
+                        <h2 class="font-serif text-gold fw-bold mb-1">
+                            <span class="counter-metric" data-counter="48" data-counter-suffix="h">48h</span>
+                        </h2>
+                        <span class="text-secondary small text-uppercase font-accent fw-semibold">Lên Men Chậm Tự Nhiên</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

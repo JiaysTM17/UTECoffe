@@ -7,9 +7,9 @@
 <body class="bg-obsidian">
     <!-- Header Banner -->
     <div class="py-5 bg-espresso border-bottom border-gold text-center">
-        <div class="container">
-            <span class="section-subtitle">Bộ Sưu Tập Hương Vị 2026</span>
-            <h1 class="font-serif display-4 fw-bold text-gold-gradient mb-2">Thực Đơn Đặc Sản</h1>
+        <div class="container py-3">
+            <span class="section-subtitle" data-i18n="feat.subtitle">Bộ Sưu Tập Hương Vị 2026</span>
+            <h1 class="font-serif display-4 fw-bold text-gold-gradient mb-2" data-i18n="nav.menu">Thực Đơn Đặc Sản</h1>
             <p class="text-secondary mx-auto" style="max-width: 650px;">
                 Tất cả thức uống được chế biến từ hạt cà phê đặc sản tuyển chọn và búp trà hoa tự nhiên, pha chế tươi mới theo yêu cầu riêng của bạn.
             </p>
@@ -43,12 +43,12 @@
                         </div>
                         <div class="card-body p-4 d-flex flex-column flex-grow-1">
                             <h5 class="font-serif fw-bold mb-2">
-                                <a href="${pageContext.request.contextPath}/menu/detail/${prod.id}" class="text-light text-decoration-none hover-gold">${prod.name}</a>
+                                <a href="${pageContext.request.contextPath}/menu/detail/${prod.id}" class="text-primary text-decoration-none hover-gold">${prod.name}</a>
                             </h5>
                             <p class="text-secondary small flex-grow-1 mb-3 text-truncate-2">
                                 ${not empty prod.description ? prod.description : 'Hương vị cao cấp chế biến thủ công từ nguyên liệu hảo hạng.'}
                             </p>
-                            <div class="d-flex justify-content-between align-items-center pt-3 border-top border-secondary opacity-75">
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold">
                                 <span class="price-gold"><fmt:formatNumber value="${prod.basePrice}" type="currency" currencySymbol="₫"/></span>
                                 <a href="${pageContext.request.contextPath}/menu/detail/${prod.id}" class="btn btn-gold btn-sm px-3">
                                     <i class="fa-solid fa-mug-hot me-1"></i> Tùy Chỉnh
