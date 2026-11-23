@@ -1,42 +1,52 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><sitemesh:write property='title'/> - KDS Barista Realtime</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <title><sitemesh:write property='title'/> - UTECoffe Barista Cockpit</title>
+    
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #0E0D0C; color: #F5F2EB; }
-        .kds-header { background: #1A1715; border-bottom: 2px solid #D4AF37; padding: 12px 24px; }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/luxury.css">
+    
     <sitemesh:write property='head'/>
 </head>
-<body>
-    <header class="kds-header d-flex justify-content-between align-items-center">
+<body class="bg-obsidian text-light min-vh-100 d-flex flex-column">
+    <!-- Barista KDS Top Header -->
+    <header class="py-2 px-4 border-bottom border-gold bg-espresso d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center gap-3">
-            <h4 class="mb-0 fw-bold text-warning"><i class="fa-solid fa-mug-saucer me-2"></i>KDS BARISTA DISPLAY</h4>
-            <span class="badge bg-success" id="connectionStatus"><i class="fa-solid fa-circle-dot me-1"></i> Trực Tuyến (STOMP)</span>
+            <a href="${pageContext.request.contextPath}/">
+                <img src="${pageContext.request.contextPath}/assets/images/logo_dark.svg" alt="UTECOFFE" height="38">
+            </a>
+            <span class="badge bg-gold text-dark font-accent fw-bold px-2 py-1">KDS BARISTA COCKPIT</span>
         </div>
-        <div class="d-flex align-items-center gap-3">
-            <span id="currentTime" class="fw-bold text-light"></span>
-            <a href="${pageContext.request.contextPath}/admin/dashboard" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-arrow-left me-1"></i> Về Quản Trị</a>
+        <div class="d-flex align-items-center gap-4">
+            <div id="liveClock" class="font-accent fw-bold text-gold fs-5">--:--:--</div>
+            <span id="stompStatus" class="badge bg-success-subtle border border-success text-success px-3 py-2"><i class="fa-solid fa-satellite-dish me-1"></i> STOMP Realtime: Đã Kết Nối</span>
+            <a href="${pageContext.request.contextPath}/admin/dashboard" class="btn btn-outline-gold btn-sm"><i class="fa-solid fa-sliders me-1"></i> Admin</a>
         </div>
     </header>
-    <main class="p-3">
+
+    <!-- Main KDS Board -->
+    <main class="flex-grow-1 p-3">
         <sitemesh:write property='body'/>
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script>
-        setInterval(() => {
-            document.getElementById('currentTime').innerText = new Date().toLocaleTimeString('vi-VN');
-        }, 1000);
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('vi-VN');
+            const el = document.getElementById('liveClock');
+            if (el) el.innerText = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 </body>
 </html>

@@ -1,227 +1,193 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><sitemesh:write property='title'/> - UTECoffe Specialty Tea & Coffee</title>
-    <!-- Fonts -->
+    <title><sitemesh:write property='title'/> - UTECoffe Specialty Tea &amp; Coffee Roastery</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/favicon.png">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap 5 CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5.3.3 & FontAwesome 6.5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/static/images/logo_icon.png">
-
-    <style>
-        :root {
-            --color-obsidian: #12100E;
-            --color-espresso: #221D1A;
-            --color-gold-primary: #D4AF37;
-            --color-gold-light: #EED59B;
-            --color-cream: #F8F5EE;
-            --color-sand: #EDE6D6;
-            --color-text-dark: #1F1D1B;
-            --color-text-muted: #7A7268;
-        }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--color-cream);
-            color: var(--color-text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .navbar-utecoffe {
-            background-color: var(--color-obsidian);
-            border-bottom: 2px solid var(--color-gold-primary);
-            padding: 12px 0;
-        }
-        .navbar-brand-text {
-            color: #FFFFFF !important;
-            font-weight: 700;
-            letter-spacing: 3px;
-            font-size: 1.35rem;
-        }
-        .navbar-brand-text span {
-            color: var(--color-gold-primary);
-        }
-        .nav-link-custom {
-            color: #D6CEC5 !important;
-            font-weight: 500;
-            font-size: 0.92rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 8px 16px !important;
-            transition: all 0.3s ease;
-        }
-        .nav-link-custom:hover, .nav-link-custom.active {
-            color: var(--color-gold-primary) !important;
-        }
-        .btn-gold {
-            background: linear-gradient(135deg, #DEB76A, #B88E44);
-            color: #12100E;
-            font-weight: 600;
-            border: none;
-            padding: 8px 22px;
-            border-radius: 4px;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        .btn-gold:hover {
-            background: linear-gradient(135deg, #EED59B, #DEB76A);
-            color: #000000;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-        .footer-utecoffe {
-            background-color: var(--color-obsidian);
-            color: #A89F94;
-            border-top: 1px solid #2B2520;
-            margin-top: auto;
-            padding: 45px 0 20px;
-        }
-        .footer-utecoffe h5 {
-            color: var(--color-gold-primary);
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
-        .footer-utecoffe a {
-            color: #A89F94;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-utecoffe a:hover {
-            color: var(--color-gold-primary);
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- UTECoffe Luxury Design System -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/luxury.css">
+    
     <sitemesh:write property='head'/>
 </head>
-<body>
+<body class="bg-obsidian d-flex flex-column min-vh-100">
 
-    <!-- Header Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-utecoffe sticky-top shadow-sm">
+    <!-- Top Luxury Announcement Banner -->
+    <div class="top-announcement-bar text-center">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="d-none d-md-inline text-muted"><i class="fa-solid fa-location-dot me-1 text-gold"></i> 10 Cửa Hàng Flagship TP.HCM &amp; Thủ Đức</span>
+            <span><i class="fa-solid fa-gem me-1 text-gold"></i> TẶNG 20% ĐƠN ĐẦU TIÊN &amp; FREESHIP TOÀN QUỐC TỪ 150.000₫</span>
+            <span class="d-none d-md-inline text-muted"><i class="fa-solid fa-phone me-1 text-gold"></i> Hotline: 1900 2026</span>
+        </div>
+    </div>
+
+    <!-- Glassmorphism Sticky Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-luxury sticky-top">
         <div class="container">
-            <a class="navbar-brand navbar-brand-text d-flex align-items-center" href="${pageContext.request.contextPath}/">
-                <i class="fa-solid fa-mug-hot text-warning me-2"></i>
-                UTE<span>COFFE</span>
+            <!-- Brand Logo (Official Vector SVG Transparent) -->
+            <a class="navbar-brand py-0 me-4" href="${pageContext.request.contextPath}/">
+                <img src="${pageContext.request.contextPath}/assets/images/logo_dark.svg" alt="UTECOFFE Specialty Roastery" height="46" class="d-inline-block align-text-top">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                <span class="navbar-toggler-icon"></span>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler border-gold text-gold" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <i class="fa-solid fa-bars-staggered"></i>
             </button>
+
+            <!-- Nav Items -->
             <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="${pageContext.request.contextPath}/">Trang Chủ</a>
+                        <a class="nav-link nav-link-luxury" href="${pageContext.request.contextPath}/">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="${pageContext.request.contextPath}/menu">Thực Đơn</a>
+                        <a class="nav-link nav-link-luxury" href="${pageContext.request.contextPath}/menu">Thực Đơn</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="${pageContext.request.contextPath}/stores">Chi Nhánh</a>
+                        <a class="nav-link nav-link-luxury" href="${pageContext.request.contextPath}/story">Câu Chuyện</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="${pageContext.request.contextPath}/reservation">Đặt Bàn</a>
+                        <a class="nav-link nav-link-luxury" href="${pageContext.request.contextPath}/reservation">Đặt Bàn</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="${pageContext.request.contextPath}/story">Câu Chuyện</a>
+                        <a class="nav-link nav-link-luxury" href="${pageContext.request.contextPath}/stores">Chi Nhánh</a>
                     </li>
                 </ul>
+
+                <!-- Right Actions -->
                 <div class="d-flex align-items-center gap-3">
-                    <a href="${pageContext.request.contextPath}/cart" class="position-relative text-light fs-5 me-2">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
-                            0
-                        </span>
+                    <!-- Cart Button -->
+                    <a href="${pageContext.request.contextPath}/cart" class="btn btn-outline-gold btn-sm px-3 position-relative">
+                        <i class="fa-solid fa-bag-shopping me-1"></i> Giỏ Hàng
                     </a>
-                    <c:choose>
-                        <c:when test="${not empty sessionScope.currentUser}">
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-outline-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                    <i class="fa-regular fa-user me-1"></i> ${sessionScope.currentUser.fullName}
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/profile">Tài Khoản</a></li>
-                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders/history">Lịch Sử Đơn Hàng</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/auth/logout">Đăng Xuất</a></li>
-                                </ul>
-                            </div>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/auth/login" class="btn btn-gold btn-sm">Đăng Nhập</a>
-                        </c:otherwise>
-                    </c:choose>
+
+                    <!-- User Account Dropdown -->
+                    <sec:authorize access="isAuthenticated()">
+                        <div class="dropdown">
+                            <button class="btn btn-dark-roast btn-sm border-gold text-gold dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-circle-user fa-lg"></i>
+                                <span class="d-none d-sm-inline"><sec:authentication property="name"/></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end bg-espresso border-gold shadow-lg">
+                                <li><a class="dropdown-item text-secondary py-2" href="${pageContext.request.contextPath}/profile"><i class="fa-solid fa-award me-2 text-gold"></i>Hồ sơ &amp; Điểm UTEClub</a></li>
+                                <sec:authorize access="hasRole('ADMIN')">
+                                    <li><a class="dropdown-item text-secondary py-2" href="${pageContext.request.contextPath}/admin/dashboard"><i class="fa-solid fa-chart-pie me-2 text-gold"></i>Trang Quản Trị Admin</a></li>
+                                </sec:authorize>
+                                <sec:authorize access="hasAnyRole('BARISTA', 'STORE_MANAGER', 'ADMIN')">
+                                    <li><a class="dropdown-item text-secondary py-2" href="${pageContext.request.contextPath}/barista/kds"><i class="fa-solid fa-mug-hot me-2 text-gold"></i>Màn Hình Pha Chế KDS</a></li>
+                                </sec:authorize>
+                                <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                                <li>
+                                    <form action="${pageContext.request.contextPath}/auth/logout" method="post" class="m-0 p-0">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        <button type="submit" class="dropdown-item text-danger py-2"><i class="fa-solid fa-right-from-bracket me-2"></i>Đăng Xuất</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </sec:authorize>
+
+                    <sec:authorize access="!isAuthenticated()">
+                        <a href="${pageContext.request.contextPath}/auth/login" class="btn btn-gold btn-sm">
+                            <i class="fa-solid fa-arrow-right-to-bracket me-1"></i> Đăng Nhập
+                        </a>
+                    </sec:authorize>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Dynamic Body Content -->
+    <!-- Main Content Body -->
     <main class="flex-grow-1">
         <sitemesh:write property='body'/>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer-utecoffe">
+    <!-- Luxury Footer -->
+    <footer class="footer-luxury">
         <div class="container">
-            <div class="row g-4">
+            <div class="row g-4 mb-5">
+                <!-- Col 1: Brand Info -->
                 <div class="col-lg-4 col-md-6">
-                    <h5 class="text-uppercase"><i class="fa-solid fa-leaf me-2"></i>UTECOFFE</h5>
-                    <p class="small text-muted mb-3">
-                        Hệ thống chuỗi bán lẻ Trà & Cà Phê đặc sản cao cấp kết hợp mô hình OMO hiện đại. Nghệ thuật rang xay thủ công và tinh hoa trà Việt.
+                    <img src="${pageContext.request.contextPath}/assets/images/logo_dark.svg" alt="UTECOFFE" height="50" class="mb-3">
+                    <p class="text-secondary small pe-lg-4">
+                        UTECOFFE là thương hiệu chuỗi cà phê &amp; trà đặc sản thượng hạng. Chúng tôi tận tâm tuyển chọn từng mẻ quả chín mọng từ độ cao 1.600m Cầu Đất, kết hợp kỹ thuật rang mộc thủ công để mang đến trải nghiệm hương vị đỉnh cao.
                     </p>
-                    <p class="small mb-1"><i class="fa-solid fa-location-dot me-2 text-warning"></i>1 Võ Văn Ngân, TP. Thủ Đức, TP. Hồ Chí Minh</p>
-                    <p class="small mb-1"><i class="fa-solid fa-phone me-2 text-warning"></i>Hotline: 1900 2026</p>
-                    <p class="small"><i class="fa-solid fa-envelope me-2 text-warning"></i>contact@utecoffe.vn</p>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <h5 class="text-uppercase">Khám Phá</h5>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="${pageContext.request.contextPath}/menu?cat=coffee">Cà Phê Đặc Sản</a></li>
-                        <li class="mb-2"><a href="${pageContext.request.contextPath}/menu?cat=tea">Trà Thượng Hạng</a></li>
-                        <li class="mb-2"><a href="${pageContext.request.contextPath}/menu?cat=pastry">Bánh Thủ Công</a></li>
-                        <li class="mb-2"><a href="${pageContext.request.contextPath}/menu?cat=beans">Hạt Rang Mộc</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-uppercase">Chính Sách</h5>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="${pageContext.request.contextPath}/policy/delivery">Chính Sách Giao Hàng OMO</a></li>
-                        <li class="mb-2"><a href="${pageContext.request.contextPath}/policy/loyalty">Chương Trình Thành Viên UTEClub</a></li>
-                        <li class="mb-2"><a href="${pageContext.request.contextPath}/policy/terms">Điều Khoản Sử Dụng</a></li>
-                        <li class="mb-2"><a href="${pageContext.request.contextPath}/policy/privacy">Bảo Mật Thông Tin</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-uppercase">Kết Nối Với Chúng Tôi</h5>
-                    <div class="d-flex gap-2 mb-3">
-                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa-brands fa-tiktok"></i></a>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-youtube"></i></a>
                     </div>
-                    <p class="small text-muted">Đăng ký nhận ưu đãi đặc biệt từ UTECoffe:</p>
-                    <div class="input-group input-group-sm">
-                        <input type="email" class="form-control" placeholder="Email của bạn...">
-                        <button class="btn btn-gold" type="button">Gửi</button>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;">Khám Phá</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link">Cà Phê Đặc Sản</a></li>
+                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link">Trà Thủ Công</a></li>
+                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link">Cold Brew Ủ Lạnh</a></li>
+                        <li><a href="${pageContext.request.contextPath}/story" class="footer-link">Nghệ Thuật Rang Mộc</a></li>
+                        <li><a href="${pageContext.request.contextPath}/reservation" class="footer-link">Đặt Bàn Thưởng Thức</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Customer Care -->
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;">Dịch Vụ</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="${pageContext.request.contextPath}/profile" class="footer-link">Đặc Quyền UTEClub</a></li>
+                        <li><a href="${pageContext.request.contextPath}/stores" class="footer-link">Tìm Cửa Hàng Gần Nhất</a></li>
+                        <li><a href="${pageContext.request.contextPath}/cart" class="footer-link">Giao Hàng Siêu Tốc 30'</a></li>
+                        <li><a href="#" class="footer-link">Chính Sách Hoàn Tiền</a></li>
+                        <li><a href="#" class="footer-link">Điều Khoản &amp; Bảo Mật</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Roastery Contact -->
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;">Xưởng Rang &amp; Trụ Sở</h6>
+                    <p class="text-secondary small mb-2"><i class="fa-solid fa-location-dot text-gold me-2"></i> 01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+                    <p class="text-secondary small mb-2"><i class="fa-solid fa-clock text-gold me-2"></i> Giờ hoạt động: 06:30 - 23:00 (Thứ 2 - Chủ Nhật)</p>
+                    <p class="text-secondary small mb-2"><i class="fa-solid fa-envelope text-gold me-2"></i> contact@utecoffe.vn | cskh@utecoffe.vn</p>
+                    <p class="text-secondary small mb-3"><i class="fa-solid fa-phone text-gold me-2"></i> Tổng đài đặt món: 1900 2026</p>
+                    
+                    <div class="pt-2">
+                        <span class="text-muted small d-block mb-1">Đối tác thanh toán bảo mật:</span>
+                        <div class="d-flex gap-2 align-items-center">
+                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-qrcode me-1 text-gold"></i> VietQR</span>
+                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-regular fa-credit-card me-1 text-gold"></i> VNPay</span>
+                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-wallet me-1 text-gold"></i> MoMo</span>
+                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-money-bill-1 me-1 text-gold"></i> Tiền mặt</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <hr class="border-secondary my-4">
-            <div class="text-center small text-muted">
-                &copy; 2026 UTECoffe Specialty Tea & Coffee Roastery. All rights reserved.
+
+            <!-- Bottom Copyright -->
+            <div class="border-top border-secondary opacity-25 pt-4 d-flex flex-column flex-md-row justify-content-between align-items-center small text-muted">
+                <p class="mb-0">© 2026 UTECoffe Specialty Tea &amp; Coffee Roastery. Bản quyền thuộc về Trương Gia Kiệt (@JiaysTM17).</p>
+                <p class="mb-0">Spring Boot 3.3.5 • PostgreSQL 16 • WebSocket STOMP • SiteMesh 3.2.1</p>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap 5 Bundle JS -->
+    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery 3.7.1 -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </body>
 </html>
