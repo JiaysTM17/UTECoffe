@@ -4,6 +4,7 @@ import com.utecoffe.entity.LoyaltyCard;
 import com.utecoffe.entity.User;
 import com.utecoffe.repository.LoyaltyCardRepository;
 import com.utecoffe.repository.LoyaltyTransactionRepository;
+import com.utecoffe.repository.UserCouponRepository;
 import com.utecoffe.service.AuthService;
 import com.utecoffe.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class ProfileMvcController {
     private LoyaltyTransactionRepository loyaltyTransactionRepository;
 
     @Autowired
+    private UserCouponRepository userCouponRepository;
+
+    @Autowired
     private OrderService orderService;
 
     @GetMapping("/profile")
@@ -41,6 +45,7 @@ public class ProfileMvcController {
         if (card != null) {
             model.addAttribute("pointsHistory", loyaltyTransactionRepository.findByLoyaltyCardIdOrderByCreatedAtDesc(card.getId()));
         }
+        model.addAttribute("userCoupons", userCouponRepository.findByUserIdAndIsUsedFalse(user.getId()));
         model.addAttribute("orders", orderService.getUserOrders(user.getId()));
         return "customer/profile";
     }

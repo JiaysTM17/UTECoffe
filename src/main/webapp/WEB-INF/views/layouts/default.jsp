@@ -111,8 +111,30 @@
                     <sec:authorize access="isAuthenticated()">
                         <div class="dropdown">
                             <button class="btn btn-dark-roast btn-sm border-gold text-gold dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
-                                <i class="fa-solid fa-circle-user fa-lg"></i>
-                                <span class="d-none d-sm-inline"><sec:authentication property="name"/></span>
+                                <c:choose>
+                                    <c:when test="${currentUser != null && currentUser.role.name == 'ROLE_ADMIN'}">
+                                        <span class="badge bg-danger text-white px-2 py-0.5 rounded-pill small fw-bold font-accent">ADMIN</span>
+                                    </c:when>
+                                    <c:when test="${currentUser != null && currentUser.role.name == 'ROLE_BARISTA'}">
+                                        <span class="badge bg-warning text-dark px-2 py-0.5 rounded-pill small fw-bold font-accent">BARISTA</span>
+                                    </c:when>
+                                    <c:when test="${currentLoyaltyCard != null && currentLoyaltyCard.tier == 'DIAMOND'}">
+                                        <span class="badge px-2 py-0.5 rounded-pill small fw-bold font-accent text-dark" style="background: #b9f2ff;"><i class="fa-solid fa-crown me-1"></i>KIM CƯƠNG</span>
+                                    </c:when>
+                                    <c:when test="${currentLoyaltyCard != null && currentLoyaltyCard.tier == 'GOLD'}">
+                                        <span class="badge px-2 py-0.5 rounded-pill small fw-bold font-accent text-dark" style="background: #ffd700;"><i class="fa-solid fa-gem me-1"></i>VÀNG</span>
+                                    </c:when>
+                                    <c:when test="${currentLoyaltyCard != null && currentLoyaltyCard.tier == 'SILVER'}">
+                                        <span class="badge px-2 py-0.5 rounded-pill small fw-bold font-accent text-dark" style="background: #c0c0c0;"><i class="fa-solid fa-medal me-1"></i>BẠC</span>
+                                    </c:when>
+                                    <c:when test="${currentLoyaltyCard != null && currentLoyaltyCard.tier == 'BRONZE'}">
+                                        <span class="badge px-2 py-0.5 rounded-pill small fw-bold font-accent text-white" style="background: #cd7f32;"><i class="fa-solid fa-award me-1"></i>ĐỒNG</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <i class="fa-solid fa-circle-user fa-lg"></i>
+                                    </c:otherwise>
+                                </c:choose>
+                                <span class="d-none d-sm-inline fw-semibold">${currentUser != null ? currentUser.fullName : pageContext.request.userPrincipal.name}</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end bg-espresso border-gold shadow-lg">
                                 <li><a class="dropdown-item py-2" href="${pageContext.request.contextPath}/profile"><i class="fa-solid fa-award me-2 text-gold"></i><span data-i18n="nav.profile">Hồ sơ &amp; Điểm UTEClub</span></a></li>

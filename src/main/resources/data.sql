@@ -10,11 +10,14 @@ INSERT INTO roles (id, name, description) VALUES
 (4, 'ROLE_CUSTOMER', 'Khach hang thanh vien UTEClub')
 ON CONFLICT (id) DO NOTHING;
 
--- 2. Initial Admin Account (Password: Admin@2026 -> BCrypt hash)
+-- 2. Initial Accounts (Password: Admin@2026 -> BCrypt hash)
 INSERT INTO users (id, full_name, email, phone_number, password_hash, status, role_id, created_at, updated_at) VALUES
 (1, 'Quan Tri Vien UTECoffe', 'admin@utecoffe.vn', '0901234567', '$2a$10$w3qWJpQdFeqf9iH2Q2.vCe93d5XgJ5J9rN6N8fVq2fLqLp2N7m5eO', true, 1, NOW(), NOW()),
 (2, 'Barista Truong Thu Duc', 'barista.thuduc@utecoffe.vn', '0907654321', '$2a$10$w3qWJpQdFeqf9iH2Q2.vCe93d5XgJ5J9rN6N8fVq2fLqLp2N7m5eO', true, 3, NOW(), NOW()),
-(3, 'Nguyen Van A (Khach Hang)', 'khachhang@gmail.com', '0912345678', '$2a$10$w3qWJpQdFeqf9iH2Q2.vCe93d5XgJ5J9rN6N8fVq2fLqLp2N7m5eO', true, 4, NOW(), NOW())
+(3, 'Nguyen Van A (Khach Hang)', 'khachhang@gmail.com', '0912345678', '$2a$10$w3qWJpQdFeqf9iH2Q2.vCe93d5XgJ5J9rN6N8fVq2fLqLp2N7m5eO', true, 4, NOW(), NOW()),
+(4, 'Nguyen Thi Mai Phuong', 'phuong.bronze@utecoffe.vn', '0911223344', '$2a$10$w3qWJpQdFeqf9iH2Q2.vCe93d5XgJ5J9rN6N8fVq2fLqLp2N7m5eO', true, 4, NOW(), NOW()),
+(5, 'Tran Quoc Bao', 'bao.silver@utecoffe.vn', '0933445566', '$2a$10$w3qWJpQdFeqf9iH2Q2.vCe93d5XgJ5J9rN6N8fVq2fLqLp2N7m5eO', true, 4, NOW(), NOW()),
+(6, 'Le Hoang Yen Vy', 'vy.diamond@utecoffe.vn', '0977889900', '$2a$10$w3qWJpQdFeqf9iH2Q2.vCe93d5XgJ5J9rN6N8fVq2fLqLp2N7m5eO', true, 4, NOW(), NOW())
 ON CONFLICT (id) DO NOTHING;
 
 -- 3. Flagship Stores

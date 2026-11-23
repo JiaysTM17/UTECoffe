@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface CouponRepository extends JpaRepository<Coupon, Long> {
+    Optional<Coupon> findByCode(String code);
     Optional<Coupon> findByCodeAndIsActiveTrue(String code);
 
     @Query("SELECT c FROM Coupon c WHERE c.isActive = true AND :now BETWEEN c.startDate AND c.endDate AND (c.usageLimit IS NULL OR c.usedCount < c.usageLimit)")

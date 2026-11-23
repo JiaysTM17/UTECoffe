@@ -50,6 +50,21 @@ public class DatabaseSeeder implements CommandLineRunner {
     private CouponRepository couponRepository;
 
     @Autowired
+    private LoyaltyCardRepository loyaltyCardRepository;
+
+    @Autowired
+    private LoyaltyTransactionRepository loyaltyTransactionRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private UserCouponRepository userCouponRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -59,7 +74,8 @@ public class DatabaseSeeder implements CommandLineRunner {
             seedStoresAndTables();
             seedCatalogAndBOM();
             seedCoupons();
-            System.out.println(">>> UTECoffe: Database seeded successfully for first-time launch!");
+            seedCustomerProfilesAndOrders();
+            System.out.println(">>> UTECoffe: Database seeded successfully with 3 distinct customer roles & accounts!");
         }
     }
 
@@ -86,6 +102,37 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .phoneNumber("0907654321")
                 .passwordHash(defaultPass)
                 .role(baristaRole)
+                .status(true)
+                .build());
+
+        // 3 Khách Hàng Đặc Biệt với 3 Cấp Bậc Riêng Biệt:
+        // 1. Nguyễn Thị Mai Phương - Hạng Đồng (Bronze)
+        userRepository.save(User.builder()
+                .fullName("Nguyễn Thị Mai Phương")
+                .email("phuong.bronze@utecoffe.vn")
+                .phoneNumber("0911223344")
+                .passwordHash(defaultPass)
+                .role(customerRole)
+                .status(true)
+                .build());
+
+        // 2. Trần Quốc Bảo - Hạng Bạc (Silver)
+        userRepository.save(User.builder()
+                .fullName("Trần Quốc Bảo")
+                .email("bao.silver@utecoffe.vn")
+                .phoneNumber("0933445566")
+                .passwordHash(defaultPass)
+                .role(customerRole)
+                .status(true)
+                .build());
+
+        // 3. Lê Hoàng Yến Vy - Hạng Kim Cương VIP (Diamond)
+        userRepository.save(User.builder()
+                .fullName("Lê Hoàng Yến Vy")
+                .email("vy.diamond@utecoffe.vn")
+                .phoneNumber("0977889900")
+                .passwordHash(defaultPass)
+                .role(customerRole)
                 .status(true)
                 .build());
 
@@ -321,8 +368,8 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     private void seedCoupons() {
         couponRepository.save(Coupon.builder()
-                .code("UTECOFFEWELCOME")
-                .title("Chào Mừng Thành Viên Mới")
+                .code("UTE2026")
+                .title("Ưu Đãi Chào Mừng Thành Viên Mới")
                 .description("Giảm 20% cho đơn hàng đầu tiên")
                 .discountType(DiscountType.PERCENTAGE)
                 .discountValue(BigDecimal.valueOf(20))
@@ -336,9 +383,9 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build());
 
         couponRepository.save(Coupon.builder()
-                .code("FREESHIP30K")
-                .title("Miễn Phí Giao Hàng 30K")
-                .description("Giảm 30.000đ phí vận chuyển")
+                .code("FREESHIP")
+                .title("Miễn Phí Giao Hàng Toàn Quốc")
+                .description("Miễn phí vận chuyển cho đơn hàng từ 100k")
                 .discountType(DiscountType.FIXED_AMOUNT)
                 .discountValue(BigDecimal.valueOf(30000))
                 .minOrderValue(BigDecimal.valueOf(100000))
@@ -348,5 +395,309 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .usedCount(0)
                 .isActive(true)
                 .build());
+
+        couponRepository.save(Coupon.builder()
+                .code("SILVER10")
+                .title("Voucher Hàng Tháng Hạng Bạc")
+                .description("Giảm 10% toàn bộ thực đơn dành riêng cho hội viên Bạc")
+                .discountType(DiscountType.PERCENTAGE)
+                .discountValue(BigDecimal.valueOf(10))
+                .minOrderValue(BigDecimal.valueOf(80000))
+                .maxDiscountAmount(BigDecimal.valueOf(40000))
+                .startDate(LocalDateTime.now())
+                .endDate(LocalDateTime.now().plusDays(365))
+                .usageLimit(1000)
+                .usedCount(0)
+                .isActive(true)
+                .build());
+
+        couponRepository.save(Coupon.builder()
+                .code("TOPPINGFREE")
+                .title("Tặng 01 Phần Topping Tự Chọn")
+                .description("Miễn phí 1 phần Topping Macchiato hoặc Trân châu")
+                .discountType(DiscountType.FIXED_AMOUNT)
+                .discountValue(BigDecimal.valueOf(15000))
+                .minOrderValue(BigDecimal.valueOf(50000))
+                .startDate(LocalDateTime.now())
+                .endDate(LocalDateTime.now().plusDays(365))
+                .usageLimit(1000)
+                .usedCount(0)
+                .isActive(true)
+                .build());
+
+        couponRepository.save(Coupon.builder()
+                .code("DIAMOND15")
+                .title("Đặc Quyền Kim Cương Giảm 15%")
+                .description("Giảm trực tiếp 15% trọn đời trên mọi hóa đơn")
+                .discountType(DiscountType.PERCENTAGE)
+                .discountValue(BigDecimal.valueOf(15))
+                .minOrderValue(BigDecimal.ZERO)
+                .maxDiscountAmount(BigDecimal.valueOf(150000))
+                .startDate(LocalDateTime.now())
+                .endDate(LocalDateTime.now().plusDays(365))
+                .usageLimit(500)
+                .usedCount(0)
+                .isActive(true)
+                .build());
+
+        couponRepository.save(Coupon.builder()
+                .code("BIRTHDAYVIP")
+                .title("Quà Tặng Sinh Nhật Kim Cương")
+                .description("01 Ly Signature + 01 Bánh Sừng Bò miễn phí tháng sinh nhật")
+                .discountType(DiscountType.FIXED_AMOUNT)
+                .discountValue(BigDecimal.valueOf(110000))
+                .minOrderValue(BigDecimal.ZERO)
+                .startDate(LocalDateTime.now())
+                .endDate(LocalDateTime.now().plusDays(365))
+                .usageLimit(100)
+                .usedCount(0)
+                .isActive(true)
+                .build());
+
+        couponRepository.save(Coupon.builder()
+                .code("CUPPINGVIP")
+                .title("Vé Mời Private Cupping Roastery Tour")
+                .description("Tham dự buổi thử nếm cà phê đỉnh cao cùng Master Roaster")
+                .discountType(DiscountType.FIXED_AMOUNT)
+                .discountValue(BigDecimal.ZERO)
+                .minOrderValue(BigDecimal.ZERO)
+                .startDate(LocalDateTime.now())
+                .endDate(LocalDateTime.now().plusDays(365))
+                .usageLimit(50)
+                .usedCount(0)
+                .isActive(true)
+                .build());
+    }
+
+    private void seedCustomerProfilesAndOrders() {
+        User uBronze = userRepository.findByEmail("phuong.bronze@utecoffe.vn").orElse(null);
+        User uSilver = userRepository.findByEmail("bao.silver@utecoffe.vn").orElse(null);
+        User uDiamond = userRepository.findByEmail("vy.diamond@utecoffe.vn").orElse(null);
+
+        if (uBronze == null || uSilver == null || uDiamond == null) return;
+
+        Store s1 = storeRepository.findById(1L).orElse(null);
+        Store s2 = storeRepository.findById(2L).orElse(null);
+        Store s3 = storeRepository.findById(3L).orElse(null);
+        if (s1 == null) return;
+        if (s2 == null) s2 = s1;
+        if (s3 == null) s3 = s1;
+
+        // 1. Loyalty Cards
+        LoyaltyCard cardBronze = loyaltyCardRepository.save(LoyaltyCard.builder()
+                .user(uBronze)
+                .cardNumber("UTE-BRONZE-8801")
+                .pointsBalance(120)
+                .lifetimePoints(120)
+                .tier(LoyaltyTier.BRONZE)
+                .build());
+
+        LoyaltyCard cardSilver = loyaltyCardRepository.save(LoyaltyCard.builder()
+                .user(uSilver)
+                .cardNumber("UTE-SILVER-6622")
+                .pointsBalance(850)
+                .lifetimePoints(850)
+                .tier(LoyaltyTier.SILVER)
+                .build());
+
+        LoyaltyCard cardDiamond = loyaltyCardRepository.save(LoyaltyCard.builder()
+                .user(uDiamond)
+                .cardNumber("UTE-DIAMOND-9999")
+                .pointsBalance(3650)
+                .lifetimePoints(3650)
+                .tier(LoyaltyTier.DIAMOND)
+                .build());
+
+        // 2. Loyalty Transactions
+        loyaltyTransactionRepository.save(LoyaltyTransaction.builder()
+                .loyaltyCard(cardBronze)
+                .pointsChange(120)
+                .transactionType("EARN")
+                .description("Tích 10% từ Đơn hàng #UTE-ORD-1010")
+                .createdAt(LocalDateTime.now().minusDays(2))
+                .build());
+
+        loyaltyTransactionRepository.save(LoyaltyTransaction.builder()
+                .loyaltyCard(cardSilver)
+                .pointsChange(320)
+                .transactionType("EARN")
+                .description("Tích 10% từ Đơn hàng #UTE-ORD-1021")
+                .createdAt(LocalDateTime.now().minusDays(10))
+                .build());
+        loyaltyTransactionRepository.save(LoyaltyTransaction.builder()
+                .loyaltyCard(cardSilver)
+                .pointsChange(280)
+                .transactionType("EARN")
+                .description("Tích 10% từ Đơn hàng #UTE-ORD-1022")
+                .createdAt(LocalDateTime.now().minusDays(5))
+                .build());
+        loyaltyTransactionRepository.save(LoyaltyTransaction.builder()
+                .loyaltyCard(cardSilver)
+                .pointsChange(250)
+                .transactionType("EARN")
+                .description("Tích 10% từ Đơn hàng #UTE-ORD-1023")
+                .createdAt(LocalDateTime.now().minusDays(1))
+                .build());
+
+        loyaltyTransactionRepository.save(LoyaltyTransaction.builder()
+                .loyaltyCard(cardDiamond)
+                .pointsChange(1200)
+                .transactionType("EARN")
+                .description("Tích lũy từ Tiệc Hội Nghị VIP Lounge Flagship")
+                .createdAt(LocalDateTime.now().minusDays(15))
+                .build());
+        loyaltyTransactionRepository.save(LoyaltyTransaction.builder()
+                .loyaltyCard(cardDiamond)
+                .pointsChange(950)
+                .transactionType("EARN")
+                .description("Tích lũy từ Hộp Quà Hạt Geisha & Trà Shan Tuyết")
+                .createdAt(LocalDateTime.now().minusDays(8))
+                .build());
+        loyaltyTransactionRepository.save(LoyaltyTransaction.builder()
+                .loyaltyCard(cardDiamond)
+                .pointsChange(1500)
+                .transactionType("EARN")
+                .description("Tích lũy từ Chuỗi Thưởng Thức Tại Bình Thạnh Garden")
+                .createdAt(LocalDateTime.now().minusDays(2))
+                .build());
+
+        // 3. User Coupons
+        couponRepository.findByCode("UTE2026").ifPresent(c -> userCouponRepository.save(UserCoupon.builder().user(uBronze).coupon(c).isUsed(false).build()));
+        couponRepository.findByCode("FREESHIP").ifPresent(c -> {
+            userCouponRepository.save(UserCoupon.builder().user(uBronze).coupon(c).isUsed(false).build());
+            userCouponRepository.save(UserCoupon.builder().user(uSilver).coupon(c).isUsed(false).build());
+        });
+        couponRepository.findByCode("SILVER10").ifPresent(c -> userCouponRepository.save(UserCoupon.builder().user(uSilver).coupon(c).isUsed(false).build()));
+        couponRepository.findByCode("TOPPINGFREE").ifPresent(c -> userCouponRepository.save(UserCoupon.builder().user(uSilver).coupon(c).isUsed(false).build()));
+        couponRepository.findByCode("DIAMOND15").ifPresent(c -> userCouponRepository.save(UserCoupon.builder().user(uDiamond).coupon(c).isUsed(false).build()));
+        couponRepository.findByCode("BIRTHDAYVIP").ifPresent(c -> userCouponRepository.save(UserCoupon.builder().user(uDiamond).coupon(c).isUsed(false).build()));
+        couponRepository.findByCode("CUPPINGVIP").ifPresent(c -> userCouponRepository.save(UserCoupon.builder().user(uDiamond).coupon(c).isUsed(false).build()));
+
+        // 4. Realistic Orders & OrderItems
+        var products = productRepository.findAll();
+        if (products.isEmpty()) return;
+
+        // Bronze: 1 order
+        Order oBronze = orderRepository.save(Order.builder()
+                .orderCode("UTE-ORD-1010")
+                .user(uBronze)
+                .store(s1)
+                .orderType(OrderType.DELIVERY)
+                .status(OrderStatus.COMPLETED)
+                .subtotal(BigDecimal.valueOf(90000))
+                .discountAmount(BigDecimal.ZERO)
+                .shippingFee(BigDecimal.valueOf(15000))
+                .finalAmount(BigDecimal.valueOf(105000))
+                .deliveryAddress("KTX ĐHQG Khu B, TP. Thủ Đức, TP.HCM")
+                .recipientName("Nguyễn Thị Mai Phương")
+                .recipientPhone("0911223344")
+                .createdAt(LocalDateTime.now().minusDays(2))
+                .build());
+        orderItemRepository.save(OrderItem.builder().order(oBronze).product(products.get(0)).unitPrice(BigDecimal.valueOf(45000)).quantity(1).subtotal(BigDecimal.valueOf(45000)).note("50% đường, 100% đá").build());
+        orderItemRepository.save(OrderItem.builder().order(oBronze).product(products.size() > 10 ? products.get(10) : products.get(0)).unitPrice(BigDecimal.valueOf(45000)).quantity(1).subtotal(BigDecimal.valueOf(45000)).note("Nóng giòn").build());
+
+        // Silver: 3 orders
+        Order oSilver1 = orderRepository.save(Order.builder()
+                .orderCode("UTE-ORD-1021")
+                .user(uSilver)
+                .store(s2)
+                .orderType(OrderType.DINE_IN)
+                .status(OrderStatus.COMPLETED)
+                .subtotal(BigDecimal.valueOf(120000))
+                .discountAmount(BigDecimal.ZERO)
+                .shippingFee(BigDecimal.ZERO)
+                .finalAmount(BigDecimal.valueOf(120000))
+                .recipientName("Trần Quốc Bảo")
+                .recipientPhone("0933445566")
+                .createdAt(LocalDateTime.now().minusDays(10))
+                .build());
+        orderItemRepository.save(OrderItem.builder().order(oSilver1).product(products.size() > 2 ? products.get(2) : products.get(0)).unitPrice(BigDecimal.valueOf(65000)).quantity(1).subtotal(BigDecimal.valueOf(65000)).note("Không đá, uống lạnh").build());
+        orderItemRepository.save(OrderItem.builder().order(oSilver1).product(products.size() > 1 ? products.get(1) : products.get(0)).unitPrice(BigDecimal.valueOf(55000)).quantity(1).subtotal(BigDecimal.valueOf(55000)).build());
+
+        Order oSilver2 = orderRepository.save(Order.builder()
+                .orderCode("UTE-ORD-1022")
+                .user(uSilver)
+                .store(s1)
+                .orderType(OrderType.TAKE_AWAY)
+                .status(OrderStatus.COMPLETED)
+                .subtotal(BigDecimal.valueOf(121000))
+                .discountAmount(BigDecimal.valueOf(12000))
+                .shippingFee(BigDecimal.ZERO)
+                .finalAmount(BigDecimal.valueOf(109000))
+                .recipientName("Trần Quốc Bảo")
+                .recipientPhone("0933445566")
+                .createdAt(LocalDateTime.now().minusDays(5))
+                .build());
+        orderItemRepository.save(OrderItem.builder().order(oSilver2).product(products.size() > 3 ? products.get(3) : products.get(0)).unitPrice(BigDecimal.valueOf(62000)).quantity(1).subtotal(BigDecimal.valueOf(62000)).build());
+        orderItemRepository.save(OrderItem.builder().order(oSilver2).product(products.size() > 4 ? products.get(4) : products.get(0)).unitPrice(BigDecimal.valueOf(59000)).quantity(1).subtotal(BigDecimal.valueOf(59000)).build());
+
+        Order oSilver3 = orderRepository.save(Order.builder()
+                .orderCode("UTE-ORD-1023")
+                .user(uSilver)
+                .store(s2)
+                .orderType(OrderType.DINE_IN)
+                .status(OrderStatus.COMPLETED)
+                .subtotal(BigDecimal.valueOf(95000))
+                .discountAmount(BigDecimal.ZERO)
+                .shippingFee(BigDecimal.ZERO)
+                .finalAmount(BigDecimal.valueOf(95000))
+                .recipientName("Trần Quốc Bảo")
+                .recipientPhone("0933445566")
+                .createdAt(LocalDateTime.now().minusDays(1))
+                .build());
+        orderItemRepository.save(OrderItem.builder().order(oSilver3).product(products.get(0)).unitPrice(BigDecimal.valueOf(45000)).quantity(1).subtotal(BigDecimal.valueOf(45000)).build());
+        orderItemRepository.save(OrderItem.builder().order(oSilver3).product(products.size() > 11 ? products.get(11) : products.get(0)).unitPrice(BigDecimal.valueOf(50000)).quantity(1).subtotal(BigDecimal.valueOf(50000)).build());
+
+        // Diamond: 3 VIP orders
+        Order oDiamond1 = orderRepository.save(Order.builder()
+                .orderCode("UTE-ORD-1031")
+                .user(uDiamond)
+                .store(s1)
+                .orderType(OrderType.DINE_IN)
+                .status(OrderStatus.COMPLETED)
+                .subtotal(BigDecimal.valueOf(580000))
+                .discountAmount(BigDecimal.valueOf(87000))
+                .shippingFee(BigDecimal.ZERO)
+                .finalAmount(BigDecimal.valueOf(493000))
+                .recipientName("Lê Hoàng Yến Vy")
+                .recipientPhone("0977889900")
+                .note("Phòng VIP Lounge tiếp khách đối tác")
+                .createdAt(LocalDateTime.now().minusDays(15))
+                .build());
+        orderItemRepository.save(OrderItem.builder().order(oDiamond1).product(products.size() > 5 ? products.get(5) : products.get(0)).unitPrice(BigDecimal.valueOf(290000)).quantity(2).subtotal(BigDecimal.valueOf(580000)).note("Hộp quà rang mộc thượng hạng").build());
+
+        Order oDiamond2 = orderRepository.save(Order.builder()
+                .orderCode("UTE-ORD-1032")
+                .user(uDiamond)
+                .store(s3)
+                .orderType(OrderType.DINE_IN)
+                .status(OrderStatus.COMPLETED)
+                .subtotal(BigDecimal.valueOf(290000))
+                .discountAmount(BigDecimal.valueOf(43500))
+                .shippingFee(BigDecimal.ZERO)
+                .finalAmount(BigDecimal.valueOf(246500))
+                .recipientName("Lê Hoàng Yến Vy")
+                .recipientPhone("0977889900")
+                .note("Bàn Sân Vườn Garden Bình Thạnh")
+                .createdAt(LocalDateTime.now().minusDays(8))
+                .build());
+        orderItemRepository.save(OrderItem.builder().order(oDiamond2).product(products.get(0)).unitPrice(BigDecimal.valueOf(59000)).quantity(2).subtotal(BigDecimal.valueOf(118000)).build());
+        orderItemRepository.save(OrderItem.builder().order(oDiamond2).product(products.size() > 10 ? products.get(10) : products.get(0)).unitPrice(BigDecimal.valueOf(45000)).quantity(2).subtotal(BigDecimal.valueOf(90000)).build());
+
+        Order oDiamond3 = orderRepository.save(Order.builder()
+                .orderCode("UTE-ORD-1033")
+                .user(uDiamond)
+                .store(s1)
+                .orderType(OrderType.DINE_IN)
+                .status(OrderStatus.COMPLETED)
+                .subtotal(BigDecimal.valueOf(350000))
+                .discountAmount(BigDecimal.valueOf(52500))
+                .shippingFee(BigDecimal.ZERO)
+                .finalAmount(BigDecimal.valueOf(297500))
+                .recipientName("Lê Hoàng Yến Vy")
+                .recipientPhone("0977889900")
+                .createdAt(LocalDateTime.now().minusDays(2))
+                .build());
+        orderItemRepository.save(OrderItem.builder().order(oDiamond3).product(products.size() > 6 ? products.get(6) : products.get(0)).unitPrice(BigDecimal.valueOf(175000)).quantity(2).subtotal(BigDecimal.valueOf(350000)).note("Set Pour-Over Geisha Cầu Đất").build());
     }
 }
