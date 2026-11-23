@@ -192,7 +192,7 @@
                         <i class="fa-solid fa-arrow-right-long text-gold ms-1"></i>
                     </button>
                     <h3 class="font-serif fw-bold mb-2 text-gold-gradient">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
-                    <p class="text-secondary mb-0 small">Thưởng thức không gian tinh tế tại 10 chi nhánh Flagship. Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.</p>
+                    <p class="text-secondary mb-0 small">Thưởng thức không gian tinh tế tại 3 chi nhánh Flagship (Thủ Đức, Quận 1, Bình Thạnh). Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.</p>
                 </div>
                 <div class="col-lg-5 text-lg-end">
                     <div class="d-flex flex-column flex-sm-row justify-content-lg-end align-items-stretch align-items-sm-center gap-3">

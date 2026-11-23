@@ -65,34 +65,34 @@
                             <div class="row g-3">
                                 <div class="col-md-3 col-6">
                                     <input type="radio" class="btn-check" name="zonePreference" id="zoneBar" value="BAR" checked>
-                                    <label class="btn btn-outline-gold w-100 py-3 text-center rounded-3 cursor-pointer h-100" for="zoneBar">
-                                        <i class="fa-solid fa-mug-saucer fs-4 d-block mb-1 text-gold"></i>
-                                        <span class="small fw-bold d-block">Quầy Barista</span>
-                                        <small class="text-secondary d-block" style="font-size: 0.7rem;">Trải nghiệm pha chế</small>
+                                    <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneBar">
+                                        <i class="fa-solid fa-mug-saucer fs-3 mb-2 text-gold"></i>
+                                        <span class="zone-name fw-bold text-light mb-1">Quầy Barista</span>
+                                        <span class="zone-desc text-secondary">Trải nghiệm pha chế</span>
                                     </label>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <input type="radio" class="btn-check" name="zonePreference" id="zoneLounge" value="LOUNGE">
-                                    <label class="btn btn-outline-gold w-100 py-3 text-center rounded-3 cursor-pointer h-100" for="zoneLounge">
-                                        <i class="fa-solid fa-couch fs-4 d-block mb-1 text-gold"></i>
-                                        <span class="small fw-bold d-block">Sofa VIP Lounge</span>
-                                        <small class="text-secondary d-block" style="font-size: 0.7rem;">Yên tĩnh, sang trọng</small>
+                                    <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneLounge">
+                                        <i class="fa-solid fa-couch fs-3 mb-2 text-gold"></i>
+                                        <span class="zone-name fw-bold text-light mb-1">Sofa VIP Lounge</span>
+                                        <span class="zone-desc text-secondary">Yên tĩnh, sang trọng</span>
                                     </label>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <input type="radio" class="btn-check" name="zonePreference" id="zoneGarden" value="GARDEN">
-                                    <label class="btn btn-outline-gold w-100 py-3 text-center rounded-3 cursor-pointer h-100" for="zoneGarden">
-                                        <i class="fa-solid fa-tree fs-4 d-block mb-1 text-gold"></i>
-                                        <span class="small fw-bold d-block">Sân Vườn Xanh</span>
-                                        <small class="text-secondary d-block" style="font-size: 0.7rem;">Thoáng đãng tự nhiên</small>
+                                    <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneGarden">
+                                        <i class="fa-solid fa-tree fs-3 mb-2 text-gold"></i>
+                                        <span class="zone-name fw-bold text-light mb-1">Sân Vườn Xanh</span>
+                                        <span class="zone-desc text-secondary">Thoáng đãng tự nhiên</span>
                                     </label>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <input type="radio" class="btn-check" name="zonePreference" id="zoneWork" value="WORK">
-                                    <label class="btn btn-outline-gold w-100 py-3 text-center rounded-3 cursor-pointer h-100" for="zoneWork">
-                                        <i class="fa-solid fa-laptop fs-4 d-block mb-1 text-gold"></i>
-                                        <span class="small fw-bold d-block">Bàn Co-Working</span>
-                                        <small class="text-secondary d-block" style="font-size: 0.7rem;">Ổ điện &amp; WiFi mạnh</small>
+                                    <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneWork">
+                                        <i class="fa-solid fa-laptop fs-3 mb-2 text-gold"></i>
+                                        <span class="zone-name fw-bold text-light mb-1">Bàn Co-Working</span>
+                                        <span class="zone-desc text-secondary">Ổ điện &amp; WiFi mạnh</span>
                                     </label>
                                 </div>
                             </div>

@@ -82,7 +82,7 @@
                             <i class="fa-solid fa-couch text-gold fs-4"></i>
                         </div>
                         <h5 class="font-serif fw-bold text-gold mb-2">Ưu Tiên VIP Lounge</h5>
-                        <p class="text-secondary small mb-0">Đặc quyền giữ chỗ bàn trung tâm view đẹp và phòng hội thảo riêng tại chuỗi 10 chi nhánh Flagship.</p>
+                        <p class="text-secondary small mb-0">Đặc quyền giữ chỗ bàn trung tâm view đẹp và phòng hội thảo riêng tại chuỗi 3 chi nhánh Flagship.</p>
                     </div>
                 </div>
             </div>
@@ -224,8 +224,8 @@
                             <td class="text-start ps-4 fw-semibold">Ưu đãi giảm giá trực tiếp trên menu</td>
                             <td class="text-muted">—</td>
                             <td class="text-muted">—</td>
-                            <td><span class="badge bg-gold text-obsidian fw-bold">Giảm 10%</span></td>
-                            <td><span class="badge bg-info text-dark fw-bold">Giảm 15%</span></td>
+                            <td><i class="fa-solid fa-circle-check text-gold"></i> Giảm 10%</td>
+                            <td><i class="fa-solid fa-circle-check text-gold"></i> Giảm 15%</td>
                         </tr>
                         <tr>
                             <td class="text-start ps-4 fw-semibold">Voucher tặng định kỳ hàng tháng</td>

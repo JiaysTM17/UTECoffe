@@ -40,10 +40,21 @@
     <div class="container py-5">
         <div class="row g-4" id="storesGrid">
             <c:forEach var="st" items="${stores}">
-                <div class="col-lg-4 col-md-6 store-card-col" data-name="${st.name.toLowerCase()}">
+                <c:set var="districtKey" value="thuduc"/>
+                <c:set var="storeImg" value="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=80"/>
+                <c:if test="${st.name.toLowerCase().contains('quận 1') || st.address.toLowerCase().contains('quận 1')}">
+                    <c:set var="districtKey" value="quan1"/>
+                    <c:set var="storeImg" value="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=700&q=80"/>
+                </c:if>
+                <c:if test="${st.name.toLowerCase().contains('bình thạnh') || st.address.toLowerCase().contains('bình thạnh')}">
+                    <c:set var="districtKey" value="binhthanh"/>
+                    <c:set var="storeImg" value="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=700&q=80"/>
+                </c:if>
+
+                <div class="col-lg-4 col-md-6 store-card-col" data-district="${districtKey}">
                     <div class="card card-luxury h-100 product-hover-lift d-flex flex-column">
                         <div class="product-image-container position-relative overflow-hidden" style="aspect-ratio: 16/10;">
-                            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=700&q=80" 
+                            <img src="${storeImg}" 
                                  alt="${st.name}" 
                                  class="w-100 h-100 object-fit-cover"
                                  loading="lazy">
@@ -96,4 +107,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Store District Filter Client Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterBtns = document.querySelectorAll('.store-filter-btn');
+            const storeCols = document.querySelectorAll('.store-card-col');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('btn-gold', 'active');
+                        b.classList.add('btn-outline-gold');
+                    });
+                    this.classList.remove('btn-outline-gold');
+                    this.classList.add('btn-gold', 'active');
+
+                    const filter = this.getAttribute('data-filter');
+                    storeCols.forEach(col => {
+                        const district = col.getAttribute('data-district');
+                        if (filter === 'all' || district === filter) {
+                            col.style.display = '';
+                        } else {
+                            col.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>

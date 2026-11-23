@@ -111,7 +111,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .isActive(true)
                 .build());
 
-        storeRepository.save(Store.builder()
+        Store s2 = storeRepository.save(Store.builder()
                 .name("UTECoffe Roastery Quận 1")
                 .address("68 Lê Lợi, Bến Nghé, Quận 1, TP.HCM")
                 .latitude(10.7735)
@@ -122,9 +122,26 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .isActive(true)
                 .build());
 
+        Store s3 = storeRepository.save(Store.builder()
+                .name("UTECoffe Garden Bình Thạnh")
+                .address("180 Ung Văn Khiêm, Phường 25, Q. Bình Thạnh, TP.HCM")
+                .latitude(10.8030)
+                .longitude(106.7155)
+                .phoneNumber("02835128888")
+                .openingTime("07:00")
+                .closingTime("22:30")
+                .isActive(true)
+                .build());
+
         storeTableRepository.save(StoreTable.builder().store(s1).tableNumber("T-01").capacity(2).isOccupied(false).isActive(true).build());
         storeTableRepository.save(StoreTable.builder().store(s1).tableNumber("T-02").capacity(4).isOccupied(false).isActive(true).build());
         storeTableRepository.save(StoreTable.builder().store(s1).tableNumber("VIP-01").capacity(8).isOccupied(false).isActive(true).build());
+
+        storeTableRepository.save(StoreTable.builder().store(s2).tableNumber("Q1-01").capacity(2).isOccupied(false).isActive(true).build());
+        storeTableRepository.save(StoreTable.builder().store(s2).tableNumber("Q1-VIP").capacity(6).isOccupied(false).isActive(true).build());
+
+        storeTableRepository.save(StoreTable.builder().store(s3).tableNumber("BT-01").capacity(2).isOccupied(false).isActive(true).build());
+        storeTableRepository.save(StoreTable.builder().store(s3).tableNumber("BT-GARDEN").capacity(8).isOccupied(false).isActive(true).build());
     }
 
     private void seedCatalogAndBOM() {

@@ -21,15 +21,19 @@ ON CONFLICT (id) DO NOTHING;
 INSERT INTO stores (id, name, address, latitude, longitude, phone_number, opening_time, closing_time, is_active, manager_id) VALUES
 (1, 'UTECoffe Flagship Thu Duc', '01 Vo Van Ngan, Linh Chieu, TP. Thu Duc, TP.HCM', 10.8514, 106.7720, '02838968641', '07:00', '22:30', true, 1),
 (2, 'UTECoffe Roastery District 1', '68 Le Loi, Ben Nghe, Quan 1, TP.HCM', 10.7735, 106.7001, '02838221999', '06:30', '23:00', true, 1),
-(3, 'UTECoffe Artisan Phu My Hung', '101 Nguyen Duc Canh, Tan Phong, Quan 7, TP.HCM', 10.7291, 106.7088, '02854123456', '07:00', '22:00', true, 1)
+(3, 'UTECoffe Garden Binh Thanh', '180 Ung Van Khiem, Phuong 25, Q. Binh Thanh, TP.HCM', 10.8030, 106.7155, '02835128888', '07:00', '22:30', true, 1)
 ON CONFLICT (id) DO NOTHING;
 
--- 4. Store Tables (Thu Duc Branch)
+-- 4. Store Tables
 INSERT INTO store_tables (id, store_id, table_number, capacity, is_occupied, is_active) VALUES
 (1, 1, 'T-01', 2, false, true),
 (2, 1, 'T-02', 4, false, true),
 (3, 1, 'T-03', 4, false, true),
-(4, 1, 'VIP-01', 8, false, true)
+(4, 1, 'VIP-01', 8, false, true),
+(5, 2, 'Q1-01', 2, false, true),
+(6, 2, 'Q1-VIP', 6, false, true),
+(7, 3, 'BT-01', 2, false, true),
+(8, 3, 'BT-GARDEN', 8, false, true)
 ON CONFLICT (id) DO NOTHING;
 
 -- 5. Product Categories

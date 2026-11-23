@@ -38,13 +38,18 @@ public class StoreMvcController {
         return "customer/reservation";
     }
 
-    @PostMapping("/reservation")
+    @PostMapping({"/reservation", "/reservation/book"})
     public String handleReservation(
             @RequestParam Long storeId,
             @RequestParam String reservationDate,
             @RequestParam String reservationTime,
-            @RequestParam Integer guestCount,
+            @RequestParam(required = false) Integer guestCount,
+            @RequestParam(required = false) Integer numberOfGuests,
             @RequestParam(required = false) String note,
+            @RequestParam(required = false) String specialRequest,
+            @RequestParam(required = false) String customerName,
+            @RequestParam(required = false) String phoneNumber,
+            @RequestParam(required = false) String zonePreference,
             @AuthenticationPrincipal UserDetails userDetails) {
 
         Long userId = null;
@@ -58,8 +63,21 @@ public class StoreMvcController {
         ReservationRequest req = new ReservationRequest();
         req.setStoreId(storeId);
         req.setReservationTime(dateTime);
-        req.setGuestCount(guestCount);
-        req.setNote(note);
+        req.setGuestCount(guestCount != null ? guestCount : (numberOfGuests != null ? numberOfGuests : 2));
+
+        StringBuilder noteBuilder = new StringBuilder();
+        if (customerName != null && !customerName.isBlank()) {
+            noteBuilder.append("Khách: ").append(customerName).append(" | SĐT: ").append(phoneNumber != null ? phoneNumber : "").append(" | ");
+        }
+        if (zonePreference != null && !zonePreference.isBlank()) {
+            noteBuilder.append("Khu vực: ").append(zonePreference).append(" | ");
+        }
+        if (note != null && !note.isBlank()) {
+            noteBuilder.append(note);
+        } else if (specialRequest != null && !specialRequest.isBlank()) {
+            noteBuilder.append(specialRequest);
+        }
+        req.setNote(noteBuilder.toString());
 
         reservationService.createReservation(req, userId);
 

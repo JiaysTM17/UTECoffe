@@ -878,3 +878,56 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     background-color: var(--text-gold);
     border-color: var(--text-gold);
 }
+
+/* ==========================================================================
+   Zone Atmosphere Selector in Reservation
+   ========================================================================== */
+.zone-option-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1.5px solid var(--border-gold-subtle);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    user-select: none;
+    text-decoration: none;
+    white-space: normal !important;
+}
+
+[data-theme="light"] .zone-option-card {
+    background: #ffffff;
+    border-color: rgba(212, 175, 55, 0.25);
+}
+
+.zone-option-card:hover {
+    border-color: var(--border-gold);
+    background: rgba(212, 175, 55, 0.06);
+    transform: translateY(-2px);
+}
+
+.zone-option-card .zone-name {
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+}
+
+.zone-option-card .zone-desc {
+    font-size: 0.72rem;
+    line-height: 1.3;
+}
+
+.btn-check:checked + .zone-option-card {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(26, 21, 16, 0.95) 100%) !important;
+    border-color: var(--border-gold) !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+}
+
+[data-theme="light"] .btn-check:checked + .zone-option-card {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, #faf8f5 100%) !important;
+}
+
+.btn-check:checked + .zone-option-card .zone-name {
+    color: var(--text-gold) !important;
+}
+
+.btn-check:checked + .zone-option-card i {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
