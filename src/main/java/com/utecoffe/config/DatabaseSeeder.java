@@ -173,7 +173,19 @@ public class DatabaseSeeder implements CommandLineRunner {
                 "Espresso Cầu Đất đậm đà rót trên nền cốt dừa tươi Bến Tre xay mịn cùng cơm dừa non sấy giòn thơm bùi.",
                 "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800", 55000, false);
 
-        // Artisan Tea (9 items)
+        createProductWithSizes(cCoffee, "Cold Brew Sparkling Yuzu", "cold-brew-sparkling-yuzu",
+                "Cà phê Arabica Cầu Đất ủ lạnh 24 giờ phối cùng nước ép quả Yuzu Nhật Bản và bọt sủi sparkling thanh mát đánh thức mọi giác quan.",
+                "https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=800", 65000, true);
+
+        createProductWithSizes(cCoffee, "Cà Phê Bạc Xỉu 4 Tầng Cầu Đất", "ca-phe-bac-xiu-4-tang-cau-dat",
+                "Tuyệt phẩm phân tầng thị giác nghệ thuật: sữa đặc thượng hạng, sữa tươi thanh trùng Đà Lạt, cà phê Arabica và bọt microfoam bồng bềnh.",
+                "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=800", 49000, false);
+
+        createProductWithSizes(cCoffee, "Single Origin Geisha Panama Pour-Over", "single-origin-geisha-panama-pour-over",
+                "Dòng hạt Geisha quý hiếm hàng đầu thế giới được pha thủ công tại bàn, bùng nổ nốt hương hoa cam, quả mơ và mật ong rừng nguyên bản.",
+                "https://images.unsplash.com/photo-1518057111178-44a106bad636?q=80&w=800", 85000, false);
+
+        // Artisan Tea (12 items)
         createProductWithSizes(cTea, "Trà Oolong Kem Phô Mai Vàng", "tra-oolong-kem-phomai-vang",
                 "Trà Oolong nướng Mộc Châu thơm lừng kết hợp lớp macchiato phô mai béo ngậy sánh mịn.",
                 "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800", 62000, true);
@@ -210,7 +222,19 @@ public class DatabaseSeeder implements CommandLineRunner {
                 "Bột trà xanh rang củi Shizuoka thơm nồng hương hạt dẻ nướng và khói gỗ, quyện cùng sữa tươi thanh trùng Đà Lạt.",
                 "https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?q=80&w=800", 62000, false);
 
-        // Craft Pastry & Bakery (9 items)
+        createProductWithSizes(cTea, "Trà Bưởi Hồng Ruby Mật Ong Bạc Hà", "tra-buoi-hong-ruby-mat-ong",
+                "Trà xanh ướp hoa bưởi kết hợp tép bưởi hồng Ruby căng mọng chua ngọt và mật ong hoa bạc hà mát lạnh thanh lọc cơ thể.",
+                "https://images.unsplash.com/photo-1546173159-315724a31696?q=80&w=800", 55000, false);
+
+        createProductWithSizes(cTea, "Trà Dâu Tây Đà Lạt Macchiato Kem Mặn", "tra-dau-tay-da-lat-macchiato",
+                "Nền trà nhài hữu cơ phối cùng dâu tây giống Nhật Bản trồng tại Đà Lạt dầm tươi, phủ lớp kem mặn béo ngậy sánh mịn.",
+                "https://images.unsplash.com/photo-1553530666-ba11a7da3888?q=80&w=800", 58000, true);
+
+        createProductWithSizes(cTea, "Trà Thảo Mộc Cúc La Mã & Táo Đỏ", "tra-thao-moc-cuc-la-ma-tao-do",
+                "Trà hoa cúc Chamomile hữu cơ kết hợp táo đỏ Tân Cương và kỷ tử ninh nhừ, thơm dịu giúp thư giãn và ngủ ngon sâu giấc.",
+                "https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?q=80&w=800", 52000, false);
+
+        // Craft Pastry & Bakery (11 items)
         createProductWithSizes(cPastry, "Croissant Bơ Pháp Thủ Công", "croissant-bo-phap-thu-cong",
                 "Bánh sừng bò ngàn lớp nướng giòn rụm với 100% bơ Elle & Vire thơm lừng chuẩn vị Paris.",
                 "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800", 45000, true);
@@ -246,6 +270,14 @@ public class DatabaseSeeder implements CommandLineRunner {
         createProductWithSizes(cPastry, "Bánh Danish Đào & Phô Mai Tươi", "banh-danish-dao-pho-mai-tuoi",
                 "Vỏ bánh nghìn lớp bơ Pháp vàng ươm ôm trọn lớp kem phô mai béo ngậy và miếng đào vàng tươi mọng nước thơm ngọt.",
                 "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800", 46000, false);
+
+        createProductWithSizes(cPastry, "Croissant Kẹp Phô Mai & Jambon Pháp", "croissant-jambon-pho-mai-phap",
+                "Bánh sừng bò nướng giòn rụm kẹp thịt nguội Jambon Pháp cao cấp, phô mai Cheddar tan chảy và mù tạt vàng Dijon cay dịu.",
+                "https://images.unsplash.com/photo-1509722747041-616f39b57569?q=80&w=800", 58000, true);
+
+        createProductWithSizes(cPastry, "Bánh Sourdough Bơ Tỏi Lá Thyme", "banh-sourdough-bo-toi-la-thyme",
+                "Bánh mì men tự nhiên ủ 36 giờ nướng giòn tan trên đá, phết đẫm bơ Elle & Vire tỏi nướng và lá thyme thơm lừng nức mũi.",
+                "https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?q=80&w=800", 45000, false);
 
         toppingRepository.save(Topping.builder().name("Trân Châu Oolong Hoàng Kim").price(BigDecimal.valueOf(10000)).isAvailable(true).build());
         toppingRepository.save(Topping.builder().name("Kem Cheese Kem Mặn Signature").price(BigDecimal.valueOf(15000)).isAvailable(true).build());

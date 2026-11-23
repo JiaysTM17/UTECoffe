@@ -69,7 +69,15 @@ INSERT INTO products (id, category_id, name, slug, description, image_url, base_
 (25, 2, 'Tra Long Nhan Hat Chia Hung Yen', 'tra-long-nhan-hat-chia-hung-yen', 'Tra Shan tuyet co thu u lanh cung long nhan cui day Hung Yen va hat chia huu co', 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=800', 55000.00, true, false, NOW(), NOW()),
 (26, 2, 'Hojicha Latte Rang Cui Nhat Ban', 'hojicha-latte-rang-cui-nhat-ban', 'Bot tra xanh rang cui Shizuoka thom nong huong hat de quyen cung sua tuoi thanh trung', 'https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?q=80&w=800', 62000.00, true, false, NOW(), NOW()),
 (27, 3, 'Croffle Bo Nuong Mat Ong Rung', 'croffle-bo-nuong-mat-ong-rung', 'Banh sung bo ep waffle nong gion phu caramel va mat ong hoa bac ha nguyen chat', 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?q=80&w=800', 48000.00, true, false, NOW(), NOW()),
-(28, 3, 'Banh Danish Dao & Pho Mai Tuoi', 'banh-danish-dao-pho-mai-tuoi', 'Vo banh nghin lop bo Phap vang uom om tron kem pho mai beo ngay va dao vang tuoi', 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800', 46000.00, true, false, NOW(), NOW())
+(28, 3, 'Banh Danish Dao & Pho Mai Tuoi', 'banh-danish-dao-pho-mai-tuoi', 'Vo banh nghin lop bo Phap vang uom om tron kem pho mai beo ngay va dao vang tuoi', 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800', 46000.00, true, false, NOW(), NOW()),
+(29, 1, 'Cold Brew Sparkling Yuzu', 'cold-brew-sparkling-yuzu', 'Ca phe Arabica Cau Dat u lanh 24 gio phoi cung nuoc ep qua Yuzu Nhat Ban va bot sui sparkling', 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=800', 65000.00, true, true, NOW(), NOW()),
+(30, 1, 'Ca Phe Bac Xiu 4 Tang Cau Dat', 'ca-phe-bac-xiu-4-tang-cau-dat', 'Tuyet pham phan tang thi giac nghe thuat sua dac sua tuoi Da Lat ca phe Arabica va bot microfoam', 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=800', 49000.00, true, false, NOW(), NOW()),
+(31, 1, 'Single Origin Geisha Panama Pour-Over', 'single-origin-geisha-panama-pour-over', 'Dong hat Geisha quy hiem hang dau the gioi pha thu cong tai ban bung no hoa cam qua mo mat ong', 'https://images.unsplash.com/photo-1518057111178-44a106bad636?q=80&w=800', 85000.00, true, false, NOW(), NOW()),
+(32, 2, 'Tra Buoi Hong Ruby Mat Ong', 'tra-buoi-hong-ruby-mat-ong', 'Tra xanh uop hoa buoi ket hop tep buoi hong Ruby mong nuoc va mat ong hoa bac ha thanh loc', 'https://images.unsplash.com/photo-1546173159-315724a31696?q=80&w=800', 55000.00, true, false, NOW(), NOW()),
+(33, 2, 'Tra Dau Tay Da Lat Macchiato', 'tra-dau-tay-da-lat-macchiato', 'Nen tra nhai huu co phoi cung dau tay giong Nhat Ban trong tai Da Lat dam tuoi va kem beo man', 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?q=80&w=800', 58000.00, true, true, NOW(), NOW()),
+(34, 2, 'Tra Thao Moc Cuc La Ma Tao Do', 'tra-thao-moc-cuc-la-ma-tao-do', 'Tra hoa cuc Chamomile huu co ket hop tao do Tan Cuong va ky tu ninh nhu thu gian giup ngu ngon', 'https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?q=80&w=800', 52000.00, true, false, NOW(), NOW()),
+(35, 3, 'Croissant Jambon Pho Mai Phap', 'croissant-jambon-pho-mai-phap', 'Banh sung bo nuong gion rum kep thit nguoi Jambon Phap cao cap pho mai Cheddar va mu tat Dijon', 'https://images.unsplash.com/photo-1509722747041-616f39b57569?q=80&w=800', 58000.00, true, true, NOW(), NOW()),
+(36, 3, 'Banh Sourdough Bo Toi La Thyme', 'banh-sourdough-bo-toi-la-thyme', 'Banh mi men tu nhien u 36 gio nuong gion tan tren da phet dam bo Elle & Vire toi nuong va la thyme', 'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?q=80&w=800', 45000.00, true, false, NOW(), NOW())
 ON CONFLICT (id) DO NOTHING;
 
 -- 7. Product Sizes
@@ -101,7 +109,15 @@ INSERT INTO product_sizes (id, product_id, size_name, extra_price) VALUES
 (49, 25, 'Regular (M)', 0.00), (50, 25, 'Large (L)', 10000.00),
 (51, 26, 'Regular (M)', 0.00), (52, 26, 'Large (L)', 10000.00),
 (53, 27, 'Regular (M)', 0.00), (54, 27, 'Large (L)', 10000.00),
-(55, 28, 'Regular (M)', 0.00), (56, 28, 'Large (L)', 10000.00)
+(55, 28, 'Regular (M)', 0.00), (56, 28, 'Large (L)', 10000.00),
+(57, 29, 'Regular (M)', 0.00), (58, 29, 'Large (L)', 10000.00),
+(59, 30, 'Regular (M)', 0.00), (60, 30, 'Large (L)', 10000.00),
+(61, 31, 'Regular (M)', 0.00), (62, 31, 'Large (L)', 10000.00),
+(63, 32, 'Regular (M)', 0.00), (64, 32, 'Large (L)', 10000.00),
+(65, 33, 'Regular (M)', 0.00), (66, 33, 'Large (L)', 10000.00),
+(67, 34, 'Regular (M)', 0.00), (68, 34, 'Large (L)', 10000.00),
+(69, 35, 'Regular (M)', 0.00), (70, 35, 'Large (L)', 10000.00),
+(71, 36, 'Regular (M)', 0.00), (72, 36, 'Large (L)', 10000.00)
 ON CONFLICT (id) DO NOTHING;
 
 -- 8. Toppings
