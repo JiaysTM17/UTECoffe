@@ -1,174 +1,133 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <head>
     <title>Thanh Toán Đơn Hàng - UTECoffe</title>
 </head>
-<body>
+<body class="bg-obsidian">
     <div class="container py-5">
-        <h3 class="fw-bold mb-4"><i class="fa-solid fa-credit-card me-2 text-warning"></i> Thông Tin Thanh Toán</h3>
-        <div class="row g-4">
-            <div class="col-lg-7">
-                <div class="card border-0 shadow-sm p-4 mb-4">
-                    <h5 class="fw-bold mb-3">1. Hình Thức Đặt Món</h5>
-                    <div class="row g-3 mb-4">
-                        <div class="col-4">
-                            <input type="radio" class="btn-check" name="orderType" id="takeaway" value="TAKE_AWAY" checked>
-                            <label class="btn btn-outline-secondary w-100 py-3" for="takeaway">
-                                <i class="fa-solid fa-bag-shopping d-block mb-1 fs-5"></i> Mang Đi
-                            </label>
-                        </div>
-                        <div class="col-4">
-                            <input type="radio" class="btn-check" name="orderType" id="delivery" value="DELIVERY">
-                            <label class="btn btn-outline-secondary w-100 py-3" for="delivery">
-                                <i class="fa-solid fa-motorcycle d-block mb-1 fs-5"></i> Giao Hàng
-                            </label>
-                        </div>
-                        <div class="col-4">
-                            <input type="radio" class="btn-check" name="orderType" id="dinein" value="DINE_IN">
-                            <label class="btn btn-outline-secondary w-100 py-3" for="dinein">
-                                <i class="fa-solid fa-utensils d-block mb-1 fs-5"></i> Dùng Tại Bàn
-                            </label>
-                        </div>
-                    </div>
-
-                    <h5 class="fw-bold mb-3">2. Chi Nhánh Phục Vụ</h5>
-                    <select class="form-select mb-4" id="storeSelect">
-                        <c:forEach var="store" items="${stores}">
-                            <option value="${store.id}">${store.name} - ${store.address}</option>
-                        </c:forEach>
-                    </select>
-
-                    <h5 class="fw-bold mb-3">3. Thông Tin Người Nhận</h5>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" id="recipientName" placeholder="Họ và tên..." required>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" id="recipientPhone" placeholder="Số điện thoại..." required>
-                        </div>
-                        <div class="col-12">
-                            <input type="text" class="form-control" id="deliveryAddress" placeholder="Địa chỉ giao hàng (nếu chọn giao tận nơi)...">
-                        </div>
-                        <div class="col-12">
-                            <textarea class="form-control" id="orderNote" rows="2" placeholder="Ghi chú đơn hàng (ít ngọt, không đá, số bàn, v.v.)..."></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card border-0 shadow-sm p-4">
-                    <h5 class="fw-bold mb-3">4. Phương Thức Thanh Toán</h5>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="paymentMethod" id="pmVietQr" value="VIETQR" checked>
-                        <label class="form-check-label fw-bold" for="pmVietQr">
-                            <i class="fa-solid fa-qrcode text-primary me-2"></i> VietQR Chuyển Khoản Nhanh 24/7 (Khuyên dùng)
-                        </label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="paymentMethod" id="pmCod" value="COD">
-                        <label class="form-check-label fw-bold" for="pmCod">
-                            <i class="fa-solid fa-money-bill-wave text-success me-2"></i> Thanh toán tiền mặt khi nhận hàng (COD)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="paymentMethod" id="pmVnpay" value="VNPAY">
-                        <label class="form-check-label fw-bold" for="pmVnpay">
-                            <i class="fa-regular fa-credit-card text-danger me-2"></i> Cổng thanh toán VNPAY / Ví MoMo
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-5">
-                <div class="card border-0 shadow-sm p-4 sticky-top" style="top: 100px;">
-                    <h5 class="fw-bold mb-3">Đơn Hàng Của Bạn</h5>
-                    <div id="checkoutItemsList" class="mb-3"></div>
-                    <hr>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="couponInput" placeholder="Mã giảm giá (UTECOFFEWELCOME)...">
-                        <button class="btn btn-outline-secondary" type="button">Áp Dụng</button>
-                    </div>
-                    <div class="d-flex justify-content-between mb-4">
-                        <span class="fw-bold fs-5">Tổng Thanh Toán:</span>
-                        <span id="checkoutTotal" class="fw-bold text-danger fs-5">0 ₫</span>
-                    </div>
-                    <button class="btn btn-gold w-100 py-3 fw-bold" onclick="submitOrder()">
-                        Xác Nhận Đặt Đơn Hàng
-                    </button>
-                </div>
-            </div>
+        <div class="section-title-wrap mb-4">
+            <span class="section-subtitle">Xác Nhận Đơn Hàng</span>
+            <h2 class="section-title">Thông Tin Giao Nhận &amp; Thanh Toán</h2>
+            <div class="gold-divider"></div>
         </div>
+
+        <form action="${pageContext.request.contextPath}/api/orders" method="post" id="checkoutForm">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            
+            <div class="row g-4">
+                <!-- Left: Shipping & Customer Details -->
+                <div class="col-lg-7">
+                    <div class="card-luxury p-4 mb-4">
+                        <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2"><i class="fa-solid fa-truck-fast me-2"></i>1. Phương Thức Nhận Hàng</h5>
+                        <div class="row g-3 mb-3">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="orderType" id="typeDelivery" value="DELIVERY" checked>
+                                <label class="btn btn-outline-gold w-100 py-3 text-center" for="typeDelivery">
+                                    <i class="fa-solid fa-motorcycle fs-4 d-block mb-1"></i> Giao Tận Nơi
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="orderType" id="typeTakeaway" value="TAKEAWAY">
+                                <label class="btn btn-outline-gold w-100 py-3 text-center" for="typeTakeaway">
+                                    <i class="fa-solid fa-store fs-4 d-block mb-1"></i> Lấy Tại Quán
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small text-gold fw-bold">Chi Nhánh Chế Biến:</label>
+                            <select class="form-select form-control-luxury" name="storeId" required>
+                                <option value="1">UTECoffe Flagship Thủ Đức - 01 Võ Văn Ngân, TP. Thủ Đức</option>
+                                <option value="2">UTECoffe Roastery Quận 1 - 68 Lê Lợi, Quận 1</option>
+                            </select>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label small text-gold fw-bold">Họ và Tên:</label>
+                                <input type="text" class="form-control form-control-luxury" name="recipientName" placeholder="Nguyễn Văn A" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-gold fw-bold">Số Điện Thoại:</label>
+                                <input type="tel" class="form-control form-control-luxury" name="recipientPhone" placeholder="0901234567" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3" id="deliveryAddressGroup">
+                            <label class="form-label small text-gold fw-bold">Địa Chỉ Giao Hàng:</label>
+                            <input type="text" class="form-control form-control-luxury" name="deliveryAddress" placeholder="Số nhà, tên đường, phường/xã, quận/huyện...">
+                        </div>
+
+                        <div>
+                            <label class="form-label small text-gold fw-bold">Ghi Chú Cho Barista / Shipper:</label>
+                            <textarea class="form-control form-control-luxury" name="note" rows="2" placeholder="Ví dụ: Ít đá, giao trước 11h..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Payment Gateways -->
+                    <div class="card-luxury p-4">
+                        <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2"><i class="fa-solid fa-credit-card me-2"></i>2. Cổng Thanh Toán</h5>
+                        <div class="d-flex flex-column gap-2">
+                            <label class="p-3 border border-gold rounded-3 bg-espresso d-flex align-items-center gap-3 cursor-pointer">
+                                <input type="radio" name="paymentMethod" value="VIETQR" checked class="form-check-input">
+                                <div>
+                                    <div class="fw-bold"><i class="fa-solid fa-qrcode text-gold me-2"></i>Chuyển Khoản Ngân Hàng Tự Động (VietQR Động)</div>
+                                    <small class="text-secondary">Tạo mã QR chứa mã đơn và số tiền chính xác, tự động kích hoạt chế biến</small>
+                                </div>
+                            </label>
+
+                            <label class="p-3 border border-gold rounded-3 bg-espresso d-flex align-items-center gap-3 cursor-pointer">
+                                <input type="radio" name="paymentMethod" value="VNPAY" class="form-check-input">
+                                <div>
+                                    <div class="fw-bold"><i class="fa-regular fa-credit-card text-gold me-2"></i>Ví / Cổng VNPay Sandbox</div>
+                                    <small class="text-secondary">Thanh toán qua thẻ ATM nội địa, QR Pay hoặc thẻ quốc tế</small>
+                                </div>
+                            </label>
+
+                            <label class="p-3 border border-gold rounded-3 bg-espresso d-flex align-items-center gap-3 cursor-pointer">
+                                <input type="radio" name="paymentMethod" value="MOMO" class="form-check-input">
+                                <div>
+                                    <div class="fw-bold"><i class="fa-solid fa-wallet text-gold me-2"></i>Ví Điện Tử MoMo Sandbox</div>
+                                    <small class="text-secondary">Xác thực chữ ký HMAC-SHA256 bảo mật cao</small>
+                                </div>
+                            </label>
+
+                            <label class="p-3 border border-gold rounded-3 bg-espresso d-flex align-items-center gap-3 cursor-pointer">
+                                <input type="radio" name="paymentMethod" value="COD" class="form-check-input">
+                                <div>
+                                    <div class="fw-bold"><i class="fa-solid fa-money-bill-wave text-gold me-2"></i>Tiền Mặt Khi Nhận Hàng (COD)</div>
+                                    <small class="text-secondary">Thanh toán trực tiếp cho nhân viên giao hàng khi nhận thức uống</small>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Order Review -->
+                <div class="col-lg-5">
+                    <div class="card-luxury p-4 sticky-top" style="top: 100px;">
+                        <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2">Đơn Hàng Của Bạn</h5>
+                        <div class="d-flex justify-content-between mb-2 small text-secondary">
+                            <span>Sản phẩm:</span>
+                            <span class="text-light fw-bold">Cà Phê Cold Brew Cam Vàng (L) x1</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2 small text-secondary">
+                            <span>Phí vận chuyển:</span>
+                            <span class="text-success">Miễn Phí</span>
+                        </div>
+                        <hr class="border-secondary opacity-25">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="fw-bold fs-5">Tổng Thanh Toán:</span>
+                            <span class="price-gold fs-3">65.000₫</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-gold w-100 py-3 fw-bold fs-6">
+                            <i class="fa-solid fa-lock me-2"></i> Hoàn Tất Đặt Hàng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    <script>
-        function loadCheckout() {
-            let cart = JSON.parse(localStorage.getItem('utecoffe_cart') || '[]');
-            let list = document.getElementById('checkoutItemsList');
-            let total = 0;
-            list.innerHTML = '';
-            cart.forEach(i => {
-                let itemTotal = i.unitPrice * i.quantity;
-                total += itemTotal;
-                list.innerHTML += `<div class="d-flex justify-content-between small mb-1">
-                    <span>${i.name} x ${i.quantity}</span>
-                    <span class="fw-bold">${itemTotal.toLocaleString('vi-VN')} ₫</span>
-                </div>`;
-            });
-            document.getElementById('checkoutTotal').innerText = total.toLocaleString('vi-VN') + ' ₫';
-        }
-
-        async function submitOrder() {
-            let cart = JSON.parse(localStorage.getItem('utecoffe_cart') || '[]');
-            if (cart.length === 0) {
-                alert('Giỏ hàng trống!');
-                return;
-            }
-
-            let orderType = document.querySelector('input[name="orderType"]:checked').value;
-            let paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-            let storeId = document.getElementById('storeSelect').value;
-            let name = document.getElementById('recipientName').value;
-            let phone = document.getElementById('recipientPhone').value;
-            let addr = document.getElementById('deliveryAddress').value;
-            let note = document.getElementById('orderNote').value;
-            let coupon = document.getElementById('couponInput').value;
-
-            if (!name || !phone) {
-                alert('Vui lòng nhập tên và số điện thoại nhận hàng!');
-                return;
-            }
-
-            let payload = {
-                storeId: parseInt(storeId),
-                orderType: orderType,
-                paymentMethod: paymentMethod,
-                recipientName: name,
-                recipientPhone: phone,
-                deliveryAddress: addr,
-                note: note,
-                couponCode: coupon,
-                items: cart.map(i => ({
-                    productId: parseInt(i.productId),
-                    quantity: parseInt(i.quantity)
-                }))
-            };
-
-            try {
-                let res = await fetch('${pageContext.request.contextPath}/api/orders', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                let data = await res.json();
-                if (data.success) {
-                    localStorage.removeItem('utecoffe_cart');
-                    window.location.href = '${pageContext.request.contextPath}/orders/tracking/' + data.data.orderCode;
-                } else {
-                    alert('Lỗi đặt hàng: ' + data.message);
-                }
-            } catch (err) {
-                alert('Không thể kết nối đến máy chủ: ' + err);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', loadCheckout);
-    </script>
 </body>

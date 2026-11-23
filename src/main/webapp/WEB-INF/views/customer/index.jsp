@@ -2,87 +2,101 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <head>
-    <title>Trang Chủ - UTECoffe Specialty Tea & Coffee Roastery</title>
-    <style>
-        .hero-banner {
-            background: linear-gradient(rgba(18, 16, 14, 0.85), rgba(18, 16, 14, 0.9)), url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=1600') center/cover;
-            color: #FFFFFF;
-            padding: 120px 0 100px;
-        }
-        .product-card {
-            background: #FFFFFF;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #EDE6D6;
-        }
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-        }
-        .product-img {
-            height: 220px;
-            object-fit: cover;
-            width: 100%;
-        }
-    </style>
+    <title>Trang Chủ - UTECoffe Specialty Tea &amp; Coffee Roastery</title>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero-banner text-center">
-        <div class="container">
-            <span class="badge bg-warning text-dark px-3 py-2 text-uppercase fw-bold letter-spacing-2 mb-3">
-                Thế Hệ Thứ 3 Của Cà Phê & Trà Đặc Sản
-            </span>
-            <h1 class="display-4 fw-bold mb-3" style="letter-spacing: 2px;">
-                TINH HOA TRÀ &amp; CÀ PHÊ VIỆT
-            </h1>
-            <p class="lead text-light opacity-75 max-w-700 mx-auto mb-4" style="font-size: 1.15rem;">
-                Hạt Arabica Cầu Đất rang mộc thủ công, lá trà Ô Long Mộc Châu tuyển chọn kết hợp mô hình đặt món đa kênh OMO và quầy pha chế thời gian thực.
-            </p>
-            <div class="d-flex justify-content-center gap-3">
-                <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold btn-lg px-4">
-                    <i class="fa-solid fa-mug-hot me-2"></i> Khám Phá Thực Đơn
-                </a>
-                <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-light btn-lg px-4">
-                    <i class="fa-regular fa-calendar-check me-2"></i> Đặt Bàn Ngay
-                </a>
+
+    <!-- Cinematic Hero Section -->
+    <section class="hero-luxury py-5 position-relative">
+        <div class="container py-lg-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7">
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3 border border-gold" style="background: rgba(222, 183, 106, 0.1);">
+                        <i class="fa-solid fa-sparkles text-gold small"></i>
+                        <span class="text-gold font-accent fw-bold small text-uppercase" style="letter-spacing: 0.15em;">Di Sản Cà Phê &amp; Trà Đặc Sản Nguyên Bản</span>
+                    </div>
+                    <h1 class="display-3 fw-bold font-serif mb-3 text-gold-gradient" style="line-height: 1.15;">
+                        Nghệ Thuật Rang Mộc &amp; Tách Cà Phê Hoàn Hảo
+                    </h1>
+                    <p class="lead text-secondary mb-4 pe-lg-4" style="font-weight: 300;">
+                        Tận hưởng tinh hoa từ độ cao 1.600m cao nguyên Cầu Đất. Mỗi hạt cà phê tại UTECoffe được tuyển chọn kỹ lưỡng, rang mộc thủ công từng mẻ nhỏ để lưu giữ trọn vẹn dải hương hoa quả phong phú và hậu vị ngọt sâu.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mb-5">
+                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold">
+                            <i class="fa-solid fa-mug-hot me-1"></i> Khám Phá Thực Đơn
+                        </a>
+                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold">
+                            <i class="fa-solid fa-calendar-check me-1"></i> Đặt Bàn Thưởng Thức
+                        </a>
+                    </div>
+
+                    <!-- Roastery Highlights Strip -->
+                    <div class="row g-3 pt-3 border-top border-secondary opacity-75">
+                        <div class="col-sm-4 col-6">
+                            <h4 class="font-serif text-gold fw-bold mb-0">85+ SCA</h4>
+                            <small class="text-muted text-uppercase font-accent" style="font-size: 0.72rem; letter-spacing: 0.08em;">Điểm Cupping Đặc Sản</small>
+                        </div>
+                        <div class="col-sm-4 col-6">
+                            <h4 class="font-serif text-gold fw-bold mb-0">1.600m</h4>
+                            <small class="text-muted text-uppercase font-accent" style="font-size: 0.72rem; letter-spacing: 0.08em;">Độ Cao Cầu Đất Terroir</small>
+                        </div>
+                        <div class="col-sm-4 col-6">
+                            <h4 class="font-serif text-gold fw-bold mb-0">10 Cửa Hàng</h4>
+                            <small class="text-muted text-uppercase font-accent" style="font-size: 0.72rem; letter-spacing: 0.08em;">Flagship Roasteries</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 text-center">
+                    <div class="position-relative d-inline-block">
+                        <div class="card-luxury p-3 shadow-lg" style="border-radius: 30px;">
+                            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80" 
+                                 alt="UTECOFFE Signature Pour Over" class="img-fluid rounded-4 shadow" style="max-height: 480px; object-fit: cover;">
+                        </div>
+                        <div class="badge-luxury-tag px-3 py-2 fs-6 shadow pulse-gold" style="top: -15px; right: -15px; left: auto;">
+                            <i class="fa-solid fa-award text-gold me-1"></i> Artisanal Roasters
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Products -->
-    <section class="py-5">
+    <!-- Signature Seasonal Menu Highlights -->
+    <section class="py-5 bg-dark-roast">
         <div class="container py-4">
-            <div class="text-center mb-5">
-                <h6 class="text-warning text-uppercase fw-bold letter-spacing-2 mb-2">Thực Đơn Nổi Bật</h6>
-                <h2 class="fw-bold text-dark">HƯƠNG VỊ ĐẶC SẮC NHẤT</h2>
-                <div style="width: 60px; height: 3px; background: #D4AF37; margin: 12px auto;"></div>
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Bộ Sưu Tập Hương Vị Trứ Danh</span>
+                <h2 class="section-title">Thức Uống Đặc Sản Nổi Bật</h2>
+                <div class="gold-divider"></div>
             </div>
 
             <div class="row g-4">
-                <c:forEach var="prod" items="${featuredProducts}">
+                <c:forEach var="prod" items="${featuredProducts}" varStatus="status">
                     <div class="col-lg-3 col-md-6">
-                        <div class="product-card h-100 d-flex flex-column">
-                            <img src="${prod.imageUrl}" alt="${prod.name}" class="product-img">
-                            <div class="p-3 d-flex flex-column flex-grow-1">
-                                <span class="badge bg-light text-secondary mb-2 align-self-start" style="font-size: 0.75rem;">
-                                    ${prod.category.name}
-                                </span>
-                                <h5 class="fw-bold text-dark mb-2" style="font-size: 1.05rem;">
-                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="text-decoration-none text-dark">
-                                        ${prod.name}
-                                    </a>
+                        <div class="card card-luxury h-100 d-flex flex-column">
+                            <div class="product-image-container">
+                                <img src="${not empty prod.imageUrl ? prod.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80'}" 
+                                     alt="${prod.name}">
+                                <c:if test="${prod.isFeatured}">
+                                    <span class="badge-luxury-tag"><i class="fa-solid fa-star text-gold me-1"></i> Bán Chạy</span>
+                                </c:if>
+                            </div>
+                            <div class="card-body p-4 d-flex flex-column flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <span class="text-gold font-accent small text-uppercase" style="letter-spacing: 0.1em;">${prod.category.name}</span>
+                                    <span class="badge bg-espresso text-secondary small border border-secondary"><i class="fa-solid fa-fire-flame-curved me-1 text-gold"></i> Rang Vừa</span>
+                                </div>
+                                <h5 class="font-serif fw-bold mb-2">
+                                    <a href="${pageContext.request.contextPath}/menu/detail/${prod.id}" class="text-light text-decoration-none hover-gold">${prod.name}</a>
                                 </h5>
-                                <p class="small text-muted mb-3 flex-grow-1 line-clamp-2">
-                                    ${prod.description}
+                                <p class="text-secondary small flex-grow-1 mb-3 text-truncate-2">
+                                    ${not empty prod.description ? prod.description : 'Hương vị nguyên bản từ hạt Arabica chín cây tuyển chọn, kết hợp kỹ thuật pha thủ công tinh tế.'}
                                 </p>
-                                <div class="d-flex justify-content-between align-items-center pt-2 border-top">
-                                    <span class="fw-bold text-danger fs-5">
-                                        <fmt:formatNumber value="${prod.basePrice}" type="currency" currencySymbol="₫"/>
-                                    </span>
-                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-sm btn-gold">
-                                        <i class="fa-solid fa-plus"></i> Đặt Món
+                                <div class="d-flex justify-content-between align-items-center pt-3 border-top border-secondary opacity-75">
+                                    <span class="price-gold"><fmt:formatNumber value="${prod.basePrice}" type="currency" currencySymbol="₫"/></span>
+                                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold btn-sm px-3">
+                                        <i class="fa-solid fa-plus me-1"></i> Chọn Món
                                     </a>
                                 </div>
                             </div>
@@ -90,35 +104,84 @@
                     </div>
                 </c:forEach>
             </div>
+
+            <div class="text-center mt-5">
+                <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold px-4 py-2">
+                    Xem Toàn Bộ Thực Đơn Đặc Sản <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- OMO Value Proposition -->
-    <section class="py-5 bg-white border-top border-bottom">
-        <div class="container py-3">
-            <div class="row g-4 text-center">
-                <div class="col-md-4">
-                    <div class="p-4">
-                        <i class="fa-solid fa-truck-fast text-warning fs-1 mb-3"></i>
-                        <h5 class="fw-bold">Giao Hàng Siêu Tốc 30 Phút</h5>
-                        <p class="text-muted small">Thuật toán Haversine tự động điều phối đơn hàng đến chi nhánh gần nhất để giữ trọn vẹn hương vị thức uống.</p>
+    <!-- 4 Pillars of Artisanal Craftsmanship -->
+    <section class="py-5 bg-obsidian border-top border-gold">
+        <div class="container py-4">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Triết Lý Cà Phê Thủ Công</span>
+                <h2 class="section-title">Hành Trình Từ Nông Trại Đến Tách Cà Phê</h2>
+                <div class="gold-divider"></div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="card-luxury p-4 text-center h-100">
+                        <div class="d-inline-flex p-3 rounded-circle mb-3 border border-gold" style="background: rgba(222, 183, 106, 0.1);">
+                            <i class="fa-solid fa-mountain text-gold fs-3"></i>
+                        </div>
+                        <h5 class="font-serif fw-bold mb-2">Terroir 1.600m</h5>
+                        <p class="text-secondary small mb-0">Hạt cà phê phát triển chậm trong sương mù và đất bazan Cầu Đất, tích tụ hương vị hoa quả sâu lắng.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="p-4">
-                        <i class="fa-solid fa-bell-concierge text-warning fs-1 mb-3"></i>
-                        <h5 class="fw-bold">Pha Chế Thời Gian Thực KDS</h5>
-                        <p class="text-muted small">Hệ thống màn hình quầy Barista hiển thị công thức chuẩn hóa, giảm thiểu tối đa thời gian chờ đợi của bạn.</p>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card-luxury p-4 text-center h-100">
+                        <div class="d-inline-flex p-3 rounded-circle mb-3 border border-gold" style="background: rgba(222, 183, 106, 0.1);">
+                            <i class="fa-solid fa-fire text-gold fs-3"></i>
+                        </div>
+                        <h5 class="font-serif fw-bold mb-2">Rang Mộc Artisanal</h5>
+                        <p class="text-secondary small mb-0">Rang theo mẻ nhỏ (Micro-batch) bằng công nghệ trống rang Giesen cao cấp, giữ vẹn nguyên tính độc bản.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="p-4">
-                        <i class="fa-solid fa-crown text-warning fs-1 mb-3"></i>
-                        <h5 class="fw-bold">Đặc Quyền Thành Viên UTEClub</h5>
-                        <p class="text-muted small">Tích lũy hạt vàng trên mỗi hóa đơn, thăng hạng thành viên và đổi lấy các món nước miễn phí cùng ưu đãi sinh nhật.</p>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card-luxury p-4 text-center h-100">
+                        <div class="d-inline-flex p-3 rounded-circle mb-3 border border-gold" style="background: rgba(222, 183, 106, 0.1);">
+                            <i class="fa-solid fa-hand-holding-droplet text-gold fs-3"></i>
+                        </div>
+                        <h5 class="font-serif fw-bold mb-2">Pha Chế Chuẩn Mực</h5>
+                        <p class="text-secondary small mb-0">Đội ngũ Barista được đào tạo theo tiêu chuẩn Specialty Coffee Association (SCA) quốc tế.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card-luxury p-4 text-center h-100">
+                        <div class="d-inline-flex p-3 rounded-circle mb-3 border border-gold" style="background: rgba(222, 183, 106, 0.1);">
+                            <i class="fa-solid fa-couch text-gold fs-3"></i>
+                        </div>
+                        <h5 class="font-serif fw-bold mb-2">Không Gian Roastery</h5>
+                        <p class="text-secondary small mb-0">Kiến trúc kết hợp hài hòa giữa kim loại trầm ấm, gỗ sồi và hương thơm nồng nàn của mẻ rang mới.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Table Booking & Membership Banner -->
+    <section class="py-5 position-relative bg-espresso" style="border-top: 1px solid var(--border-gold);">
+        <div class="container py-3">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-8">
+                    <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.12em;">Đặc Quyền Hội Viên UTEClub</span>
+                    <h3 class="font-serif fw-bold mb-2 text-gold-gradient">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
+                    <p class="text-secondary mb-0 small">Thưởng thức không gian tinh tế tại 10 chi nhánh Flagship. Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="${pageContext.request.contextPath}/reservation" class="btn btn-gold me-2">
+                        <i class="fa-solid fa-chair me-1"></i> Đặt Bàn Ngay
+                    </a>
+                    <a href="${pageContext.request.contextPath}/auth/register" class="btn btn-outline-gold">
+                        Đăng Ký UTEClub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>

@@ -2,68 +2,77 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <head>
-    <title>Hồ Sơ Thành Viên - UTECoffe</title>
+    <title>Hồ Sơ Thành Viên UTEClub - UTECoffe</title>
 </head>
-<body>
+<body class="bg-obsidian">
     <div class="container py-5">
-        <div class="row g-4">
-            <!-- Loyalty Card Banner -->
-            <div class="col-lg-4">
-                <div class="card border-0 shadow text-white p-4 mb-4" style="background: linear-gradient(135deg, #1A1715, #2D2824); border-radius: 16px; border: 1px solid #D4AF37 !important;">
-                    <div class="d-flex justify-content-between align-items-start mb-4">
-                        <div>
-                            <span class="badge bg-warning text-dark px-2 py-1 mb-2">UTEClub Member</span>
-                            <h5 class="fw-bold mb-0">THẺ THÀNH VIÊN</h5>
-                        </div>
-                        <i class="fa-solid fa-mug-saucer text-warning fs-3"></i>
-                    </div>
-                    <h3 class="fw-bold letter-spacing-2 mb-3">${loyaltyCard != null ? loyaltyCard.cardNumber : 'UTE-MEMBER'}</h3>
-                    <div class="d-flex justify-content-between align-items-end mt-4 pt-3 border-top border-secondary">
-                        <div>
-                            <small class="text-muted d-block">HẠNG THẺ</small>
-                            <span class="fw-bold text-warning fs-5">${loyaltyCard != null ? loyaltyCard.tier : 'BRONZE'}</span>
-                        </div>
-                        <div class="text-end">
-                            <small class="text-muted d-block">ĐIỂM HẠT VÀNG</small>
-                            <span class="fw-bold text-warning fs-4">${loyaltyCard != null ? loyaltyCard.pointsBalance : 0} pts</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="section-title-wrap mb-4">
+            <span class="section-subtitle">Đặc Quyền Hội Viên</span>
+            <h2 class="section-title">Hồ Sơ Cá Nhân &amp; Điểm UTEClub</h2>
+            <div class="gold-divider"></div>
+        </div>
 
-                <div class="card border-0 shadow-sm p-4">
-                    <h6 class="fw-bold mb-3">Thông Tin Cá Nhân</h6>
-                    <p class="small mb-2"><strong>Họ tên:</strong> ${user.fullName}</p>
-                    <p class="small mb-2"><strong>Email:</strong> ${user.email}</p>
-                    <p class="small mb-3"><strong>Số điện thoại:</strong> ${user.phoneNumber}</p>
-                    <a href="${pageContext.request.contextPath}/auth/logout" class="btn btn-outline-danger btn-sm w-100">Đăng Xuất</a>
+        <div class="row g-4">
+            <!-- Left: Member Card -->
+            <div class="col-lg-4">
+                <div class="card-luxury p-4 text-center">
+                    <div class="d-inline-block p-1 rounded-circle border border-gold mb-3">
+                        <i class="fa-solid fa-circle-user text-gold display-4"></i>
+                    </div>
+                    <h4 class="font-serif fw-bold text-gold-gradient mb-1">${user.fullName}</h4>
+                    <p class="text-secondary small mb-3">${user.email} • ${user.phoneNumber}</p>
+                    
+                    <div class="p-3 rounded-3 bg-espresso border border-gold mb-3 text-start">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="small text-muted font-accent text-uppercase">Hạng Thẻ:</span>
+                            <span class="badge bg-gold text-dark font-accent fw-bold">THÀNH VIÊN VÀNG</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small text-muted font-accent text-uppercase">Điểm Tích Lũy:</span>
+                            <span class="price-gold fs-5">1.250 Điểm</span>
+                        </div>
+                    </div>
+
+                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold btn-sm w-100">
+                        <i class="fa-solid fa-mug-hot me-1"></i> Đặt Món Dùng Điểm
+                    </a>
                 </div>
             </div>
 
-            <!-- Orders History & Points Logs -->
+            <!-- Right: Order History & Points History -->
             <div class="col-lg-8">
-                <div class="card border-0 shadow-sm p-4 mb-4">
-                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-receipt me-2 text-warning"></i> Lịch Sử Đơn Hàng Gần Đây</h5>
+                <div class="card-luxury p-4">
+                    <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2">Lịch Sử Đơn Hàng Gần Đây</h5>
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-light">
+                        <table class="table table-luxury align-middle">
+                            <thead>
                                 <tr>
                                     <th>Mã Đơn</th>
                                     <th>Chi Nhánh</th>
+                                    <th>Hình Thức</th>
                                     <th>Tổng Tiền</th>
                                     <th>Trạng Thái</th>
-                                    <th>Ngày Đặt</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="ord" items="${orders}">
-                                    <tr>
-                                        <td class="fw-bold"><a href="${pageContext.request.contextPath}/orders/tracking/${ord.orderCode}">#${ord.orderCode}</a></td>
-                                        <td>${ord.store.name}</td>
-                                        <td class="text-danger fw-bold"><fmt:formatNumber value="${ord.finalAmount}" type="currency" currencySymbol="₫"/></td>
-                                        <td><span class="badge bg-warning text-dark">${ord.status}</span></td>
-                                        <td class="small text-muted">${ord.createdAt}</td>
-                                    </tr>
-                                </c:forEach>
+                                <c:choose>
+                                    <c:when test="${not empty orders}">
+                                        <c:forEach var="ord" items="${orders}">
+                                            <tr>
+                                                <td class="fw-bold"><a href="${pageContext.request.contextPath}/orders/tracking/${ord.orderCode}" class="text-gold text-decoration-none">#${ord.orderCode}</a></td>
+                                                <td>${ord.store.name}</td>
+                                                <td><span class="badge bg-espresso border border-secondary text-light">${ord.orderType}</span></td>
+                                                <td class="text-gold fw-bold"><fmt:formatNumber value="${ord.finalAmount}" type="currency" currencySymbol="₫"/></td>
+                                                <td><span class="badge bg-success text-light">${ord.status}</span></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <tr>
+                                            <td colspan="5" class="text-center py-4 text-muted">Chưa có đơn hàng nào.</td>
+                                        </tr>
+                                    </c:otherwise>
+                                </c:choose>
                             </tbody>
                         </table>
                     </div>
