@@ -165,7 +165,15 @@ public class DatabaseSeeder implements CommandLineRunner {
                 "Cà phê phin Cầu Đất hòa quyện cùng lớp kem trứng đánh bông mịn như mây, thơm bùi béo ngậy không tanh, chuẩn phong vị hoàng thành.",
                 "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800", 56000, false);
 
-        // Artisan Tea (7 items)
+        createProductWithSizes(cCoffee, "Cold Brew Ủ Thùng Gỗ Sồi", "cold-brew-u-thung-go-soi",
+                "Cà phê Arabica Cầu Đất ủ 48 giờ trong thùng gỗ sồi, tạo tầng hương khói gỗ, vanilla và caramel nồng nàn độc bản.",
+                "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=800", 68000, true);
+
+        createProductWithSizes(cCoffee, "Cà Phê Dừa Non Bến Tre", "ca-phe-dua-non-ben-tre",
+                "Espresso Cầu Đất đậm đà rót trên nền cốt dừa tươi Bến Tre xay mịn cùng cơm dừa non sấy giòn thơm bùi.",
+                "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800", 55000, false);
+
+        // Artisan Tea (9 items)
         createProductWithSizes(cTea, "Trà Oolong Kem Phô Mai Vàng", "tra-oolong-kem-phomai-vang",
                 "Trà Oolong nướng Mộc Châu thơm lừng kết hợp lớp macchiato phô mai béo ngậy sánh mịn.",
                 "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800", 62000, true);
@@ -194,7 +202,15 @@ public class DatabaseSeeder implements CommandLineRunner {
                 "Trà sen trắng ủ lạnh chiết xuất cùng cánh hoa hồng hữu cơ và trái vải tươi giòn ngọt lịm mọng nước.",
                 "https://images.unsplash.com/photo-1556881286-fc6915169721?q=80&w=800", 55000, false);
 
-        // Craft Pastry & Bakery (7 items)
+        createProductWithSizes(cTea, "Trà Long Nhãn Hạt Chia Hưng Yên", "tra-long-nhan-hat-chia-hung-yen",
+                "Trà Shan tuyết cổ thụ ủ lạnh cùng long nhãn cùi dày Hưng Yên ngọt dịu thanh tao và hạt chia hữu cơ thanh mát.",
+                "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=800", 55000, false);
+
+        createProductWithSizes(cTea, "Hojicha Latte Rang Củi Nhật Bản", "hojicha-latte-rang-cui-nhat-ban",
+                "Bột trà xanh rang củi Shizuoka thơm nồng hương hạt dẻ nướng và khói gỗ, quyện cùng sữa tươi thanh trùng Đà Lạt.",
+                "https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?q=80&w=800", 62000, false);
+
+        // Craft Pastry & Bakery (9 items)
         createProductWithSizes(cPastry, "Croissant Bơ Pháp Thủ Công", "croissant-bo-phap-thu-cong",
                 "Bánh sừng bò ngàn lớp nướng giòn rụm với 100% bơ Elle & Vire thơm lừng chuẩn vị Paris.",
                 "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800", 45000, true);
@@ -222,6 +238,14 @@ public class DatabaseSeeder implements CommandLineRunner {
         createProductWithSizes(cPastry, "Bánh Tart Dâu Tây & Quả Mọng", "banh-tart-dau-tay-qua-mong",
                 "Vỏ bánh tart bột hạnh nhân nướng vàng giòn, phủ kem pastry vani Pháp và dâu tây tươi Đà Lạt căng mọng.",
                 "https://images.unsplash.com/photo-1519869325930-281384150729?q=80&w=800", 55000, false);
+
+        createProductWithSizes(cPastry, "Croffle Bơ Nướng Mật Ong Rừng", "croffle-bo-nuong-mat-ong-rung",
+                "Bánh sừng bò ép waffle nóng giòn phủ lớp đường caramel giòn rụm và mật ong hoa bạc hà nguyên chất thơm lừng.",
+                "https://images.unsplash.com/photo-1562376552-0d160a2f238d?q=80&w=800", 48000, false);
+
+        createProductWithSizes(cPastry, "Bánh Danish Đào & Phô Mai Tươi", "banh-danish-dao-pho-mai-tuoi",
+                "Vỏ bánh nghìn lớp bơ Pháp vàng ươm ôm trọn lớp kem phô mai béo ngậy và miếng đào vàng tươi mọng nước thơm ngọt.",
+                "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800", 46000, false);
 
         toppingRepository.save(Topping.builder().name("Trân Châu Oolong Hoàng Kim").price(BigDecimal.valueOf(10000)).isAvailable(true).build());
         toppingRepository.save(Topping.builder().name("Kem Cheese Kem Mặn Signature").price(BigDecimal.valueOf(15000)).isAvailable(true).build());

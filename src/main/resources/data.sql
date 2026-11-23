@@ -63,7 +63,13 @@ INSERT INTO products (id, category_id, name, slug, description, image_url, base_
 (19, 2, 'Tra Sua Oolong Rang Khoi', 'tra-sua-oolong-rang-khoi', 'Tra Oolong say than hoa Moc Chau quyen cung sua tuoi thanh trung Da Lat beo ngay', 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?q=80&w=800', 58000.00, true, false, NOW(), NOW()),
 (20, 2, 'Tra Vai Hoa Hong Damask', 'tra-vai-hoa-hong-damask', 'Tra sen trang u lanh chiet xuat cung canh hoa hong huu co va trai vai tuoi gion ngot', 'https://images.unsplash.com/photo-1556881286-fc6915169721?q=80&w=800', 55000.00, true, false, NOW(), NOW()),
 (21, 3, 'Basque Burnt Cheesecake', 'basque-burnt-cheesecake', 'Banh pho mai nuong chay xem be mat San Sebastian voi lop kem pho mai beo ngay tan chay', 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=800', 62000.00, true, false, NOW(), NOW()),
-(22, 3, 'Banh Tart Dau Tay & Qua Mong', 'banh-tart-dau-tay-qua-mong', 'Vo banh tart bot hanh nhan nuong vang gion phu kem pastry vani va dau tay Da Lat', 'https://images.unsplash.com/photo-1519869325930-281384150729?q=80&w=800', 55000.00, true, false, NOW(), NOW())
+(22, 3, 'Banh Tart Dau Tay & Qua Mong', 'banh-tart-dau-tay-qua-mong', 'Vo banh tart bot hanh nhan nuong vang gion phu kem pastry vani va dau tay Da Lat', 'https://images.unsplash.com/photo-1519869325930-281384150729?q=80&w=800', 55000.00, true, false, NOW(), NOW()),
+(23, 1, 'Cold Brew U Thung Go Soi', 'cold-brew-u-thung-go-soi', 'Ca phe Arabica Cau Dat u 48 gio trong thung go soi tao tang huong khoi vanilla caramel', 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=800', 68000.00, true, true, NOW(), NOW()),
+(24, 1, 'Ca Phe Dua Non Ben Tre', 'ca-phe-dua-non-ben-tre', 'Espresso Cau Dat dam da rot tren nen cot dua tuoi Ben Tre xay min va com dua non', 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800', 55000.00, true, false, NOW(), NOW()),
+(25, 2, 'Tra Long Nhan Hat Chia Hung Yen', 'tra-long-nhan-hat-chia-hung-yen', 'Tra Shan tuyet co thu u lanh cung long nhan cui day Hung Yen va hat chia huu co', 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=800', 55000.00, true, false, NOW(), NOW()),
+(26, 2, 'Hojicha Latte Rang Cui Nhat Ban', 'hojicha-latte-rang-cui-nhat-ban', 'Bot tra xanh rang cui Shizuoka thom nong huong hat de quyen cung sua tuoi thanh trung', 'https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?q=80&w=800', 62000.00, true, false, NOW(), NOW()),
+(27, 3, 'Croffle Bo Nuong Mat Ong Rung', 'croffle-bo-nuong-mat-ong-rung', 'Banh sung bo ep waffle nong gion phu caramel va mat ong hoa bac ha nguyen chat', 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?q=80&w=800', 48000.00, true, false, NOW(), NOW()),
+(28, 3, 'Banh Danish Dao & Pho Mai Tuoi', 'banh-danish-dao-pho-mai-tuoi', 'Vo banh nghin lop bo Phap vang uom om tron kem pho mai beo ngay va dao vang tuoi', 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800', 46000.00, true, false, NOW(), NOW())
 ON CONFLICT (id) DO NOTHING;
 
 -- 7. Product Sizes
@@ -89,7 +95,13 @@ INSERT INTO product_sizes (id, product_id, size_name, extra_price) VALUES
 (37, 19, 'Regular (M)', 0.00), (38, 19, 'Large (L)', 10000.00),
 (39, 20, 'Regular (M)', 0.00), (40, 20, 'Large (L)', 10000.00),
 (41, 21, 'Regular (M)', 0.00), (42, 21, 'Large (L)', 10000.00),
-(43, 22, 'Regular (M)', 0.00), (44, 22, 'Large (L)', 10000.00)
+(43, 22, 'Regular (M)', 0.00), (44, 22, 'Large (L)', 10000.00),
+(45, 23, 'Regular (M)', 0.00), (46, 23, 'Large (L)', 10000.00),
+(47, 24, 'Regular (M)', 0.00), (48, 24, 'Large (L)', 10000.00),
+(49, 25, 'Regular (M)', 0.00), (50, 25, 'Large (L)', 10000.00),
+(51, 26, 'Regular (M)', 0.00), (52, 26, 'Large (L)', 10000.00),
+(53, 27, 'Regular (M)', 0.00), (54, 27, 'Large (L)', 10000.00),
+(55, 28, 'Regular (M)', 0.00), (56, 28, 'Large (L)', 10000.00)
 ON CONFLICT (id) DO NOTHING;
 
 -- 8. Toppings
