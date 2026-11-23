@@ -182,7 +182,7 @@
                 <div class="col-lg-2 col-md-6 col-6">
                     <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;" data-i18n="footer.policy">Dịch Vụ</h6>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/profile" class="footer-link">Đặc Quyền UTEClub</a></li>
+                        <li><a href="${pageContext.request.contextPath}/uteclub" class="footer-link">Đặc Quyền UTEClub</a></li>
                         <li><a href="${pageContext.request.contextPath}/stores" class="footer-link">Tìm Cửa Hàng Gần Nhất</a></li>
                         <li><a href="${pageContext.request.contextPath}/cart" class="footer-link">Giao Hàng Siêu Tốc 30'</a></li>
                         <li><a href="#" class="footer-link">Chính Sách Hoàn Tiền</a></li>

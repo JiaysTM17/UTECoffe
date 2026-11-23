@@ -28,4 +28,9 @@ public class HomeController {
     public String story() {
         return "customer/story";
     }
+
+    @GetMapping("/uteclub")
+    public String uteclub() {
+        return "customer/uteclub";
+    }
 }

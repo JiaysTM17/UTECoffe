@@ -135,7 +135,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         // Specialty Coffee (13 items)
         createProductWithSizes(cCoffee, "Cold Brew Cam Vàng Specialty", "cold-brew-cam-vang-specialty",
                 "Cà phê Arabica ủ lạnh 18 tiếng kết hợp nước cam vàng Sunkist mọng nước nguyên chất.",
-                "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=800", 59000, true);
+                "/assets/images/products/coldbrew-cam-vang.jpg", 59000, true);
 
         createProductWithSizes(cCoffee, "Espresso Tonic Signature", "espresso-tonic-signature",
                 "Double shot Espresso Cầu Đất đậm đà trên nền nước tonic cao cấp và lát chanh vàng tươi mát.",
@@ -175,7 +175,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         createProductWithSizes(cCoffee, "Cold Brew Sparkling Yuzu", "cold-brew-sparkling-yuzu",
                 "Cà phê Arabica Cầu Đất ủ lạnh 24 giờ phối cùng nước ép quả Yuzu Nhật Bản và bọt sủi sparkling thanh mát đánh thức mọi giác quan.",
-                "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=800", 65000, true);
+                "/assets/images/products/coldbrew-sparkling-yuzu.jpg", 65000, true);
 
         createProductWithSizes(cCoffee, "Cà Phê Bạc Xỉu 4 Tầng Cầu Đất", "ca-phe-bac-xiu-4-tang-cau-dat",
                 "Tuyệt phẩm phân tầng thị giác nghệ thuật: sữa đặc thượng hạng, sữa tươi thanh trùng Đà Lạt, cà phê Arabica và bọt microfoam bồng bềnh.",

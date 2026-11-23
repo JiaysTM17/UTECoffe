@@ -185,21 +185,179 @@
     <section class="py-5 position-relative bg-espresso" style="border-top: 1px solid var(--border-gold);">
         <div class="container py-3">
             <div class="row align-items-center g-4">
-                <div class="col-lg-8">
-                    <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.12em;">Đặc Quyền Hội Viên UTEClub</span>
+                <div class="col-lg-7">
+                    <button type="button" class="btn btn-link p-0 text-decoration-none text-gold font-accent fw-bold text-uppercase small d-inline-flex align-items-center gap-2 mb-2" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal" style="letter-spacing: 0.12em; cursor: pointer;">
+                        <i class="fa-solid fa-crown text-gold"></i>
+                        <span>Đặc Quyền Hội Viên UTEClub • Bấm Xem Chi Tiết</span>
+                        <i class="fa-solid fa-arrow-right-long text-gold ms-1"></i>
+                    </button>
                     <h3 class="font-serif fw-bold mb-2 text-gold-gradient">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
-                    <p class="text-secondary mb-0 small">Thưởng thức không gian tinh tế tại 10 chi nhánh Flagship. Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương.</p>
+                    <p class="text-secondary mb-0 small">Thưởng thức không gian tinh tế tại 10 chi nhánh Flagship. Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.</p>
                 </div>
-                <div class="col-lg-4 text-lg-end">
-                    <a href="${pageContext.request.contextPath}/reservation" class="btn btn-gold me-2">
-                        <i class="fa-solid fa-chair me-1"></i> Đặt Bàn Ngay
-                    </a>
-                    <a href="${pageContext.request.contextPath}/auth/register" class="btn btn-outline-gold">
-                        Đăng Ký UTEClub
-                    </a>
+                <div class="col-lg-5 text-lg-end">
+                    <div class="d-flex flex-column flex-sm-row justify-content-lg-end align-items-stretch align-items-sm-center gap-3">
+                        <button type="button" class="btn btn-gold rounded-pill px-4 py-2.5 fw-semibold d-inline-flex align-items-center justify-content-center text-nowrap shadow-gold-sm" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal">
+                            <i class="fa-solid fa-crown me-2"></i> Xem Đặc Quyền
+                        </button>
+                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold rounded-pill px-4 py-2.5 fw-semibold d-inline-flex align-items-center justify-content-center text-nowrap">
+                            <i class="fa-solid fa-chair me-2"></i> Đặt Bàn Ngay
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- UTEClub Membership Privileges Modal -->
+    <div class="modal fade" id="uteClubPrivilegeModal" tabindex="-1" aria-labelledby="uteClubPrivilegeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content bg-espresso border border-gold shadow-lg" style="box-shadow: 0 15px 50px rgba(0,0,0,0.8), 0 0 25px rgba(212,175,55,0.2) !important;">
+                <!-- Modal Header -->
+                <div class="modal-header border-bottom border-gold px-4 py-3 position-relative" style="background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(20,20,20,0.95) 100%);">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center border border-gold" style="width: 48px; height: 48px; background: rgba(212,175,55,0.15);">
+                            <i class="fa-solid fa-crown text-gold fs-4"></i>
+                        </div>
+                        <div>
+                            <span class="text-gold font-accent text-uppercase small fw-bold" style="letter-spacing: 0.15em;">UTEClub Loyalty Privilege</span>
+                            <h4 class="font-serif fw-bold text-gold-gradient mb-0" id="uteClubPrivilegeModalLabel">Đặc Quyền Hội Viên Danh Dự UTECoffe</h4>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body p-4 p-md-5">
+                    <!-- 4 Core Pillars -->
+                    <div class="row g-3 mb-5">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="p-3 rounded-3 h-100 border border-gold-subtle text-center" style="background: rgba(255,255,255,0.02);">
+                                <div class="text-gold fs-2 mb-2"><i class="fa-solid fa-percent"></i></div>
+                                <h6 class="font-serif fw-bold text-gold mb-1">Tích 10% Mọi Hóa Đơn</h6>
+                                <p class="text-secondary small mb-0">Mỗi 1.000₫ chi tiêu tích 1 điểm, quy đổi đồ uống và quà tặng cao cấp.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="p-3 rounded-3 h-100 border border-gold-subtle text-center" style="background: rgba(255,255,255,0.02);">
+                                <div class="text-gold fs-2 mb-2"><i class="fa-solid fa-cake-candles"></i></div>
+                                <h6 class="font-serif fw-bold text-gold mb-1">Quà Tặng Sinh Nhật</h6>
+                                <p class="text-secondary small mb-0">Tặng 01 thức uống Signature và thiệp chúc mừng riêng biệt trong tháng sinh nhật.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="p-3 rounded-3 h-100 border border-gold-subtle text-center" style="background: rgba(255,255,255,0.02);">
+                                <div class="text-gold fs-2 mb-2"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
+                                <h6 class="font-serif fw-bold text-gold mb-1">Free Up-size Thứ 5</h6>
+                                <p class="text-secondary small mb-0">Miễn phí nâng cỡ ly Size M lên Size L trên toàn bộ thực đơn vào mỗi thứ Năm.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="p-3 rounded-3 h-100 border border-gold-subtle text-center" style="background: rgba(255,255,255,0.02);">
+                                <div class="text-gold fs-2 mb-2"><i class="fa-solid fa-couch"></i></div>
+                                <h6 class="font-serif fw-bold text-gold mb-1">Ưu Tiên VIP Lounge</h6>
+                                <p class="text-secondary small mb-0">Giữ chỗ bàn trung tâm và phòng họp riêng tư với hệ thống đặt bàn ưu tiên.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4 Membership Tiers -->
+                    <div class="text-center mb-4">
+                        <span class="badge bg-gold text-obsidian px-3 py-1 font-accent fw-bold text-uppercase">4 Hạng Thẻ Hội Viên</span>
+                        <h4 class="font-serif fw-bold text-gold-gradient mt-2 mb-1">Hành Trình Thăng Hạng &amp; Tích Lũy</h4>
+                        <p class="text-secondary small mb-0">Thăng hạng tức thì theo điểm tích lũy trọn đời (1.000₫ thanh toán = 1 Điểm UTEClub)</p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Bronze Tier -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-luxury p-3 h-100 text-start border position-relative" style="border-color: #cd7f32 !important;">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="badge px-2 py-1 text-white fw-bold" style="background: #cd7f32;">HẠNG ĐỒNG</span>
+                                    <span class="text-secondary small">0 - 499 điểm</span>
+                                </div>
+                                <h5 class="font-serif fw-bold text-light mb-2">Thành Viên Khởi Đầu</h5>
+                                <p class="text-secondary small mb-3">Kích hoạt ngay khi tạo tài khoản miễn phí tại UTECoffe.</p>
+                                <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-0">
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Tặng Voucher 20% đơn hàng đầu tiên</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Tích lũy 10% điểm cho mọi đơn hàng</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Nhận tin mẻ rang specialty mới sớm nhất</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Silver Tier -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-luxury p-3 h-100 text-start border position-relative" style="border-color: #c0c0c0 !important;">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="badge px-2 py-1 text-dark fw-bold" style="background: #c0c0c0;">HẠNG BẠC</span>
+                                    <span class="text-secondary small">500 - 1.499 điểm</span>
+                                </div>
+                                <h5 class="font-serif fw-bold text-light mb-2">Hội Viên Bạc</h5>
+                                <p class="text-secondary small mb-3">Dành cho khách hàng thân thiết thường xuyên ghé thăm.</p>
+                                <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-0">
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Tất cả quyền lợi Hạng Đồng</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Tặng Voucher 10% mỗi đầu tháng</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Miễn phí nâng size (Size L) thứ 5</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Tặng 1 phần topping tự chọn hàng tháng</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Gold Tier -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-luxury p-3 h-100 text-start border position-relative" style="border-color: #ffd700 !important; background: linear-gradient(180deg, rgba(212,175,55,0.06) 0%, rgba(20,20,20,0.6) 100%);">
+                                <div class="position-absolute top-0 end-0 translate-middle-y me-3">
+                                    <span class="badge bg-gold text-obsidian fw-bold small px-2">PHỔ BIẾN NHẤT</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="badge px-2 py-1 text-dark fw-bold" style="background: #ffd700;">HẠNG VÀNG</span>
+                                    <span class="text-gold small fw-bold">1.500 - 2.999 điểm</span>
+                                </div>
+                                <h5 class="font-serif fw-bold text-gold-gradient mb-2">Hội Viên Vàng VIP</h5>
+                                <p class="text-secondary small mb-3">Trải nghiệm dịch vụ chuyên biệt và ưu đãi giảm giá sâu.</p>
+                                <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-0">
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Giảm trực tiếp 10% trên toàn bộ thực đơn</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> 01 Ly cà phê Signature miễn phí dịp Sinh Nhật</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Ưu tiên giữ bàn đẹp tại VIP Lounge</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Đổi điểm lấy voucher thanh toán trực tiếp</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Diamond Tier -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-luxury p-3 h-100 text-start border position-relative" style="border-color: #b9f2ff !important; background: linear-gradient(180deg, rgba(185,242,255,0.08) 0%, rgba(20,20,20,0.6) 100%);">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="badge px-2 py-1 text-dark fw-bold" style="background: #b9f2ff;">KIM CƯƠNG</span>
+                                    <span class="text-info small fw-bold">3.000+ điểm</span>
+                                </div>
+                                <h5 class="font-serif fw-bold text-light mb-2">Thượng Khách Kim Cương</h5>
+                                <p class="text-secondary small mb-3">Đỉnh cao đặc quyền cá nhân hóa và trải nghiệm roastery độc bản.</p>
+                                <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-0">
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Giảm trực tiếp 15% trọn đời mọi đơn hàng</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Tặng 01 phần bánh sừng bò thủ công mỗi tuần</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Vé mời VIP Private Cupping cùng Master Roaster</li>
+                                    <li><i class="fa-solid fa-check text-gold me-2"></i> Đường dây hỗ trợ &amp; đặt bàn ưu tiên 24/7</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer border-top border-gold px-4 py-3 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4 text-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <div class="d-flex gap-2">
+                        <a href="${pageContext.request.contextPath}/uteclub" class="btn btn-outline-gold rounded-pill px-4 fw-semibold">
+                            <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Xem Chi Tiết Đầy Đủ
+                        </a>
+                        <a href="${pageContext.request.contextPath}/auth/register" class="btn btn-gold rounded-pill px-4 fw-semibold">
+                            <i class="fa-solid fa-user-plus me-2"></i>Đăng Ký UTEClub Miễn Phí
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
