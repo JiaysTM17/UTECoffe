@@ -17,7 +17,7 @@ public class BaristaController {
     @Autowired
     private StoreService storeService;
 
-    @GetMapping("/barista/kds")
+    @GetMapping({"/barista/kds", "/barista/orders"})
     public String kdsScreen(@RequestParam(defaultValue = "1") Long storeId, Model model) {
         model.addAttribute("store", storeService.getStoreById(storeId));
         model.addAttribute("activeOrders", orderService.getKdsOrdersForStore(storeId));
