@@ -316,9 +316,9 @@ Hệ thống cấp sẵn các tài khoản mẫu với mật khẩu mặc địn
 
 | Vai Trò | Email Đăng Nhập | Mật Khẩu | Quyền Hạn & Phạm Vi |
 | :--- | :--- | :--- | :--- |
-| **Quản Trị Viên (ADMIN)** | `admin@utecoffe.vn` | `Admin@123` | Quản trị toàn chuỗi, xem doanh thu, kho BOM, nhân sự |
-| **Pha Chế Trưởng (BARISTA)** | `barista@utecoffe.vn` | `Barista@123` | Vận hành quầy KDS, nhận đơn, chuyển trạng thái chế biến |
-| **Khách Hàng VIP (CUSTOMER)** | `customer@utecoffe.vn` | `Customer@123` | Đặt hàng, tích điểm OMO, đặt bàn, xem lịch sử giao dịch |
+| **Quản Trị Viên (ADMIN)** | `admin@utecoffe.vn` | `Admin@2026` | Quản trị toàn chuỗi, xem doanh thu, kho BOM, nhân sự |
+| **Pha Chế Trưởng (BARISTA)** | `barista.thuduc@utecoffe.vn` | `Admin@2026` | Vận hành quầy KDS, nhận đơn, chuyển trạng thái chế biến |
+| **Khách Hàng VIP (CUSTOMER)** | `khachhang@gmail.com` | `Admin@2026` | Đặt hàng, tích điểm OMO, đặt bàn, xem lịch sử giao dịch |
 
 ---
 
