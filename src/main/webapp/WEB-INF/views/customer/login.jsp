@@ -14,6 +14,7 @@
                 <div class="alert alert-danger small py-2">Sai email hoặc mật khẩu!</div>
             </c:if>
             <form action="${pageContext.request.contextPath}/auth/login-process" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="mb-3">
                     <label class="form-label small fw-bold">Email hoặc Số điện thoại:</label>
                     <input type="text" name="username" class="form-control" placeholder="admin@utecoffe.vn" required>

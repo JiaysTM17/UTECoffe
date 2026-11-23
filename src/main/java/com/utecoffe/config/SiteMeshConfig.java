@@ -15,8 +15,13 @@ public class SiteMeshConfig {
         filter.setFilter(new ConfigurableSiteMeshFilter() {
             @Override
             protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
-                builder.addExcludedPath("/api/*")
+                builder.setDecoratorPrefix("")
+                       .addExcludedPath("/api/*")
                        .addExcludedPath("/ws-utecoffe/*")
+                       .addExcludedPath("/actuator/*")
+                       .addExcludedPath("/swagger-ui/*")
+                       .addExcludedPath("/v3/api-docs/*")
+                       .addExcludedPath("/h2-console/*")
                        .addExcludedPath("/static/*")
                        .addExcludedPath("/assets/*")
                        .addExcludedPath("/css/*")
