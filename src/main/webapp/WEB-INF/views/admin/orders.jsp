@@ -24,7 +24,7 @@
     <div class="card-luxury p-3 border-gold shadow-sm mb-3 bg-espresso">
         <div class="row g-2 align-items-center">
             <!-- Search Input -->
-            <div class="col-md-4">
+            <div class="col-lg-5 col-md-6">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text bg-dark-roast border-gold text-gold"><i class="fa-solid fa-magnifying-glass"></i></span>
                     <input type="text" id="orderSearchInput" class="form-control form-control-luxury" placeholder="Tìm theo mã đơn, tên khách, SĐT..." onkeyup="filterOrdersTable()">
@@ -32,7 +32,7 @@
             </div>
 
             <!-- Branch Filter -->
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6">
                 <select id="branchFilterSelect" class="form-select form-select-sm form-select-luxury" onchange="filterOrdersTable()">
                     <option value="ALL">-- Tất Cả Chi Nhánh --</option>
                     <c:forEach var="st" items="${stores}">
@@ -42,12 +42,12 @@
             </div>
 
             <!-- Status Filter Pills -->
-            <div class="col-md-5 text-md-end text-start">
-                <div class="btn-group btn-group-sm" role="group">
-                    <button type="button" class="btn btn-gold status-filter-btn active" data-status="ALL" onclick="setStatusFilter('ALL', this)">Tất Cả</button>
-                    <button type="button" class="btn btn-outline-gold status-filter-btn" data-status="PENDING" onclick="setStatusFilter('PENDING', this)">Chờ Xử Lý</button>
-                    <button type="button" class="btn btn-outline-gold status-filter-btn" data-status="PREPARING" onclick="setStatusFilter('PREPARING', this)">Đang Pha</button>
-                    <button type="button" class="btn btn-outline-gold status-filter-btn" data-status="COMPLETED" onclick="setStatusFilter('COMPLETED', this)">Hoàn Tất</button>
+            <div class="col-lg-4 col-md-12 text-lg-end text-start">
+                <div class="d-flex flex-wrap gap-1 justify-content-lg-end align-items-center">
+                    <button type="button" class="btn btn-sm btn-gold status-filter-btn active rounded-pill px-2 py-1 font-accent" data-status="ALL" onclick="setStatusFilter('ALL', this)">Tất Cả</button>
+                    <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-2 py-1 font-accent" data-status="PENDING" onclick="setStatusFilter('PENDING', this)">Chờ Xử Lý</button>
+                    <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-2 py-1 font-accent" data-status="PREPARING" onclick="setStatusFilter('PREPARING', this)">Đang Pha</button>
+                    <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-2 py-1 font-accent" data-status="COMPLETED" onclick="setStatusFilter('COMPLETED', this)">Hoàn Tất</button>
                 </div>
             </div>
         </div>
