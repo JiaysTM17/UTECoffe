@@ -284,8 +284,17 @@
             const isEn = (localStorage.getItem('utecoffe_lang') === 'en');
             const titleEl = document.getElementById('inDevFeatureTitle');
             const descEl = document.getElementById('inDevFeatureDesc');
+            
+            const channelNamesEn = {
+                'Kênh Facebook Official': 'Official Facebook Channel',
+                'Kênh Instagram Official': 'Official Instagram Channel',
+                'Kênh TikTok Official': 'Official TikTok Channel',
+                'Kênh YouTube Roastery': 'Roastery YouTube Channel'
+            };
+            const displayFeature = (isEn && channelNamesEn[featureName]) ? channelNamesEn[featureName] : featureName;
+
             if (titleEl && featureName) {
-                titleEl.textContent = featureName + (isEn ? ' - Under Active Development' : ' - Đang Nâng Cấp');
+                titleEl.textContent = displayFeature + (isEn ? ' - Under Active Development' : ' - Đang Hoàn Thiện');
             }
             if (descEl && customMessage) {
                 descEl.textContent = customMessage;
@@ -301,7 +310,7 @@
                 const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
                 modal.show();
             } else {
-                alert(featureName + (isEn ? ': Feature is under development. Please stay tuned!' : ': Tính năng đang được hoàn thiện. Vui lòng đón chờ!'));
+                alert(displayFeature + (isEn ? ': Feature is under active curation. Please stay tuned!' : ': Tính năng đang được hoàn thiện. Vui lòng đón chờ!'));
             }
         }
     </script>

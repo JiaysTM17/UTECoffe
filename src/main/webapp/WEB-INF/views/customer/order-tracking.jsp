@@ -9,14 +9,14 @@
     <!-- Header Section -->
     <div class="py-5 bg-espresso border-bottom border-gold text-center">
         <div class="container py-2">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" style="letter-spacing: 0.12em;">
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" style="letter-spacing: 0.12em;" data-i18n="track.badge">
                 <i class="fa-solid fa-satellite-dish me-1 fa-fade"></i> TRUYỀN DỮ LIỆU THỜI GIAN THỰC (WEBSOCKET)
             </span>
-            <h1 class="font-serif display-5 fw-bold text-gold-gradient mb-2">
+            <h1 class="font-serif display-5 fw-bold text-gold-gradient mb-2" data-i18n="track.title">
                 Hành Trình Tách Cà Phê Của Bạn
             </h1>
             <p class="text-secondary mx-auto small mb-0" style="max-width: 600px;">
-                Mã Đơn Hàng: <span class="text-gold fw-bold font-monospace fs-6">#${order.orderCode}</span> • Đặt lúc: <span class="text-light"><fmt:formatDate value="${order.createdAt}" pattern="HH:mm - dd/MM/yyyy"/></span>
+                <span data-i18n="track.code_label">Mã Đơn Hàng:</span> <span class="text-gold fw-bold font-monospace fs-6">#${order.orderCode}</span> • <span data-i18n="track.time_label">Đặt lúc:</span> <span class="text-light"><fmt:formatDate value="${order.createdAt}" pattern="HH:mm - dd/MM/yyyy"/></span>
             </p>
         </div>
     </div>
@@ -30,16 +30,16 @@
                 <div class="card-luxury p-4 p-md-5 mb-4 shadow-lg">
                     <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-gold flex-wrap gap-2">
                         <div>
-                            <span class="small text-secondary text-uppercase font-accent" style="letter-spacing: 0.08em;">Trạng Thái Hiện Tại</span>
+                            <span class="small text-secondary text-uppercase font-accent" style="letter-spacing: 0.08em;" data-i18n="track.status_label">Trạng Thái Hiện Tại</span>
                             <h4 class="font-serif fw-bold text-gold mb-0 mt-1 d-flex align-items-center gap-2">
                                 <span class="spinner-grow spinner-grow-sm text-gold" role="status"></span>
                                 <span id="currentStatusText">${order.status}</span>
                             </h4>
                         </div>
                         <div class="text-md-end">
-                            <span class="small text-secondary d-block">Dự kiến hoàn tất trong:</span>
+                            <span class="small text-secondary d-block" data-i18n="track.eta_label">Dự kiến hoàn tất trong:</span>
                             <span class="badge bg-espresso border border-gold text-gold fs-6 px-3 py-2 rounded-pill font-monospace" id="estimatedTimeBadge">
-                                <i class="fa-regular fa-clock me-1"></i> ~15 - 25 Phút
+                                <i class="fa-regular fa-clock me-1"></i> <span data-i18n="track.eta_val">~15 - 25 Phút</span>
                             </span>
                         </div>
                     </div>
@@ -55,8 +55,8 @@
                                 <div class="step-circle active mx-auto mb-2">
                                     <i class="fa-solid fa-clipboard-check"></i>
                                 </div>
-                                <div class="step-label fw-bold font-accent text-gold small">Tiếp Nhận</div>
-                                <div class="step-sub text-secondary small d-none d-md-block" style="font-size: 0.75rem;">Hệ thống xác nhận</div>
+                                <div class="step-label fw-bold font-accent text-gold small" data-i18n="track.step1">Tiếp Nhận</div>
+                                <div class="step-sub text-secondary small d-none d-md-block" style="font-size: 0.75rem;" data-i18n="track.step1_sub">Hệ thống xác nhận</div>
                             </div>
 
                             <!-- Step 2: Barista Crafting -->
@@ -64,8 +64,8 @@
                                 <div class="step-circle mx-auto mb-2">
                                     <i class="fa-solid fa-mug-hot"></i>
                                 </div>
-                                <div class="step-label fw-bold font-accent small text-secondary">Pha Chế</div>
-                                <div class="step-sub text-secondary small d-none d-md-block" style="font-size: 0.75rem;">Barista chiết xuất</div>
+                                <div class="step-label fw-bold font-accent small text-secondary" data-i18n="track.step2">Pha Chế</div>
+                                <div class="step-sub text-secondary small d-none d-md-block" style="font-size: 0.75rem;" data-i18n="track.step2_sub">Barista chiết xuất</div>
                             </div>
 
                             <!-- Step 3: Shipping / Ready -->
@@ -73,8 +73,8 @@
                                 <div class="step-circle mx-auto mb-2">
                                     <i class="fa-solid fa-motorcycle"></i>
                                 </div>
-                                <div class="step-label fw-bold font-accent small text-secondary">Giao Hàng</div>
-                                <div class="step-sub text-secondary small d-none d-md-block" style="font-size: 0.75rem;">Đang trên đường tới</div>
+                                <div class="step-label fw-bold font-accent small text-secondary" data-i18n="track.step3">Giao Hàng</div>
+                                <div class="step-sub text-secondary small d-none d-md-block" style="font-size: 0.75rem;" data-i18n="track.step3_sub">Đang trên đường tới</div>
                             </div>
 
                             <!-- Step 4: Delivered -->
@@ -82,8 +82,8 @@
                                 <div class="step-circle mx-auto mb-2">
                                     <i class="fa-solid fa-champagne-glasses"></i>
                                 </div>
-                                <div class="step-label fw-bold font-accent small text-secondary">Thưởng Thức</div>
-                                <div class="step-sub text-secondary small d-none d-md-block" style="font-size: 0.75rem;">Giao thành công</div>
+                                <div class="step-label fw-bold font-accent small text-secondary" data-i18n="track.step4">Thưởng Thức</div>
+                                <div class="step-sub text-secondary small d-none d-md-block" style="font-size: 0.75rem;" data-i18n="track.step4_sub">Giao thành công</div>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                             <i class="fa-solid fa-circle-info"></i>
                         </div>
                         <div class="flex-grow-1">
-                            <div class="fw-bold text-light small" id="statusMessageHeader">Thông điệp từ quầy Barista:</div>
+                            <div class="fw-bold text-light small" id="statusMessageHeader" data-i18n="track.barista_note">Thông điệp từ quầy Barista:</div>
                             <div class="text-secondary small" id="statusDescText">
                                 Đơn hàng #${order.orderCode} đã được chuyển tới máy in hóa đơn quầy Barista chi nhánh ${order.store.name}.
                             </div>
@@ -108,16 +108,16 @@
                     <div class="col-lg-7">
                         <div class="card-luxury p-4 h-100">
                             <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2">
-                                <i class="fa-solid fa-receipt me-2"></i>Chi Tiết Thức Uống Đã Đặt
+                                <i class="fa-solid fa-receipt me-2"></i><span data-i18n="track.items_title">Chi Tiết Thức Uống Đã Đặt</span>
                             </h5>
 
                             <div class="table-responsive">
                                 <table class="table table-luxury align-middle mb-0">
                                     <thead>
                                         <tr class="small text-secondary">
-                                            <th>Thức Uống</th>
-                                            <th class="text-center">Số Lượng</th>
-                                            <th class="text-end">Thành Tiền</th>
+                                            <th data-i18n="track.col_item">Thức Uống</th>
+                                            <th class="text-center" data-i18n="track.col_qty">Số Lượng</th>
+                                            <th class="text-end" data-i18n="track.col_total">Thành Tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -141,7 +141,7 @@
 
                             <hr class="border-secondary opacity-25 my-3">
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold">Tổng Thanh Toán:</span>
+                                <span class="fw-bold" data-i18n="track.total_paid">Tổng Thanh Toán:</span>
                                 <span class="price-gold fs-4">
                                     <fmt:formatNumber value="${order.finalAmount}" pattern="#,##0"/> VNĐ
                                 </span>
@@ -154,17 +154,17 @@
                         <div class="card-luxury p-4 h-100 d-flex flex-column justify-content-between">
                             <div>
                                 <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2">
-                                    <i class="fa-solid fa-location-crosshairs me-2"></i>Thông Tin Giao Nhận
+                                    <i class="fa-solid fa-location-crosshairs me-2"></i><span data-i18n="track.shipping_title">Thông Tin Giao Nhận</span>
                                 </h5>
 
                                 <div class="mb-3">
-                                    <span class="small text-secondary d-block mb-1">Người nhận:</span>
+                                    <span class="small text-secondary d-block mb-1" data-i18n="track.recipient">Người nhận:</span>
                                     <div class="fw-bold text-light">${order.recipientName}</div>
                                     <div class="small text-gold font-monospace"><i class="fa-solid fa-phone me-1"></i>${order.recipientPhone}</div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <span class="small text-secondary d-block mb-1">Địa chỉ giao:</span>
+                                    <span class="small text-secondary d-block mb-1" data-i18n="track.address">Địa chỉ giao:</span>
                                     <div class="small text-light">
                                         <i class="fa-solid fa-house-chimney text-gold me-1"></i>
                                         ${not empty order.deliveryAddress ? order.deliveryAddress : 'Nhận trực tiếp tại quầy UTECoffe Roastery'}
@@ -172,13 +172,13 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <span class="small text-secondary d-block mb-1">Chi nhánh chế biến:</span>
+                                    <span class="small text-secondary d-block mb-1" data-i18n="track.store">Chi nhánh chế biến:</span>
                                     <div class="small text-light fw-bold">${order.store.name}</div>
                                     <div class="small text-secondary">${order.store.address}</div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <span class="small text-secondary d-block mb-1">Phương thức thanh toán:</span>
+                                    <span class="small text-secondary d-block mb-1" data-i18n="track.payment_method">Phương thức thanh toán:</span>
                                     <span class="badge bg-gold-subtle text-gold border border-gold-subtle px-2 py-1 rounded-pill">
                                         <i class="fa-solid fa-credit-card me-1"></i> ${order.paymentMethod}
                                     </span>
@@ -187,10 +187,10 @@
 
                             <div class="pt-3 border-top border-gold mt-4 d-flex gap-2">
                                 <a href="tel:19002026" class="btn btn-outline-gold btn-sm flex-grow-1">
-                                    <i class="fa-solid fa-headset me-1"></i> Gọi Hotline CSKH
+                                    <i class="fa-solid fa-headset me-1"></i> <span data-i18n="track.btn_support">Gọi Hotline CSKH</span>
                                 </a>
                                 <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold btn-sm flex-grow-1">
-                                    <i class="fa-solid fa-mug-saucer me-1"></i> Đặt Thêm Món
+                                    <i class="fa-solid fa-mug-saucer me-1"></i> <span data-i18n="track.btn_order_more">Đặt Thêm Món</span>
                                 </a>
                             </div>
                         </div>

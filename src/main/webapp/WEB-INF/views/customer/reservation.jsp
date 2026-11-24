@@ -49,7 +49,7 @@
                         
                         <!-- 1. Store Selection -->
                         <div class="mb-4">
-                            <label class="form-label text-gold small fw-bold">1. Chọn Chi Nhánh Thưởng Thức:</label>
+                            <label class="form-label text-gold small fw-bold" data-i18n="res.store_label">1. Chọn Chi Nhánh Thưởng Thức:</label>
                             <select class="form-select form-control-luxury" name="storeId" required>
                                 <c:forEach var="store" items="${stores}">
                                     <option value="${store.id}" ${param.storeId == store.id ? 'selected' : ''}>
@@ -61,38 +61,38 @@
 
                         <!-- 2. Zone Atmosphere Selector -->
                         <div class="mb-4">
-                            <label class="form-label text-gold small fw-bold">2. Khu Vực Không Gian Ưa Thích:</label>
+                            <label class="form-label text-gold small fw-bold" data-i18n="res.zone_label">2. Khu Vực Không Gian Ưa Thích:</label>
                             <div class="row g-3">
                                 <div class="col-md-3 col-6">
                                     <input type="radio" class="btn-check" name="zonePreference" id="zoneBar" value="BAR" checked>
                                     <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneBar">
                                         <i class="fa-solid fa-mug-saucer fs-3 mb-2 text-gold"></i>
-                                        <span class="zone-name fw-bold text-light mb-1">Quầy Barista</span>
-                                        <span class="zone-desc text-secondary">Trải nghiệm pha chế</span>
+                                        <span class="zone-name fw-bold text-light mb-1" data-i18n="res.zone_bar_title">Quầy Barista</span>
+                                        <span class="zone-desc text-secondary" data-i18n="res.zone_bar_desc">Trải nghiệm pha chế</span>
                                     </label>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <input type="radio" class="btn-check" name="zonePreference" id="zoneLounge" value="LOUNGE">
                                     <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneLounge">
                                         <i class="fa-solid fa-couch fs-3 mb-2 text-gold"></i>
-                                        <span class="zone-name fw-bold text-light mb-1">Sofa VIP Lounge</span>
-                                        <span class="zone-desc text-secondary">Yên tĩnh, sang trọng</span>
+                                        <span class="zone-name fw-bold text-light mb-1" data-i18n="res.zone_lounge_title">Sofa VIP Lounge</span>
+                                        <span class="zone-desc text-secondary" data-i18n="res.zone_lounge_desc">Yên tĩnh, sang trọng</span>
                                     </label>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <input type="radio" class="btn-check" name="zonePreference" id="zoneGarden" value="GARDEN">
                                     <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneGarden">
                                         <i class="fa-solid fa-tree fs-3 mb-2 text-gold"></i>
-                                        <span class="zone-name fw-bold text-light mb-1">Sân Vườn Xanh</span>
-                                        <span class="zone-desc text-secondary">Thoáng đãng tự nhiên</span>
+                                        <span class="zone-name fw-bold text-light mb-1" data-i18n="res.zone_garden_title">Sân Vườn Xanh</span>
+                                        <span class="zone-desc text-secondary" data-i18n="res.zone_garden_desc">Thoáng đãng tự nhiên</span>
                                     </label>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <input type="radio" class="btn-check" name="zonePreference" id="zoneWork" value="WORK">
                                     <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneWork">
                                         <i class="fa-solid fa-laptop fs-3 mb-2 text-gold"></i>
-                                        <span class="zone-name fw-bold text-light mb-1">Bàn Co-Working</span>
-                                        <span class="zone-desc text-secondary">Ổ điện &amp; WiFi mạnh</span>
+                                        <span class="zone-name fw-bold text-light mb-1" data-i18n="res.zone_work_title">Bàn Co-Working</span>
+                                        <span class="zone-desc text-secondary" data-i18n="res.zone_work_desc">Ổ điện &amp; WiFi mạnh</span>
                                     </label>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                         <!-- 3. Customer Info -->
                         <div class="row g-4 mb-4">
                             <div class="col-md-6">
-                                <label class="form-label text-gold small fw-bold">3. Số Lượng Khách:</label>
+                                <label class="form-label text-gold small fw-bold" data-i18n="res.guests_label">3. Số Lượng Khách:</label>
                                 <select class="form-select form-control-luxury" name="numberOfGuests" required>
                                     <option value="1">1 Người (Bàn Độc Thoại / Bar Slow Bar)</option>
                                     <option value="2" selected>2 Người (Bàn Đôi Lãng Mạn)</option>
@@ -112,32 +112,32 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label text-gold small fw-bold">Họ và Tên Quý Khách:</label>
+                                <label class="form-label text-gold small fw-bold" data-i18n="res.name_label">Họ và Tên Quý Khách:</label>
                                 <input type="text" class="form-control form-control-luxury" name="customerName" placeholder="Nguyễn Văn A" required>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label text-gold small fw-bold">Số Điện Thoại Xác Nhận:</label>
+                                <label class="form-label text-gold small fw-bold" data-i18n="res.phone_label">Số Điện Thoại Xác Nhận:</label>
                                 <input type="tel" class="form-control form-control-luxury" name="phoneNumber" placeholder="0901234567" required>
                             </div>
 
                             <div class="col-md-3 col-6">
-                                <label class="form-label text-gold small fw-bold">Ngày Thưởng Thức:</label>
+                                <label class="form-label text-gold small fw-bold" data-i18n="res.date_label">Ngày Thưởng Thức:</label>
                                 <input type="date" class="form-control form-control-luxury font-monospace" name="reservationDate" required id="reservationDateInput">
                             </div>
                             <div class="col-md-3 col-6">
-                                <label class="form-label text-gold small fw-bold">Khung Giờ Hẹn:</label>
+                                <label class="form-label text-gold small fw-bold" data-i18n="res.time_label">Khung Giờ Hẹn:</label>
                                 <input type="time" class="form-control form-control-luxury font-monospace" name="reservationTime" required value="14:30">
                             </div>
 
                             <div class="col-12">
-                                <label class="form-label text-gold small fw-bold">Yêu Cầu Đặc Biệt (Trang trí hoa tươi, chuẩn bị cà phê Geisha, bánh kỷ niệm...):</label>
+                                <label class="form-label text-gold small fw-bold" data-i18n="res.special_label">Yêu Cầu Đặc Biệt (Trang trí hoa tươi, chuẩn bị cà phê Geisha, bánh kỷ niệm...):</label>
                                 <textarea class="form-control form-control-luxury" name="specialRequest" rows="3" placeholder="Nhập yêu cầu để chúng tôi chuẩn bị tiếp đón chu đáo nhất..."></textarea>
                             </div>
                         </div>
 
                         <button type="submit" class="btn btn-gold w-100 py-3 fw-bold fs-6 rounded-pill shadow-gold">
-                            <i class="fa-solid fa-calendar-check me-2"></i> Xác Nhận Giữ Chỗ Trực Tuyến
+                            <i class="fa-solid fa-calendar-check me-2"></i> <span data-i18n="res.submit_btn">Xác Nhận Giữ Chỗ Trực Tuyến</span>
                         </button>
                     </form>
                 </div>

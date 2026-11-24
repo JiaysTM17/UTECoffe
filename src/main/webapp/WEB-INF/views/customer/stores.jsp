@@ -63,32 +63,32 @@
                                  class="w-100 h-100 object-fit-cover"
                                  loading="lazy">
                             <span class="badge-luxury-tag position-absolute top-0 start-0 m-3">
-                                <i class="fa-solid fa-circle text-success me-1"></i> Đang Mở Cửa
+                                <i class="fa-solid fa-circle text-success me-1"></i> <span data-i18n="stores.open_now">Đang Mở Cửa</span>
                             </span>
                             <span class="badge bg-espresso border border-gold text-gold position-absolute top-0 end-0 m-3 px-2 py-1 rounded-pill small">
-                                <i class="fa-solid fa-star text-gold me-1"></i> 4.9 (420+ Đánh giá)
+                                <i class="fa-solid fa-star text-gold me-1"></i> <span data-i18n="stores.rating">4.9 (420+ Đánh giá)</span>
                             </span>
                         </div>
 
                         <div class="card-body p-4 d-flex flex-column flex-grow-1">
                             <h5 class="font-serif fw-bold mb-2 text-gold-gradient">${st.name}</h5>
                             <p class="text-secondary small mb-2"><i class="fa-solid fa-location-dot text-gold me-2"></i> ${st.address}</p>
-                            <p class="text-secondary small mb-2"><i class="fa-regular fa-clock text-gold me-2"></i> ${st.openingTime} - ${st.closingTime} (Mở cửa hàng ngày)</p>
+                            <p class="text-secondary small mb-2"><i class="fa-regular fa-clock text-gold me-2"></i> ${st.openingTime} - ${st.closingTime} <span data-i18n="stores.everyday">(Mở cửa hàng ngày)</span></p>
                             <p class="text-secondary small mb-3"><i class="fa-solid fa-phone text-gold me-2"></i> ${st.phoneNumber}</p>
                             
                             <!-- Amenities -->
                             <div class="d-flex flex-wrap gap-1 mb-4">
-                                <span class="badge bg-espresso text-secondary border border-gold-subtle small px-2 py-1"><i class="fa-solid fa-wifi text-gold me-1"></i> WiFi Tốc Độ Cao</span>
-                                <span class="badge bg-espresso text-secondary border border-gold-subtle small px-2 py-1"><i class="fa-solid fa-square-parking text-gold me-1"></i> Giữ Xe Miễn Phí</span>
-                                <span class="badge bg-espresso text-secondary border border-gold-subtle small px-2 py-1"><i class="fa-solid fa-mug-hot text-gold me-1"></i> Slow Bar Pour-Over</span>
+                                <span class="badge bg-espresso text-secondary border border-gold-subtle small px-2 py-1"><i class="fa-solid fa-wifi text-gold me-1"></i> <span data-i18n="stores.wifi">WiFi Tốc Độ Cao</span></span>
+                                <span class="badge bg-espresso text-secondary border border-gold-subtle small px-2 py-1"><i class="fa-solid fa-square-parking text-gold me-1"></i> <span data-i18n="stores.parking">Giữ Xe Miễn Phí</span></span>
+                                <span class="badge bg-espresso text-secondary border border-gold-subtle small px-2 py-1"><i class="fa-solid fa-mug-hot text-gold me-1"></i> <span data-i18n="stores.slowbar">Slow Bar Pour-Over</span></span>
                             </div>
 
                             <div class="mt-auto d-flex gap-2">
                                 <a href="https://maps.google.com/?q=${st.latitude},${st.longitude}" target="_blank" class="btn btn-outline-gold btn-sm flex-grow-1 rounded-pill">
-                                    <i class="fa-solid fa-diamond-turn-right me-1"></i> Chỉ Đường
+                                    <i class="fa-solid fa-diamond-turn-right me-1"></i> <span data-i18n="stores.directions">Chỉ Đường</span>
                                 </a>
                                 <a href="${pageContext.request.contextPath}/reservation?storeId=${st.id}" class="btn btn-gold btn-sm flex-grow-1 rounded-pill">
-                                    <i class="fa-solid fa-calendar-check me-1"></i> Đặt Bàn Trước
+                                    <i class="fa-solid fa-calendar-check me-1"></i> <span data-i18n="stores.reserve">Đặt Bàn Trước</span>
                                 </a>
                             </div>
                         </div>
@@ -101,12 +101,12 @@
         <div class="mt-5 pt-3">
             <div class="card-luxury p-4 p-md-5 text-center bg-espresso">
                 <i class="fa-solid fa-mug-hot text-gold display-4 mb-3"></i>
-                <h3 class="font-serif fw-bold text-gold-gradient mb-2">Đặc Quyền Thử Cà Phê Miễn Phí (Cupping Session)</h3>
-                <p class="text-secondary mx-auto mb-4" style="max-width: 650px;">
+                <h3 class="font-serif fw-bold text-gold-gradient mb-2" data-i18n="stores.cupping_title">Đặc Quyền Thử Cà Phê Miễn Phí (Cupping Session)</h3>
+                <p class="text-secondary mx-auto mb-4" style="max-width: 650px;" data-i18n="stores.cupping_desc">
                     Mỗi sáng thứ Bảy từ 09:00 - 10:30, các Master Roaster của UTECoffe tổ chức buổi chia sẻ và thử nếm các mẻ hạt đặc sản mới hoàn toàn miễn phí cho thành viên UTEClub.
                 </p>
                 <a href="${pageContext.request.contextPath}/reservation" class="btn btn-gold px-4 py-2 rounded-pill font-accent fw-bold">
-                    <i class="fa-solid fa-ticket me-1"></i> Đăng Ký Tham Gia Cupping Session
+                    <i class="fa-solid fa-ticket me-1"></i> <span data-i18n="stores.cupping_btn">Đăng Ký Tham Gia Cupping Session</span>
                 </a>
             </div>
         </div>
