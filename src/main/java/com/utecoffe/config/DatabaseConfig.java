@@ -76,36 +76,31 @@ public class DatabaseConfig {
             rawUrl = datasourceUrl;
         }
 
-        // 2. Normalize Cloud URI formats (postgres:// or postgresql://) to clean JDBC format
-        if (rawUrl != null && (rawUrl.startsWith("postgres://") || rawUrl.startsWith("postgresql://"))) {
-            try {
-                URI uri = new URI(rawUrl);
-                String host = uri.getHost();
-                int port = uri.getPort() > 0 ? uri.getPort() : 5432;
-                String path = uri.getPath() != null ? uri.getPath() : "/utecoffe_db";
-                String query = uri.getQuery();
+        // 2. Parse and normalize Cloud URI (postgres://, postgresql://, or jdbc:postgresql:// with user:pass@)
+        if (rawUrl != null) {
+            String clean = rawUrl.trim();
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^(?:(?:postgres|postgresql|jdbc:postgresql)://)?(?:([^:@]+)(?::([^@]+))?@)?([^:/]+)(?::(\\d+))?(?:/([^?]+))?(?:\\?(.*))?$");
+            java.util.regex.Matcher m = pattern.matcher(clean);
+            if (m.matches()) {
+                String u = m.group(1);
+                String p = m.group(2);
+                String h = m.group(3);
+                String port = m.group(4);
+                String db = m.group(5);
+                String query = m.group(6);
 
-                if (uri.getUserInfo() != null) {
-                    String[] userInfo = uri.getUserInfo().split(":", 2);
-                    if (userInfo.length > 0 && (envUser == null || envUser.isBlank() || "postgres".equals(envUser))) {
-                        envUser = userInfo[0];
-                    }
-                    if (userInfo.length > 1 && (envPass == null || envPass.isBlank() || "postgres".equals(envPass))) {
-                        envPass = userInfo[1];
-                    }
+                if (u != null && !u.isBlank() && (envUser == null || envUser.isBlank() || "postgres".equals(envUser))) {
+                    envUser = u;
+                }
+                if (p != null && !p.isBlank() && (envPass == null || envPass.isBlank() || "postgres".equals(envPass))) {
+                    envPass = p;
                 }
 
-                rawUrl = "jdbc:postgresql://" + host + ":" + port + path;
-                if (query != null && !query.isBlank()) {
-                    rawUrl += "?" + query;
-                }
-            } catch (Exception e) {
-                log.warn("Failed to parse raw cloud database URL as URI: {}", e.getMessage());
-                String trimmed = rawUrl.trim();
-                if (trimmed.startsWith("postgres://")) {
-                    rawUrl = "jdbc:postgresql://" + trimmed.substring("postgres://".length());
-                } else if (trimmed.startsWith("postgresql://")) {
-                    rawUrl = "jdbc:postgresql://" + trimmed.substring("postgresql://".length());
+                if (h != null && !h.isBlank()) {
+                    rawUrl = "jdbc:postgresql://" + h + ":" + (port != null && !port.isBlank() ? port : "5432") + "/" + (db != null && !db.isBlank() ? db : "utecoffe_db");
+                    if (query != null && !query.isBlank()) {
+                        rawUrl += "?" + query;
+                    }
                 }
             }
         }

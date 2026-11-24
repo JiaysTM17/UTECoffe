@@ -47,25 +47,32 @@ public class DiagController {
 
         // Test direct JDBC connection with 5s timeout to catch real exception
         Map<String, Object> dbTest = new LinkedHashMap<>();
-        String testUrl = null;
+        String testUrl = dbUrl != null && !dbUrl.isBlank() ? dbUrl : "jdbc:postgresql://localhost:5432/utecoffe_db";
         String testUser = System.getenv("DB_USERNAME");
         String testPass = System.getenv("DB_PASSWORD");
 
-        if (System.getenv("DB_HOST") != null && !System.getenv("DB_HOST").isBlank()) {
-            testUrl = "jdbc:postgresql://" + System.getenv("DB_HOST").trim() + ":5432/" + 
-                      (System.getenv("DB_NAME") != null ? System.getenv("DB_NAME").trim() : "utecoffe_db") + "?sslmode=disable";
-        } else if (dbUrl != null && !dbUrl.isBlank()) {
-            testUrl = dbUrl;
-            if (testUrl.startsWith("postgres://")) {
-                testUrl = "jdbc:postgresql://" + testUrl.substring("postgres://".length());
-            } else if (testUrl.startsWith("postgresql://")) {
-                testUrl = "jdbc:postgresql://" + testUrl.substring("postgresql://".length());
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^(?:(?:postgres|postgresql|jdbc:postgresql)://)?(?:([^:@]+)(?::([^@]+))?@)?([^:/]+)(?::(\\d+))?(?:/([^?]+))?(?:\\?(.*))?$");
+        java.util.regex.Matcher m = pattern.matcher(testUrl.trim());
+        if (m.matches()) {
+            String u = m.group(1);
+            String p = m.group(2);
+            String h = m.group(3);
+            String port = m.group(4);
+            String db = m.group(5);
+            String query = m.group(6);
+
+            if (u != null && !u.isBlank()) testUser = u;
+            if (p != null && !p.isBlank()) testPass = p;
+            if (h != null && !h.isBlank()) {
+                testUrl = "jdbc:postgresql://" + h + ":" + (port != null && !port.isBlank() ? port : "5432") + "/" + (db != null && !db.isBlank() ? db : "utecoffe_db");
+                if (query != null && !query.isBlank()) {
+                    testUrl += "?" + query;
+                }
             }
-            if (!testUrl.contains("sslmode=")) {
-                testUrl += (testUrl.contains("?") ? "&" : "?") + "sslmode=disable";
-            }
-        } else {
-            testUrl = "jdbc:postgresql://localhost:5432/utecoffe_db?sslmode=disable";
+        }
+
+        if (!testUrl.contains("sslmode=")) {
+            testUrl += (testUrl.contains("?") ? "&" : "?") + "sslmode=disable";
         }
         
         dbTest.put("targetJdbcUrl", testUrl.replaceAll(":[^:@]+@", ":****@"));
