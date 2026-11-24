@@ -4,10 +4,10 @@
 <head>
     <title>Trang Chủ - UTECoffe Specialty Tea &amp; Coffee Roastery</title>
     <style>
-        @media (min-width: 1200px) {
+        @media (min-width: 992px) {
             .banner-table-title {
                 white-space: nowrap !important;
-                font-size: clamp(1.3rem, 1.75vw, 1.75rem) !important;
+                font-size: clamp(1.15rem, 1.6vw, 1.75rem) !important;
             }
         }
     </style>
