@@ -2,7 +2,7 @@
 # Minimal Production JRE Runtime with Pre-compiled WAR
 # Bypasses all Maven Central HTTP 429 rate limits and Cloud OOM constraints
 # ============================================================================
-FROM eclipse-temurin:21-jre-jammy
+FROM eclipse-temurin:21-jdk-jammy
 
 WORKDIR /app
 
