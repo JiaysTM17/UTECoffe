@@ -8,12 +8,13 @@ WORKDIR /build
 # Constrain Maven heap memory to prevent container OOM on Cloud Free tiers
 ENV MAVEN_OPTS="-Xmx384m -XX:+UseSerialGC"
 
-# Copy Maven POM and source files
+# Copy Maven POM, Google Mirror settings, and source files
 COPY pom.xml .
+COPY settings.xml .
 COPY src ./src
 
-# Build production WAR package skipping tests for fast and reliable CI/CD
-RUN mvn clean package -DskipTests -B -q
+# Build production WAR package skipping tests using Google Cloud mirror to prevent HTTP 429
+RUN mvn clean package -s settings.xml -DskipTests -B
 
 # ============================================================================
 # Stage 2: Minimal Production JRE Runtime
