@@ -1,7 +1,57 @@
 package com.utecoffe.service;
 
 public interface IdempotencyService {
-    
+
+    class IdempotencyCheckResult {
+        public enum Action {
+            ACQUIRED,
+            CACHED,
+            CONFLICT
+        }
+
+        private final Action action;
+        private final Integer httpStatus;
+        private final String responsePayload;
+
+        public IdempotencyCheckResult(Action action, Integer httpStatus, String responsePayload) {
+            this.action = action;
+            this.httpStatus = httpStatus;
+            this.responsePayload = responsePayload;
+        }
+
+        public static IdempotencyCheckResult acquired() {
+            return new IdempotencyCheckResult(Action.ACQUIRED, null, null);
+        }
+
+        public static IdempotencyCheckResult cached(int httpStatus, String responsePayload) {
+            return new IdempotencyCheckResult(Action.CACHED, httpStatus, responsePayload);
+        }
+
+        public static IdempotencyCheckResult conflict(String errorMessage) {
+            return new IdempotencyCheckResult(Action.CONFLICT, 409, errorMessage);
+        }
+
+        public Action getAction() {
+            return action;
+        }
+
+        public Integer getHttpStatus() {
+            return httpStatus;
+        }
+
+        public String getResponsePayload() {
+            return responsePayload;
+        }
+    }
+
+    String computeSha256(String input);
+
+    IdempotencyCheckResult checkAndLock(String idempotencyKey, String requestHash);
+
+    void markSuccess(String idempotencyKey, int httpStatus, String responsePayload);
+
+    void markFailed(String idempotencyKey);
+
     /**
      * Checks whether an idempotency key is valid and not currently in-flight or already committed.
      * @param key Client-provided idempotency key (UUID or unique transaction ref).

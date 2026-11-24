@@ -113,7 +113,7 @@
             'pillar.space_desc': 'Kiến trúc kết hợp hài hòa giữa kim loại trầm ấm, gỗ sồi và hương thơm nồng nàn của mẻ rang mới.',
 
             // Table Booking & Loyalty Banner
-            'banner.loyalty_tag': 'Đặc Quyền Hội Viên UTEClub • Bấm Xem Chi Tiết',
+            'banner.loyalty_tag': 'Đặc Quyền Hội Viên UTEClub',
             'banner.table_title': 'Đặt Bàn Trực Tuyến & Tích Điểm Tự Động Cho Mọi Đơn Hàng',
             'banner.table_desc': 'Thưởng thức không gian tinh tế tại 3 chi nhánh Flagship (Thủ Đức, Quận 1, Bình Thạnh). Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.',
             'banner.btn_privilege': 'Xem Đặc Quyền',
@@ -217,6 +217,73 @@
             'story.stat2': 'Điểm Cupping Quốc Tế',
             'story.stat3': 'Trái Chín Hái Thủ Công',
             'story.stat4': 'Lên Men Chậm Tự Nhiên',
+            'story.ch1_badge': 'Chương I • Thổ Nhưỡng',
+            'story.ch1_title': 'Độ Cao 1.600m & Sương Mù Cao Nguyên',
+            'story.ch1_p1': 'Cầu Đất - Đà Lạt được mệnh danh là thiên đường của cà phê Arabica hảo hạng tại Việt Nam. Độ cao 1.600m so với mực nước biển cùng biên độ nhiệt ngày đêm lớn giúp hạt cà phê phát triển chậm rãi, cô đọng lượng đường tự nhiên và axit hữu cơ thanh nhã.',
+            'story.ch1_p2': 'Chúng tôi trực tiếp liên kết cùng các nông hộ tâm huyết, chỉ thu hoạch những trái chín đỏ 100% bằng tay, đảm bảo độ đồng đều và chất lượng cupping đạt chuẩn Specialty Coffee Association (SCA).',
+            'story.ch2_badge': 'Chương II • Kỹ Nghệ Rang',
+            'story.ch2_title': 'Nghệ Thuật Đánh Thức Dải Hương Bản Độc',
+            'story.ch2_p1': 'Rang cà phê không đơn thuần là xử lý nhiệt; đó là cuộc đối thoại giữa nghệ nhân và hạt mầm tự nhiên. Bằng công nghệ trống rang hiện đại kiểm soát luồng khí và nhiệt độ chuẩn xác từng giây, chúng tôi phát triển tối đa dải hương hoa nhài, cam bergamot, mật ong rừng và socola đen đặc trưng.',
+            'story.ch2_p2': 'Mỗi mẻ rang mộc hoàn toàn không tẩm ướp phụ gia hay hương liệu nhân tạo, tôn vinh sự tinh khiết tuyệt đối của nông sản quê hương.',
+            'story.ch3_badge': 'Chương III • Nghệ Thuật Chiết Xuất',
+            'story.ch3_title': 'Tỷ Lệ Vàng Trong Từng Giọt Cà Phê',
+            'story.ch3_p1': 'Từ dòng máy Espresso La Marzocco thủ công đến các bình chiết xuất V60 Hario gốm sứ Nhật Bản, mỗi giọt cà phê chiết xuất tại UTECoffe đều tuân thủ biểu đồ TDS chuẩn mực quốc tế.',
+            'story.ch3_p2': 'Kỹ thuật ủ lạnh Specialty Cold Brew kéo dài liên tục 18 đến 24 giờ trong nhiệt độ 4°C giúp chiết tách tối đa vị ngọt hậu và loại bỏ hoàn toàn vị đắng gắt, đem lại trải nghiệm thanh tao như dòng vang hảo hạng.',
+            'story.ch4_badge': 'PHỔ HƯƠNG VỊ ĐẶC SẢN',
+            'story.ch4_title': 'Dải Hương Độc Bản Của UTECoffe',
+            'story.ch4_desc': 'Mỗi mẻ cà phê được đánh giá cupping theo tiêu chuẩn khắt khe với 4 nhóm hương vị đặc trưng:',
+            'story.wheel_citrus_title': 'Cam Quýt & Bergamot',
+            'story.wheel_citrus_desc': 'Axit citric tự nhiên sáng ngời, gợi nhớ hương cam sành và vỏ chanh vàng thanh nhã.',
+            'story.wheel_floral_title': 'Hoa Nhài & Bạch Cúc',
+            'story.wheel_floral_desc': 'Hương hoa trắng thoang thoảng nở rộ khi pha Pour-over nóng bốc khói nhẹ nhàng.',
+            'story.wheel_honey_title': 'Mật Ong Hoa Cà Phê',
+            'story.wheel_honey_desc': 'Hậu vị ngọt sâu kéo dài nơi cuống họng, êm dịu và tròn trịa sau từng ngụm thưởng thức.',
+            'story.wheel_choco_title': 'Chocolate Đen & Hạt Nướng',
+            'story.wheel_choco_desc': 'Vị đắng êm dịu của cacao nguyên chất hòa quyện nốt hạnh nhân nướng thơm bùi.',
+            'story.btn_menu': 'Khám Phá Toàn Bộ Thực Đơn',
+            'story.btn_reserve': 'Đặt Bàn Thưởng Thức Tại Quán',
+
+            // Reservation Options & Placeholders
+            'res.opt_guest1': '1 Người (Bàn Độc Thoại / Bar Slow Bar)',
+            'res.opt_guest2': '2 Người (Bàn Đôi Lãng Mạn)',
+            'res.opt_guest4': '3 - 4 Người (Bàn Tiêu Chuẩn)',
+            'res.opt_guest6': '5 - 6 Người (Bàn Họp / Nhóm Bạn)',
+            'res.opt_guest10': 'Phòng Riêng Private (8 - 12 Người)',
+            'res.placeholder_name': 'Nguyễn Văn A',
+            'res.placeholder_phone': '0901234567',
+            'res.placeholder_special': 'Nhập yêu cầu để chúng tôi chuẩn bị tiếp đón chu đáo nhất...',
+
+            // Cart Extra
+            'cart.freeship_notice': 'Đơn hàng từ 150.000₫ được MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC',
+            'cart.freeship_badge': 'FREESHIP',
+            'cart.free_text': 'Miễn Phí',
+
+            // Login Page
+            'login.title': 'Chào Mừng Trở Lại',
+            'login.subtitle': 'Đăng nhập để nhận ưu đãi tích điểm UTEClub',
+            'login.error': 'Email hoặc mật khẩu không chính xác!',
+            'login.logout_msg': 'Bạn đã đăng xuất an toàn.',
+            'login.email_label': 'Email hoặc Số Điện Thoại:',
+            'login.placeholder_email': 'admin@utecoffe.vn',
+            'login.password_label': 'Mật Khẩu:',
+            'login.forgot_password': 'Quên mật khẩu?',
+            'login.btn_login': 'Đăng Nhập',
+            'login.quick_demo': 'Đăng Nhập Nhanh (Demo)',
+            'login.no_account': 'Chưa có tài khoản thành viên?',
+            'login.register_now': 'Đăng ký ngay',
+
+            // Register Page
+            'reg.title': 'Đăng Ký UTEClub',
+            'reg.subtitle': 'Gia nhập cộng đồng người yêu trà & cà phê đặc sản',
+            'reg.name_label': 'Họ và Tên:',
+            'reg.email_label': 'Địa Chỉ Email:',
+            'reg.placeholder_email': 'email@gmail.com',
+            'reg.phone_label': 'Số Điện Thoại:',
+            'reg.password_label': 'Mật Khẩu:',
+            'reg.placeholder_password': 'Ít nhất 6 ký tự',
+            'reg.btn_submit': 'Tạo Tài Khoản Thành Viên',
+            'reg.has_account': 'Đã có tài khoản?',
+            'reg.login_now': 'Đăng nhập',
             'res.badge': 'DỊCH VỤ TIẾP ĐÓN CHU ĐÁO',
             'res.desc': 'Giữ trước vị trí thưởng thức lý tưởng tại UTECoffe để những buổi gặp gỡ, trò chuyện hay làm việc của bạn trở nên trọn vẹn và thư thái nhất.',
             'res.perk_title': 'ĐẶC QUYỀN ĐẶT BÀN TRỰC TUYẾN:',
@@ -436,8 +503,8 @@
             'pillar.space_desc': 'Harmonious architectural blend of brushed metal, aged oak, and the intoxicating scent of fresh roasts.',
 
             // Table Booking & Loyalty Banner
-            'banner.loyalty_tag': 'UTEClub Loyalty Privilege • Click for Details',
-            'banner.table_title': 'Online Reservations & Automatic Loyalty Points on Every Order',
+            'banner.loyalty_tag': 'UTEClub Loyalty Privileges',
+            'banner.table_title': 'Online Table Reservation & Automatic Reward Points',
             'banner.table_desc': 'Experience refined spaces at 3 Flagship roasteries (Thu Duc, District 1, Binh Thanh). Earn 10% points on every order to unlock Silver, Gold, and Diamond tiers with incomparable privileges.',
             'banner.btn_privilege': 'View Privileges',
             'banner.btn_reserve': 'Reserve Table Now',
@@ -540,6 +607,41 @@
             'story.stat2': 'International Cupping Score',
             'story.stat3': 'Hand-Picked Ripe Cherries',
             'story.stat4': 'Natural Slow Fermentation',
+            'story.ch1_badge': 'Chapter I • Terroir',
+            'story.ch1_title': '1,600m Altitude & Misty Highlands',
+            'story.ch1_p1': 'Cau Dat - Dalat is celebrated as the paradise of premium Arabica coffee in Vietnam. Perched at 1,600m elevation with vast diurnal temperature variations, coffee cherries mature slowly, concentrating natural sugars and refined organic acidity.',
+            'story.ch1_p2': 'We partner directly with dedicated smallholder farmers, hand-harvesting 100% ripe red cherries to ensure exceptional consistency and cupping quality meeting Specialty Coffee Association (SCA) standards.',
+            'story.ch2_badge': 'Chapter II • Roasting Craft',
+            'story.ch2_title': 'The Art of Awakening Signature Aroma Profiles',
+            'story.ch2_p1': 'Coffee roasting is far more than thermal processing; it is a delicate conversation between the artisan roaster and the coffee bean. Utilizing advanced drum technology with precision airflow and temperature control, we develop exquisite notes of white jasmine, bergamot, forest honey, and dark chocolate.',
+            'story.ch2_p2': 'Every small micro-batch is 100% artisan roasted with zero artificial flavors or additives, honoring the absolute purity of our highland terroir.',
+            'story.ch3_badge': 'Chapter III • Extraction Mastery',
+            'story.ch3_title': 'The Golden Ratio in Every Drop of Coffee',
+            'story.ch3_p1': 'From handcrafted La Marzocco espresso machines to Japanese Hario ceramic V60 pour-over brewers, every extraction at UTECoffe strictly adheres to international SCA Total Dissolved Solids (TDS) brewing standards.',
+            'story.ch3_p2': 'Our Specialty Cold Brew slow-steeps for 18 to 24 continuous hours at 4°C, extracting profound natural sweetness while completely eliminating astringent bitterness for a velvety, wine-like elegance.',
+            'story.ch4_badge': 'SPECIALTY FLAVOR SPECTRUM',
+            'story.ch4_title': 'UTECoffe Signature Flavor Wheel',
+            'story.ch4_desc': 'Each harvested batch undergoes rigorous sensory cupping across 4 distinct aroma clusters:',
+            'story.wheel_citrus_title': 'Citrus & Bergamot',
+            'story.wheel_citrus_desc': 'Vibrant natural citric brightness reminiscent of ripe oranges and fragrant yellow lemon peel.',
+            'story.wheel_floral_title': 'White Jasmine & Chrysanthemum',
+            'story.wheel_floral_desc': 'Delicate white floral bouquets wafting gently through steaming pour-over extractions.',
+            'story.wheel_honey_title': 'Wild Coffee Blossom Honey',
+            'story.wheel_honey_desc': 'Deep, lingering sweet finish coating the palate with smooth, rounded satisfaction.',
+            'story.wheel_choco_title': 'Dark Chocolate & Toasted Nuts',
+            'story.wheel_choco_desc': 'Gentle, comforting bitterness of pure cocoa intertwined with nutty roasted almond notes.',
+            'story.btn_menu': 'Explore Full Menu',
+            'story.btn_reserve': 'Reserve a Roastery Table',
+
+            // Reservation Options & Placeholders
+            'res.opt_guest1': '1 Guest (Solo Table / Slow Bar)',
+            'res.opt_guest2': '2 Guests (Romantic Duo Table)',
+            'res.opt_guest4': '3 - 4 Guests (Standard Dining Table)',
+            'res.opt_guest6': '5 - 6 Guests (Meeting / Group Table)',
+            'res.opt_guest10': 'Private VIP Suite (8 - 12 Guests)',
+            'res.placeholder_name': 'John Doe',
+            'res.placeholder_phone': '0901234567',
+            'res.placeholder_special': 'Enter any special requests so our concierge can prepare attentively...',
             'res.badge': 'ATTENTIVE GUEST CONCIERGE',
             'res.desc': 'Reserve your ideal table in advance at UTECoffe to make your meetings, conversations, or focus sessions smooth and serene.',
             'res.perk_title': 'ONLINE BOOKING PRIVILEGE:',
@@ -632,6 +734,36 @@
             'cart.empty_title': 'Your Cart is Currently Empty',
             'cart.empty_desc': 'Explore our specialty coffee and artisan tea menu to find your perfect cup.',
             'cart.empty_btn': 'Explore Menu Now',
+            'cart.freeship_notice': 'Orders from 150,000₫ qualify for FREE NATIONWIDE SHIPPING',
+            'cart.freeship_badge': 'FREESHIP',
+            'cart.free_text': 'Free',
+
+            // Login Page
+            'login.title': 'Welcome Back',
+            'login.subtitle': 'Sign in to access your UTEClub loyalty privileges',
+            'login.error': 'Invalid email or password!',
+            'login.logout_msg': 'You have been securely signed out.',
+            'login.email_label': 'Email or Phone Number:',
+            'login.placeholder_email': 'admin@utecoffe.vn',
+            'login.password_label': 'Password:',
+            'login.forgot_password': 'Forgot password?',
+            'login.btn_login': 'Sign In',
+            'login.quick_demo': 'Quick Demo Sign In',
+            'login.no_account': 'Don\'t have an account yet?',
+            'login.register_now': 'Register now',
+
+            // Register Page
+            'reg.title': 'Join UTEClub',
+            'reg.subtitle': 'Become part of our artisanal specialty coffee & tea community',
+            'reg.name_label': 'Full Name:',
+            'reg.email_label': 'Email Address:',
+            'reg.placeholder_email': 'email@gmail.com',
+            'reg.phone_label': 'Phone Number:',
+            'reg.password_label': 'Password:',
+            'reg.placeholder_password': 'At least 6 characters',
+            'reg.btn_submit': 'Create Member Account',
+            'reg.has_account': 'Already have an account?',
+            'reg.login_now': 'Sign in',
 
             // Checkout Page
             'checkout.badge': 'SECURE & PRECISE',
@@ -920,6 +1052,14 @@
             }
         });
 
+        // Translate option[data-i18n] elements in dropdowns
+        document.querySelectorAll('option[data-i18n]').forEach(opt => {
+            const key = opt.getAttribute('data-i18n');
+            if (dict[key]) {
+                opt.text = dict[key];
+            }
+        });
+
         // Translate Category Filter Buttons
         document.querySelectorAll('.filter-btn[data-category-name]').forEach(el => {
             const name = el.getAttribute('data-category-name');
@@ -1026,7 +1166,7 @@
             if (!isNaN(vnd) && vnd > 0) {
                 if (lang === 'en') {
                     const usd = (vnd / RATE).toFixed(2);
-                    el.textContent = '$' + usd + ' USD';
+                    el.textContent = '$' + usd;
                 } else {
                     el.textContent = Math.round(vnd).toLocaleString('vi-VN') + ' VNĐ';
                 }

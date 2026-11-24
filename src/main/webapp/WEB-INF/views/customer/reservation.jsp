@@ -103,22 +103,22 @@
                             <div class="col-md-6">
                                 <label class="form-label text-gold small fw-bold" data-i18n="res.guests_label">3. Số Lượng Khách:</label>
                                 <select class="form-select form-control-luxury" name="numberOfGuests" required>
-                                    <option value="1">1 Người (Bàn Độc Thoại / Bar Slow Bar)</option>
-                                    <option value="2" selected>2 Người (Bàn Đôi Lãng Mạn)</option>
-                                    <option value="4">3 - 4 Người (Bàn Tiêu Chuẩn)</option>
-                                    <option value="6">5 - 6 Người (Bàn Họp / Nhóm Bạn)</option>
-                                    <option value="10">Phòng Riêng Private (8 - 12 Người)</option>
+                                    <option value="1" data-i18n="res.opt_guest1">1 Người (Bàn Độc Thoại / Bar Slow Bar)</option>
+                                    <option value="2" selected data-i18n="res.opt_guest2">2 Người (Bàn Đôi Lãng Mạn)</option>
+                                    <option value="4" data-i18n="res.opt_guest4">3 - 4 Người (Bàn Tiêu Chuẩn)</option>
+                                    <option value="6" data-i18n="res.opt_guest6">5 - 6 Người (Bàn Họp / Nhóm Bạn)</option>
+                                    <option value="10" data-i18n="res.opt_guest10">Phòng Riêng Private (8 - 12 Người)</option>
                                 </select>
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label text-gold small fw-bold" data-i18n="res.name_label">Họ và Tên Quý Khách:</label>
-                                <input type="text" class="form-control form-control-luxury" name="customerName" placeholder="Nguyễn Văn A" required>
+                                <input type="text" class="form-control form-control-luxury" name="customerName" placeholder="Nguyễn Văn A" data-i18n-placeholder="res.placeholder_name" required>
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label text-gold small fw-bold" data-i18n="res.phone_label">Số Điện Thoại Xác Nhận:</label>
-                                <input type="tel" class="form-control form-control-luxury" name="phoneNumber" placeholder="0901234567" required>
+                                <input type="tel" class="form-control form-control-luxury" name="phoneNumber" placeholder="0901234567" data-i18n-placeholder="res.placeholder_phone" required>
                             </div>
 
                             <div class="col-md-3 col-6">
@@ -132,7 +132,7 @@
 
                             <div class="col-12">
                                 <label class="form-label text-gold small fw-bold" data-i18n="res.special_label">Yêu Cầu Đặc Biệt (Trang trí hoa tươi, chuẩn bị cà phê Geisha, bánh kỷ niệm...):</label>
-                                <textarea class="form-control form-control-luxury" name="specialRequest" rows="3" placeholder="Nhập yêu cầu để chúng tôi chuẩn bị tiếp đón chu đáo nhất..."></textarea>
+                                <textarea class="form-control form-control-luxury" name="specialRequest" rows="3" placeholder="Nhập yêu cầu để chúng tôi chuẩn bị tiếp đón chu đáo nhất..." data-i18n-placeholder="res.placeholder_special"></textarea>
                             </div>
                         </div>
 

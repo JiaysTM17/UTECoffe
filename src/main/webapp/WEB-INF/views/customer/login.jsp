@@ -8,18 +8,18 @@
         <div class="card card-luxury border-gold p-4 shadow-lg w-100" style="max-width: 480px;">
             <div class="text-center mb-4">
                 <img src="${pageContext.request.contextPath}/assets/images/logo_icon.svg" alt="UTECOFFE" height="48" class="mb-3">
-                <h3 class="font-serif fw-bold text-gold-gradient mb-1">Chào Mừng Trở Lại</h3>
-                <p class="text-secondary small">Đăng nhập để nhận ưu đãi tích điểm UTEClub</p>
+                <h3 class="font-serif fw-bold text-gold-gradient mb-1" data-i18n="login.title">Chào Mừng Trở Lại</h3>
+                <p class="text-secondary small" data-i18n="login.subtitle">Đăng nhập để nhận ưu đãi tích điểm UTEClub</p>
             </div>
 
             <c:if test="${param.error != null}">
-                <div class="alert alert-danger small py-2 px-3 rounded-3 mb-3 border-0 bg-danger-subtle text-danger">
+                <div class="alert alert-danger small py-2 px-3 rounded-3 mb-3 border-0 bg-danger-subtle text-danger" data-i18n="login.error">
                     <i class="fa-solid fa-circle-exclamation me-1"></i> Email hoặc mật khẩu không chính xác!
                 </div>
             </c:if>
 
             <c:if test="${param.logout != null}">
-                <div class="alert alert-success small py-2 px-3 rounded-3 mb-3 border-0 bg-success-subtle text-success">
+                <div class="alert alert-success small py-2 px-3 rounded-3 mb-3 border-0 bg-success-subtle text-success" data-i18n="login.logout_msg">
                     <i class="fa-solid fa-circle-check me-1"></i> Bạn đã đăng xuất an toàn.
                 </div>
             </c:if>
@@ -28,20 +28,20 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 
                 <div class="mb-3">
-                    <label class="form-label text-gold small fw-bold">Email hoặc Số Điện Thoại:</label>
-                    <input type="text" id="usernameInput" name="username" class="form-control form-control-luxury" placeholder="admin@utecoffe.vn" required autofocus>
+                    <label class="form-label text-gold small fw-bold" data-i18n="login.email_label">Email hoặc Số Điện Thoại:</label>
+                    <input type="text" id="usernameInput" name="username" class="form-control form-control-luxury" placeholder="admin@utecoffe.vn" data-i18n-placeholder="login.placeholder_email" required autofocus>
                 </div>
 
                 <div class="mb-4">
                     <div class="d-flex justify-content-between">
-                        <label class="form-label text-gold small fw-bold">Mật Khẩu:</label>
-                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Khôi Phục Mật Khẩu', 'Tính năng đặt lại mật khẩu trực tuyến qua Email OTP đang được nâng cấp. Để được hỗ trợ cấp lại mật khẩu ngay lập tức, quý khách vui lòng liên hệ hotline tổng đài 1900 2026 hoặc quản trị viên chi nhánh.')" class="small text-muted text-decoration-none hover-gold">Quên mật khẩu?</a>
+                        <label class="form-label text-gold small fw-bold" data-i18n="login.password_label">Mật Khẩu:</label>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Khôi Phục Mật Khẩu', 'Tính năng đặt lại mật khẩu trực tuyến qua Email OTP đang được nâng cấp. Để được hỗ trợ cấp lại mật khẩu ngay lập tức, quý khách vui lòng liên hệ hotline tổng đài 1900 2026 hoặc quản trị viên chi nhánh.')" class="small text-muted text-decoration-none hover-gold" data-i18n="login.forgot_password">Quên mật khẩu?</a>
                     </div>
                     <input type="password" id="passwordInput" name="password" class="form-control form-control-luxury" placeholder="••••••••" required>
                 </div>
 
                 <button type="submit" class="btn btn-gold w-100 py-3 fw-bold mb-3 shadow-gold-sm">
-                    <i class="fa-solid fa-arrow-right-to-bracket me-1"></i> Đăng Nhập
+                    <i class="fa-solid fa-arrow-right-to-bracket me-1"></i> <span data-i18n="login.btn_login">Đăng Nhập</span>
                 </button>
             </form>
 
@@ -49,7 +49,7 @@
             <div class="pt-3 border-top border-gold-subtle mt-2">
                 <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-gold-subtle">
                     <span class="text-gold font-accent small fw-bold text-uppercase d-flex align-items-center gap-1 text-nowrap">
-                        <i class="fa-solid fa-bolt text-gold"></i> Đăng Nhập Nhanh (Demo)
+                        <i class="fa-solid fa-bolt text-gold"></i> <span data-i18n="login.quick_demo">Đăng Nhập Nhanh (Demo)</span>
                     </span>
                     <span class="badge bg-espresso border border-gold-subtle text-secondary font-monospace text-nowrap" style="font-size: 0.72rem;">
                         Pass: Admin@2026
@@ -116,8 +116,8 @@
             </div>
 
             <div class="text-center small text-secondary">
-                Chưa có tài khoản thành viên? 
-                <a href="${pageContext.request.contextPath}/auth/register" class="text-gold fw-bold text-decoration-none">Đăng ký ngay</a>
+                <span data-i18n="login.no_account">Chưa có tài khoản thành viên?</span> 
+                <a href="${pageContext.request.contextPath}/auth/register" class="text-gold fw-bold text-decoration-none" data-i18n="login.register_now">Đăng ký ngay</a>
             </div>
         </div>
     </div>

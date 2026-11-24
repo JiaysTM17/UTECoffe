@@ -29,9 +29,9 @@
                     <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
                         <span class="small fw-bold text-light" id="freeShippingNotice">
                             <i class="fa-solid fa-truck-fast text-gold me-2"></i>
-                            Đơn hàng từ <strong>150.000₫</strong> được <strong>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC</strong>
+                            <span data-i18n="cart.freeship_notice">Đơn hàng từ <strong>150.000₫</strong> được <strong>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC</strong></span>
                         </span>
-                        <span class="badge bg-gold text-obsidian fw-bold font-monospace px-3 py-1 rounded-pill" id="shippingStatusBadge">
+                        <span class="badge bg-gold text-obsidian fw-bold font-monospace px-3 py-1 rounded-pill" id="shippingStatusBadge" data-i18n="cart.freeship_badge">
                             FREESHIP
                         </span>
                     </div>
@@ -139,7 +139,7 @@
                             </div>
                             <div class="d-flex justify-content-between mb-2 small text-secondary">
                                 <span data-i18n="cart.shipping_label">Phí vận chuyển:</span>
-                                <span class="text-success fw-bold" id="cartShippingText">Miễn Phí</span>
+                                <span class="text-success fw-bold" id="cartShippingText" data-i18n="cart.free_text">Miễn Phí</span>
                             </div>
                             <div class="d-flex justify-content-between mb-3 small text-secondary">
                                 <span data-i18n="cart.discount_label">Giảm giá voucher:</span>
@@ -177,10 +177,8 @@
                         <p class="text-secondary small mb-4" data-i18n="cart.empty_desc">
                             Hãy khám phá thực đơn cà phê rang mộc thủ công và trà hoa tinh tuyển của UTECoffe để chọn cho mình thức uống ưng ý.
                         </p>
-                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-2 rounded-pill font-accent fw-bold">
+                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-2.5 rounded-pill font-accent fw-bold shadow-gold-sm">
                             <i class="fa-solid fa-arrow-right me-1"></i> <span data-i18n="cart.empty_btn">Khám Phá Thực Đơn Ngay</span>
-                        </a>
-                            <i class="fa-solid fa-mug-hot me-2"></i> Khám Phá Thực Đơn Ngay
                         </a>
                     </div>
                 </div>

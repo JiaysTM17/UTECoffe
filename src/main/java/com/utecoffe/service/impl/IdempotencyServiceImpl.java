@@ -26,6 +26,7 @@ public class IdempotencyServiceImpl implements IdempotencyService {
     private static class IdempotencyRecord {
         final String payloadHash;
         final Instant createdAt;
+        int httpStatus = 200;
         String responsePayload;
         boolean committed;
 
@@ -77,9 +78,58 @@ public class IdempotencyServiceImpl implements IdempotencyService {
     private static final double DEFAULT_REFILL_RATE = 1.0;
 
     @Override
+    public IdempotencyCheckResult checkAndLock(String idempotencyKey, String requestHash) {
+        if (idempotencyKey == null || idempotencyKey.isBlank()) {
+            return IdempotencyCheckResult.acquired();
+        }
+
+        IdempotencyRecord newRecord = new IdempotencyRecord(requestHash);
+        IdempotencyRecord existing = idempotencyStore.putIfAbsent(idempotencyKey, newRecord);
+
+        if (existing == null) {
+            log.info("Idempotency lock acquired for key: {}", idempotencyKey);
+            return IdempotencyCheckResult.acquired();
+        }
+
+        // Check if hash matches
+        if (!existing.payloadHash.equals(requestHash)) {
+            log.warn("Idempotency conflict detected for key: {}", idempotencyKey);
+            return IdempotencyCheckResult.conflict("IDEMPOTENCY_CONFLICT: Key was previously submitted with different payload parameters.");
+        }
+
+        if (existing.committed) {
+            log.info("Returning cached idempotent response for key: {}", idempotencyKey);
+            return IdempotencyCheckResult.cached(existing.httpStatus, existing.responsePayload);
+        }
+
+        log.warn("Concurrent in-flight duplicate request detected for key: {}", idempotencyKey);
+        return IdempotencyCheckResult.conflict("IDEMPOTENCY_IN_FLIGHT: A request with this key is currently being processed.");
+    }
+
+    @Override
+    public void markSuccess(String idempotencyKey, int httpStatus, String responsePayload) {
+        if (idempotencyKey == null || idempotencyKey.isBlank()) return;
+
+        IdempotencyRecord record = idempotencyStore.get(idempotencyKey);
+        if (record != null) {
+            record.httpStatus = httpStatus;
+            record.responsePayload = responsePayload;
+            record.committed = true;
+            log.info("Idempotency marked success for key: {}", idempotencyKey);
+        }
+    }
+
+    @Override
+    public void markFailed(String idempotencyKey) {
+        if (idempotencyKey == null || idempotencyKey.isBlank()) return;
+        idempotencyStore.remove(idempotencyKey);
+        log.info("Idempotency lock released due to failure for key: {}", idempotencyKey);
+    }
+
+    @Override
     public boolean acquireIdempotencyLock(String key, String requestPayload) {
         if (key == null || key.isBlank()) {
-            return true; // No key provided, bypass lock
+            return true;
         }
 
         String hash = computeSha256(requestPayload);
@@ -90,7 +140,6 @@ public class IdempotencyServiceImpl implements IdempotencyService {
             return true;
         }
 
-        // Key already recorded: verify payload consistency
         if (!existing.payloadHash.equals(hash)) {
             log.warn("Idempotency conflict! Key {} reused with different payload hash.", key);
             throw new IllegalStateException("IDEMPOTENCY_CONFLICT: Key was previously submitted with different request parameters.");
@@ -135,7 +184,8 @@ public class IdempotencyServiceImpl implements IdempotencyService {
         return allowed;
     }
 
-    private String computeSha256(String input) {
+    @Override
+    public String computeSha256(String input) {
         if (input == null) input = "";
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

@@ -144,9 +144,6 @@
                 <!-- Gold -->
                 <div class="col-lg-3 col-md-6">
                     <div class="card-luxury p-4 h-100 text-start border position-relative" style="border-color: #ffd700 !important; background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, rgba(20,20,20,0.8) 100%);">
-                        <div class="position-absolute top-0 end-0 translate-middle-y me-3">
-                            <span class="badge bg-gold text-obsidian fw-bold small px-2 py-1 shadow-gold-sm">ĐƯỢC YÊU THÍCH NHẤT</span>
-                        </div>
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <span class="badge px-3 py-1.5 text-dark fw-bold font-accent" style="background: #ffd700;">HẠNG VÀNG</span>
                             <span class="text-gold small font-monospace fw-bold">1.500 - 2.999 pts</span>

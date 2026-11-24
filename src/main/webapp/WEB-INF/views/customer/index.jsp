@@ -105,15 +105,15 @@
                                     <span class="text-gold font-accent small text-uppercase product-category-badge" style="letter-spacing: 0.1em;" data-category-name="${prod.category.name}">${prod.category.name}</span>
                                     <span class="badge bg-espresso text-secondary small border border-gold roast-badge"><i class="fa-solid fa-fire-flame-curved me-1 text-gold"></i> Rang Mộc</span>
                                 </div>
-                                <h5 class="font-serif fw-bold mb-2">
+                                <h5 class="font-serif fw-bold mb-2" style="min-height: 2.85rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                                     <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="text-primary text-decoration-none hover-gold product-title-text" data-slug="${prod.slug}">${prod.name}</a>
                                 </h5>
-                                <p class="text-secondary small flex-grow-1 mb-3 text-truncate-2 product-desc-text" data-slug="${prod.slug}">
+                                <p class="text-secondary small mb-3 product-desc-text" style="min-height: 2.85rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" data-slug="${prod.slug}">
                                     ${not empty prod.description ? prod.description : 'Hương vị nguyên bản từ hạt Arabica chín cây tuyển chọn, kết hợp kỹ thuật pha thủ công tinh tế.'}
                                 </p>
-                                <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold">
-                                    <span class="price-gold product-price-val" data-raw-price="${prod.basePrice}" data-vnd="${prod.basePrice}"><fmt:formatNumber value="${prod.basePrice}" pattern="#,##0"/> VNĐ</span>
-                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill">
+                                <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold mt-auto gap-2">
+                                    <span class="price-gold product-price-val fs-6 fw-bold text-nowrap" data-raw-price="${prod.basePrice}" data-vnd="${prod.basePrice}"><fmt:formatNumber value="${prod.basePrice}" pattern="#,##0"/> VNĐ</span>
+                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill text-nowrap font-accent fw-semibold">
                                         <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="feat.add_cart">Thêm Giỏ Hàng</span>
                                     </a>
                                 </div>
@@ -185,16 +185,15 @@
     <section class="py-5 position-relative bg-espresso" style="border-top: 1px solid var(--border-gold);">
         <div class="container py-3">
             <div class="row align-items-center g-4">
-                <div class="col-lg-7">
+                <div class="col-xl-8 col-lg-8">
                     <button type="button" class="btn btn-link p-0 text-decoration-none text-gold font-accent fw-bold text-uppercase small d-inline-flex align-items-center gap-2 mb-2" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal" style="letter-spacing: 0.12em; cursor: pointer;">
                         <i class="fa-solid fa-crown text-gold"></i>
-                        <span data-i18n="banner.loyalty_tag">Đặc Quyền Hội Viên UTEClub • Bấm Xem Chi Tiết</span>
-                        <i class="fa-solid fa-arrow-right-long text-gold ms-1"></i>
+                        <span data-i18n="banner.loyalty_tag">Đặc Quyền Hội Viên UTEClub</span>
                     </button>
-                    <h3 class="font-serif fw-bold mb-2 text-gold-gradient" data-i18n="banner.table_title">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
+                    <h3 class="font-serif fw-bold mb-2 text-gold-gradient" data-i18n="banner.table_title" style="white-space: normal; letter-spacing: -0.01em;">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
                     <p class="text-secondary mb-0 small" data-i18n="banner.table_desc">Thưởng thức không gian tinh tế tại 3 chi nhánh Flagship (Thủ Đức, Quận 1, Bình Thạnh). Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.</p>
                 </div>
-                <div class="col-lg-5 text-lg-end">
+                <div class="col-xl-4 col-lg-4 text-lg-end">
                     <div class="d-flex flex-column flex-sm-row justify-content-lg-end align-items-stretch align-items-sm-center gap-3">
                         <button type="button" class="btn btn-gold rounded-pill px-4 py-2.5 fw-semibold d-inline-flex align-items-center justify-content-center text-nowrap shadow-gold-sm" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal">
                             <i class="fa-solid fa-crown me-2"></i> <span data-i18n="banner.btn_privilege">Xem Đặc Quyền</span>
@@ -306,9 +305,6 @@
                         <!-- Gold Tier -->
                         <div class="col-lg-3 col-md-6">
                             <div class="card-luxury p-3 h-100 text-start border position-relative" style="border-color: #ffd700 !important; background: linear-gradient(180deg, rgba(212,175,55,0.06) 0%, rgba(20,20,20,0.6) 100%);">
-                                <div class="position-absolute top-0 end-0 translate-middle-y me-3">
-                                    <span class="badge bg-gold text-obsidian fw-bold small px-2" data-i18n="modal.tier_gold_popular">PHỔ BIẾN NHẤT</span>
-                                </div>
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="badge px-2 py-1 text-dark fw-bold" style="background: #ffd700;" data-i18n="modal.tier_gold_badge">HẠNG VÀNG</span>
                                     <span class="text-gold small fw-bold" data-i18n="modal.tier_gold_pts">1.500 - 2.999 điểm</span>
