@@ -1,8 +1,10 @@
 package com.utecoffe.controller.mvc;
 
-import com.utecoffe.entity.Order;
-import com.utecoffe.entity.Store;
+import com.utecoffe.entity.*;
+import com.utecoffe.enums.DiscountType;
 import com.utecoffe.enums.OrderStatus;
+import com.utecoffe.enums.OrderType;
+import com.utecoffe.enums.ReservationStatus;
 import com.utecoffe.repository.*;
 import com.utecoffe.service.ExcelExportService;
 import com.utecoffe.service.OrderService;
@@ -16,8 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,16 +31,31 @@ public class AdminDashboardController {
     private OrderRepository orderRepository;
 
     @Autowired
+    private OrderItemRepository orderItemRepository;
+
+    @Autowired
     private ProductRepository productRepository;
 
     @Autowired
     private StoreRepository storeRepository;
 
     @Autowired
+    private StoreTableRepository storeTableRepository;
+
+    @Autowired
+    private TableReservationRepository tableReservationRepository;
+
+    @Autowired
     private StoreInventoryRepository storeInventoryRepository;
 
     @Autowired
     private InventoryLogRepository inventoryLogRepository;
+
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private CouponRepository couponRepository;
@@ -70,6 +89,11 @@ public class AdminDashboardController {
                 .filter(o -> o.getStatus() == OrderStatus.COMPLETED)
                 .count();
 
+        // Channel breakdown
+        long dineInCount = allOrders.stream().filter(o -> o.getOrderType() == OrderType.DINE_IN).count();
+        long takeAwayCount = allOrders.stream().filter(o -> o.getOrderType() == OrderType.TAKE_AWAY).count();
+        long deliveryCount = allOrders.stream().filter(o -> o.getOrderType() == OrderType.DELIVERY).count();
+
         List<Store> stores = storeRepository.findAll();
         Map<Long, Long> storeOrderCounts = new HashMap<>();
         Map<Long, BigDecimal> storeRevenues = new HashMap<>();
@@ -87,15 +111,33 @@ public class AdminDashboardController {
             storeRevenues.put(st.getId(), rev);
         }
 
+        // Top 5 Best-selling Products
+        List<OrderItem> allOrderItems = orderItemRepository.findAll();
+        Map<String, Long> productSalesMap = new HashMap<>();
+        for (OrderItem item : allOrderItems) {
+            if (item.getProduct() != null) {
+                productSalesMap.put(item.getProduct().getName(),
+                        productSalesMap.getOrDefault(item.getProduct().getName(), 0L) + item.getQuantity());
+            }
+        }
+        List<Map.Entry<String, Long>> topProducts = productSalesMap.entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                .limit(5)
+                .toList();
+
         model.addAttribute("totalOrders", allOrders.size());
         model.addAttribute("totalRevenue", totalRevenue);
         model.addAttribute("pendingOrdersCount", pendingOrdersCount);
         model.addAttribute("completedOrdersCount", completedOrdersCount);
+        model.addAttribute("dineInCount", dineInCount);
+        model.addAttribute("takeAwayCount", takeAwayCount);
+        model.addAttribute("deliveryCount", deliveryCount);
         model.addAttribute("totalProducts", productRepository.count());
         model.addAttribute("totalStores", stores.size());
         model.addAttribute("stores", stores);
         model.addAttribute("storeOrderCounts", storeOrderCounts);
         model.addAttribute("storeRevenues", storeRevenues);
+        model.addAttribute("topProducts", topProducts);
         model.addAttribute("totalUsers", userRepository.count());
         model.addAttribute("recentOrders", allOrders.stream()
                 .sorted(Comparator.comparing(Order::getId).reversed())
@@ -137,29 +179,135 @@ public class AdminDashboardController {
         return ResponseEntity.ok(resp);
     }
 
-    @GetMapping("/products")
-    public String products(Model model) {
-        model.addAttribute("products", productRepository.findAll());
-        return "admin/products";
-    }
-
-    @GetMapping("/inventory")
-    public String inventory(Model model) {
-        model.addAttribute("inventories", storeInventoryRepository.findAll());
-        model.addAttribute("logs", inventoryLogRepository.findAll().stream().limit(20).toList());
-        return "admin/inventory";
-    }
-
     @GetMapping("/stores")
     public String stores(Model model) {
-        model.addAttribute("stores", storeRepository.findAll());
+        List<Store> stores = storeRepository.findAll();
+        List<StoreTable> tables = storeTableRepository.findAll();
+        List<TableReservation> reservations = tableReservationRepository.findAll().stream()
+                .sorted(Comparator.comparing(TableReservation::getId).reversed())
+                .toList();
+
+        long occupiedTablesCount = tables.stream().filter(t -> Boolean.TRUE.equals(t.getIsOccupied())).count();
+
+        model.addAttribute("stores", stores);
+        model.addAttribute("tables", tables);
+        model.addAttribute("reservations", reservations);
+        model.addAttribute("totalTables", tables.size());
+        model.addAttribute("occupiedTablesCount", occupiedTablesCount);
         return "admin/stores";
+    }
+
+    @PostMapping("/reservations/{id}/status")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateReservationStatus(@PathVariable Long id,
+                                                                       @RequestParam ReservationStatus status) {
+        Optional<TableReservation> opt = tableReservationRepository.findById(id);
+        if (opt.isPresent()) {
+            TableReservation res = opt.get();
+            res.setStatus(status);
+            tableReservationRepository.save(res);
+            return ResponseEntity.ok(Map.of("success", true, "id", id, "status", status.name()));
+        }
+        return ResponseEntity.badRequest().body(Map.of("success", false, "message", "Không tìm thấy lượt đặt bàn"));
     }
 
     @GetMapping("/coupons")
     public String coupons(Model model) {
-        model.addAttribute("coupons", couponRepository.findAll());
+        model.addAttribute("coupons", couponRepository.findAll().stream()
+                .sorted(Comparator.comparing(Coupon::getId).reversed())
+                .toList());
         return "admin/coupons";
+    }
+
+    @PostMapping("/coupons/create")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> createCoupon(@RequestParam String code,
+                                                            @RequestParam String title,
+                                                            @RequestParam DiscountType discountType,
+                                                            @RequestParam BigDecimal discountValue,
+                                                            @RequestParam(required = false, defaultValue = "0") BigDecimal minOrderValue,
+                                                            @RequestParam(required = false, defaultValue = "1000") Integer usageLimit) {
+        Coupon c = Coupon.builder()
+                .code(code.toUpperCase().trim())
+                .title(title)
+                .discountType(discountType)
+                .discountValue(discountValue)
+                .minOrderValue(minOrderValue)
+                .maxDiscountAmount(discountValue.multiply(BigDecimal.valueOf(2)))
+                .usageLimit(usageLimit)
+                .usedCount(0)
+                .isActive(true)
+                .startDate(LocalDateTime.now())
+                .endDate(LocalDateTime.now().plusMonths(6))
+                .build();
+        couponRepository.save(c);
+        return ResponseEntity.ok(Map.of("success", true, "code", c.getCode()));
+    }
+
+    @PostMapping("/coupons/{id}/toggle")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> toggleCoupon(@PathVariable Long id) {
+        Optional<Coupon> opt = couponRepository.findById(id);
+        if (opt.isPresent()) {
+            Coupon c = opt.get();
+            c.setIsActive(!Boolean.TRUE.equals(c.getIsActive()));
+            couponRepository.save(c);
+            return ResponseEntity.ok(Map.of("success", true, "isActive", c.getIsActive()));
+        }
+        return ResponseEntity.badRequest().body(Map.of("success", false));
+    }
+
+    @GetMapping("/products")
+    public String products(Model model) {
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "admin/products";
+    }
+
+    @PostMapping("/products/{id}/toggle")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> toggleProduct(@PathVariable Long id) {
+        Optional<Product> opt = productRepository.findById(id);
+        if (opt.isPresent()) {
+            Product p = opt.get();
+            p.setIsAvailable(!Boolean.TRUE.equals(p.getIsAvailable()));
+            productRepository.save(p);
+            return ResponseEntity.ok(Map.of("success", true, "isAvailable", p.getIsAvailable()));
+        }
+        return ResponseEntity.badRequest().body(Map.of("success", false));
+    }
+
+    @GetMapping("/inventory")
+    public String inventory(Model model) {
+        List<StoreInventory> inventories = storeInventoryRepository.findAll();
+        long lowStockCount = inventories.stream()
+                .filter(i -> i.getCurrentStock().compareTo(i.getSafetyStock()) <= 0)
+                .count();
+
+        model.addAttribute("inventories", inventories);
+        model.addAttribute("stores", storeRepository.findAll());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+        model.addAttribute("lowStockCount", lowStockCount);
+        model.addAttribute("logs", inventoryLogRepository.findAll().stream()
+                .sorted(Comparator.comparing(InventoryLog::getId).reversed())
+                .limit(20)
+                .toList());
+        return "admin/inventory";
+    }
+
+    @PostMapping("/inventory/{id}/restock")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> restockInventory(@PathVariable Long id,
+                                                                @RequestParam BigDecimal amount) {
+        Optional<StoreInventory> opt = storeInventoryRepository.findById(id);
+        if (opt.isPresent()) {
+            StoreInventory inv = opt.get();
+            inv.setCurrentStock(inv.getCurrentStock().add(amount));
+            inv.setLastRestockedAt(LocalDateTime.now());
+            storeInventoryRepository.save(inv);
+            return ResponseEntity.ok(Map.of("success", true, "newStock", inv.getCurrentStock()));
+        }
+        return ResponseEntity.badRequest().body(Map.of("success", false));
     }
 
     @GetMapping("/users")
