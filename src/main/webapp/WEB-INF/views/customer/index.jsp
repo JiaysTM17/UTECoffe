@@ -102,17 +102,17 @@
                             </a>
                             <div class="card-body p-4 d-flex flex-column flex-grow-1">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <span class="text-gold font-accent small text-uppercase" style="letter-spacing: 0.1em;">${prod.category.name}</span>
-                                    <span class="badge bg-espresso text-secondary small border border-gold"><i class="fa-solid fa-fire-flame-curved me-1 text-gold"></i> Rang Mộc</span>
+                                    <span class="text-gold font-accent small text-uppercase product-category-badge" style="letter-spacing: 0.1em;" data-category-name="${prod.category.name}">${prod.category.name}</span>
+                                    <span class="badge bg-espresso text-secondary small border border-gold roast-badge"><i class="fa-solid fa-fire-flame-curved me-1 text-gold"></i> Rang Mộc</span>
                                 </div>
                                 <h5 class="font-serif fw-bold mb-2">
-                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="text-primary text-decoration-none hover-gold">${prod.name}</a>
+                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="text-primary text-decoration-none hover-gold product-title-text" data-slug="${prod.slug}">${prod.name}</a>
                                 </h5>
-                                <p class="text-secondary small flex-grow-1 mb-3 text-truncate-2">
+                                <p class="text-secondary small flex-grow-1 mb-3 text-truncate-2 product-desc-text" data-slug="${prod.slug}">
                                     ${not empty prod.description ? prod.description : 'Hương vị nguyên bản từ hạt Arabica chín cây tuyển chọn, kết hợp kỹ thuật pha thủ công tinh tế.'}
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold">
-                                    <span class="price-gold"><fmt:formatNumber value="${prod.basePrice}" pattern="#,##0"/> VNĐ</span>
+                                    <span class="price-gold product-price-val" data-raw-price="${prod.basePrice}" data-vnd="${prod.basePrice}"><fmt:formatNumber value="${prod.basePrice}" pattern="#,##0"/> VNĐ</span>
                                     <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill">
                                         <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="feat.add_cart">Tùy Chỉnh</span>
                                     </a>

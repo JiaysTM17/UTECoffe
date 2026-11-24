@@ -180,6 +180,7 @@
             <c:forEach var="p" items="${products}">
                 <div class="col product-card-col" 
                      data-name="${p.name.toLowerCase()}" 
+                     data-slug="${p.slug}"
                      data-desc="${empty p.description ? '' : p.description.toLowerCase()}" 
                      data-price="${p.basePrice}"
                      data-cat="${p.category.id}">
@@ -187,7 +188,7 @@
                         <!-- Featured Badge -->
                         <c:if test="${p.isFeatured}">
                             <div class="position-absolute top-0 end-0 m-3" style="z-index: 3;">
-                                <span class="badge bg-gold text-dark px-2 py-1 font-accent fw-bold small shadow">
+                                <span class="badge bg-gold text-dark px-2 py-1 font-accent fw-bold small shadow signature-badge">
                                     <i class="fa-solid fa-award me-1"></i> Signature
                                 </span>
                             </div>
@@ -200,7 +201,7 @@
                                  alt="${p.name}"
                                  loading="lazy">
                             <div class="card-img-overlay d-flex flex-column justify-content-end p-2 bg-gradient-dark">
-                                <span class="badge bg-dark-roast border border-gold-subtle text-gold align-self-start font-accent small">
+                                <span class="badge bg-dark-roast border border-gold-subtle text-gold align-self-start font-accent small product-category-badge" data-category-name="${p.category.name}">
                                     ${p.category.name}
                                 </span>
                             </div>
@@ -208,25 +209,25 @@
 
                         <!-- Card Body -->
                         <div class="p-3 d-flex flex-column flex-grow-1">
-                            <h5 class="font-serif fw-bold text-light mb-1 line-clamp-1" title="${p.name}">
+                            <h5 class="font-serif fw-bold text-light mb-1 line-clamp-1 product-title-text" title="${p.name}" data-slug="${p.slug}">
                                 ${p.name}
                             </h5>
-                            <p class="text-secondary small mb-3 flex-grow-1 line-clamp-2" style="font-size: 0.825rem; line-height: 1.5;">
+                            <p class="text-secondary small mb-3 flex-grow-1 line-clamp-2 product-desc-text" data-slug="${p.slug}" style="font-size: 0.825rem; line-height: 1.5;">
                                 ${empty p.description ? 'Hương vị cà phê đặc sản thủ công cao cấp được tuyển chọn từ các vùng nguyên liệu nổi tiếng.' : p.description}
                             </p>
 
                             <!-- Price and Action Strip -->
                             <div class="d-flex align-items-center justify-content-between pt-2 border-top border-gold-subtle mt-auto">
                                 <div>
-                                    <span class="small text-secondary d-block font-accent" style="font-size: 0.75rem;">Giá nguyên bản:</span>
-                                    <span class="fw-bold text-gold fs-6">
+                                    <span class="small text-secondary d-block font-accent" style="font-size: 0.75rem;" data-i18n="menu.original_price">Giá nguyên bản:</span>
+                                    <span class="fw-bold text-gold fs-6 product-price-val" data-raw-price="${p.basePrice}" data-vnd="${p.basePrice}">
                                         <fmt:formatNumber value="${p.basePrice}" pattern="#,###"/> VNĐ
                                     </span>
                                 </div>
                                 <div>
                                     <a href="${pageContext.request.contextPath}/menu/${p.slug}" 
                                        class="btn btn-gold btn-sm px-3 rounded-pill font-accent fw-semibold">
-                                        <i class="fa-solid fa-sliders me-1"></i> Tùy Chỉnh
+                                        <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="menu.customize">Tùy Chỉnh</span>
                                     </a>
                                 </div>
                             </div>

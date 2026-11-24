@@ -161,8 +161,8 @@
                         <span class="badge bg-success-subtle text-success small ms-2"><i class="fa-solid fa-circle-check me-1"></i>Sẵn Sàng Phục Vụ</span>
                     </div>
 
-                    <h1 class="display-5 fw-bold font-serif text-gold-gradient mb-2">${product.name}</h1>
-                    <p class="text-secondary mb-4 leading-relaxed">${product.description}</p>
+                    <h1 class="display-5 fw-bold font-serif text-gold-gradient mb-2 product-title-text" data-slug="${product.slug}">${product.name}</h1>
+                    <p class="text-secondary mb-4 leading-relaxed product-desc-text" data-slug="${product.slug}">${product.description}</p>
 
                     <!-- Price Box -->
                     <div class="p-3 rounded-4 bg-espresso border border-gold mb-4 d-flex justify-content-between align-items-center flex-wrap gap-2">

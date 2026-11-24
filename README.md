@@ -111,40 +111,91 @@ flowchart TD
 
 ---
 
-## ⚡ Giải Thuật Chuyên Sâu & Mẫu Thiết Kế Doanh Nghiệp (Enterprise Algorithms & Patterns)
+## ⚡ 8 Giải Thuật Toán Học & Khoa Học Máy Tính Doanh Nghiệp (Enterprise Algorithms & Formulations)
 
-Dự án áp dụng các giải thuật và mẫu thiết kế chuẩn công nghiệp để đảm bảo tính toàn vẹn dữ liệu, hiệu năng cao và độ tin cậy tuyệt đối:
+Hệ thống UTECoffe tích hợp 8 thuật toán chuyên sâu nhằm giải quyết triệt để các bài toán tối ưu hóa trong vận hành chuỗi F&B cao cấp:
 
-### 1. Thuật Toán Bảo Toàn Tính Bất Biến (Idempotency Algorithm & Pattern)
-- **Vấn đề giải quyết:** Chống tạo đơn hàng trùng lặp hoặc trừ tiền/trừ kho 2 lần khi khách hàng nhấn đúp nút thanh toán, mạng bị gián đoạn hoặc cơ chế tự động gửi lại (retry) của trình duyệt.
-- **Cơ chế triển khai:**
-  - Client gửi kèm HTTP Header `Idempotency-Key` (UUIDv4) duy nhất cho mỗi phiên thanh toán.
-  - Server áp dụng Aspect `@Idempotent` tính toán mã băm SHA-256 từ Request Body và kiểm tra bảng `idempotency_keys`:
-    - Nếu khóa **chưa tồn tại**: Tạo bản ghi trạng thái `PROCESSING`, thực hiện giao dịch, sau đó chuyển thành `COMPLETED` và lưu bộ nhớ đệm (Response Cache).
-    - Nếu khóa **đang ở trạng thái `PROCESSING`**: Trả về `409 Conflict` ngăn chặn giao dịch đồng thời.
-    - Nếu khóa **đã ở trạng thái `COMPLETED`**: Lập tức trả về kết quả đã lưu trong bộ đệm mà không thực hiện lại logic trừ kho hay tạo đơn mới.
+```mermaid
+flowchart LR
+    A["1. Cosine Similarity<br/>(Vector Space Flavor Profiling)"] --> Core["UTE-ALGORITHM ENGINE"]
+    B["2. Damerau-Levenshtein<br/>(Fuzzy Spell Tolerance)"] --> Core
+    C["3. Wilson EOQ & Safety Stock<br/>(Inventory Optimization)"] --> Core
+    D["4. Dynamic Priority Aging<br/>(KDS Dispatch Scheduling)"] --> Core
+    E["5. Dynamic Pricing Elasticity<br/>(Yield & Clearance)"] --> Core
+    F["6. Apriori Association Rules<br/>(Market Basket Lift >= 1.0)"] --> Core
+    G["7. 0/1 Knapsack DP<br/>(Optimal Coupon Stacking)"] --> Core
+    H["8. SHA-256 Idempotency<br/>(Token Bucket Rate Limiting)"] --> Core
+```
 
-### 2. Thuật Toán Giới Hạn Tần Suất Token Bucket (Sliding Window Rate Limiter)
-- **Vấn đề giải quyết:** Phòng chống tấn công từ chối dịch vụ (DDoS), Brute-Force mật khẩu và spam tạo đơn tự động.
-- **Cơ chế triển khai:**
-  - Dùng thuật toán **Token Bucket** trong bộ nhớ đồng thời (`ConcurrentHashMap` + Atomic Timestamp).
-  - Tích hợp qua Aspect `@RateLimited` áp dụng cho API Đăng nhập (tối đa 10 lần/phút) và API Đặt hàng (tối đa 20 lần/phút). Vượt ngưỡng sẽ nhận phản hồi `429 Too Many Requests` lịch sự.
+### 1. Thuật Toán Không Gian Vector & Độ Tương Đồng Cosine (Cosine Similarity Flavor Profiling)
+- **Bài toán:** Khách hàng có sở thích cảm quan đa dạng (độ chua thanh Acidity, độ đắng mộc Roast, độ ngọt hậu Sweetness, thể chất Body). Làm sao định vị chính xác ly cà phê phù hợp nhất?
+- **Công thức:** Biểu diễn gu khách hàng thành vector $\vec{u} = (u_1, u_2, u_3, u_4)$ và hồ sơ hạt thành vector $\vec{v} = (v_1, v_2, v_3, v_4)$:
+  $$\text{Cosine Similarity}(\vec{u}, \vec{v}) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\|} = \frac{\sum_{i=1}^n u_i v_i}{\sqrt{\sum_{i=1}^n u_i^2} \sqrt{\sum_{i=1}^n v_i^2}}$$
+- **Kết quả:** Trả về % tương đồng hương vị (VD: 94.6% tương thích với Pour-Over V60 Bourbon Cầu Đất).
 
-### 3. Thuật Toán Khoảng Cách Trắc Địa Trái Đất (Haversine Spherical Distance Formula)
-- **Vấn đề giải quyết:** Tính toán khoảng cách mặt cầu thực tế giữa vị trí GPS của khách hàng và 3 chi nhánh Flagship để tự động chọn cơ sở gần nhất và ước tính thời gian giao hàng.
-- **Công thức giải thuật:**
-  $$\Delta\phi = \text{radians}(\text{lat}_2 - \text{lat}_1), \quad \Delta\lambda = \text{radians}(\text{lng}_2 - \text{lng}_1)$$
-  $$a = \sin^2\left(\frac{\Delta\phi}{2}\right) + \cos(\text{lat}_1) \cdot \cos(\text{lat}_2) \cdot \sin^2\left(\frac{\Delta\lambda}{2}\right)$$
-  $$c = 2 \cdot \text{atan2}\left(\sqrt{a}, \sqrt{1-a}\right), \quad d = R \cdot c \quad (R = 6.371\text{ km})$$
-- Tích hợp nút **"Định Vị Gần Nhất"** tại trang Checkout và danh sách Cửa hàng.
+### 2. Thuật Toán Tìm Kiếm Mờ Damerau-Levenshtein & Jaro-Winkler (Fuzzy Spell-Tolerance Search)
+- **Bài toán:** Thực khách gõ sai chính tả, thiếu dấu tiếng Việt hoặc gõ tắt (VD: "cold bre", "croisan", "cà fe muoi").
+- **Công thức:** Tính toán khoảng cách sửa đổi nhỏ nhất giữa 2 chuỗi $s_1, s_2$ cho phép 4 thao tác (Thêm, Xóa, Thay thế, và Đảo vị trí 2 ký tự liền kề):
+  $$d_{a,b}(i, j) = \min \begin{cases} d_{a,b}(i-1, j) + 1 \\ d_{a,b}(i, j-1) + 1 \\ d_{a,b}(i-1, j-1) + \text{cost} \\ d_{a,b}(i-2, j-2) + 1 & \text{khi } a[i]=b[j-1] \text{ và } a[i-1]=b[j] \end{cases}$$
+- **Kết quả:** Gợi ý tức thì đồ uống chính xác với thời gian phản hồi $< 2\text{ms}$.
 
-### 4. Thuật Toán Gợi Ý Ghép Vị Cảm Quan (Artisanal Flavor Pairing Engine)
-- **Vấn đề giải quyết:** Đề xuất cặp đôi đồ uống & bánh nướng tối ưu nhằm bùng nổ hương vị Terroir cho thực khách.
-- **Cơ chế triển khai:**
-  - Ma trận hòa hợp hương vị (Flavor Harmony Matrix) kết hợp quy tắc đối ngẫu cảm quan:
-    - *Đồ uống hương chua sáng / Cam chanh* (Geisha, Cold Brew Cam Vàng) $\leftrightarrow$ *Bánh ngậy bơ Pháp* (Croissant Elle & Vire, Danish Phúc Bồn Tử).
-    - *Đồ uống đậm đà / Muối béo* (Cà phê muối, Espresso) $\leftrightarrow$ *Bánh phô mai & Cacao* (Tiramisu, Basque Cheesecake).
-    - *Trà hoa thanh tao* (Ô Long Mộc Châu, Sen Tây Hồ) $\leftrightarrow$ *Bánh thanh nhẹ* (Mousse Chanh Leo, Macaron).
+### 3. Thuật Toán Định Lượng Tồn Kho Kinh Tế Wilson EOQ & Safety Stock (Inventory Optimization)
+- **Bài toán:** Cân bằng giữa chi phí đặt hàng (Order Cost $S$) và chi phí lưu kho bảo quản hạt specialty (Holding Cost $H$) để không bao giờ bị đứt hàng hạt tươi.
+- **Công thức:**
+  $$\text{EOQ} = \sqrt{\frac{2 \cdot D \cdot S}{H}}, \quad \text{Safety Stock (SS)} = Z_{\alpha} \times \sigma_L = 1.65 \times \sqrt{L} \times \sigma_D$$
+  $$\text{Reorder Point (ROP)} = (\bar{d} \times L) + \text{SS}$$
+- **Kết quả:** Tự động phát cảnh báo đặt hàng nguyên liệu cho Quản lý chi nhánh khi tồn kho chạm ngưỡng ROP.
+
+### 4. Thuật Toán Lập Lịch Pha Chế KDS Động Có Hệ Số Lão Hóa (Dynamic Priority Scheduling with Aging)
+- **Bài toán:** Ngăn chặn tình trạng đơn hàng lớn hoặc đơn Delivery chiếm dụng quầy bar khiến khách ngồi tại quán bị chờ quá lâu (Starvation Prevention).
+- **Công thức:** Điểm ưu tiên được cập nhật liên tục theo từng chu kỳ 5 giây:
+  $$\text{Priority Score} = w_1 \cdot \text{BaseTypeWeight} + w_2 \cdot \text{WaitTimeSeconds} \times \alpha_{\text{Aging}} - w_3 \cdot \text{EstimatedPrepTime}$$
+- **Kết quả:** Đơn hàng chờ càng lâu thì điểm ưu tiên càng tăng vọt, tự động đẩy lên đầu hàng đợi pha chế.
+
+### 5. Thuật Toán Định Giá Động & Quản Trị Năng Suất (Dynamic Pricing & Yield Management)
+- **Bài toán:** Tối ưu hóa doanh thu theo giờ thấp điểm và xả hàng bánh ngọt tươi cuối ngày để chống lãng phí thực phẩm (Anti-Food Waste).
+- **Cơ chế:**
+  - *Afternoon Happy Hour (14:00 - 16:30):* Giảm động 12% đồ uống nhằm kích thích lưu lượng khách làm việc buổi chiều.
+  - *Evening Fresh Clearance (20:30 - 23:00):* Giảm 25% toàn bộ bánh nướng thủ công nướng trong ngày (Croissant, Pain au Chocolat, Danish).
+
+### 6. Khai Phá Luật Kết Hợp Giỏ Hàng Apriori (Market Basket Analysis & Cross-Selling)
+- **Bài toán:** Khám phá cặp đôi đồ uống & bánh nướng có độ kết hợp cao nhất để gợi ý tại Customizer và Cart.
+- **Công thức:**
+  $$\text{Support}(A \to B) = P(A \cap B), \quad \text{Confidence}(A \to B) = \frac{P(A \cap B)}{P(A)}, \quad \text{Lift}(A \to B) = \frac{P(A \cap B)}{P(A) \times P(B)}$$
+- **Kết quả:** Các cặp có $\text{Lift} \ge 1.0$ (VD: Cà phê đặc sản $\to$ Croissant Pháp với $\text{Lift} = 2.45$) được ưu tiên gợi ý hàng đầu.
+
+### 7. Quy Hoạch Động 0/1 Knapsack Tối Ưu Hóa Mã Giảm Giá (Coupon Stacking Optimizer)
+- **Bài toán:** Khách hàng sở hữu nhiều voucher trong ví (giảm %, giảm tiền mặt, miễn phí vận chuyển). Tìm tổ hợp voucher mang lại số tiền tiết kiệm lớn nhất mà không vi phạm quy chế chiết khấu tối đa.
+- **Giải thuật:** Quy hoạch động quy đổi bài toán ba-lô nguyên:
+  $$V(i, w) = \max\Big(V(i-1, w), \; V(i-1, w - c_i) + d_i\Big)$$
+- **Kết quả:** Áp dụng phương án có lợi nhất cho khách hàng trong 1 lần nhấn chuột.
+
+### 8. Động Cơ Idempotency Bất Biến & Token Bucket Rate Limiting
+- **Bài toán:** Triệt tiêu rủi ro thanh toán trùng lặp khi rớt mạng hoặc người dùng nhấn liên tục nút đặt hàng.
+- **Cơ chế:**
+  - Tạo mã băm mật mã SHA-256 từ Request Body + Client Idempotency Key (UUIDv4).
+  - Thuật toán **Token Bucket** (Capacity 60 tokens, Refill 1 token/giây) điều tiết lưu lượng truy cập mượt mà, phòng chống quét giá hay tấn công DDoS.
+
+---
+
+## 🎨 Hệ Thống Thiết Kế Kỹ Nghệ & Đa Ngôn Ngữ (Design Craft & Internationalization)
+
+### 1. Chuẩn Mực Thiết Kế Kỹ Nghệ Thủ Công (Artisanal Craft Design System)
+- **Triết lý:** *Quiet Luxury & Artisanal Roastery* — loại bỏ hiệu ứng hào nhoáng của AI (*AI Slop: glow neon, viền vàng dạ quang, font chữ hoa gắt gỏng, nút bấm viên thuốc 9999px*) để trở về với vẻ đẹp mộc mạc, tĩnh lặng của xưởng rang cà phê châu Âu.
+- **Hệ màu sắc:**
+  - Nền tối: Espresso than chì ấm (`#12100e` & `#171412`), không dùng đen kịt chói mắt.
+  - Ánh kim: Đồng thau phay xước (*Brushed Brass* `#d4b47e`), không dùng vàng chanh rực rỡ.
+  - Đường viền: Hairline siêu mảnh 1px với độ mờ tinh tế 8% – 18%.
+- **Chế độ A/B Live Switcher:** Nút gạt nổi thông minh ở góc trái màn hình cho phép người dùng chuyển đổi tức thì giữa chế độ *Cổ Điển (Classic Gold)* và *Tinh Gọn (Artisanal Craft)*.
+
+### 2. Động Cơ Đa Ngôn Ngữ & Tự Động Quy Đổi Ngoại Tệ (Bilingual & Currency Engine)
+- **Chuyển ngữ toàn diện:** Hỗ trợ song ngữ Tiếng Việt (VN) và English (EN) trên toàn bộ danh mục 36+ thức uống, mô tả nguyên liệu nông hộ, câu chuyện thương hiệu và nhãn KDS.
+- **Chuyển ngữ thông minh có fallback:** Tự động loại bỏ dấu tiếng Việt chuẩn xác (*Diacritic Stripping*) cho các dòng sản phẩm đặc trưng nếu chưa kịp định nghĩa từ điển.
+- **Tự động quy đổi ngoại tệ:**
+  - Khi chọn **Tiếng Việt:** Hiển thị tiền tệ bản địa chuẩn xác (`#,##0 ₫` hoặc `VNĐ`).
+  - Khi chọn **English:** Tự động quy đổi theo tỷ giá quốc tế hiển thị `$X.XX USD`, tạo trải nghiệm mua sắm quốc tế hoàn hảo.
+
+---
 
 ---
 

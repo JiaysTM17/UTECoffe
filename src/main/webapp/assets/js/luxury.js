@@ -243,6 +243,158 @@
         });
     }
 
+    // Helper: Strip Vietnamese Diacritics
+    function removeVietnameseAccents(str) {
+        if (!str) return '';
+        return str.normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .replace(/đ/g, 'd').replace(/Đ/g, 'D');
+    }
+
+    // Comprehensive Bilingual Product Catalog
+    const PRODUCT_I18N_CATALOG = {
+        // Specialty Coffees
+        'cold-brew-cam-vang-specialty': {
+            en_name: 'Specialty Cold Brew with Valencia Orange',
+            en_desc: '18-hour slow-steeped Arabica paired with fresh, sun-ripened Sunkist orange juice.'
+        },
+        'espresso-tonic-signature': {
+            en_name: 'Espresso Tonic Signature',
+            en_desc: 'Robust double-shot Cau Dat espresso layered over crisp premium tonic and fresh lemon slice.'
+        },
+        'ca-phe-muoi-hoang-gia': {
+            en_name: 'Imperial Salted Cream Coffee',
+            en_desc: 'Fine Cau Dat Robusta topped with velvety royal salted caramel cream.'
+        },
+        'pour-over-v60-bourbon-cau-dat': {
+            en_name: 'Pour-Over V60 Cau Dat Bourbon',
+            en_desc: 'Hand-poured drop by drop; delicate notes of white jasmine and crisp wild berries.'
+        },
+        'latte-sua-yen-mach-oatly': {
+            en_name: 'Oatly Oat Milk Artisan Latte',
+            en_desc: 'Rich artisan espresso harmoniously blended with Swedish Oatly oat milk; naturally creamy & 100% plant-based.'
+        },
+        'flat-white-cau-dat-double-shot': {
+            en_name: 'Cau Dat Double Shot Flat White',
+            en_desc: 'Silky microfoam milk perfectly steamed with a bold double shot of Cau Dat espresso.'
+        },
+        'affogato-gelato-vani': {
+            en_name: 'Madagascar Vanilla Gelato Affogato',
+            en_desc: 'Single shot hot espresso poured over artisanal vanilla gelato for a sublime temperature contrast.'
+        },
+        'ca-phe-trung-ha-noi-specialty': {
+            en_name: 'Hanoi Egg Cream Coffee Specialty',
+            en_desc: 'Traditional phin coffee crowned with fluffy, cloud-like sweet egg foam; rich, velvety and authentic.'
+        },
+        'cold-brew-u-thung-go-soi': {
+            en_name: 'Oak Barrel Aged Cold Brew',
+            en_desc: 'Cau Dat Arabica slow-steeped 48 hours in charred oak barrels; deep vanilla, smoke and caramel notes.'
+        },
+        'ca-phe-dua-non-ben-tre': {
+            en_name: 'Ben Tre Tender Coconut Coffee',
+            en_desc: 'Artisan espresso over freshly blended Ben Tre young coconut milk topped with toasted coconut crisps.'
+        },
+        'cold-brew-sparkling-yuzu': {
+            en_name: 'Sparkling Yuzu Cold Brew',
+            en_desc: '24-hour steeped cold brew infused with Japanese Yuzu citrus and effervescent sparkling bubbles.'
+        },
+        'ca-phe-bac-xiu-4-tang-cau-dat': {
+            en_name: '4-Layer Artisanal Bac Xiu',
+            en_desc: 'Four-tiered visual masterpiece: premium condensed milk, fresh Dalat milk, espresso, and silky microfoam.'
+        },
+        'single-origin-geisha-panama-pour-over': {
+            en_name: 'Panama Geisha Single-Origin Pour-Over',
+            en_desc: 'World-renowned rare Geisha varietal hand-brewed at your table; blooming orange blossoms, apricot and raw honey.'
+        },
+
+        // Artisanal Teas
+        'tra-oolong-kem-phomai-vang': {
+            en_name: 'Roasted Oolong with Golden Cheese Foam',
+            en_desc: 'Charcoal-roasted Moc Chau Oolong topped with a luscious savory cheese macchiato crown.'
+        },
+        'tra-sen-vang-macchiato-tay-ho': {
+            en_name: 'Royal Tay Ho Lotus Macchiato Tea',
+            en_desc: 'Fragrant West Lake lotus tea served with tender lotus seeds, crunchy water chestnuts, and silky cream foam.'
+        },
+        'tra-nhai-mang-cau-dak-lak': {
+            en_name: 'Jasmine Soursop Refreshing Tea',
+            en_desc: 'Pure jasmine green tea paired with crushed sweet-tart Dak Lak soursop pulp.'
+        },
+        'tra-dao-cam-sa-thao-moc': {
+            en_name: 'Botanical Peach Orange Lemongrass Tea',
+            en_desc: 'Fresh warm lemongrass, sun-kissed juicy orange slices, and sweet crisp marinated peach slices.'
+        },
+        'matcha-latte-uji-kyoto': {
+            en_name: 'Ceremonial Uji Kyoto Matcha Latte',
+            en_desc: 'Authentic stone-ground ceremonial matcha from Uji, Kyoto blended with velvety fresh Dalat milk.'
+        },
+        'tra-sua-oolong-rang-khoi': {
+            en_name: 'Smoked Roasted Oolong Milk Tea',
+            en_desc: 'Charcoal-fired roasted Oolong tea married with rich dairy milk and chewy golden boba pearls.'
+        },
+        'tra-vai-hoa-hong-damask': {
+            en_name: 'Damascus Rose & Lychee Royal Tea',
+            en_desc: 'Artisan black tea scented with Damascus rosebuds and infused with luscious, sweet lychee fruit.'
+        },
+        'tra-long-nhan-hat-chia-hung-yen': {
+            en_name: 'Hung Yen Longan & Chia Wellness Tea',
+            en_desc: 'Ancient black tea with royal Hung Yen thick-fleshed longan fruit and organic chia seeds.'
+        },
+        'hojicha-latte-rang-cui-nhat-ban': {
+            en_name: 'Wood-Fired Japanese Hojicha Latte',
+            en_desc: 'Traditional wood-roasted Japanese Hojicha green tea; nutty, toasty aroma with minimal caffeine.'
+        },
+        'tra-buoi-hong-ruby-mat-ong': {
+            en_name: 'Ruby Pink Grapefruit & Wild Mint Honey Tea',
+            en_desc: 'Floral green tea mixed with juicy Ruby grapefruit pulp and refreshing cool mint blossom honey.'
+        },
+        'tra-dau-tay-da-lat-macchiato': {
+            en_name: 'Dalat Fresh Strawberry Macchiato',
+            en_desc: 'Organic jasmine tea base combined with muddled Japanese-variety Dalat strawberries, topped with salted cream.'
+        },
+        'tra-thao-moc-cuc-la-ma-tao-do': {
+            en_name: 'Chamomile, Jujube & Goji Berry Herbal Tea',
+            en_desc: 'Soothing organic Chamomile blossoms infused with slow-simmered Xinjiang red dates and goji berries.'
+        },
+
+        // Pastries
+        'croissant-bo-phap-thu-cong': {
+            en_name: 'Handcrafted French Butter Croissant',
+            en_desc: 'Flaky thousand-layer croissant baked with 100% Elle & Vire French butter for true Parisian flavor.'
+        },
+        'pain-au-chocolat-bo-tuoi': {
+            en_name: 'Fresh Butter Pain au Chocolat',
+            en_desc: 'Crisp Parisian laminated pastry rolled with rich molten Belgian dark chocolate batons.'
+        },
+        'tiramisu-espresso-mascarpone': {
+            en_name: 'Espresso Mascarpone Artisan Tiramisu',
+            en_desc: 'Classic Italian ladyfingers steeped in Cau Dat espresso, layered with silky mascarpone and cocoa.'
+        },
+        'canele-de-bordeaux-truyen-thong': {
+            en_name: 'Traditional Canelé de Bordeaux',
+            en_desc: 'Caramelized crisp dark crust enveloping a soft, custardy center infused with pure vanilla and dark rum.'
+        },
+        'mousse-dau-tam-rung-da-lat': {
+            en_name: 'Dalat Wild Mulberry Velvet Mousse',
+            en_desc: 'Delicate, airy mousse crafted from fresh wild Dalat mulberries with a refreshing sweet-tart profile.'
+        },
+        'basque-burnt-cheesecake': {
+            en_name: 'Basque Burnt Cheesecake San Sebastián',
+            en_desc: 'San Sebastián-style caramelized burnt top with an ultra-creamy, molten cheesecake core.'
+        }
+    };
+
+    const CATEGORY_I18N = {
+        'Cà Phê Đặc Sản': 'Specialty Coffee',
+        'Trà Thượng Hạng': 'Artisan Tea',
+        'Bánh Ngọt Thủ Công': 'Artisan Pastry',
+        'Bánh Nghệ Nhân': 'Artisan Pastry',
+        'Rang Mộc': 'Artisan Roasted',
+        'Bán Chạy': 'Best Seller',
+        'Signature': 'Signature',
+        'Đang Hoạt Động': 'Operational'
+    };
+
     function applyLanguage(lang) {
         localStorage.setItem('utecoffe_lang', lang);
 
@@ -264,14 +416,105 @@
             }
         });
 
-        // Update raw prices uniformly
-        document.querySelectorAll('[data-raw-price]').forEach(el => {
-            const raw = parseFloat(el.getAttribute('data-raw-price'));
-            if (!isNaN(raw) && raw > 0) {
-                if (lang === 'en') {
-                    el.textContent = Math.round(raw).toLocaleString('en-US') + ' VND';
+        // Translate Product Titles
+        document.querySelectorAll('.product-title-text').forEach(el => {
+            const slug = el.getAttribute('data-slug');
+            if (!el.getAttribute('data-vi-title')) {
+                el.setAttribute('data-vi-title', el.textContent.trim());
+            }
+            if (lang === 'en') {
+                if (PRODUCT_I18N_CATALOG[slug] && PRODUCT_I18N_CATALOG[slug].en_name) {
+                    el.textContent = PRODUCT_I18N_CATALOG[slug].en_name;
                 } else {
-                    el.textContent = Math.round(raw).toLocaleString('vi-VN') + ' VNĐ';
+                    el.textContent = removeVietnameseAccents(el.getAttribute('data-vi-title'));
+                }
+            } else {
+                el.textContent = el.getAttribute('data-vi-title');
+            }
+        });
+
+        // Translate Product Descriptions
+        document.querySelectorAll('.product-desc-text').forEach(el => {
+            const slug = el.getAttribute('data-slug');
+            if (!el.getAttribute('data-vi-desc')) {
+                el.setAttribute('data-vi-desc', el.textContent.trim());
+            }
+            if (lang === 'en') {
+                if (PRODUCT_I18N_CATALOG[slug] && PRODUCT_I18N_CATALOG[slug].en_desc) {
+                    el.textContent = PRODUCT_I18N_CATALOG[slug].en_desc;
+                } else {
+                    el.textContent = removeVietnameseAccents(el.getAttribute('data-vi-desc'));
+                }
+            } else {
+                el.textContent = el.getAttribute('data-vi-desc');
+            }
+        });
+
+        // Translate Category Badges
+        document.querySelectorAll('.product-category-badge').forEach(el => {
+            if (!el.getAttribute('data-vi-cat')) {
+                el.setAttribute('data-vi-cat', el.textContent.trim());
+            }
+            const vi = el.getAttribute('data-vi-cat');
+            if (lang === 'en') {
+                el.textContent = CATEGORY_I18N[vi] || removeVietnameseAccents(vi);
+            } else {
+                el.textContent = vi;
+            }
+        });
+
+        // Translate Special Badges (Rang Mộc, Bán Chạy)
+        document.querySelectorAll('.roast-badge').forEach(el => {
+            if (lang === 'en') {
+                el.innerHTML = '<i class="fa-solid fa-fire-flame-curved me-1 text-gold"></i> Artisan Roasted';
+            } else {
+                el.innerHTML = '<i class="fa-solid fa-fire-flame-curved me-1 text-gold"></i> Rang Mộc';
+            }
+        });
+
+        document.querySelectorAll('.badge-luxury-tag').forEach(el => {
+            if (lang === 'en') {
+                el.innerHTML = '<i class="fa-solid fa-star text-gold me-1"></i> Best Seller';
+            } else {
+                el.innerHTML = '<i class="fa-solid fa-star text-gold me-1"></i> Bán Chạy';
+            }
+        });
+
+        // Translate Menu Sort Dropdown
+        const sortSelect = document.getElementById('menuSortSelect');
+        if (sortSelect) {
+            const opt = sortSelect.options;
+            if (lang === 'en') {
+                if (opt[0]) opt[0].text = 'Featured Selection';
+                if (opt[1]) opt[1].text = 'Price: Low → High';
+                if (opt[2]) opt[2].text = 'Price: High → Low';
+                if (opt[3]) opt[3].text = 'Name: A → Z';
+            } else {
+                if (opt[0]) opt[0].text = 'Nổi bật nhất';
+                if (opt[1]) opt[1].text = 'Giá: Thấp → Cao';
+                if (opt[2]) opt[2].text = 'Giá: Cao → Thấp';
+                if (opt[3]) opt[3].text = 'Tên: A → Z';
+            }
+        }
+
+        // Translate & Convert Currency (1 USD = 24,500 VND)
+        const RATE = 24500;
+        document.querySelectorAll('[data-raw-price], [data-vnd], .product-price-val').forEach(el => {
+            let vnd = parseFloat(el.getAttribute('data-vnd') || el.getAttribute('data-raw-price'));
+            if (isNaN(vnd) || vnd <= 0) {
+                // Try parse from text content
+                const matched = el.textContent.replace(/[^0-9]/g, '');
+                if (matched) {
+                    vnd = parseFloat(matched);
+                    el.setAttribute('data-vnd', vnd);
+                }
+            }
+            if (!isNaN(vnd) && vnd > 0) {
+                if (lang === 'en') {
+                    const usd = (vnd / RATE).toFixed(2);
+                    el.textContent = '$' + usd + ' USD';
+                } else {
+                    el.textContent = Math.round(vnd).toLocaleString('vi-VN') + ' VNĐ';
                 }
             }
         });

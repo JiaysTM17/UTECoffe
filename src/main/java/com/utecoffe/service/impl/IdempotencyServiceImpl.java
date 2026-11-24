@@ -1,129 +1,148 @@
 package com.utecoffe.service.impl;
 
-import com.utecoffe.entity.IdempotencyKey;
-import com.utecoffe.enums.IdempotencyStatus;
-import com.utecoffe.repository.IdempotencyKeyRepository;
 import com.utecoffe.service.IdempotencyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.time.LocalDateTime;
-import java.util.Optional;
+import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
+import java.util.HexFormat;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Enterprise Idempotency & Token Bucket Rate Limiting Engine.
+ * Formulated to guarantee exact-once execution for financial checkout,
+ * loyalty point redemption, and stock deduction.
+ */
 @Service
 public class IdempotencyServiceImpl implements IdempotencyService {
 
-    @Autowired
-    private IdempotencyKeyRepository idempotencyKeyRepository;
+    private static final Logger log = LoggerFactory.getLogger(IdempotencyServiceImpl.class);
 
-    @Override
-    @Transactional(isolation = Isolation.READ_COMMITTED)
-    public IdempotencyCheckResult checkAndLock(String keyValue, String requestHash) {
-        if (keyValue == null || keyValue.trim().isEmpty()) {
-            return IdempotencyCheckResult.builder().action(IdempotencyCheckResult.Action.ACQUIRED).build();
+    private static class IdempotencyRecord {
+        final String payloadHash;
+        final Instant createdAt;
+        String responsePayload;
+        boolean committed;
+
+        IdempotencyRecord(String payloadHash) {
+            this.payloadHash = payloadHash;
+            this.createdAt = Instant.now();
+            this.committed = false;
+        }
+    }
+
+    private static class TokenBucket {
+        final long capacity;
+        final double refillRatePerSecond;
+        double currentTokens;
+        long lastRefillTimestamp;
+
+        TokenBucket(long capacity, double refillRatePerSecond) {
+            this.capacity = capacity;
+            this.refillRatePerSecond = refillRatePerSecond;
+            this.currentTokens = capacity;
+            this.lastRefillTimestamp = System.currentTimeMillis();
         }
 
-        Optional<IdempotencyKey> existingOpt = idempotencyKeyRepository.findByKeyValue(keyValue.trim());
-        if (existingOpt.isPresent()) {
-            IdempotencyKey existing = existingOpt.get();
-
-            // If already completed, replay the exact response without re-executing
-            if (existing.getStatus() == IdempotencyStatus.COMPLETED) {
-                return IdempotencyCheckResult.builder()
-                        .action(IdempotencyCheckResult.Action.CACHED)
-                        .httpStatus(existing.getHttpStatus() != null ? existing.getHttpStatus() : 200)
-                        .responsePayload(existing.getResponsePayload())
-                        .build();
+        synchronized boolean tryConsume(int tokens) {
+            refill();
+            if (currentTokens >= tokens) {
+                currentTokens -= tokens;
+                return true;
             }
+            return false;
+        }
 
-            // If processing and within lock TTL (e.g. 2 minutes), reject concurrent duplicate
-            if (existing.getStatus() == IdempotencyStatus.PROCESSING) {
-                if (existing.getCreatedAt().isAfter(LocalDateTime.now().minusMinutes(2))) {
-                    return IdempotencyCheckResult.builder()
-                            .action(IdempotencyCheckResult.Action.CONFLICT)
-                            .httpStatus(409)
-                            .responsePayload("{\"success\":false,\"message\":\"Yêu cầu đang được hệ thống xử lý, vui lòng không nhấn liên tục.\"}")
-                            .build();
-                } else {
-                    // Stale lock, allow retry
-                    existing.setStatus(IdempotencyStatus.PROCESSING);
-                    existing.setRequestHash(requestHash);
-                    existing.setCreatedAt(LocalDateTime.now());
-                    idempotencyKeyRepository.save(existing);
-                    return IdempotencyCheckResult.builder().action(IdempotencyCheckResult.Action.ACQUIRED).build();
-                }
+        private void refill() {
+            long now = System.currentTimeMillis();
+            double secondsElapsed = (now - lastRefillTimestamp) / 1000.0;
+            if (secondsElapsed > 0) {
+                currentTokens = Math.min(capacity, currentTokens + secondsElapsed * refillRatePerSecond);
+                lastRefillTimestamp = now;
             }
-
-            // If FAILED, reset to processing
-            existing.setStatus(IdempotencyStatus.PROCESSING);
-            existing.setRequestHash(requestHash);
-            existing.setCreatedAt(LocalDateTime.now());
-            idempotencyKeyRepository.save(existing);
-            return IdempotencyCheckResult.builder().action(IdempotencyCheckResult.Action.ACQUIRED).build();
-        }
-
-        // Key not found: atomically acquire lock
-        IdempotencyKey newKey = IdempotencyKey.builder()
-                .keyValue(keyValue.trim())
-                .requestHash(requestHash)
-                .status(IdempotencyStatus.PROCESSING)
-                .createdAt(LocalDateTime.now())
-                .expiresAt(LocalDateTime.now().plusHours(24))
-                .build();
-        try {
-            idempotencyKeyRepository.save(newKey);
-            return IdempotencyCheckResult.builder().action(IdempotencyCheckResult.Action.ACQUIRED).build();
-        } catch (Exception e) {
-            // Concurrent insert race condition caught by unique index
-            return IdempotencyCheckResult.builder()
-                    .action(IdempotencyCheckResult.Action.CONFLICT)
-                    .httpStatus(409)
-                    .responsePayload("{\"success\":false,\"message\":\"Giao dịch đang được xử lý đồng thời. Vui lòng kiểm tra lại trạng thái đơn hàng.\"}")
-                    .build();
         }
     }
 
+    // In-memory concurrent state (Can be swapped with Redis in distributed cluster)
+    private final Map<String, IdempotencyRecord> idempotencyStore = new ConcurrentHashMap<>();
+    private final Map<String, TokenBucket> rateLimiters = new ConcurrentHashMap<>();
+
+    // Default rate limit: 60 tokens capacity, replenishing 1 token/sec (60 req/min)
+    private static final long DEFAULT_BUCKET_CAPACITY = 60;
+    private static final double DEFAULT_REFILL_RATE = 1.0;
+
     @Override
-    @Transactional
-    public void markSuccess(String keyValue, int httpStatus, String responsePayload) {
-        if (keyValue == null || keyValue.trim().isEmpty()) return;
-        idempotencyKeyRepository.findByKeyValue(keyValue.trim()).ifPresent(record -> {
-            record.setStatus(IdempotencyStatus.COMPLETED);
-            record.setHttpStatus(httpStatus);
-            record.setResponsePayload(responsePayload);
-            idempotencyKeyRepository.save(record);
-        });
+    public boolean acquireIdempotencyLock(String key, String requestPayload) {
+        if (key == null || key.isBlank()) {
+            return true; // No key provided, bypass lock
+        }
+
+        String hash = computeSha256(requestPayload);
+        IdempotencyRecord existing = idempotencyStore.putIfAbsent(key, new IdempotencyRecord(hash));
+
+        if (existing == null) {
+            log.info("Idempotency lock acquired successfully for key: {}", key);
+            return true;
+        }
+
+        // Key already recorded: verify payload consistency
+        if (!existing.payloadHash.equals(hash)) {
+            log.warn("Idempotency conflict! Key {} reused with different payload hash.", key);
+            throw new IllegalStateException("IDEMPOTENCY_CONFLICT: Key was previously submitted with different request parameters.");
+        }
+
+        log.info("Duplicate idempotent request detected for key: {}. Committed: {}", key, existing.committed);
+        return false;
     }
 
     @Override
-    @Transactional
-    public void markFailed(String keyValue) {
-        if (keyValue == null || keyValue.trim().isEmpty()) return;
-        idempotencyKeyRepository.findByKeyValue(keyValue.trim()).ifPresent(record -> {
-            record.setStatus(IdempotencyStatus.FAILED);
-            idempotencyKeyRepository.save(record);
-        });
+    public void commitIdempotencyResult(String key, String responsePayload) {
+        if (key == null || key.isBlank()) return;
+
+        IdempotencyRecord record = idempotencyStore.get(key);
+        if (record != null) {
+            record.responsePayload = responsePayload;
+            record.committed = true;
+            log.info("Idempotency response committed for key: {}", key);
+        }
     }
 
     @Override
-    public String computeSha256(String data) {
-        if (data == null) return "";
+    public String getCachedResponse(String key) {
+        if (key == null) return null;
+        IdempotencyRecord record = idempotencyStore.get(key);
+        return (record != null && record.committed) ? record.responsePayload : null;
+    }
+
+    @Override
+    public boolean tryAcquireRateLimitToken(String clientId) {
+        if (clientId == null || clientId.isBlank()) {
+            clientId = "anonymous";
+        }
+
+        TokenBucket bucket = rateLimiters.computeIfAbsent(clientId, 
+                id -> new TokenBucket(DEFAULT_BUCKET_CAPACITY, DEFAULT_REFILL_RATE));
+
+        boolean allowed = bucket.tryConsume(1);
+        if (!allowed) {
+            log.warn("Token Bucket rate limit exceeded for client: {}", clientId);
+        }
+        return allowed;
+    }
+
+    private String computeSha256(String input) {
+        if (input == null) input = "";
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(data.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (Exception e) {
-            return String.valueOf(data.hashCode());
+            byte[] hashBytes = digest.digest(input.getBytes(StandardCharsets.UTF_8));
+            return HexFormat.of().formatHex(hashBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("SHA-256 algorithm not available", e);
         }
     }
 }
