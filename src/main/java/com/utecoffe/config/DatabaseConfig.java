@@ -134,12 +134,12 @@ public class DatabaseConfig {
         // 5. Connection pool settings for Cloud Production
         config.setMaximumPoolSize(20);
         config.setMinimumIdle(2);
-        config.setConnectionTimeout(6000); // 6s timeout so requests fail fast if pool is busy
+        config.setConnectionTimeout(10000); // 10s timeout
         config.setInitializationFailTimeout(-1);
         config.setIdleTimeout(120000);
         config.setMaxLifetime(600000);
-        config.setLeakDetectionThreshold(5000);
-        config.addDataSourceProperty("socketTimeout", "10"); // 10s socket timeout
+        config.setLeakDetectionThreshold(15000);
+        config.addDataSourceProperty("socketTimeout", "15"); // 15s socket timeout
         config.addDataSourceProperty("loginTimeout", "5");
 
         log.info("Initialized Cloud HikariDataSource with JDBC URL: {}", rawUrl != null && rawUrl.contains("@") ? rawUrl.replaceAll(":[^:@]+@", ":****@") : rawUrl);

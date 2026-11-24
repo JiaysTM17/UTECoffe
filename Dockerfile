@@ -12,7 +12,7 @@ RUN groupadd -r utecoffe && useradd -r -g utecoffe utecoffe
 # Copy production WAR package directly (Instant 5-second Docker build on Cloud)
 COPY app.war /app/app.war
 
-RUN chown -R utecoffe:utecoffe /app
+RUN mkdir -p /app/tomcat-work && chown -R utecoffe:utecoffe /app
 USER utecoffe
 
 EXPOSE 10000 8080

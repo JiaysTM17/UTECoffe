@@ -16,6 +16,12 @@ public class SiteMeshConfig {
             @Override
             protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
                 builder.setDecoratorPrefix("")
+                       .addExcludedPath("/ping")
+                       .addExcludedPath("/ping/*")
+                       .addExcludedPath("/diag")
+                       .addExcludedPath("/diag/*")
+                       .addExcludedPath("/favicon.ico")
+                       .addExcludedPath("/WEB-INF/*")
                        .addExcludedPath("/api/*")
                        .addExcludedPath("/ws-utecoffe/*")
                        .addExcludedPath("/actuator/*")

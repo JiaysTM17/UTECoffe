@@ -1,5 +1,11 @@
 <sitemesh>
     <!-- Exclude API REST endpoints, WebSocket, and static assets from decoration -->
+    <mapping path="/ping" excl="true"/>
+    <mapping path="/ping/*" excl="true"/>
+    <mapping path="/diag" excl="true"/>
+    <mapping path="/diag/*" excl="true"/>
+    <mapping path="/favicon.ico" excl="true"/>
+    <mapping path="/WEB-INF/*" excl="true"/>
     <mapping path="/api/*" excl="true"/>
     <mapping path="/ws-utecoffe/*" excl="true"/>
     <mapping path="/static/*" excl="true"/>
