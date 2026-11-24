@@ -12,14 +12,12 @@
 </p>
 
 <p align="center">
-  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Java-17%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17"/></a>
-  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot 3"/></a>
-  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Spring_Security-JWT-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white" alt="Security"/></a>
-  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/></a>
-  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/WebSocket-STOMP-010101?style=for-the-badge&logo=socketdotio&logoColor=white" alt="WebSocket"/></a>
-  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/SiteMesh-3.0-FF6F00?style=for-the-badge" alt="SiteMesh 3"/></a>
-  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap 5"/></a>
-  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Cloudinary-Media_CDN-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white" alt="Cloudinary"/></a>
+  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Java-21_LTS-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21"/></a>
+  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot 3.3.5"/></a>
+  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Algorithms-8_Enterprise-FFD700?style=for-the-badge&logo=probot&logoColor=black" alt="8 Enterprise Algorithms"/></a>
+  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Database-34_Tables-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="34 DB Tables"/></a>
+  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions"/></a>
+  <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge" alt="PRs Welcome"/></a>
 </p>
 
 <p align="center">
@@ -279,6 +277,62 @@ Hệ thống biểu tượng **UTECOFFE** được thiết kế theo phong cách
 - **Hạt cà phê Arabica rang mộc (Mạn phải - Đen khói Obsidian `#181615`):** Biểu trưng cho sự đậm đà, chiều sâu, tính kiên định và phong cách thưởng thức cà phê nguyên bản.
 - **Điểm giao thoa tâm điểm (Diamond Core):** Điểm nhấn hình thoi biểu trưng cho "Tỷ lệ vàng" trong công thức chiết xuất, đồng thời ẩn dụ ngòi bút tri thức kỹ thuật từ mái trường UTE.
 - **Dáng chữ "U" âm bản:** Khéo léo tạo hình chữ U đại diện cho thương hiệu UTECoffe.
+
+---
+
+## 🧠 8 Thuật Toán Chuyên Sâu Cấp Doanh Nghiệp (Enterprise Algorithms)
+
+Hệ thống UTECoffe Platform ứng dụng 8 mô hình toán học và thuật toán chuyên sâu phục vụ thương mại điện tử F&B đa kênh OMO:
+
+```mermaid
+graph TD
+    subgraph ClientAlgorithms["Khách Hàng & Trải Nghiệm Khẩu Vị (Storefront)"]
+        A1["1. Cosine Similarity Vector Space<br/>(AI Cupping & Palate Matcher)"]
+        A2["2. Damerau-Levenshtein & N-Gram<br/>(Fuzzy Search Sai Chính Tả)"]
+        A3["3. Sensory Flavor Pairing Engine<br/>(Ghép Vị Cà Phê & Bánh Thủ Công)"]
+        A4["4. Haversine Spherical Distance<br/>(Định Vị Chi Nhánh Gần Nhất)"]
+    end
+
+    subgraph OperationAlgorithms["Vận Hành & An Ninh Doanh Nghiệp (Backoffice & KDS)"]
+        B1["5. Idempotency Pattern<br/>(Khóa Chống Trùng Lặp Giao Dịch)"]
+        B2["6. Token Bucket Rate Limiter<br/>(Chống Brute-force & DDoS)"]
+        B3["7. Economic Order Quantity & ROP<br/>(Tối Ưu Chuỗi Cung Ứng & Tồn Kho BOM)"]
+        B4["8. Weighted Fair Queuing & Dynamic ETA<br/>(Điều Phối Hàng Đợi Barista KDS)"]
+    end
+```
+
+### 1. Thuật Toán Vector Space & Cosine Similarity (AI Cupping & Palate Matcher)
+- **Công thức:** Đối chiếu vector khẩu vị người dùng $\vec{U}$ và vector cảm quan sản phẩm $\vec{P}$ trong không gian 5 chiều (Chua thanh, Đậm đà, Ngọt hậu, Đắng dịu, Hương hoa):
+  $$\cos(\vec{U}, \vec{P}) = \frac{\sum_{i=1}^5 U_i \cdot P_i}{\sqrt{\sum_{i=1}^5 U_i^2} \cdot \sqrt{\sum_{i=1}^5 P_i^2}}$$
+- **Ứng dụng:** Trực quan hóa qua 5 thanh trượt cảm quan tại trang Thực đơn, tính toán độ khớp chính xác từng phần trăm ($0.0\% - 100.0\%$) kèm điểm đánh giá SCA Cupping Score.
+
+### 2. Thuật Toán Damerau-Levenshtein Kết Hợp N-Gram Jaccard (Fuzzy Search Engine)
+- **Công thức:** Cho phép 4 thao tác chỉnh sửa ký tự (Thêm, Xóa, Thay thế, và Hoán vị 2 ký tự liền kề) kết hợp chỉ số tương đồng tập hợp Bi-Gram:
+  $$D(i, j) = \min \begin{cases} D(i-1, j) + 1 \\ D(i, j-1) + 1 \\ D(i-1, j-1) + \text{cost} \\ D(i-2, j-2) + 1 \quad (\text{khi hoán vị}) \end{cases}$$
+- **Ứng dụng:** Tìm kiếm thông minh trên thanh tìm kiếm Thực đơn, xử lý mượt mà khi khách gõ sai chính tả (ví dụ: `colbrew` $\rightarrow$ `Cold Brew`, `croisan` $\rightarrow$ `Croissant`).
+
+### 3. Thuật Toán Tối Ưu Lô Đặt Hàng Kinh Tế (EOQ) & Điểm Đặt Hàng Lại (ROP)
+- **Công thức:** Cân bằng giữa chi phí đặt hàng cố định $S$ và chi phí lưu kho bảo quản $H$ để tìm kích thước lô đặt hàng tối ưu:
+  $$EOQ = \sqrt{\frac{2 \cdot D \cdot S}{H}}$$
+  $$ROP = (d \times L) + SS, \quad SS = Z \times \sigma_d \times \sqrt{L}$$
+- **Ứng dụng:** Tích hợp trong bảng điều khiển Quản Lý Kho BOM, tự động phát cảnh báo khẩn cấp `CRITICAL_REORDER` và tính toán số ngày dự trữ an toàn còn lại.
+
+### 4. Thuật Toán Điều Phối Ưu Tiên Hàng Đợi (Weighted Fair Queuing - WFQ) & ETA KDS
+- **Công thức:** Tính điểm ưu tiên động cho từng phiếu pha chế tại quầy Barista KDS:
+  $$P = (w_1 \cdot T_{\text{chờ}}) + (w_2 \cdot S_{\text{hội\_viên}}) + (w_3 \cdot D_{\text{tại\_bàn}}) - (w_4 \cdot C_{\text{độ\_phức\_tạp}})$$
+- **Ứng dụng:** Chống bỏ quên đơn cũ (Anti-Starvation), ưu tiên phục vụ khách VIP (Diamond +35đ) và đơn uống tại bàn (Dine-in +15đ để giữ lớp Crema nóng), dự báo thời gian chờ thực tế (ETA) theo số lượng Barista đang trực ca.
+
+### 5. Thuật Toán Bảo Toàn Tính Bất Biến (Idempotency Pattern & SHA-256 Hash Lock)
+- **Cơ chế:** Ngăn chặn tuyệt đối tình trạng đặt đơn trùng lặp khi khách bấm double-click hoặc mạng chập chờn thông qua `Idempotency-Key` UUIDv4 và bảng `idempotency_keys`. Request đang xử lý trả về `409 Conflict`, request đã hoàn tất trả về kết quả lưu trong cache tức thì mà không tạo thêm bản ghi mới.
+
+### 6. Thuật Toán Token Bucket & Sliding Window Rate Limiting
+- **Cơ chế:** Kiểm soát tần suất truy cập API theo độ chính xác nano giây (`System.nanoTime()`), bảo vệ endpoint nhạy cảm (`/api/auth/login`, `/api/auth/register`) không bị tấn công vét cạn mật khẩu (Brute-force). Khi cạn Token, hệ thống trả về mã lỗi chuẩn quốc tế HTTP `429 Too Many Requests`.
+
+### 7. Thuật Toán Khoảng Cách Mặt Cầu Haversine (Geolocation Dispatch)
+- **Công thức:** Tính toán khoảng cách mặt cong Trái Đất ($R = 6.371$ km) từ tọa độ GPS thực tế của khách hàng đến 3 chi nhánh Flagship (Thủ Đức, Quận 1, Bình Thạnh) và sắp xếp tăng dần kèm thời gian giao hàng dự kiến.
+
+### 8. Thuật Toán Gợi Ý Ghép Vị Thượng Hạng (Sensory Flavor Pairing Engine)
+- **Cơ chế:** Dựa trên nguyên lý ghép vị đối nghịch và bổ trợ của Hiệp hội Cà phê Đặc sản Quốc tế (SCA), tự động đề xuất món bánh ngọt Pháp hoàn hảo tương thích với từng ly cà phê hoặc trà đặc sản.
 
 ---
 

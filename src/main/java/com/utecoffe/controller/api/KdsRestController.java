@@ -1,8 +1,10 @@
 package com.utecoffe.controller.api;
 
 import com.utecoffe.dto.response.ApiResponse;
+import com.utecoffe.dto.response.KdsPriorityOrderDto;
 import com.utecoffe.entity.Order;
 import com.utecoffe.enums.OrderStatus;
+import com.utecoffe.service.KdsDispatchService;
 import com.utecoffe.service.OrderService;
 import com.utecoffe.websocket.OrderNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +21,29 @@ public class KdsRestController {
     private OrderService orderService;
 
     @Autowired
+    private KdsDispatchService kdsDispatchService;
+
+    @Autowired
     private OrderNotificationService notificationService;
 
     @GetMapping("/orders/{storeId}")
-    public ResponseEntity<ApiResponse<List<Order>>> getStoreKdsOrders(@PathVariable Long storeId) {
+    public ResponseEntity<ApiResponse<List<Order>>> getStoreKdsOrders(@PathVariable("storeId") Long storeId) {
         return ResponseEntity.ok(ApiResponse.success(orderService.getKdsOrdersForStore(storeId), "Danh sach don KDS"));
     }
 
+    @GetMapping("/queue-optimization/{storeId}")
+    public ResponseEntity<ApiResponse<List<KdsPriorityOrderDto>>> getOptimizedQueue(@PathVariable("storeId") Long storeId) {
+        return ResponseEntity.ok(ApiResponse.success(
+                kdsDispatchService.getOptimizedQueue(storeId),
+                "Hang doi phuc vu toi uu hoa theo thuat toan Weighted Fair Queuing"));
+    }
+
     @PostMapping("/orders/{orderId}/status")
-    public ResponseEntity<ApiResponse<Order>> updateStatus(@PathVariable Long orderId,
-                                                          @RequestParam OrderStatus status,
-                                                          @RequestParam(required = false) String note) {
+    public ResponseEntity<ApiResponse<Void>> updateStatus(@PathVariable("orderId") Long orderId,
+                                                          @RequestParam("status") OrderStatus status,
+                                                          @RequestParam(value = "note", required = false) String note) {
         Order updated = orderService.updateOrderStatus(orderId, status, note);
         notificationService.notifyOrderStatusChanged(updated, note);
-        return ResponseEntity.ok(ApiResponse.success(updated, "Cap nhat trang thai thanh cong"));
+        return ResponseEntity.ok(ApiResponse.success(null, "Cap nhat trang thai thanh cong"));
     }
 }

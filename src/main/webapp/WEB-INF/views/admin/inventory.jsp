@@ -11,6 +11,9 @@
             <small class="text-secondary">Tự động trừ kho nguyên liệu theo định lượng công thức pha chế của từng ly nước bán ra</small>
         </div>
         <div class="d-flex gap-2">
+            <button type="button" class="btn btn-gold btn-sm px-3 rounded-pill font-accent fw-bold" onclick="openEoqOptimizationModal()">
+                <i class="fa-solid fa-chart-pie me-1"></i> Tối Ưu EOQ &amp; ROP Chuỗi Cung Ứng
+            </button>
             <span class="badge bg-dark-roast border border-gold text-gold px-3 py-2 font-accent">
                 Tổng: <strong>${inventories.size()}</strong> Mặt Hàng Định Lượng
             </span>
@@ -157,7 +160,103 @@
         </div>
     </c:if>
 
+    <!-- EOQ & ROP Supply Chain Optimization Modal -->
+    <div class="modal fade" id="eoqModal" tabindex="-1" aria-labelledby="eoqModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-card-dark border border-gold text-light">
+                <div class="modal-header border-gold bg-espresso">
+                    <h5 class="modal-title font-serif text-gold-gradient" id="eoqModalLabel">
+                        <i class="fa-solid fa-chart-line me-2 text-gold"></i>Mô Hình Kinh Tế Tối Ưu Tồn Kho EOQ &amp; Điểm Đặt Hàng ROP
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="alert alert-dark border border-gold mb-3 small" style="background: rgba(222, 183, 106, 0.08);">
+                        <i class="fa-solid fa-info-circle text-gold me-2"></i>
+                        <strong>Mô hình toán học:</strong> EOQ (Economic Order Quantity) $\sqrt{\frac{2DS}{H}}$ tính toán kích thước lô đặt hàng tối thiểu hóa tổng chi phí đặt và lưu kho. ROP (Reorder Point) $(d \cdot L) + SS$ bảo vệ 95% không bị gián đoạn nguyên liệu.
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-luxury align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Nguyên Liệu</th>
+                                    <th>Tồn Hiện Tại</th>
+                                    <th>Lô Đặt Tối Ưu (EOQ)</th>
+                                    <th>Điểm Đặt Lại (ROP)</th>
+                                    <th>Tồn An Toàn (SS)</th>
+                                    <th>Dự Trữ Còn Lại</th>
+                                    <th>Khuyến Nghị Chuỗi Cung Ứng</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eoqTableBody">
+                                <tr>
+                                    <td colspan="7" class="text-center py-4 text-gold">
+                                        <i class="fa-solid fa-spinner fa-spin me-2"></i> Đang tải dữ liệu mô hình EOQ &amp; ROP...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer border-gold">
+                    <button type="button" class="btn btn-secondary btn-sm rounded-pill font-accent" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-gold btn-sm rounded-pill font-accent" onclick="loadEoqData()">
+                        <i class="fa-solid fa-arrows-rotate me-1"></i> Làm Mới Dữ Liệu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        function openEoqOptimizationModal() {
+            const modalEl = document.getElementById('eoqModal');
+            if (!modalEl) return;
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+            loadEoqData();
+        }
+
+        function loadEoqData() {
+            const tbody = document.getElementById('eoqTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-gold"><i class="fa-solid fa-spinner fa-spin me-2"></i> Đang phân tích thuật toán EOQ...</td></tr>';
+
+            fetch('${pageContext.request.contextPath}/api/inventory/optimization')
+                .then(res => res.json())
+                .then(res => {
+                    if (res.success && res.data && res.data.length > 0) {
+                        tbody.innerHTML = '';
+                        res.data.forEach(item => {
+                            let badgeClass = 'bg-success text-light';
+                            if (item.stockStatus === 'CRITICAL_REORDER') badgeClass = 'bg-danger text-light';
+                            else if (item.stockStatus === 'WARNING_LOW') badgeClass = 'bg-warning text-dark';
+
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>
+                                    <strong class="text-light">${item.ingredientName}</strong>
+                                    <small class="text-secondary d-block font-monospace">${item.sku}</small>
+                                </td>
+                                <td><span class="fw-bold text-light">${item.currentStock} ${item.unit}</span></td>
+                                <td><span class="badge bg-gold text-dark font-accent fw-bold fs-6">${item.eoqOptimalBatch} ${item.unit}</span></td>
+                                <td><span class="text-gold fw-bold">${item.reorderPoint} ${item.unit}</span></td>
+                                <td><span class="text-secondary">${item.safetyStock} ${item.unit}</span></td>
+                                <td><span class="badge ${badgeClass} font-accent">${item.daysOfInventoryLeft} ngày</span></td>
+                                <td><small class="text-secondary d-block" style="font-size:0.8rem; line-height:1.4;">${item.actionRecommendation}</small></td>
+                            `;
+                            tbody.appendChild(tr);
+                        });
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-secondary py-3">Chưa có dữ liệu tồn kho để phân tích</td></tr>';
+                    }
+                })
+                .catch(err => {
+                    console.error('Lỗi tải dữ liệu EOQ:', err);
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-danger py-3">Không thể kết nối đến API phân tích tồn kho</td></tr>';
+                });
+        }
+
         function filterInventoryByBranch() {
             const branch = document.getElementById('invBranchSelect').value;
             const rows = document.querySelectorAll('.inv-row');

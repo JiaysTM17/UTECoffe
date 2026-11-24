@@ -63,3 +63,5 @@ buildNumber.properties
 *.tmp
 *.bak
 *~
+.agent/
+server_boot.log

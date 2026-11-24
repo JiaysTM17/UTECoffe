@@ -3,6 +3,18 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <head>
     <title>Thực Đơn Cà Phê &amp; Trà Đặc Sản - UTECoffe Specialty Roastery</title>
+    <style>
+        .custom-gold-range {
+            accent-color: #DEB76A;
+        }
+        .fuzzy-suggestion-item {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .fuzzy-suggestion-item:hover {
+            background: rgba(222, 183, 106, 0.15) !important;
+        }
+    </style>
 </head>
 <body class="bg-obsidian">
 
@@ -19,18 +31,99 @@
                 Trải nghiệm những nốt hương tinh tuyển từ cao nguyên Cầu Đất 1.600m và đồi chè cổ thụ. Mỗi mẻ rang được các Master Roaster chế tác thủ công để tôn vinh sự nguyên bản.
             </p>
 
-            <!-- Search Bar in Hero -->
-            <div class="mx-auto" style="max-width: 540px;">
+            <!-- Search Bar in Hero with Smart Fuzzy Suggestions -->
+            <div class="mx-auto position-relative" style="max-width: 540px;">
                 <div class="input-group search-input-group shadow-sm">
                     <span class="input-group-text bg-card-dark border-gold text-gold ps-3">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
                     <input type="text" id="menuSearchInput" class="form-control form-control-luxury border-start-0 ps-2" 
                            placeholder="Tìm kiếm cà phê, trà hoa, cold brew, bánh mộc..." 
-                           aria-label="Tìm kiếm thức uống">
+                           aria-label="Tìm kiếm thức uống" autocomplete="off">
                     <button class="btn btn-outline-gold px-3" type="button" id="clearSearchBtn" style="display: none;">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
+                </div>
+
+                <!-- Fuzzy Search Suggestions Dropdown -->
+                <div id="fuzzySuggestionsBox" class="position-absolute w-100 bg-card-dark border border-gold rounded-3 shadow-lg mt-1 p-2 text-start d-none" style="z-index: 1050;">
+                    <div class="d-flex justify-content-between align-items-center px-2 py-1 border-bottom border-gold-subtle mb-1">
+                        <small class="text-gold font-accent"><i class="fa-solid fa-brain me-1"></i> Gợi ý thông minh (Damerau-Levenshtein)</small>
+                        <span class="badge bg-gold-subtle text-gold small">AI Fuzzy</span>
+                    </div>
+                    <div id="fuzzySuggestionsList" class="d-flex flex-column gap-1"></div>
+                </div>
+            </div>
+
+            <!-- Taste Matcher Trigger Button -->
+            <div class="mt-3">
+                <button class="btn btn-dark-roast border border-gold text-gold rounded-pill px-4 py-2 font-accent shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#tasteMatcherCollapse" aria-expanded="false" aria-controls="tasteMatcherCollapse">
+                    <i class="fa-solid fa-wand-magic-sparkles text-gold me-2"></i>✨ Trải Nghiệm AI Cupping: Tìm Cà Phê Hợp Gu (Sensory Matcher)
+                </button>
+            </div>
+
+            <!-- Taste Matcher Collapsible Card -->
+            <div class="collapse mt-4 text-start" id="tasteMatcherCollapse">
+                <div class="card-luxury p-4 mx-auto border-gold shadow-lg" style="max-width: 820px; background: rgba(26, 21, 18, 0.96); backdrop-filter: blur(12px);">
+                    <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-gold pb-2">
+                        <div>
+                            <h5 class="font-serif fw-bold text-gold-gradient mb-0">
+                                <i class="fa-solid fa-compass-drafting me-2 text-gold"></i>Định Hình Khẩu Vị Cảm Quan (Vector Space Model)
+                            </h5>
+                            <small class="text-secondary">Thuật toán Cosine Similarity đối chiếu gu của bạn với thông số SCA Cupping của các mẻ rang đặc sản</small>
+                        </div>
+                        <span class="badge bg-gold text-dark font-accent fw-bold px-3 py-1">COSINE SIMILARITY</span>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small text-gold font-accent d-flex justify-content-between">
+                                <span><i class="fa-solid fa-lemon me-1"></i> Độ Chua Thanh (Acidity)</span>
+                                <span class="fw-bold" id="valAcidity">3.5 / 5.0</span>
+                            </label>
+                            <input type="range" class="form-range custom-gold-range" id="sliderAcidity" min="1.0" max="5.0" step="0.5" value="3.5">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small text-gold font-accent d-flex justify-content-between">
+                                <span><i class="fa-solid fa-shield-halved me-1"></i> Thể Chất / Đậm Đà (Body)</span>
+                                <span class="fw-bold" id="valBody">3.5 / 5.0</span>
+                            </label>
+                            <input type="range" class="form-range custom-gold-range" id="sliderBody" min="1.0" max="5.0" step="0.5" value="3.5">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small text-gold font-accent d-flex justify-content-between">
+                                <span><i class="fa-solid fa-candy-cane me-1"></i> Ngọt Hậu (Sweetness)</span>
+                                <span class="fw-bold" id="valSweetness">4.0 / 5.0</span>
+                            </label>
+                            <input type="range" class="form-range custom-gold-range" id="sliderSweetness" min="1.0" max="5.0" step="0.5" value="4.0">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small text-gold font-accent d-flex justify-content-between">
+                                <span><i class="fa-solid fa-mug-hot me-1"></i> Đắng Dịu (Bitterness)</span>
+                                <span class="fw-bold" id="valBitterness">2.5 / 5.0</span>
+                            </label>
+                            <input type="range" class="form-range custom-gold-range" id="sliderBitterness" min="1.0" max="5.0" step="0.5" value="2.5">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small text-gold font-accent d-flex justify-content-between">
+                                <span><i class="fa-solid fa-spa me-1"></i> Hương Hoa / Trái Cây (Aroma)</span>
+                                <span class="fw-bold" id="valAroma">4.5 / 5.0</span>
+                            </label>
+                            <input type="range" class="form-range custom-gold-range" id="sliderAroma" min="1.0" max="5.0" step="0.5" value="4.5">
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-gold px-5 py-2 fw-bold font-accent shadow-lg" id="btnRunTasteMatch">
+                            <i class="fa-solid fa-microchip me-2"></i> PHÂN TÍCH GU CẢM QUAN HOÀN HẢO
+                        </button>
+                    </div>
+
+                    <!-- Taste Match Results Container -->
+                    <div id="tasteMatchResultsArea" class="mt-4 pt-3 border-top border-gold-subtle d-none">
+                        <h6 class="text-gold font-accent mb-3"><i class="fa-solid fa-star me-2"></i>Cà Phê Phù Hợp Nhất Với Khẩu Vị Của Bạn:</h6>
+                        <div class="row g-3" id="tasteMatchCardsRow"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,83 +176,59 @@
         </div>
 
         <!-- Product Cards Grid -->
-        <div class="row g-4" id="productGridContainer">
-            <c:forEach var="prod" items="${products}">
-                <div class="col-lg-3 col-md-6 product-card-col" 
-                     data-name="${prod.name.toLowerCase()}" 
-                     data-desc="${not empty prod.description ? prod.description.toLowerCase() : ''}"
-                     data-cat="${prod.category.id}"
-                     data-price="${prod.basePrice}">
-                    <div class="card card-luxury h-100 d-flex flex-column product-hover-lift">
-                        <!-- Product Image & Badges (Clickable directly to Story & Details) -->
-                        <c:choose>
-                            <c:when test="${empty prod.imageUrl}">
-                                <c:set var="curProdImg" value="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80"/>
-                            </c:when>
-                            <c:when test="${prod.imageUrl.startsWith('http')}">
-                                <c:set var="curProdImg" value="${prod.imageUrl}"/>
-                            </c:when>
-                            <c:otherwise>
-                                <c:set var="curProdImg" value="${pageContext.request.contextPath}${prod.imageUrl}"/>
-                            </c:otherwise>
-                        </c:choose>
-                        <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="product-image-container position-relative overflow-hidden d-block text-decoration-none" style="aspect-ratio: 4/3; cursor: pointer;" title="${prod.name} - Khám phá câu chuyện &amp; thành phần">
-                            <img src="${curProdImg}" 
-                                 alt="${prod.name}" 
-                                 class="product-thumb-img w-100 h-100 object-fit-cover"
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="productGridContainer">
+            <c:forEach var="p" items="${products}">
+                <div class="col product-card-col" 
+                     data-name="${p.name.toLowerCase()}" 
+                     data-desc="${empty p.description ? '' : p.description.toLowerCase()}" 
+                     data-price="${p.basePrice}"
+                     data-cat="${p.category.id}">
+                    <div class="card-luxury h-100 d-flex flex-column border-gold position-relative overflow-hidden group-hover-glow">
+                        <!-- Featured Badge -->
+                        <c:if test="${p.isFeatured}">
+                            <div class="position-absolute top-0 end-0 m-3" style="z-index: 3;">
+                                <span class="badge bg-gold text-dark px-2 py-1 font-accent fw-bold small shadow">
+                                    <i class="fa-solid fa-award me-1"></i> Signature
+                                </span>
+                            </div>
+                        </c:if>
+
+                        <!-- Product Image Area -->
+                        <div class="position-relative overflow-hidden" style="height: 220px; background-color: #120e0c;">
+                            <img src="${empty p.imageUrl ? 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800' : p.imageUrl}" 
+                                 class="card-img-top w-100 h-100 object-fit-cover transition-transform" 
+                                 alt="${p.name}"
                                  loading="lazy">
-                            <span class="badge-luxury-tag position-absolute top-0 start-0 m-3">
-                                ${prod.category.name}
-                            </span>
-                            <span class="badge bg-gold-gradient text-obsidian fw-bold position-absolute top-0 end-0 m-3 px-2 py-1 rounded-pill small">
-                                <i class="fa-solid fa-award me-1"></i> Special
-                            </span>
-                        </a>
+                            <div class="card-img-overlay d-flex flex-column justify-content-end p-2 bg-gradient-dark">
+                                <span class="badge bg-dark-roast border border-gold-subtle text-gold align-self-start font-accent small">
+                                    ${p.category.name}
+                                </span>
+                            </div>
+                        </div>
 
                         <!-- Card Body -->
-                        <div class="card-body p-4 d-flex flex-column flex-grow-1">
-                            <!-- Tasting Notes / Terroir Mini-Pill -->
-                            <div class="mb-2">
-                                <c:choose>
-                                    <c:when test="${prod.category.id == 2}">
-                                        <span class="badge bg-espresso text-gold border border-gold-subtle px-2 py-1 rounded-pill" style="font-size: 0.72rem; letter-spacing: 0.05em;">
-                                            <i class="fa-solid fa-leaf me-1 text-success"></i> <span data-i18n="terroir.tea">Trà Cổ Thụ &amp; Sen Tây Hồ</span>
-                                        </span>
-                                    </c:when>
-                                    <c:when test="${prod.category.id == 3}">
-                                        <span class="badge bg-espresso text-gold border border-gold-subtle px-2 py-1 rounded-pill" style="font-size: 0.72rem; letter-spacing: 0.05em;">
-                                            <i class="fa-solid fa-wheat-awn me-1 text-warning"></i> <span data-i18n="terroir.pastry">Bơ Pháp Elle &amp; Vire 100%</span>
-                                        </span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <span class="badge bg-espresso text-gold border border-gold-subtle px-2 py-1 rounded-pill" style="font-size: 0.72rem; letter-spacing: 0.05em;">
-                                            <i class="fa-solid fa-seedling me-1"></i> <span data-i18n="terroir.coffee">Cao Nguyên Cầu Đất 1.600m</span>
-                                        </span>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-
-                            <h5 class="font-serif fw-bold mb-2">
-                                <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="text-primary text-decoration-none hover-gold product-title-link">
-                                    ${prod.name}
-                                </a>
+                        <div class="p-3 d-flex flex-column flex-grow-1">
+                            <h5 class="font-serif fw-bold text-light mb-1 line-clamp-1" title="${p.name}">
+                                ${p.name}
                             </h5>
-                            
-                            <p class="text-secondary small flex-grow-1 mb-3 text-truncate-2" style="min-height: 2.6rem;">
-                                ${not empty prod.description ? prod.description : 'Tuyệt phẩm thức uống được pha chế thủ công theo tỷ lệ vàng độc quyền tại UTECoffe.'}
+                            <p class="text-secondary small mb-3 flex-grow-1 line-clamp-2" style="font-size: 0.825rem; line-height: 1.5;">
+                                ${empty p.description ? 'Hương vị cà phê đặc sản thủ công cao cấp được tuyển chọn từ các vùng nguyên liệu nổi tiếng.' : p.description}
                             </p>
 
-                            <!-- Price & Customization Action Button -->
-                            <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold mt-auto gap-2">
-                                <div class="d-flex flex-column text-nowrap" style="min-width: 0;">
-                                    <span class="small text-secondary" style="font-size: 0.75rem;" data-i18n="menu.original_price">Giá nguyên bản:</span>
-                                    <span class="price-gold fw-bold fs-5 text-nowrap" data-raw-price="${prod.basePrice}" style="white-space: nowrap !important; letter-spacing: -0.02em;">
-                                        <fmt:formatNumber value="${prod.basePrice}" pattern="#,##0"/> VNĐ
+                            <!-- Price and Action Strip -->
+                            <div class="d-flex align-items-center justify-content-between pt-2 border-top border-gold-subtle mt-auto">
+                                <div>
+                                    <span class="small text-secondary d-block font-accent" style="font-size: 0.75rem;">Giá nguyên bản:</span>
+                                    <span class="fw-bold text-gold fs-6">
+                                        <fmt:formatNumber value="${p.basePrice}" pattern="#,###"/> VNĐ
                                     </span>
                                 </div>
-                                <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill fw-semibold text-nowrap flex-shrink-0">
-                                    <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="menu.customize">Tùy Chỉnh</span>
-                                </a>
+                                <div>
+                                    <a href="${pageContext.request.contextPath}/menu/${p.slug}" 
+                                       class="btn btn-gold btn-sm px-3 rounded-pill font-accent fw-semibold">
+                                        <i class="fa-solid fa-sliders me-1"></i> Tùy Chỉnh
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -167,14 +236,18 @@
             </c:forEach>
         </div>
 
-        <!-- Bottom Roastery Story Callout -->
+        <!-- Craftsmanship Callout Footer Banner -->
         <div class="mt-5 pt-4">
-            <div class="card-luxury p-4 p-md-5 text-center bg-espresso position-relative overflow-hidden">
+            <div class="card-luxury p-4 p-md-5 border-gold bg-gradient-dark text-center position-relative overflow-hidden">
                 <div class="position-relative" style="z-index: 2;">
-                    <i class="fa-solid fa-mortar-pestle text-gold display-4 mb-3"></i>
-                    <h3 class="font-serif fw-bold text-gold-gradient mb-2">Bạn Muốn Tìm Hương Vị Riêng Cho Mình?</h3>
-                    <p class="text-secondary mx-auto mb-4" style="max-width: 600px;">
-                        Các Barista giàu kinh nghiệm của chúng tôi luôn sẵn sàng hỗ trợ điều chỉnh độ đậm hạt, hương hoa và tỷ lệ sữa để tạo nên ly cà phê chuẩn gu của bạn.
+                    <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase">
+                        <i class="fa-solid fa-certificate me-1"></i> Tiêu Chuẩn Quốc Tế SCA
+                    </span>
+                    <h3 class="font-serif fw-bold text-gold-gradient mb-3">
+                        Tùy Chỉnh Tách Cà Phê Của Riêng Bạn
+                    </h3>
+                    <p class="text-secondary mx-auto mb-4" style="max-width: 620px; font-size: 0.95rem;">
+                        Tất cả thức uống tại UTECoffe đều cho phép cá nhân hóa: Lựa chọn 3 size (S/M/L), thêm các loại hạt, thạch trà thủ công, điều chỉnh độ đậm hạt, hương hoa và tỷ lệ sữa để tạo nên ly cà phê chuẩn gu của bạn.
                     </p>
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
                         <a href="${pageContext.request.contextPath}/story" class="btn btn-outline-gold px-4 py-2 rounded-pill font-accent">
@@ -199,11 +272,14 @@
             const noProductsAlert = document.getElementById('noProductsFoundAlert');
             const resetBtn = document.getElementById('resetFiltersBtn');
             const totalCountEl = document.getElementById('totalProductCount');
+            const fuzzyBox = document.getElementById('fuzzySuggestionsBox');
+            const fuzzyList = document.getElementById('fuzzySuggestionsList');
 
             if (!searchInput || !productGrid) return;
 
             const cards = Array.from(productGrid.querySelectorAll('.product-card-col'));
 
+            // 1. Standard Live Filter & Sort
             function filterAndSort() {
                 const query = searchInput.value.trim().toLowerCase();
                 if (clearSearchBtn) {
@@ -256,10 +332,64 @@
                 sortedCards.forEach(card => productGrid.appendChild(card));
             }
 
-            searchInput.addEventListener('input', filterAndSort);
+            // 2. Damerau-Levenshtein Fuzzy Search API Hook
+            let debounceTimer = null;
+            searchInput.addEventListener('input', function () {
+                filterAndSort();
+
+                const q = searchInput.value.trim();
+                clearTimeout(debounceTimer);
+                if (q.length < 2) {
+                    if (fuzzyBox) fuzzyBox.classList.add('d-none');
+                    return;
+                }
+
+                debounceTimer = setTimeout(() => {
+                    fetch('${pageContext.request.contextPath}/api/products/fuzzy-search?q=' + encodeURIComponent(q) + '&threshold=0.35&limit=4')
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res.success && res.data && res.data.length > 0) {
+                                fuzzyList.innerHTML = '';
+                                res.data.forEach(item => {
+                                    const matchPercent = Math.round(item.matchScore * 100);
+                                    const div = document.createElement('div');
+                                    div.className = 'fuzzy-suggestion-item p-2 rounded d-flex justify-content-between align-items-center';
+                                    div.innerHTML = `
+                                        <div>
+                                            <span class="text-light fw-bold">${item.productName}</span>
+                                            <small class="text-secondary d-block" style="font-size:0.75rem;">${item.matchHighlight}</small>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-gold-subtle text-gold small">${matchPercent}% khớp</span>
+                                            <a href="${pageContext.request.contextPath}/menu/${item.productSlug}" class="btn btn-sm btn-outline-gold py-0 px-2 ms-2 font-accent" style="font-size:0.75rem;">Xem</a>
+                                        </div>
+                                    `;
+                                    div.addEventListener('click', () => {
+                                        window.location.href = '${pageContext.request.contextPath}/menu/' + item.productSlug;
+                                    });
+                                    fuzzyList.appendChild(div);
+                                });
+                                fuzzyBox.classList.remove('d-none');
+                            } else {
+                                fuzzyBox.classList.add('d-none');
+                            }
+                        })
+                        .catch(() => {
+                            if (fuzzyBox) fuzzyBox.classList.add('d-none');
+                        });
+                }, 300);
+            });
+
+            document.addEventListener('click', function (e) {
+                if (fuzzyBox && !fuzzyBox.contains(e.target) && e.target !== searchInput) {
+                    fuzzyBox.classList.add('d-none');
+                }
+            });
+
             if (clearSearchBtn) {
                 clearSearchBtn.addEventListener('click', function () {
                     searchInput.value = '';
+                    if (fuzzyBox) fuzzyBox.classList.add('d-none');
                     filterAndSort();
                     searchInput.focus();
                 });
@@ -270,7 +400,92 @@
             if (resetBtn) {
                 resetBtn.addEventListener('click', function () {
                     searchInput.value = '';
+                    if (fuzzyBox) fuzzyBox.classList.add('d-none');
                     filterAndSort();
+                });
+            }
+
+            // 3. AI Taste Matcher (Cosine Similarity) Slider Listeners & API Call
+            const sAcid = document.getElementById('sliderAcidity');
+            const sBody = document.getElementById('sliderBody');
+            const sSweet = document.getElementById('sliderSweetness');
+            const sBit = document.getElementById('sliderBitterness');
+            const sAroma = document.getElementById('sliderAroma');
+
+            const vAcid = document.getElementById('valAcidity');
+            const vBody = document.getElementById('valBody');
+            const vSweet = document.getElementById('valSweetness');
+            const vBit = document.getElementById('valBitterness');
+            const vAroma = document.getElementById('valAroma');
+
+            if (sAcid) sAcid.addEventListener('input', () => vAcid.textContent = sAcid.value + ' / 5.0');
+            if (sBody) sBody.addEventListener('input', () => vBody.textContent = sBody.value + ' / 5.0');
+            if (sSweet) sSweet.addEventListener('input', () => vSweet.textContent = sSweet.value + ' / 5.0');
+            if (sBit) sBit.addEventListener('input', () => vBit.textContent = sBit.value + ' / 5.0');
+            if (sAroma) sAroma.addEventListener('input', () => vAroma.textContent = sAroma.value + ' / 5.0');
+
+            const btnMatch = document.getElementById('btnRunTasteMatch');
+            const resultsArea = document.getElementById('tasteMatchResultsArea');
+            const cardsRow = document.getElementById('tasteMatchCardsRow');
+
+            if (btnMatch) {
+                btnMatch.addEventListener('click', function () {
+                    btnMatch.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i> Đang tính toán ma trận Cosine...';
+                    btnMatch.disabled = true;
+
+                    const url = '${pageContext.request.contextPath}/api/products/taste-match?'
+                        + 'acidity=' + sAcid.value
+                        + '&body=' + sBody.value
+                        + '&sweetness=' + sSweet.value
+                        + '&bitterness=' + sBit.value
+                        + '&aroma=' + sAroma.value
+                        + '&limit=3';
+
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(res => {
+                            btnMatch.innerHTML = '<i class="fa-solid fa-microchip me-2"></i> PHÂN TÍCH GU CẢM QUAN HOÀN HẢO';
+                            btnMatch.disabled = false;
+
+                            if (res.success && res.data && res.data.length > 0) {
+                                cardsRow.innerHTML = '';
+                                res.data.forEach(item => {
+                                    const col = document.createElement('div');
+                                    col.className = 'col-md-4';
+                                    const notesHtml = (item.tastingNotes || []).map(n => `<span class="badge bg-dark-roast border border-gold-subtle text-gold me-1 mb-1 font-accent" style="font-size:0.7rem;">${n}</span>`).join('');
+                                    const formattedPrice = new Intl.NumberFormat('vi-VN').format(item.price);
+
+                                    col.innerHTML = `
+                                        <div class="card-luxury p-3 border-gold h-100 d-flex flex-column" style="background:#140f0c;">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span class="badge bg-gold text-dark font-accent fw-bold" style="font-size:0.75rem;">
+                                                    <i class="fa-solid fa-trophy me-1"></i> ${item.matchScorePercent}% HỢP GU
+                                                </span>
+                                                <span class="badge bg-gold-subtle text-gold font-accent" style="font-size:0.7rem;">${item.scaCuppingScore}</span>
+                                            </div>
+                                            <img src="${item.productImageUrl || 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800'}" class="w-100 rounded mb-2 object-fit-cover" style="height:120px;" alt="${item.productName}">
+                                            <h6 class="font-serif fw-bold text-light mb-1">${item.productName}</h6>
+                                            <small class="text-gold font-accent d-block mb-1" style="font-size:0.75rem;"><i class="fa-solid fa-mountain me-1"></i>${item.terroir || 'Cầu Đất, Lâm Đồng'}</small>
+                                            <p class="text-secondary small mb-2 flex-grow-1" style="font-size:0.78rem; line-height:1.4;">${item.sensoryVerdict}</p>
+                                            <div class="mb-2">${notesHtml}</div>
+                                            <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-gold-subtle">
+                                                <span class="fw-bold text-gold fs-6">${formattedPrice} VNĐ</span>
+                                                <a href="${pageContext.request.contextPath}/menu/${item.productSlug}" class="btn btn-sm btn-gold rounded-pill px-3 font-accent">
+                                                    Thưởng Thức <i class="fa-solid fa-arrow-right ms-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    `;
+                                    cardsRow.appendChild(col);
+                                });
+                                resultsArea.classList.remove('d-none');
+                            }
+                        })
+                        .catch(err => {
+                            btnMatch.innerHTML = '<i class="fa-solid fa-microchip me-2"></i> PHÂN TÍCH GU CẢM QUAN HOÀN HẢO';
+                            btnMatch.disabled = false;
+                            alert('Không thể kết nối đến máy chủ tính toán ma trận cảm quan.');
+                        });
                 });
             }
         });

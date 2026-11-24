@@ -96,16 +96,27 @@
                 </div>
             </div>
 
-            <!-- Action Controls: Audio chime & Refresh -->
+            <!-- Action Controls: Audio chime, WFQ Priority Dispatch, Refresh -->
             <div class="col-lg-3 col-md-12 text-lg-end text-start">
                 <div class="d-flex gap-2 justify-content-lg-end align-items-center">
+                    <button type="button" id="wfqToggleBtn" class="btn btn-dark-roast border border-gold text-gold btn-sm rounded-pill px-3 font-accent" onclick="toggleWfqPriorityQueue()">
+                        <i class="fa-solid fa-bolt me-1 text-gold"></i> <span id="wfqStatusText">WFQ Ưu Tiên</span>
+                    </button>
                     <button type="button" id="chimeToggleBtn" class="btn btn-outline-gold btn-sm rounded-pill px-3" onclick="toggleSound()">
-                        <i class="fa-solid fa-volume-high me-1"></i> <span id="chimeStatusText">Chuông: BẬT</span>
+                        <i class="fa-solid fa-volume-high me-1"></i> <span id="chimeStatusText">Chuông</span>
                     </button>
                     <button type="button" class="btn btn-gold btn-sm rounded-pill px-3" onclick="location.reload()" title="Tải lại đơn hàng">
                         <i class="fa-solid fa-arrows-rotate"></i>
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- WFQ Active Banner Alert -->
+        <div id="wfqBanner" class="alert alert-dark border border-gold mt-3 mb-0 py-2 px-3 small d-none" style="background: rgba(222, 183, 106, 0.1);">
+            <div class="d-flex justify-content-between align-items-center">
+                <span><i class="fa-solid fa-brain text-gold me-2"></i><strong>Điều phối thông minh WFQ:</strong> Sắp xếp hàng đợi tối ưu theo VIP Tier (+35đ), Dine-in giữ crema (+15đ), và Anti-Starvation (+3.5đ/phút).</span>
+                <span class="badge bg-gold text-dark font-accent fw-bold">ACTIVE</span>
             </div>
         </div>
 
@@ -335,6 +346,59 @@
                     }
                 }
             }).catch(err => console.error(err));
+        }
+
+        // WFQ Priority Dispatching Algorithm Hook
+        let isWfqActive = false;
+        function toggleWfqPriorityQueue() {
+            const btn = document.getElementById('wfqToggleBtn');
+            const banner = document.getElementById('wfqBanner');
+            const container = document.getElementById('kdsGridContainer');
+            if (!container) return;
+
+            if (isWfqActive) {
+                isWfqActive = false;
+                btn.className = 'btn btn-dark-roast border border-gold text-gold btn-sm rounded-pill px-3 font-accent';
+                if (banner) banner.classList.add('d-none');
+                location.reload();
+                return;
+            }
+
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang tối ưu...';
+            fetch('${pageContext.request.contextPath}/api/kds/queue-optimization/${store.id}')
+                .then(res => res.json())
+                .then(res => {
+                    btn.innerHTML = '<i class="fa-solid fa-check me-1 text-success"></i> WFQ BẬT';
+                    btn.className = 'btn btn-gold btn-sm rounded-pill px-3 font-accent fw-bold';
+                    isWfqActive = true;
+                    if (banner) banner.classList.remove('d-none');
+
+                    if (res.success && res.data && res.data.length > 0) {
+                        res.data.forEach(item => {
+                            const ticket = document.getElementById('ticket-' + item.orderId);
+                            if (ticket) {
+                                container.appendChild(ticket); // Re-append in sorted order
+
+                                // Inject or update Priority Tag badge
+                                let badgeWrap = ticket.querySelector('.wfq-priority-pill');
+                                if (!badgeWrap) {
+                                    badgeWrap = document.createElement('div');
+                                    badgeWrap.className = 'wfq-priority-pill d-flex justify-content-between align-items-center bg-dark-roast border border-gold rounded px-2 py-1 mb-2 font-accent';
+                                    const cardBody = ticket.querySelector('.card-body');
+                                    if (cardBody) cardBody.insertBefore(badgeWrap, cardBody.firstChild);
+                                }
+                                badgeWrap.innerHTML = `
+                                    <span class="small text-gold fw-bold"><i class="fa-solid fa-fire me-1"></i>Điểm: ${item.priorityScore} (${item.customerTier})</span>
+                                    <span class="badge bg-gold-subtle text-gold small">⏱️ ETA: ~${item.estimatedWaitEtaMinutes} phút</span>
+                                `;
+                            }
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.error('Lỗi gọi thuật toán WFQ:', err);
+                    btn.innerHTML = '<i class="fa-solid fa-bolt me-1 text-gold"></i> WFQ Ưu Tiên';
+                });
         }
 
         // Realtime Elapsed Timer
