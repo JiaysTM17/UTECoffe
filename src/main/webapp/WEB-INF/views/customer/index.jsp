@@ -113,7 +113,7 @@
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold">
                                     <span class="price-gold product-price-val" data-raw-price="${prod.basePrice}" data-vnd="${prod.basePrice}"><fmt:formatNumber value="${prod.basePrice}" pattern="#,##0"/> VNĐ</span>
-                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill text-nowrap d-inline-flex align-items-center justify-content-center" style="min-width: 142px;">
+                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill">
                                         <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="feat.add_cart">Thêm Giỏ Hàng</span>
                                     </a>
                                 </div>

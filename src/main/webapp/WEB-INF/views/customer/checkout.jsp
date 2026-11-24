@@ -9,13 +9,13 @@
     <!-- Header Banner -->
     <div class="py-5 bg-espresso border-bottom border-gold text-center">
         <div class="container py-2">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" style="letter-spacing: 0.12em;">
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" style="letter-spacing: 0.12em;" data-i18n="checkout.badge">
                 <i class="fa-solid fa-lock me-1"></i> BẢO MẬT &amp; CHÍNH XÁC
             </span>
-            <h1 class="font-serif display-5 fw-bold text-gold-gradient mb-2">
+            <h1 class="font-serif display-5 fw-bold text-gold-gradient mb-2" data-i18n="checkout.title">
                 Xác Nhận Đơn Hàng
             </h1>
-            <p class="text-secondary mx-auto small mb-0" style="max-width: 600px;">
+            <p class="text-secondary mx-auto small mb-0" style="max-width: 600px;" data-i18n="checkout.desc">
                 Quý khách vui lòng kiểm tra kỹ thông tin nhận hàng và phương thức thanh toán trước khi hoàn tất.
             </p>
         </div>
@@ -31,7 +31,7 @@
                     <!-- Method Selector -->
                     <div class="card-luxury p-4 mb-4">
                         <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2">
-                            <i class="fa-solid fa-truck-fast me-2"></i>1. Phương Thức Nhận Thức Uống
+                            <i class="fa-solid fa-truck-fast me-2"></i><span data-i18n="checkout.step1">1. Phương Thức Nhận Thức Uống</span>
                         </h5>
 
                         <div class="row g-3 mb-4">
@@ -39,16 +39,16 @@
                                 <input type="radio" class="btn-check" name="orderType" id="typeDelivery" value="DELIVERY" checked>
                                 <label class="btn btn-outline-gold w-100 py-3 text-center rounded-3 cursor-pointer" for="typeDelivery">
                                     <i class="fa-solid fa-motorcycle fs-3 d-block mb-1 text-gold"></i>
-                                    <span class="fw-bold font-accent">Giao Tận Nơi</span>
-                                    <small class="d-block text-secondary" style="font-size: 0.75rem;">Siêu tốc 20 - 35 phút</small>
+                                    <span class="fw-bold font-accent" data-i18n="checkout.delivery">Giao Tận Nơi</span>
+                                    <small class="d-block text-secondary" style="font-size: 0.75rem;" data-i18n="checkout.delivery_hint">Siêu tốc 20 - 35 phút</small>
                                 </label>
                             </div>
                             <div class="col-6">
                                 <input type="radio" class="btn-check" name="orderType" id="typeTakeaway" value="TAKE_AWAY">
                                 <label class="btn btn-outline-gold w-100 py-3 text-center rounded-3 cursor-pointer" for="typeTakeaway">
                                     <i class="fa-solid fa-store fs-3 d-block mb-1 text-gold"></i>
-                                    <span class="fw-bold font-accent">Lấy Tại Quán</span>
-                                    <small class="d-block text-secondary" style="font-size: 0.75rem;">Chuẩn bị sẵn không chờ</small>
+                                    <span class="fw-bold font-accent" data-i18n="checkout.takeaway">Lấy Tại Quán</span>
+                                    <small class="d-block text-secondary" style="font-size: 0.75rem;" data-i18n="checkout.takeaway_hint">Chuẩn bị sẵn không chờ</small>
                                 </label>
                             </div>
                         </div>
@@ -56,9 +56,9 @@
                         <!-- Store Branch Selection with Haversine Geolocation Detection -->
                         <div class="mb-3">
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <label class="form-label small text-gold fw-bold mb-0">Chi Nhánh Chế Biến Thức Uống:</label>
+                                <label class="form-label small text-gold fw-bold mb-0" data-i18n="checkout.store_label">Chi Nhánh Chế Biến Thức Uống:</label>
                                 <button type="button" class="btn btn-outline-gold btn-sm py-0 px-2 rounded-pill font-accent" style="font-size: 0.72rem;" onclick="detectNearestStore()">
-                                    <i class="fa-solid fa-location-crosshairs text-gold me-1"></i> Định Vị Gần Nhất
+                                    <i class="fa-solid fa-location-crosshairs text-gold me-1"></i> <span data-i18n="checkout.gps_btn">Định Vị Gần Nhất</span>
                                 </button>
                             </div>
                             <select class="form-select form-control-luxury" name="storeId" id="storeSelect" required>
@@ -75,27 +75,27 @@
                         <!-- Recipient Name & Phone -->
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <label class="form-label small text-gold fw-bold">Họ và Tên Quý Khách:</label>
+                                <label class="form-label small text-gold fw-bold" data-i18n="checkout.name_label">Họ và Tên Quý Khách:</label>
                                 <input type="text" class="form-control form-control-luxury" name="recipientName" placeholder="Ví dụ: Nguyễn Văn An" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small text-gold fw-bold">Số Điện Thoại Nhận Hàng:</label>
+                                <label class="form-label small text-gold fw-bold" data-i18n="checkout.phone_label">Số Điện Thoại Nhận Hàng:</label>
                                 <input type="tel" class="form-control form-control-luxury" name="recipientPhone" placeholder="Ví dụ: 0901234567" required>
                             </div>
                         </div>
 
                         <!-- Delivery Address Group -->
                         <div class="mb-3" id="deliveryAddressGroup">
-                            <label class="form-label small text-gold fw-bold">Địa Chỉ Giao Tận Tay:</label>
+                            <label class="form-label small text-gold fw-bold" data-i18n="checkout.addr_label">Địa Chỉ Giao Tận Tay:</label>
                             <input type="text" class="form-control form-control-luxury" name="deliveryAddress" placeholder="Số nhà, tên đường, phường/xã, quận/huyện...">
                             <small class="text-secondary" style="font-size: 0.75rem;">
-                                <i class="fa-solid fa-circle-info text-gold me-1"></i> Shipper sẽ gọi điện trước khi giao 5 - 10 phút.
+                                <i class="fa-solid fa-circle-info text-gold me-1"></i> <span data-i18n="checkout.shipper_hint">Shipper sẽ gọi điện trước khi giao 5 - 10 phút.</span>
                             </small>
                         </div>
 
                         <!-- Notes for Barista -->
                         <div>
-                            <label class="form-label small text-gold fw-bold">Ghi Chú Cho Barista / Shipper:</label>
+                            <label class="form-label small text-gold fw-bold" data-i18n="checkout.note_label">Ghi Chú Cho Barista / Shipper:</label>
                             <textarea class="form-control form-control-luxury" name="note" rows="2" placeholder="Ví dụ: Giao lên lầu 3, để đá riêng, ít ngọt..."></textarea>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                     <!-- Payment Gateways Selection -->
                     <div class="card-luxury p-4">
                         <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2">
-                            <i class="fa-solid fa-credit-card me-2"></i>2. Cổng Thanh Toán An Toàn
+                            <i class="fa-solid fa-credit-card me-2"></i><span data-i18n="checkout.step2">2. Cổng Thanh Toán An Toàn</span>
                         </h5>
 
                         <div class="d-flex flex-column gap-3">

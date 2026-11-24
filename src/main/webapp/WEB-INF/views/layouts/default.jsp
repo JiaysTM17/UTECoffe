@@ -192,11 +192,11 @@
                 <div class="col-lg-2 col-md-6 col-6">
                     <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;" data-i18n="footer.explore">Khám Phá</h6>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link">Cà Phê Đặc Sản</a></li>
-                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link">Trà Thủ Công</a></li>
-                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link">Cold Brew Ủ Lạnh</a></li>
-                        <li><a href="${pageContext.request.contextPath}/story" class="footer-link">Nghệ Thuật Rang Mộc</a></li>
-                        <li><a href="${pageContext.request.contextPath}/reservation" class="footer-link">Đặt Bàn Thưởng Thức</a></li>
+                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link" data-i18n="footer.link_coffee">Cà Phê Đặc Sản</a></li>
+                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link" data-i18n="footer.link_tea">Trà Thủ Công</a></li>
+                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link" data-i18n="footer.link_coldbrew">Cold Brew Ủ Lạnh</a></li>
+                        <li><a href="${pageContext.request.contextPath}/story" class="footer-link" data-i18n="footer.link_roast">Nghệ Thuật Rang Mộc</a></li>
+                        <li><a href="${pageContext.request.contextPath}/reservation" class="footer-link" data-i18n="footer.link_reserve">Đặt Bàn Thưởng Thức</a></li>
                     </ul>
                 </div>
 
@@ -204,29 +204,29 @@
                 <div class="col-lg-2 col-md-6 col-6">
                     <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;" data-i18n="footer.policy">Dịch Vụ</h6>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/uteclub" class="footer-link">Đặc Quyền UTEClub</a></li>
-                        <li><a href="${pageContext.request.contextPath}/stores" class="footer-link">Tìm Cửa Hàng Gần Nhất</a></li>
-                        <li><a href="${pageContext.request.contextPath}/cart" class="footer-link">Giao Hàng Siêu Tốc 30'</a></li>
-                        <li><a href="${pageContext.request.contextPath}/policy/refund" class="footer-link">Chính Sách Hoàn Tiền</a></li>
-                        <li><a href="${pageContext.request.contextPath}/policy/terms" class="footer-link">Điều Khoản &amp; Bảo Mật</a></li>
+                        <li><a href="${pageContext.request.contextPath}/uteclub" class="footer-link" data-i18n="footer.link_uteclub">Đặc Quyền UTEClub</a></li>
+                        <li><a href="${pageContext.request.contextPath}/stores" class="footer-link" data-i18n="footer.link_stores">Tìm Cửa Hàng Gần Nhất</a></li>
+                        <li><a href="${pageContext.request.contextPath}/cart" class="footer-link" data-i18n="footer.link_delivery">Giao Hàng Siêu Tốc 30'</a></li>
+                        <li><a href="${pageContext.request.contextPath}/policy/refund" class="footer-link" data-i18n="footer.link_refund">Chính Sách Hoàn Tiền</a></li>
+                        <li><a href="${pageContext.request.contextPath}/policy/terms" class="footer-link" data-i18n="footer.link_terms">Điều Khoản &amp; Bảo Mật</a></li>
                     </ul>
                 </div>
 
                 <!-- Col 4: Roastery Contact -->
                 <div class="col-lg-4 col-md-6">
-                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;">Xưởng Rang &amp; Trụ Sở</h6>
-                    <p class="text-secondary small mb-2"><i class="fa-solid fa-location-dot text-gold me-2"></i> 01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</p>
-                    <p class="text-secondary small mb-2"><i class="fa-solid fa-clock text-gold me-2"></i> Giờ hoạt động: 06:30 - 23:00 (Thứ 2 - Chủ Nhật)</p>
+                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;" data-i18n="footer.contact_title">Xưởng Rang &amp; Trụ Sở</h6>
+                    <p class="text-secondary small mb-2"><i class="fa-solid fa-location-dot text-gold me-2"></i> <span data-i18n="footer.contact_addr">01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</span></p>
+                    <p class="text-secondary small mb-2"><i class="fa-solid fa-clock text-gold me-2"></i> <span data-i18n="footer.contact_hours">Giờ hoạt động: 06:30 - 23:00 (Thứ 2 - Chủ Nhật)</span></p>
                     <p class="text-secondary small mb-2"><i class="fa-solid fa-envelope text-gold me-2"></i> contact@utecoffe.vn | cskh@utecoffe.vn</p>
-                    <p class="text-secondary small mb-3"><i class="fa-solid fa-phone text-gold me-2"></i> Tổng đài đặt món: 1900 2026</p>
+                    <p class="text-secondary small mb-3"><i class="fa-solid fa-phone text-gold me-2"></i> <span data-i18n="footer.contact_hotline">Tổng đài đặt món: 1900 2026</span></p>
                     
                     <div class="pt-2">
-                        <span class="text-muted small d-block mb-1">Đối tác thanh toán bảo mật:</span>
+                        <span class="text-muted small d-block mb-1" data-i18n="footer.payment_partners">Đối tác thanh toán bảo mật:</span>
                         <div class="d-flex gap-2 align-items-center flex-wrap">
                             <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-qrcode me-1 text-gold"></i> VietQR</span>
                             <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-regular fa-credit-card me-1 text-gold"></i> VNPay</span>
                             <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-wallet me-1 text-gold"></i> MoMo</span>
-                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-money-bill-1 me-1 text-gold"></i> Tiền mặt</span>
+                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-money-bill-1 me-1 text-gold"></i> <span data-i18n="footer.pay_cash">Tiền mặt</span></span>
                         </div>
                     </div>
                 </div>

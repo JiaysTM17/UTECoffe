@@ -9,13 +9,13 @@
     <!-- Header Banner -->
     <div class="py-5 bg-espresso border-bottom border-gold text-center">
         <div class="container py-2">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" style="letter-spacing: 0.12em;">
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" style="letter-spacing: 0.12em;" data-i18n="cart.badge">
                 <i class="fa-solid fa-bag-shopping me-1"></i> TÚI THƯỞNG THỨC NGHỆ NHÂN
             </span>
-            <h1 class="font-serif display-5 fw-bold text-gold-gradient mb-2">
+            <h1 class="font-serif display-5 fw-bold text-gold-gradient mb-2" data-i18n="cart.title">
                 Giỏ Hàng Thức Uống
             </h1>
-            <p class="text-secondary mx-auto small mb-0" style="max-width: 600px;">
+            <p class="text-secondary mx-auto small mb-0" style="max-width: 600px;" data-i18n="cart.desc">
                 Mỗi ly cà phê và tách trà đều được pha mới ngay khi nhận đơn để đảm bảo độ tươi và hương vị trọn vẹn nhất.
             </p>
         </div>
@@ -45,9 +45,9 @@
                     <div class="col-lg-8">
                         <div class="card-luxury p-4">
                             <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold">
-                                <h5 class="font-serif fw-bold text-gold mb-0">Danh Sách Thức Uống (${cart.items.size()})</h5>
+                                <h5 class="font-serif fw-bold text-gold mb-0"><span data-i18n="cart.item_list">Danh Sách Thức Uống</span> (${cart.items.size()})</h5>
                                 <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold btn-sm px-3 rounded-pill">
-                                    <i class="fa-solid fa-plus me-1"></i> Chọn Thêm Món
+                                    <i class="fa-solid fa-plus me-1"></i> <span data-i18n="cart.add_more">Chọn Thêm Món</span>
                                 </a>
                             </div>
 
@@ -55,10 +55,10 @@
                                 <table class="table table-luxury align-middle">
                                     <thead>
                                         <tr class="small text-secondary">
-                                            <th>Thức Uống</th>
-                                            <th>Đơn Giá</th>
-                                            <th class="text-center">Số Lượng</th>
-                                            <th class="text-end">Tạm Tính</th>
+                                            <th data-i18n="cart.th_beverage">Thức Uống</th>
+                                            <th data-i18n="cart.th_unit_price">Đơn Giá</th>
+                                            <th class="text-center" data-i18n="cart.th_quantity">Số Lượng</th>
+                                            <th class="text-end" data-i18n="cart.th_total">Tạm Tính</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -113,16 +113,16 @@
                     <div class="col-lg-4">
                         <div class="card-luxury p-4 sticky-top" style="top: 100px;">
                             <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2">
-                                <i class="fa-solid fa-receipt me-2"></i>Tóm Tắt Đơn Hàng
+                                <i class="fa-solid fa-receipt me-2"></i><span data-i18n="cart.order_summary">Tóm Tắt Đơn Hàng</span>
                             </h5>
                             
                             <!-- Voucher Promo Input -->
                             <div class="mb-4">
-                                <label class="form-label small text-gold fw-bold">Mã Ưu Đãi / Voucher:</label>
+                                <label class="form-label small text-gold fw-bold" data-i18n="cart.voucher_label">Mã Ưu Đãi / Voucher:</label>
                                 <div class="input-group">
                                     <input type="text" id="voucherCodeInput" class="form-control form-control-luxury font-monospace text-uppercase" placeholder="VD: UTE2026, FREESHIP">
                                     <button class="btn btn-outline-gold px-3 font-accent fw-bold" type="button" id="applyVoucherBtn">
-                                        Áp Dụng
+                                        <span data-i18n="cart.voucher_apply">Áp Dụng</span>
                                     </button>
                                 </div>
                                 <div id="voucherFeedback" class="small mt-1 text-success d-none">
@@ -132,35 +132,35 @@
 
                             <!-- Cost Breakdown -->
                             <div class="d-flex justify-content-between mb-2 small text-secondary">
-                                <span>Tổng tiền món:</span>
-                                <span class="text-light fw-bold font-monospace" id="cartSubtotalText">
+                                <span data-i18n="cart.subtotal_label">Tổng tiền món:</span>
+                                <span class="text-light fw-bold font-monospace product-price-val" id="cartSubtotalText" data-raw-price="${cart.totalAmount}" data-vnd="${cart.totalAmount}">
                                     <fmt:formatNumber value="${cart.totalAmount}" pattern="#,##0"/> VNĐ
                                 </span>
                             </div>
                             <div class="d-flex justify-content-between mb-2 small text-secondary">
-                                <span>Phí vận chuyển:</span>
+                                <span data-i18n="cart.shipping_label">Phí vận chuyển:</span>
                                 <span class="text-success fw-bold" id="cartShippingText">Miễn Phí</span>
                             </div>
                             <div class="d-flex justify-content-between mb-3 small text-secondary">
-                                <span>Giảm giá voucher:</span>
+                                <span data-i18n="cart.discount_label">Giảm giá voucher:</span>
                                 <span class="text-gold fw-bold font-monospace" id="cartDiscountText">-0 VNĐ</span>
                             </div>
 
                             <hr class="border-secondary opacity-25">
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <span class="fw-bold fs-6">Thành Tiền:</span>
-                                <span class="price-gold fs-3 fw-bold" id="cartFinalTotalText">
+                                <span class="fw-bold fs-6" data-i18n="cart.final_total_label">Thành Tiền:</span>
+                                <span class="price-gold fs-3 fw-bold product-price-val" id="cartFinalTotalText" data-raw-price="${cart.totalAmount}" data-vnd="${cart.totalAmount}">
                                     <fmt:formatNumber value="${cart.totalAmount}" pattern="#,##0"/> VNĐ
                                 </span>
                             </div>
 
                             <a href="${pageContext.request.contextPath}/cart/checkout" class="btn btn-gold w-100 py-3 fw-bold fs-6 rounded-pill shadow-gold">
-                                <i class="fa-solid fa-credit-card me-2"></i> Tiến Hành Thanh Toán
+                                <i class="fa-solid fa-credit-card me-2"></i> <span data-i18n="cart.btn_checkout">Tiến Hành Thanh Toán</span>
                             </a>
 
                             <div class="text-center mt-3">
                                 <span class="small text-secondary" style="font-size: 0.75rem;">
-                                    <i class="fa-solid fa-shield-halved text-gold me-1"></i> Thanh toán bảo mật SSL 256-bit
+                                    <i class="fa-solid fa-shield-halved text-gold me-1"></i> <span data-i18n="cart.ssl_notice">Thanh toán bảo mật SSL 256-bit</span>
                                 </span>
                             </div>
                         </div>
@@ -173,11 +173,13 @@
                         <div class="mb-4">
                             <i class="fa-solid fa-bag-shopping text-gold display-1 opacity-50"></i>
                         </div>
-                        <h3 class="font-serif fw-bold text-gold-gradient mb-2">Giỏ Hàng Của Bạn Đang Trống</h3>
-                        <p class="text-secondary small mb-4">
+                        <h3 class="font-serif fw-bold text-gold-gradient mb-2" data-i18n="cart.empty_title">Giỏ Hàng Của Bạn Đang Trống</h3>
+                        <p class="text-secondary small mb-4" data-i18n="cart.empty_desc">
                             Hãy khám phá thực đơn cà phê rang mộc thủ công và trà hoa tinh tuyển của UTECoffe để chọn cho mình thức uống ưng ý.
                         </p>
                         <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-2 rounded-pill font-accent fw-bold">
+                            <i class="fa-solid fa-arrow-right me-1"></i> <span data-i18n="cart.empty_btn">Khám Phá Thực Đơn Ngay</span>
+                        </a>
                             <i class="fa-solid fa-mug-hot me-2"></i> Khám Phá Thực Đơn Ngay
                         </a>
                     </div>

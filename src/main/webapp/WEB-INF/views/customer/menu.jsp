@@ -227,7 +227,7 @@
                                 </div>
                                 <div>
                                     <a href="${pageContext.request.contextPath}/menu/${p.slug}" 
-                                       class="btn btn-gold btn-sm px-3 rounded-pill font-accent fw-semibold text-nowrap d-inline-flex align-items-center justify-content-center" style="min-width: 125px;">
+                                       class="btn btn-gold btn-sm px-3 rounded-pill font-accent fw-semibold">
                                         <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="menu.customize">Tùy Chỉnh</span>
                                     </a>
                                 </div>

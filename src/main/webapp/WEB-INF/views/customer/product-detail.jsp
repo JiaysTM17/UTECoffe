@@ -9,8 +9,8 @@
         <!-- Breadcrumb Navigation -->
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb small font-accent text-uppercase" style="letter-spacing: 0.08em;">
-                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/" class="text-secondary text-decoration-none hover-gold">Trang Chủ</a></li>
-                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/menu" class="text-secondary text-decoration-none hover-gold">Thực Đơn</a></li>
+                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/" class="text-secondary text-decoration-none hover-gold" data-i18n="nav.home">Trang Chủ</a></li>
+                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/menu" class="text-secondary text-decoration-none hover-gold" data-i18n="nav.menu">Thực Đơn</a></li>
                 <li class="breadcrumb-item active text-gold fw-bold" aria-current="page">${product.name}</li>
             </ol>
         </nav>
@@ -43,7 +43,7 @@
 
                     <!-- Terroir & Taste Radar Card -->
                     <div class="card-luxury p-4">
-                        <h6 class="font-accent text-gold fw-bold text-uppercase small mb-3 border-bottom border-gold pb-2" style="letter-spacing: 0.12em;">
+                        <h6 class="font-accent text-gold fw-bold text-uppercase small mb-3 border-bottom border-gold pb-2" style="letter-spacing: 0.12em;" data-i18n="detail.terroir_title">
                             <i class="fa-solid fa-compass-drafting me-2"></i>Hồ Sơ Hương Vị &amp; Xuất Xứ (Terroir)
                         </h6>
                         

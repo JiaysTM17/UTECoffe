@@ -211,6 +211,68 @@
             'res.perk_title': 'ĐẶC QUYỀN ĐẶT BÀN TRỰC TUYẾN:',
             'res.perk_desc': 'Mỗi lượt đặt chỗ trực tuyến qua website được tặng kèm 01 shot Cold Brew Cam Vàng Signature dùng thử trước khi bắt đầu thưởng thức.',
 
+            // Footer Links & Contacts
+            'footer.link_coffee': 'Cà Phê Đặc Sản',
+            'footer.link_tea': 'Trà Thủ Công',
+            'footer.link_coldbrew': 'Cold Brew Ủ Lạnh',
+            'footer.link_roast': 'Nghệ Thuật Rang Mộc',
+            'footer.link_reserve': 'Đặt Bàn Thưởng Thức',
+            'footer.link_uteclub': 'Đặc Quyền UTEClub',
+            'footer.link_stores': 'Tìm Cửa Hàng Gần Nhất',
+            'footer.link_delivery': 'Giao Hàng Siêu Tốc 30\'',
+            'footer.link_refund': 'Chính Sách Hoàn Tiền',
+            'footer.link_terms': 'Điều Khoản & Bảo Mật',
+            'footer.contact_title': 'Xưởng Rang & Trụ Sở',
+            'footer.contact_addr': '01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh',
+            'footer.contact_hours': 'Giờ hoạt động: 06:30 - 23:00 (Thứ 2 - Chủ Nhật)',
+            'footer.contact_hotline': 'Tổng đài đặt món: 1900 2026',
+            'footer.payment_partners': 'Đối tác thanh toán bảo mật:',
+            'footer.pay_cash': 'Tiền mặt',
+
+            // Cart Page
+            'cart.badge': 'TÚI THƯỞNG THỨC NGHỆ NHÂN',
+            'cart.title': 'Giỏ Hàng Thức Uống',
+            'cart.desc': 'Mỗi ly cà phê và tách trà đều được pha mới ngay khi nhận đơn để đảm bảo độ tươi và hương vị trọn vẹn nhất.',
+            'cart.item_list': 'Danh Sách Thức Uống',
+            'cart.add_more': 'Chọn Thêm Món',
+            'cart.th_beverage': 'Thức Uống',
+            'cart.th_unit_price': 'Đơn Giá',
+            'cart.th_quantity': 'Số Lượng',
+            'cart.th_total': 'Tạm Tính',
+            'cart.order_summary': 'Tóm Tắt Đơn Hàng',
+            'cart.voucher_label': 'Mã Ưu Đãi / Voucher:',
+            'cart.voucher_apply': 'Áp Dụng',
+            'cart.subtotal_label': 'Tổng tiền món:',
+            'cart.shipping_label': 'Phí vận chuyển:',
+            'cart.discount_label': 'Giảm giá voucher:',
+            'cart.final_total_label': 'Thành Tiền:',
+            'cart.btn_checkout': 'Tiến Hành Thanh Toán',
+            'cart.ssl_notice': 'Thanh toán bảo mật SSL 256-bit',
+            'cart.empty_title': 'Giỏ Hàng Của Bạn Đang Trống',
+            'cart.empty_desc': 'Hãy khám phá thực đơn cà phê rang mộc thủ công và trà hoa tinh tuyển của UTECoffe để chọn cho mình thức uống ưng ý.',
+            'cart.empty_btn': 'Khám Phá Thực Đơn Ngay',
+
+            // Checkout Page
+            'checkout.badge': 'BẢO MẬT & CHÍNH XÁC',
+            'checkout.title': 'Xác Nhận Đơn Hàng',
+            'checkout.desc': 'Quý khách vui lòng kiểm tra kỹ thông tin nhận hàng và phương thức thanh toán trước khi hoàn tất.',
+            'checkout.step1': '1. Phương Thức Nhận Thức Uống',
+            'checkout.delivery': 'Giao Tận Nơi',
+            'checkout.delivery_hint': 'Siêu tốc 20 - 35 phút',
+            'checkout.takeaway': 'Lấy Tại Quán',
+            'checkout.takeaway_hint': 'Chuẩn bị sẵn không chờ',
+            'checkout.store_label': 'Chi Nhánh Chế Biến Thức Uống:',
+            'checkout.gps_btn': 'Định Vị Gần Nhất',
+            'checkout.name_label': 'Họ và Tên Quý Khách:',
+            'checkout.phone_label': 'Số Điện Thoại Nhận Hàng:',
+            'checkout.addr_label': 'Địa Chỉ Giao Tận Tay:',
+            'checkout.shipper_hint': 'Shipper sẽ gọi điện trước khi giao 5 - 10 phút.',
+            'checkout.note_label': 'Ghi Chú Cho Barista / Shipper:',
+            'checkout.step2': '2. Cổng Thanh Toán An Toàn',
+
+            // Detail Page
+            'detail.terroir_title': 'Hồ Sơ Hương Vị & Xuất Xứ (Terroir)',
+
             // In Development Modal
             'in_dev.title': 'Thông Báo Trải Nghiệm',
             'in_dev.default_feature': 'Kênh Truyền Thông Đang Nâng Cấp',
@@ -413,6 +475,68 @@
             'res.desc': 'Reserve your ideal table in advance at UTECoffe to make your meetings, conversations, or focus sessions smooth and serene.',
             'res.perk_title': 'ONLINE BOOKING PRIVILEGE:',
             'res.perk_desc': 'Every online reservation booked via our website includes 01 complimentary tasting shot of Signature Valencia Orange Cold Brew.',
+
+            // Footer Links & Contacts
+            'footer.link_coffee': 'Specialty Coffee',
+            'footer.link_tea': 'Artisan Tea',
+            'footer.link_coldbrew': 'Craft Cold Brew',
+            'footer.link_roast': 'Artisanal Roasting',
+            'footer.link_reserve': 'Table Reservation',
+            'footer.link_uteclub': 'UTEClub Privileges',
+            'footer.link_stores': 'Find Nearest Roastery',
+            'footer.link_delivery': 'Express 30\' Delivery',
+            'footer.link_refund': 'Refund Policy',
+            'footer.link_terms': 'Terms & Privacy',
+            'footer.contact_title': 'Roastery & Headquarters',
+            'footer.contact_addr': '01 Vo Van Ngan, Linh Chieu, Thu Duc City, HCMC',
+            'footer.contact_hours': 'Opening Hours: 06:30 AM - 11:00 PM (Mon - Sun)',
+            'footer.contact_hotline': 'Order Hotline: 1900 2026',
+            'footer.payment_partners': 'Secure Payment Partners:',
+            'footer.pay_cash': 'Cash',
+
+            // Cart Page
+            'cart.badge': 'ARTISANAL TASTE BAG',
+            'cart.title': 'Beverage Cart',
+            'cart.desc': 'Every coffee and tea is freshly brewed upon order to ensure maximum freshness and flavor.',
+            'cart.item_list': 'Selected Beverages',
+            'cart.add_more': 'Add More Items',
+            'cart.th_beverage': 'Beverage',
+            'cart.th_unit_price': 'Unit Price',
+            'cart.th_quantity': 'Quantity',
+            'cart.th_total': 'Subtotal',
+            'cart.order_summary': 'Order Summary',
+            'cart.voucher_label': 'Promotion / Voucher Code:',
+            'cart.voucher_apply': 'Apply',
+            'cart.subtotal_label': 'Items Subtotal:',
+            'cart.shipping_label': 'Shipping Fee:',
+            'cart.discount_label': 'Voucher Discount:',
+            'cart.final_total_label': 'Total Amount:',
+            'cart.btn_checkout': 'Proceed to Checkout',
+            'cart.ssl_notice': '256-bit SSL Secure Payment',
+            'cart.empty_title': 'Your Cart is Currently Empty',
+            'cart.empty_desc': 'Explore our specialty coffee and artisan tea menu to find your perfect cup.',
+            'cart.empty_btn': 'Explore Menu Now',
+
+            // Checkout Page
+            'checkout.badge': 'SECURE & PRECISE',
+            'checkout.title': 'Order Confirmation',
+            'checkout.desc': 'Please review your delivery details and preferred payment method before finalizing.',
+            'checkout.step1': '1. Fulfillment Method',
+            'checkout.delivery': 'Delivery',
+            'checkout.delivery_hint': 'Express 20 - 35 mins',
+            'checkout.takeaway': 'Pick-up in Store',
+            'checkout.takeaway_hint': 'Ready on arrival, zero waiting',
+            'checkout.store_label': 'Roastery Processing Branch:',
+            'checkout.gps_btn': 'Detect Nearest Branch',
+            'checkout.name_label': 'Full Name:',
+            'checkout.phone_label': 'Phone Number:',
+            'checkout.addr_label': 'Delivery Address:',
+            'checkout.shipper_hint': 'Courier will call 5 - 10 minutes prior to delivery.',
+            'checkout.note_label': 'Notes for Barista / Shipper:',
+            'checkout.step2': '2. Secure Payment Gateway',
+
+            // Detail Page
+            'detail.terroir_title': 'Flavor Profile & Terroir Origin',
 
             // In Development Modal
             'in_dev.title': 'Experience Notice',
@@ -617,6 +741,26 @@
         'basque-burnt-cheesecake': {
             en_name: 'Basque Burnt Cheesecake San Sebastián',
             en_desc: 'San Sebastián-style caramelized burnt top with an ultra-creamy, molten cheesecake core.'
+        },
+        'croissant-jambon-pho-mai-phap': {
+            en_name: 'Artisan French Ham & Melted Cheddar Croissant',
+            en_desc: 'Crisp Parisian croissant layered with premium French ham, melted cheddar cheese, and a mild Dijon mustard touch.'
+        },
+        'banh-tart-dau-tay-qua-mong': {
+            en_name: 'Fresh Dalat Berry & Strawberry Tart',
+            en_desc: 'Golden almond tart crust filled with French vanilla pastry cream and sweet ripe Dalat strawberries.'
+        },
+        'croffle-bo-nuong-mat-ong-rung': {
+            en_name: 'Wild Honey Glazed Butter Croffle',
+            en_desc: 'Pressed croissant waffle caramelized with raw forest honey and fragrant mint blossom glaze.'
+        },
+        'banh-danish-dao-pho-mai-tuoi': {
+            en_name: 'Peach & Fresh Cream Cheese Danish',
+            en_desc: 'Flaky thousand-layer Danish pastry filled with velvety cream cheese and juicy golden peach slices.'
+        },
+        'banh-sourdough-bo-toi-la-thyme': {
+            en_name: 'Thyme & Roasted Garlic Butter Sourdough',
+            en_desc: '36-hour slow-fermented artisan sourdough stone-baked and brushed with aromatic roasted garlic and fresh thyme butter.'
         }
     };
 
