@@ -111,8 +111,20 @@ public class DatabaseConfig {
         }
 
         // 3. Ensure SSL mode ONLY for remote cloud PostgreSQL databases (Render external / Neon / Supabase)
-        if (rawUrl != null && rawUrl.startsWith("jdbc:postgresql://") && !rawUrl.contains("sslmode=") && !rawUrl.contains("localhost") && !rawUrl.contains("127.0.0.1") && !rawUrl.contains("utecoffe-db")) {
-            rawUrl += (rawUrl.contains("?") ? "&" : "?") + "sslmode=prefer";
+        // CRITICAL FOR RENDER INTERNAL DB:
+        // Hostnames starting with "dpg-" or ending with ".render.com" / ".render.internal" inside Render VPC
+        // run on plaintext TCP (no SSL). Any SSL handshake (prefer/require) will hang for 30s causing Hikari timeout!
+        boolean isInternalRenderHost = (rawUrl != null && (rawUrl.contains("dpg-") || rawUrl.contains("render.internal") || rawUrl.contains("utecoffe-db") || rawUrl.contains("singapore-postgres")));
+        
+        if (rawUrl != null && rawUrl.startsWith("jdbc:postgresql://")) {
+            if (isInternalRenderHost) {
+                // Explicitly disable SSL for Render internal network
+                if (!rawUrl.contains("sslmode=")) {
+                    rawUrl += (rawUrl.contains("?") ? "&" : "?") + "sslmode=disable";
+                }
+            } else if (!rawUrl.contains("sslmode=") && !rawUrl.contains("localhost") && !rawUrl.contains("127.0.0.1")) {
+                rawUrl += (rawUrl.contains("?") ? "&" : "?") + "sslmode=prefer";
+            }
         }
 
         config.setJdbcUrl(rawUrl);
