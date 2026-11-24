@@ -4,6 +4,8 @@
     <mapping path="/ping/*" excl="true"/>
     <mapping path="/diag" excl="true"/>
     <mapping path="/diag/*" excl="true"/>
+    <mapping path="/threads" excl="true"/>
+    <mapping path="/threads/*" excl="true"/>
     <mapping path="/favicon.ico" excl="true"/>
     <mapping path="/WEB-INF/*" excl="true"/>
     <mapping path="/api/*" excl="true"/>

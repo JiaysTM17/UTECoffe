@@ -20,6 +20,8 @@ public class SiteMeshConfig {
                        .addExcludedPath("/ping/*")
                        .addExcludedPath("/diag")
                        .addExcludedPath("/diag/*")
+                       .addExcludedPath("/threads")
+                       .addExcludedPath("/threads/*")
                        .addExcludedPath("/favicon.ico")
                        .addExcludedPath("/WEB-INF/*")
                        .addExcludedPath("/api/*")

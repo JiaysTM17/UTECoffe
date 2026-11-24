@@ -18,7 +18,31 @@ public class DiagController {
 
     @GetMapping("/ping")
     public String ping() {
-        return "PONG - UTECoffe Platform Online (Build 2026-11-25.01)";
+        return "PONG - UTECoffe Platform Online (Build 2026-11-25.02)";
+    }
+
+    @GetMapping("/threads")
+    public Map<String, Object> threads() {
+        Map<String, Object> res = new LinkedHashMap<>();
+        java.lang.management.ThreadMXBean bean = java.lang.management.ManagementFactory.getThreadMXBean();
+        java.lang.management.ThreadInfo[] infos = bean.dumpAllThreads(true, true);
+        for (java.lang.management.ThreadInfo info : infos) {
+            String name = info.getThreadName();
+            if (name.contains("exec") || name.contains("http") || name.contains("Hikari") || name.contains("main")) {
+                java.util.List<String> stack = new java.util.ArrayList<>();
+                for (StackTraceElement elem : info.getStackTrace()) {
+                    stack.add(elem.toString());
+                    if (stack.size() >= 20) break;
+                }
+                Map<String, Object> t = new LinkedHashMap<>();
+                t.put("state", info.getThreadState().toString());
+                t.put("lockName", info.getLockName());
+                t.put("lockOwner", info.getLockOwnerName());
+                t.put("stack", stack);
+                res.put(name, t);
+            }
+        }
+        return res;
     }
 
     @GetMapping("/diag")
