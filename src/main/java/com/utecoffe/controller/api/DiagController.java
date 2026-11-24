@@ -92,6 +92,21 @@ public class DiagController {
         }
         res.put("dbDirectTest", dbTest);
 
+        Map<String, Object> poolInfo = new LinkedHashMap<>();
+        if (dataSource instanceof com.zaxxer.hikari.HikariDataSource hikari) {
+            poolInfo.put("jdbcUrl", hikari.getJdbcUrl() != null ? hikari.getJdbcUrl().replaceAll(":[^:@]+@", ":****@") : null);
+            poolInfo.put("username", hikari.getUsername());
+            poolInfo.put("maximumPoolSize", hikari.getMaximumPoolSize());
+            poolInfo.put("isClosed", hikari.isClosed());
+            try (Connection c = dataSource.getConnection()) {
+                poolInfo.put("poolConnectionSuccess", true);
+            } catch (Throwable t) {
+                poolInfo.put("poolConnectionSuccess", false);
+                poolInfo.put("error", t.getClass().getSimpleName() + ": " + t.getMessage());
+            }
+        }
+        res.put("hikariPoolInfo", poolInfo);
+
         return res;
     }
 }

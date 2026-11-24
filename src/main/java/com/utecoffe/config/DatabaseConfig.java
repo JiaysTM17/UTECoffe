@@ -89,10 +89,10 @@ public class DatabaseConfig {
                 String db = m.group(5);
                 String query = m.group(6);
 
-                if (u != null && !u.isBlank() && (envUser == null || envUser.isBlank() || "postgres".equals(envUser))) {
+                if (u != null && !u.isBlank()) {
                     envUser = u;
                 }
-                if (p != null && !p.isBlank() && (envPass == null || envPass.isBlank() || "postgres".equals(envPass))) {
+                if (p != null && !p.isBlank()) {
                     envPass = p;
                 }
 
