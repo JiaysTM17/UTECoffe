@@ -159,10 +159,10 @@
                         UTECOFFE là thương hiệu chuỗi cà phê &amp; trà đặc sản thượng hạng. Chúng tôi tận tâm tuyển chọn từng mẻ quả chín mọng từ độ cao 1.600m Cầu Đất, kết hợp kỹ thuật rang mộc thủ công để mang đến trải nghiệm hương vị đỉnh cao.
                     </p>
                     <div class="d-flex gap-2 mt-3">
-                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Kênh Facebook Official')" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;" title="Facebook UTECoffe"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Kênh Instagram Official')" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;" title="Instagram UTECoffe"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Kênh TikTok Official')" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;" title="TikTok UTECoffe"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Kênh YouTube Roastery')" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;" title="YouTube UTECoffe"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
 
@@ -185,8 +185,8 @@
                         <li><a href="${pageContext.request.contextPath}/profile" class="footer-link">Đặc Quyền UTEClub</a></li>
                         <li><a href="${pageContext.request.contextPath}/stores" class="footer-link">Tìm Cửa Hàng Gần Nhất</a></li>
                         <li><a href="${pageContext.request.contextPath}/cart" class="footer-link">Giao Hàng Siêu Tốc 30'</a></li>
-                        <li><a href="#" class="footer-link">Chính Sách Hoàn Tiền</a></li>
-                        <li><a href="#" class="footer-link">Điều Khoản &amp; Bảo Mật</a></li>
+                        <li><a href="${pageContext.request.contextPath}/policy/refund" class="footer-link">Chính Sách Hoàn Tiền</a></li>
+                        <li><a href="${pageContext.request.contextPath}/policy/terms" class="footer-link">Điều Khoản &amp; Bảo Mật</a></li>
                     </ul>
                 </div>
 

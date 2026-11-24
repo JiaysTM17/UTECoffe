@@ -59,7 +59,7 @@
                             <select class="form-select form-control-luxury" name="storeId" required>
                                 <option value="1">UTECoffe Flagship Thủ Đức - 01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức</option>
                                 <option value="2">UTECoffe Roastery Quận 1 - 68 Lê Lợi, P. Bến Nghé, Quận 1</option>
-                                <option value="3">UTECoffe Garden Bình Thạnh - 152 Điện Biên Phủ, Quận Bình Thạnh</option>
+                                <option value="3">UTECoffe Garden Bình Thạnh - 180 Ung Văn Khiêm, Phường 25, Q. Bình Thạnh, TP.HCM</option>
                             </select>
                         </div>
 
@@ -194,7 +194,7 @@
 
                         <div class="text-center mt-3">
                             <small class="text-secondary" style="font-size: 0.75rem;">
-                                Bằng việc bấm đặt hàng, quý khách đồng ý với <a href="#" class="text-gold text-decoration-none">Điều khoản dịch vụ</a> của UTECoffe.
+                                Bằng việc bấm đặt hàng, quý khách đồng ý với <a href="${pageContext.request.contextPath}/policy/terms" target="_blank" class="text-gold text-decoration-none hover-gold">Điều khoản dịch vụ</a> của UTECoffe.
                             </small>
                         </div>
                     </div>

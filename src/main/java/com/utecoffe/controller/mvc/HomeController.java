@@ -33,4 +33,23 @@ public class HomeController {
     public String uteclub() {
         return "customer/uteclub";
     }
+
+    @GetMapping("/coming-soon")
+    public String comingSoon(Model model) {
+        model.addAttribute("title", "Tính Năng Đang Hoàn Thiện");
+        model.addAttribute("message", "Kênh truyền thông & tính năng này của UTECoffe Artisanal Roasters đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền. Xin chân thành cảm ơn sự đồng hành của quý khách!");
+        return "customer/coming-soon";
+    }
+
+    @GetMapping("/policy/refund")
+    public String policyRefund(Model model) {
+        model.addAttribute("title", "Chính Sách Đổi Trả & Bồi Hoàn Điểm Thưởng");
+        return "customer/policy-refund";
+    }
+
+    @GetMapping("/policy/terms")
+    public String policyTerms(Model model) {
+        model.addAttribute("title", "Điều Khoản Dịch Vụ & Bảo Mật Khách Hàng");
+        return "customer/policy-terms";
+    }
 }

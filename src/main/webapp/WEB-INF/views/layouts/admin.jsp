@@ -166,6 +166,12 @@
                 <a href="${pageContext.request.contextPath}/swagger-ui.html" target="_blank" class="admin-nav-link text-info">
                     <i class="fa-solid fa-code text-info"></i> OpenAPI Swagger UI
                 </a>
+                <a href="${pageContext.request.contextPath}/actuator/health" target="_blank" class="admin-nav-link text-success">
+                    <i class="fa-solid fa-heart-pulse text-success"></i> Health Probes
+                </a>
+                <a href="${pageContext.request.contextPath}/barista/kds" target="_blank" class="admin-nav-link text-warning">
+                    <i class="fa-solid fa-display text-warning"></i> Chuyển Sang KDS
+                </a>
             </nav>
 
             <div class="p-3 border-top border-secondary opacity-75">
@@ -208,11 +214,13 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Dynamic Active Navigation Link Highlighter
+        // Dynamic Active Navigation Link Highlighter & Scroll Position Retainer
         document.addEventListener('DOMContentLoaded', function() {
+            const sidebarNav = document.getElementById('adminSidebarNav');
             const currentPath = window.location.pathname.replace(/\/$/, '');
             const links = document.querySelectorAll('#adminSidebarNav .admin-nav-link');
             let matched = false;
+            let activeLink = null;
             
             links.forEach(link => {
                 const href = link.getAttribute('href');
@@ -221,9 +229,11 @@
                     if (cleanHref === currentPath) {
                         link.classList.add('active');
                         matched = true;
+                        activeLink = link;
                     } else if (cleanHref.includes('/admin/') && currentPath.startsWith(cleanHref) && cleanHref !== '${pageContext.request.contextPath}/admin') {
                         link.classList.add('active');
                         matched = true;
+                        activeLink = link;
                     } else {
                         link.classList.remove('active');
                     }
@@ -232,7 +242,41 @@
             // Default to dashboard if root admin
             if (!matched && currentPath.endsWith('/admin')) {
                 const dash = document.querySelector('a[href$="/admin/dashboard"]');
-                if (dash) dash.classList.add('active');
+                if (dash) {
+                    dash.classList.add('active');
+                    activeLink = dash;
+                }
+            }
+
+            // Restore Scroll Position so selecting lower items does NOT jump back to top
+            if (sidebarNav) {
+                const savedScroll = sessionStorage.getItem('admin_sidebar_scroll_top');
+                if (savedScroll !== null) {
+                    sidebarNav.scrollTop = parseInt(savedScroll, 10);
+                } else if (activeLink) {
+                    activeLink.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+                }
+
+                // If active link is outside visible range, smoothly keep it in view
+                if (activeLink) {
+                    setTimeout(function() {
+                        const rect = activeLink.getBoundingClientRect();
+                        const navRect = sidebarNav.getBoundingClientRect();
+                        if (rect.top < navRect.top || rect.bottom > navRect.bottom) {
+                            activeLink.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+                        }
+                    }, 50);
+                }
+
+                // Save scroll on click or navigation
+                links.forEach(link => {
+                    link.addEventListener('click', function() {
+                        sessionStorage.setItem('admin_sidebar_scroll_top', sidebarNav.scrollTop);
+                    });
+                });
+                sidebarNav.addEventListener('scroll', function() {
+                    sessionStorage.setItem('admin_sidebar_scroll_top', sidebarNav.scrollTop);
+                }, { passive: true });
             }
         });
     </script>

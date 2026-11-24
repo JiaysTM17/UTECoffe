@@ -35,7 +35,7 @@
                 <div class="mb-4">
                     <div class="d-flex justify-content-between">
                         <label class="form-label text-gold small fw-bold">Mật Khẩu:</label>
-                        <a href="#" class="small text-muted text-decoration-none hover-gold">Quên mật khẩu?</a>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Khôi Phục Mật Khẩu', 'Tính năng đặt lại mật khẩu trực tuyến qua Email OTP đang được nâng cấp. Để được hỗ trợ cấp lại mật khẩu ngay lập tức, quý khách vui lòng liên hệ hotline tổng đài 1900 2026 hoặc quản trị viên chi nhánh.')" class="small text-muted text-decoration-none hover-gold">Quên mật khẩu?</a>
                     </div>
                     <input type="password" id="passwordInput" name="password" class="form-control form-control-luxury" placeholder="••••••••" required>
                 </div>

@@ -181,10 +181,10 @@
                         UTECOFFE là thương hiệu chuỗi cà phê &amp; trà đặc sản thượng hạng. Chúng tôi tận tâm tuyển chọn từng mẻ quả chín mọng từ độ cao 1.600m Cầu Đất, kết hợp kỹ thuật rang mộc thủ công để mang đến trải nghiệm hương vị đỉnh cao.
                     </p>
                     <div class="d-flex gap-2 mt-3">
-                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="#" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Kênh Facebook Official')" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;" title="Facebook UTECoffe"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Kênh Instagram Official')" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;" title="Instagram UTECoffe"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Kênh TikTok Official')" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;" title="TikTok UTECoffe"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="javascript:void(0)" onclick="showUnderDevelopment('Kênh YouTube Roastery')" class="btn btn-outline-gold btn-sm rounded-circle p-2" style="width: 36px; height: 36px;" title="YouTube UTECoffe"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
 
@@ -207,8 +207,8 @@
                         <li><a href="${pageContext.request.contextPath}/uteclub" class="footer-link">Đặc Quyền UTEClub</a></li>
                         <li><a href="${pageContext.request.contextPath}/stores" class="footer-link">Tìm Cửa Hàng Gần Nhất</a></li>
                         <li><a href="${pageContext.request.contextPath}/cart" class="footer-link">Giao Hàng Siêu Tốc 30'</a></li>
-                        <li><a href="#" class="footer-link">Chính Sách Hoàn Tiền</a></li>
-                        <li><a href="#" class="footer-link">Điều Khoản &amp; Bảo Mật</a></li>
+                        <li><a href="${pageContext.request.contextPath}/policy/refund" class="footer-link">Chính Sách Hoàn Tiền</a></li>
+                        <li><a href="${pageContext.request.contextPath}/policy/terms" class="footer-link">Điều Khoản &amp; Bảo Mật</a></li>
                     </ul>
                 </div>
 
@@ -240,8 +240,65 @@
         </div>
     </footer>
 
+    <!-- Luxury In-Development Modal -->
+    <div class="modal fade" id="inDevelopmentModal" tabindex="-1" aria-labelledby="inDevelopmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content card-luxury border-gold shadow-lg bg-espresso text-light p-3" style="border-radius: 24px;">
+                <div class="modal-header border-0 pb-0">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-gold-gradient text-obsidian rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                            <i class="fa-solid fa-sparkles"></i>
+                        </span>
+                        <h5 class="modal-title font-serif text-gold-gradient fw-bold mb-0" id="inDevelopmentModalLabel">Thông Báo Trải Nghiệm</h5>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-4 text-center">
+                    <div class="mb-3">
+                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle border border-gold p-4" style="background: radial-gradient(circle, rgba(222,183,106,0.18) 0%, rgba(14,13,11,0) 70%); width: 85px; height: 85px;">
+                            <i class="fa-solid fa-compass-drafting text-gold fs-2"></i>
+                        </div>
+                    </div>
+                    <h5 class="font-serif fw-bold text-light mb-2" id="inDevFeatureTitle">Kênh Truyền Thông Đang Nâng Cấp</h5>
+                    <p class="text-secondary small px-3 mb-0" id="inDevFeatureDesc" style="line-height: 1.8;">
+                        UTECOFFE Official đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền trên nền tảng này nhằm mang đến trải nghiệm tinh tế và trọn vẹn nhất cho bạn. Xin vui lòng đón chờ trong thời gian sớm nhất!
+                    </p>
+                </div>
+                <div class="modal-footer border-0 pt-0 justify-content-center gap-2">
+                    <button type="button" class="btn btn-gold btn-sm px-4 rounded-pill font-accent" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-check me-1"></i> Đã Hiểu &amp; Đón Chờ
+                    </button>
+                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold btn-sm px-3 rounded-pill font-accent">
+                        Khám Phá Menu
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap 5 JS Bundle & UTECoffe Luxury Interaction Engine -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/luxury.js"></script>
+    <script>
+        function showUnderDevelopment(featureName, customMessage) {
+            const titleEl = document.getElementById('inDevFeatureTitle');
+            const descEl = document.getElementById('inDevFeatureDesc');
+            if (titleEl && featureName) {
+                titleEl.textContent = featureName + ' - Đang Nâng Cấp';
+            }
+            if (descEl && customMessage) {
+                descEl.textContent = customMessage;
+            } else if (descEl) {
+                descEl.innerHTML = 'Kênh truyền thông & tính năng này của <strong>UTECOFFE Artisanal Roasters</strong> đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền. Chúng tôi cam kết mang tới tiêu chuẩn phục vụ tinh tế và trọn vẹn nhất cho bạn. Xin chân thành cảm ơn sự đồng hành của quý khách!';
+            }
+            const modalEl = document.getElementById('inDevelopmentModal');
+            if (modalEl && typeof bootstrap !== 'undefined') {
+                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            } else {
+                alert(featureName + ': Tính năng đang được hoàn thiện. Vui lòng đón chờ!');
+            }
+        }
+    </script>
 </body>
 </html>

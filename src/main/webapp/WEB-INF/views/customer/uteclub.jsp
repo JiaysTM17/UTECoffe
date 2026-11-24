@@ -294,7 +294,7 @@
                     <div class="p-3">
                         <div class="rounded-circle border border-gold d-inline-flex align-items-center justify-content-center text-gold fs-4 fw-bold mb-3" style="width: 50px; height: 50px;">2</div>
                         <h6 class="font-serif fw-bold text-light mb-1">Thưởng Thức Đồ Uống</h6>
-                        <p class="text-secondary small mb-0">Đặt món trực tuyến hoặc đến trực tiếp chuỗi 10 cửa hàng Flagship.</p>
+                        <p class="text-secondary small mb-0">Đặt món trực tuyến hoặc đến trực tiếp chuỗi 3 chi nhánh Flagship.</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">

@@ -55,7 +55,7 @@
                         <div class="col-sm-4 col-6">
                             <div class="hero-stat-card">
                                 <h3 class="font-serif text-gold fw-bold mb-1">
-                                    <span class="counter-metric" data-counter="10" data-counter-suffix="">10</span>
+                                    <span class="counter-metric" data-counter="3" data-counter-suffix="">03</span>
                                 </h3>
                                 <div class="text-secondary text-uppercase font-accent fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.08em;" data-i18n="hero.stat3_label">
                                     Cửa Hàng Flagship
@@ -93,13 +93,13 @@
                 <c:forEach var="prod" items="${featuredProducts}" varStatus="status">
                     <div class="col-lg-3 col-md-6">
                         <div class="card card-luxury h-100 d-flex flex-column">
-                            <div class="product-image-container">
+                            <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="product-image-container d-block text-decoration-none position-relative" style="cursor: pointer;" title="${prod.name} - Khám phá câu chuyện &amp; thành phần">
                                 <img src="${not empty prod.imageUrl ? prod.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80'}" 
                                      alt="${prod.name}">
                                 <c:if test="${prod.isFeatured}">
                                     <span class="badge-luxury-tag"><i class="fa-solid fa-star text-gold me-1"></i> Bán Chạy</span>
                                 </c:if>
-                            </div>
+                            </a>
                             <div class="card-body p-4 d-flex flex-column flex-grow-1">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <span class="text-gold font-accent small text-uppercase" style="letter-spacing: 0.1em;">${prod.category.name}</span>
