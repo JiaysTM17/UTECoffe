@@ -25,6 +25,34 @@
         <cloudinary.version>1.38.0</cloudinary.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>google-maven-central</id>
+            <name>Google Cloud Maven Central Mirror</name>
+            <url>https://maven-central.storage-download.googleapis.com/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>google-maven-central-plugins</id>
+            <name>Google Cloud Maven Central Mirror</name>
+            <url>https://maven-central.storage-download.googleapis.com/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencies>
         <!-- Apache POI for Enterprise Excel Reporting (.xlsx) -->
         <dependency>
