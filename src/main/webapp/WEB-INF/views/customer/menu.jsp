@@ -27,7 +27,7 @@
             <h1 class="font-serif display-4 fw-bold text-gold-gradient mb-3" data-i18n="nav.menu">
                 Thực Đơn Nghệ Nhân
             </h1>
-            <p class="text-secondary mx-auto fs-6 mb-4" style="max-width: 680px; line-height: 1.7;">
+            <p class="text-secondary mx-auto fs-6 mb-4" style="max-width: 680px; line-height: 1.7;" data-i18n="menu.hero_desc">
                 Trải nghiệm những nốt hương tinh tuyển từ cao nguyên Cầu Đất 1.600m và đồi chè cổ thụ. Mỗi mẻ rang được các Master Roaster chế tác thủ công để tôn vinh sự nguyên bản.
             </p>
 
@@ -39,6 +39,7 @@
                     </span>
                     <input type="text" id="menuSearchInput" class="form-control form-control-luxury border-start-0 ps-2" 
                            placeholder="Tìm kiếm cà phê, trà hoa, cold brew, bánh mộc..." 
+                           data-i18n-placeholder="menu.search_placeholder"
                            aria-label="Tìm kiếm thức uống" autocomplete="off">
                     <button class="btn btn-outline-gold px-3" type="button" id="clearSearchBtn" style="display: none;">
                         <i class="fa-solid fa-xmark"></i>
@@ -58,7 +59,7 @@
             <!-- Taste Matcher Trigger Button -->
             <div class="mt-3">
                 <button class="btn btn-dark-roast border border-gold text-gold rounded-pill px-4 py-2 font-accent shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#tasteMatcherCollapse" aria-expanded="false" aria-controls="tasteMatcherCollapse">
-                    <i class="fa-solid fa-wand-magic-sparkles text-gold me-2"></i>✨ Trải Nghiệm AI Cupping: Tìm Cà Phê Hợp Gu (Sensory Matcher)
+                    <i class="fa-solid fa-wand-magic-sparkles text-gold me-2"></i><span data-i18n="menu.taste_btn">✨ Trải Nghiệm AI Cupping: Tìm Cà Phê Hợp Gu (Sensory Matcher)</span>
                 </button>
             </div>
 
@@ -67,10 +68,10 @@
                 <div class="card-luxury p-4 mx-auto border-gold shadow-lg" style="max-width: 820px; background: rgba(26, 21, 18, 0.96); backdrop-filter: blur(12px);">
                     <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-gold pb-2">
                         <div>
-                            <h5 class="font-serif fw-bold text-gold-gradient mb-0">
+                            <h5 class="font-serif fw-bold text-gold-gradient mb-0" data-i18n="menu.taste_title">
                                 <i class="fa-solid fa-compass-drafting me-2 text-gold"></i>Định Hình Khẩu Vị Cảm Quan (Vector Space Model)
                             </h5>
-                            <small class="text-secondary">Thuật toán Cosine Similarity đối chiếu gu của bạn với thông số SCA Cupping của các mẻ rang đặc sản</small>
+                            <small class="text-secondary" data-i18n="menu.taste_subtitle">Thuật toán Cosine Similarity đối chiếu gu của bạn với thông số SCA Cupping của các mẻ rang đặc sản</small>
                         </div>
                         <span class="badge bg-gold text-dark font-accent fw-bold px-3 py-1">COSINE SIMILARITY</span>
                     </div>
@@ -78,35 +79,35 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label small text-gold font-accent d-flex justify-content-between">
-                                <span><i class="fa-solid fa-lemon me-1"></i> Độ Chua Thanh (Acidity)</span>
+                                <span data-i18n="menu.taste_acidity"><i class="fa-solid fa-lemon me-1"></i> Độ Chua Thanh (Acidity)</span>
                                 <span class="fw-bold" id="valAcidity">3.5 / 5.0</span>
                             </label>
                             <input type="range" class="form-range custom-gold-range" id="sliderAcidity" min="1.0" max="5.0" step="0.5" value="3.5">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small text-gold font-accent d-flex justify-content-between">
-                                <span><i class="fa-solid fa-shield-halved me-1"></i> Thể Chất / Đậm Đà (Body)</span>
+                                <span data-i18n="menu.taste_body"><i class="fa-solid fa-shield-halved me-1"></i> Thể Chất / Đậm Đà (Body)</span>
                                 <span class="fw-bold" id="valBody">3.5 / 5.0</span>
                             </label>
                             <input type="range" class="form-range custom-gold-range" id="sliderBody" min="1.0" max="5.0" step="0.5" value="3.5">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label small text-gold font-accent d-flex justify-content-between">
-                                <span><i class="fa-solid fa-candy-cane me-1"></i> Ngọt Hậu (Sweetness)</span>
+                                <span data-i18n="menu.taste_sweetness"><i class="fa-solid fa-candy-cane me-1"></i> Ngọt Hậu (Sweetness)</span>
                                 <span class="fw-bold" id="valSweetness">4.0 / 5.0</span>
                             </label>
                             <input type="range" class="form-range custom-gold-range" id="sliderSweetness" min="1.0" max="5.0" step="0.5" value="4.0">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label small text-gold font-accent d-flex justify-content-between">
-                                <span><i class="fa-solid fa-mug-hot me-1"></i> Đắng Dịu (Bitterness)</span>
+                                <span data-i18n="menu.taste_bitterness"><i class="fa-solid fa-mug-hot me-1"></i> Đắng Dịu (Bitterness)</span>
                                 <span class="fw-bold" id="valBitterness">2.5 / 5.0</span>
                             </label>
                             <input type="range" class="form-range custom-gold-range" id="sliderBitterness" min="1.0" max="5.0" step="0.5" value="2.5">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label small text-gold font-accent d-flex justify-content-between">
-                                <span><i class="fa-solid fa-spa me-1"></i> Hương Hoa / Trái Cây (Aroma)</span>
+                                <span data-i18n="menu.taste_aroma"><i class="fa-solid fa-spa me-1"></i> Hương Hoa / Trái Cây (Aroma)</span>
                                 <span class="fw-bold" id="valAroma">4.5 / 5.0</span>
                             </label>
                             <input type="range" class="form-range custom-gold-range" id="sliderAroma" min="1.0" max="5.0" step="0.5" value="4.5">
@@ -115,13 +116,13 @@
 
                     <div class="text-center mt-4">
                         <button type="button" class="btn btn-gold px-5 py-2 fw-bold font-accent shadow-lg" id="btnRunTasteMatch">
-                            <i class="fa-solid fa-microchip me-2"></i> PHÂN TÍCH GU CẢM QUAN HOÀN HẢO
+                            <i class="fa-solid fa-microchip me-2"></i> <span data-i18n="menu.taste_run">PHÂN TÍCH GU CẢM QUAN HOÀN HẢO</span>
                         </button>
                     </div>
 
                     <!-- Taste Match Results Container -->
                     <div id="tasteMatchResultsArea" class="mt-4 pt-3 border-top border-gold-subtle d-none">
-                        <h6 class="text-gold font-accent mb-3"><i class="fa-solid fa-star me-2"></i>Cà Phê Phù Hợp Nhất Với Khẩu Vị Của Bạn:</h6>
+                        <h6 class="text-gold font-accent mb-3"><i class="fa-solid fa-star me-2"></i><span data-i18n="menu.taste_result_title">Cà Phê Phù Hợp Nhất Với Khẩu Vị Của Bạn:</span></h6>
                         <div class="row g-3" id="tasteMatchCardsRow"></div>
                     </div>
                 </div>
@@ -138,12 +139,12 @@
                     <a href="${pageContext.request.contextPath}/menu" 
                        class="btn ${empty selectedCategoryId ? 'btn-gold' : 'btn-outline-gold'} btn-sm px-4 py-2 rounded-pill fw-semibold font-accent filter-btn ${empty selectedCategoryId ? 'active' : ''}" 
                        data-cat="all">
-                        <i class="fa-solid fa-layer-group me-1"></i> Tất Cả Món (<span id="totalProductCount">${products.size()}</span>)
+                        <i class="fa-solid fa-layer-group me-1"></i> <span data-i18n="menu.filter_all">Tất Cả Món</span> (<span id="totalProductCount">${products.size()}</span>)
                     </a>
                     <c:forEach var="cat" items="${categories}">
                         <a href="${pageContext.request.contextPath}/menu?categoryId=${cat.id}" 
-                           class="btn ${selectedCategoryId == cat.id ? 'btn-gold' : 'btn-outline-gold'} btn-sm px-4 py-2 rounded-pill fw-semibold font-accent filter-btn ${selectedCategoryId == cat.id ? 'active' : ''}"
-                           data-cat="${cat.id}">
+                           class="btn ${selectedCategoryId == cat.id ? 'btn-gold' : 'btn-outline-gold'} btn-sm px-4 py-2 rounded-pill fw-semibold font-accent filter-btn product-category-badge ${selectedCategoryId == cat.id ? 'active' : ''}"
+                           data-cat="${cat.id}" data-category-name="${cat.name}">
                             ${cat.name}
                         </a>
                     </c:forEach>
@@ -152,7 +153,7 @@
 
             <div class="col-lg-3 text-lg-end">
                 <div class="d-inline-flex align-items-center gap-2">
-                    <span class="small text-secondary text-nowrap"><i class="fa-solid fa-arrow-down-short-wide text-gold me-1"></i>Sắp xếp:</span>
+                    <span class="small text-secondary text-nowrap"><i class="fa-solid fa-arrow-down-short-wide text-gold me-1"></i><span data-i18n="menu.sort_label">Sắp xếp:</span></span>
                     <select id="menuSortSelect" class="form-select form-control-luxury py-1 px-3 small font-accent" style="width: auto;">
                         <option value="featured">Nổi bật nhất</option>
                         <option value="price-asc">Giá: Thấp &rarr; Cao</option>
@@ -167,10 +168,10 @@
         <div id="noProductsFoundAlert" class="text-center py-5 d-none">
             <div class="card-luxury p-5 mx-auto" style="max-width: 500px;">
                 <i class="fa-solid fa-mug-saucer text-gold display-3 mb-3 opacity-50"></i>
-                <h4 class="font-serif fw-bold text-gold-gradient mb-2">Không Tìm Thấy Món Phù Hợp</h4>
-                <p class="text-secondary small mb-4">Rất tiếc chúng tôi chưa tìm thấy thức uống phù hợp với từ khóa của bạn. Hãy thử tìm kiếm từ khóa khác hoặc khám phá toàn bộ thực đơn.</p>
+                <h4 class="font-serif fw-bold text-gold-gradient mb-2" data-i18n="menu.empty_title">Không Tìm Thấy Món Phù Hợp</h4>
+                <p class="text-secondary small mb-4" data-i18n="menu.empty_desc">Rất tiếc chúng tôi chưa tìm thấy thức uống phù hợp với từ khóa của bạn. Hãy thử tìm kiếm từ khóa khác hoặc khám phá toàn bộ thực đơn.</p>
                 <button type="button" class="btn btn-gold btn-sm px-4" id="resetFiltersBtn">
-                    <i class="fa-solid fa-rotate-left me-1"></i> Xem Toàn Bộ Thực Đơn
+                    <i class="fa-solid fa-rotate-left me-1"></i> <span data-i18n="menu.empty_reset">Xem Toàn Bộ Thực Đơn</span>
                 </button>
             </div>
         </div>
@@ -226,7 +227,7 @@
                                 </div>
                                 <div>
                                     <a href="${pageContext.request.contextPath}/menu/${p.slug}" 
-                                       class="btn btn-gold btn-sm px-3 rounded-pill font-accent fw-semibold">
+                                       class="btn btn-gold btn-sm px-3 rounded-pill font-accent fw-semibold text-nowrap d-inline-flex align-items-center justify-content-center" style="min-width: 125px;">
                                         <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="menu.customize">Tùy Chỉnh</span>
                                     </a>
                                 </div>
@@ -241,21 +242,21 @@
         <div class="mt-5 pt-4">
             <div class="card-luxury p-4 p-md-5 border-gold bg-gradient-dark text-center position-relative overflow-hidden">
                 <div class="position-relative" style="z-index: 2;">
-                    <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase">
+                    <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" data-i18n="menu.sca_badge">
                         <i class="fa-solid fa-certificate me-1"></i> Tiêu Chuẩn Quốc Tế SCA
                     </span>
-                    <h3 class="font-serif fw-bold text-gold-gradient mb-3">
+                    <h3 class="font-serif fw-bold text-gold-gradient mb-3" data-i18n="menu.sca_title">
                         Tùy Chỉnh Tách Cà Phê Của Riêng Bạn
                     </h3>
-                    <p class="text-secondary mx-auto mb-4" style="max-width: 620px; font-size: 0.95rem;">
+                    <p class="text-secondary mx-auto mb-4" style="max-width: 620px; font-size: 0.95rem;" data-i18n="menu.sca_desc">
                         Tất cả thức uống tại UTECoffe đều cho phép cá nhân hóa: Lựa chọn 3 size (S/M/L), thêm các loại hạt, thạch trà thủ công, điều chỉnh độ đậm hạt, hương hoa và tỷ lệ sữa để tạo nên ly cà phê chuẩn gu của bạn.
                     </p>
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
                         <a href="${pageContext.request.contextPath}/story" class="btn btn-outline-gold px-4 py-2 rounded-pill font-accent">
-                            <i class="fa-solid fa-book-open me-1"></i> Tìm Hiểu Nghệ Thuật Rang Mộc
+                            <i class="fa-solid fa-book-open me-1"></i> <span data-i18n="menu.sca_btn_story">Tìm Hiểu Nghệ Thuật Rang Mộc</span>
                         </a>
                         <a href="${pageContext.request.contextPath}/reservation" class="btn btn-gold px-4 py-2 rounded-pill font-accent">
-                            <i class="fa-solid fa-calendar-check me-1"></i> Đặt Bàn Thưởng Thức Tại Quán
+                            <i class="fa-solid fa-calendar-check me-1"></i> <span data-i18n="menu.sca_btn_reserve">Đặt Bàn Thưởng Thức Tại Quán</span>
                         </a>
                     </div>
                 </div>

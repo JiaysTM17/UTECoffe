@@ -98,7 +98,125 @@
             'customizer.tea_step5': 'Topping Trà Thượng Hạng:',
             'customizer.topping_hint': 'Chọn nhiều tùy thích',
             'customizer.add_to_cart': 'Thêm Vào Giỏ Hàng',
-            'customizer.view_cart': 'Xem Giỏ Hàng'
+            'customizer.view_cart': 'Xem Giỏ Hàng',
+
+            // 4 Artisanal Pillars
+            'pillars.subtitle': 'Triết Lý Cà Phê Thủ Công',
+            'pillars.title': 'Hành Trình Từ Nông Trại Đến Tách Cà Phê',
+            'pillar.terroir_title': 'Terroir 1.600m',
+            'pillar.terroir_desc': 'Hạt cà phê phát triển chậm trong sương mù và đất bazan Cầu Đất, tích tụ hương vị hoa quả sâu lắng.',
+            'pillar.roast_title': 'Rang Mộc Artisanal',
+            'pillar.roast_desc': 'Rang theo mẻ nhỏ (Micro-batch) bằng công nghệ trống rang Giesen cao cấp, giữ vẹn nguyên tính độc bản.',
+            'pillar.brew_title': 'Pha Chế Chuẩn Mực',
+            'pillar.brew_desc': 'Đội ngũ Barista được đào tạo theo tiêu chuẩn Specialty Coffee Association (SCA) quốc tế.',
+            'pillar.space_title': 'Không Gian Roastery',
+            'pillar.space_desc': 'Kiến trúc kết hợp hài hòa giữa kim loại trầm ấm, gỗ sồi và hương thơm nồng nàn của mẻ rang mới.',
+
+            // Table Booking & Loyalty Banner
+            'banner.loyalty_tag': 'Đặc Quyền Hội Viên UTEClub • Bấm Xem Chi Tiết',
+            'banner.table_title': 'Đặt Bàn Trực Tuyến & Tích Điểm Tự Động Cho Mọi Đơn Hàng',
+            'banner.table_desc': 'Thưởng thức không gian tinh tế tại 3 chi nhánh Flagship (Thủ Đức, Quận 1, Bình Thạnh). Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.',
+            'banner.btn_privilege': 'Xem Đặc Quyền',
+            'banner.btn_reserve': 'Đặt Bàn Ngay',
+
+            // UTEClub Modal
+            'modal.uteclub_tag': 'UTEClub Loyalty Privilege',
+            'modal.uteclub_title': 'Đặc Quyền Hội Viên Danh Dự UTECoffe',
+            'modal.pillar1_title': 'Tích 10% Mọi Hóa Đơn',
+            'modal.pillar1_desc': 'Mỗi 1.000₫ chi tiêu tích 1 điểm, quy đổi đồ uống và quà tặng cao cấp.',
+            'modal.pillar2_title': 'Quà Tặng Sinh Nhật',
+            'modal.pillar2_desc': 'Tặng 01 thức uống Signature và thiệp chúc mừng riêng biệt trong tháng sinh nhật.',
+            'modal.pillar3_title': 'Free Up-size Thứ 5',
+            'modal.pillar3_desc': 'Miễn phí nâng cỡ ly Size M lên Size L trên toàn bộ thực đơn vào mỗi thứ Năm.',
+            'modal.pillar4_title': 'Ưu Tiên VIP Lounge',
+            'modal.pillar4_desc': 'Giữ chỗ bàn trung tâm và phòng họp riêng tư với hệ thống đặt bàn ưu tiên.',
+            'modal.tiers_badge': '4 Hạng Thẻ Hội Viên',
+            'modal.tiers_title': 'Hành Trình Thăng Hạng & Tích Lũy',
+            'modal.tiers_desc': 'Thăng hạng tức thì theo điểm tích lũy trọn đời (1.000₫ thanh toán = 1 Điểm UTEClub)',
+            'modal.tier_bronze_badge': 'HẠNG ĐỒNG',
+            'modal.tier_bronze_pts': '0 - 499 điểm',
+            'modal.tier_bronze_name': 'Thành Viên Khởi Đầu',
+            'modal.tier_bronze_desc': 'Kích hoạt ngay khi tạo tài khoản miễn phí tại UTECoffe.',
+            'modal.tier_bronze_b1': 'Tặng Voucher 20% đơn hàng đầu tiên',
+            'modal.tier_bronze_b2': 'Tích lũy 10% điểm cho mọi đơn hàng',
+            'modal.tier_bronze_b3': 'Nhận tin mẻ rang specialty mới sớm nhất',
+            'modal.tier_silver_badge': 'HẠNG BẠC',
+            'modal.tier_silver_pts': '500 - 1.499 điểm',
+            'modal.tier_silver_name': 'Hội Viên Bạc',
+            'modal.tier_silver_desc': 'Dành cho khách hàng thân thiết thường xuyên ghé thăm.',
+            'modal.tier_silver_b1': 'Tất cả quyền lợi Hạng Đồng',
+            'modal.tier_silver_b2': 'Tặng Voucher 10% mỗi đầu tháng',
+            'modal.tier_silver_b3': 'Miễn phí nâng size (Size L) thứ 5',
+            'modal.tier_silver_b4': 'Tặng 1 phần topping tự chọn hàng tháng',
+            'modal.tier_gold_popular': 'PHỔ BIẾN NHẤT',
+            'modal.tier_gold_badge': 'HẠNG VÀNG',
+            'modal.tier_gold_pts': '1.500 - 2.999 điểm',
+            'modal.tier_gold_name': 'Hội Viên Vàng VIP',
+            'modal.tier_gold_desc': 'Trải nghiệm dịch vụ chuyên biệt và ưu đãi giảm giá sâu.',
+            'modal.tier_gold_b1': 'Giảm trực tiếp 10% trên toàn bộ thực đơn',
+            'modal.tier_gold_b2': '01 Ly cà phê Signature miễn phí dịp Sinh Nhật',
+            'modal.tier_gold_b3': 'Ưu tiên giữ bàn đẹp tại VIP Lounge',
+            'modal.tier_gold_b4': 'Đổi điểm lấy voucher thanh toán trực tiếp',
+            'modal.tier_diamond_badge': 'KIM CƯƠNG',
+            'modal.tier_diamond_pts': '3.000+ điểm',
+            'modal.tier_diamond_name': 'Thượng Khách Kim Cương',
+            'modal.tier_diamond_desc': 'Đỉnh cao đặc quyền cá nhân hóa và trải nghiệm roastery độc bản.',
+            'modal.tier_diamond_b1': 'Giảm trực tiếp 15% trọn đời mọi đơn hàng',
+            'modal.tier_diamond_b2': 'Tặng 01 phần bánh sừng bò thủ công mỗi tuần',
+            'modal.tier_diamond_b3': 'Vé mời VIP Private Cupping cùng Master Roaster',
+            'modal.tier_diamond_b4': 'Đường dây hỗ trợ & đặt bàn ưu tiên 24/7',
+            'modal.btn_close': 'Đóng',
+            'modal.btn_details': 'Xem Chi Tiết Đầy Đủ',
+            'modal.btn_register': 'Đăng Ký UTEClub Miễn Phí',
+
+            // Menu Details & Callout
+            'menu.hero_desc': 'Trải nghiệm những nốt hương tinh tuyển từ cao nguyên Cầu Đất 1.600m và đồi chè cổ thụ. Mỗi mẻ rang được các Master Roaster chế tác thủ công để tôn vinh sự nguyên bản.',
+            'menu.search_placeholder': 'Tìm kiếm cà phê, trà hoa, cold brew, bánh mộc...',
+            'menu.taste_btn': '✨ Trải Nghiệm AI Cupping: Tìm Cà Phê Hợp Gu (Sensory Matcher)',
+            'menu.taste_title': 'Định Hình Khẩu Vị Cảm Quan (Vector Space Model)',
+            'menu.taste_subtitle': 'Thuật toán Cosine Similarity đối chiếu gu của bạn với thông số SCA Cupping của các mẻ rang đặc sản',
+            'menu.taste_acidity': 'Độ Chua Thanh (Acidity)',
+            'menu.taste_body': 'Thể Chất / Đậm Đà (Body)',
+            'menu.taste_sweetness': 'Ngọt Hậu (Sweetness)',
+            'menu.taste_bitterness': 'Đắng Dịu (Bitterness)',
+            'menu.taste_aroma': 'Hương Hoa / Trái Cây (Aroma)',
+            'menu.taste_run': 'PHÂN TÍCH GU CẢM QUAN HOÀN HẢO',
+            'menu.taste_result_title': 'Cà Phê Phù Hợp Nhất Với Khẩu Vị Của Bạn:',
+            'menu.sort_label': 'Sắp xếp:',
+            'menu.empty_title': 'Không Tìm Thấy Món Phù Hợp',
+            'menu.empty_desc': 'Rất tiếc chúng tôi chưa tìm thấy thức uống phù hợp với từ khóa của bạn. Hãy thử tìm kiếm từ khóa khác hoặc khám phá toàn bộ thực đơn.',
+            'menu.empty_reset': 'Xem Toàn Bộ Thực Đơn',
+            'menu.sca_badge': 'Tiêu Chuẩn Quốc Tế SCA',
+            'menu.sca_title': 'Tùy Chỉnh Tách Cà Phê Của Riêng Bạn',
+            'menu.sca_desc': 'Tất cả thức uống tại UTECoffe đều cho phép cá nhân hóa: Lựa chọn 3 size (S/M/L), thêm các loại hạt, thạch trà thủ công, điều chỉnh độ đậm hạt, hương hoa và tỷ lệ sữa để tạo nên ly cà phê chuẩn gu của bạn.',
+            'menu.sca_btn_story': 'Tìm Hiểu Nghệ Thuật Rang Mộc',
+            'menu.sca_btn_reserve': 'Đặt Bàn Thưởng Thức Tại Quán',
+
+            // Stores & Story & Reservation
+            'stores.subtitle': 'KHÔNG GIAN THƯỞNG THỨC NGHỆ THUẬT',
+            'stores.desc': 'Mỗi không gian UTECoffe là sự giao thoa hài hòa giữa kiến trúc tối giản hiện đại và hơi thở mộc mạc của xưởng rang cà phê, mang đến trải nghiệm thưởng thức trọn vẹn mọi giác quan.',
+            'stores.filter_all': 'Tất Cả Chi Nhánh',
+            'stores.filter_thuduc': 'TP. Thủ Đức (Flagship)',
+            'stores.filter_quan1': 'Quận 1 (Trung Tâm)',
+            'stores.filter_binhthanh': 'Bình Thạnh (Garden)',
+            'stores.btn_gps': 'Tìm Chi Nhánh Gần Nhất',
+            'story.badge': 'KHỞI NGUỒN TỪ ĐAM MÊ NGUYÊN BẢN',
+            'story.desc': 'Tại UTECoffe, chúng tôi tin rằng mỗi tách cà phê là một tác phẩm nghệ thuật sống động, kết tinh từ thổ nhưỡng bazan huyền thoại Cầu Đất 1.600m và sự tỉ mỉ của những nghệ nhân rang mộc thủ công.',
+            'story.stat1': 'Độ Cao Thổ Nhưỡng',
+            'story.stat2': 'Điểm Cupping Quốc Tế',
+            'story.stat3': 'Trái Chín Hái Thủ Công',
+            'story.stat4': 'Lên Men Chậm Tự Nhiên',
+            'res.badge': 'DỊCH VỤ TIẾP ĐÓN CHU ĐÁO',
+            'res.desc': 'Giữ trước vị trí thưởng thức lý tưởng tại UTECoffe để những buổi gặp gỡ, trò chuyện hay làm việc của bạn trở nên trọn vẹn và thư thái nhất.',
+            'res.perk_title': 'ĐẶC QUYỀN ĐẶT BÀN TRỰC TUYẾN:',
+            'res.perk_desc': 'Mỗi lượt đặt chỗ trực tuyến qua website được tặng kèm 01 shot Cold Brew Cam Vàng Signature dùng thử trước khi bắt đầu thưởng thức.',
+
+            // In Development Modal
+            'in_dev.title': 'Thông Báo Trải Nghiệm',
+            'in_dev.default_feature': 'Kênh Truyền Thông Đang Nâng Cấp',
+            'in_dev.desc': 'UTECOFFE Official đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền trên nền tảng này nhằm mang đến trải nghiệm tinh tế và trọn vẹn nhất cho bạn. Xin vui lòng đón chờ trong thời gian sớm nhất!',
+            'in_dev.btn_understand': 'Đã Hiểu & Đón Chờ',
+            'in_dev.btn_explore': 'Khám Phá Menu'
         },
         en: {
             // Top Announcement Bar
@@ -183,7 +301,125 @@
             'customizer.tea_step5': 'Artisanal Tea Toppings:',
             'customizer.topping_hint': 'Select multiple toppings',
             'customizer.add_to_cart': 'Add to Cart',
-            'customizer.view_cart': 'View Cart'
+            'customizer.view_cart': 'View Cart',
+
+            // 4 Artisanal Pillars
+            'pillars.subtitle': 'Artisan Coffee Philosophy',
+            'pillars.title': 'The Journey From Farm To Cup',
+            'pillar.terroir_title': 'Terroir 1,600m',
+            'pillar.terroir_desc': 'Coffee cherries mature slowly in misty Cau Dat basalt soil, concentrating deep floral and fruit notes.',
+            'pillar.roast_title': 'Artisanal Drum Roasting',
+            'pillar.roast_desc': 'Micro-batch roasted using premium Giesen drum technology to preserve unique origin profiles.',
+            'pillar.brew_title': 'SCA Standard Extraction',
+            'pillar.brew_desc': 'Baristas rigorously trained and certified under Specialty Coffee Association (SCA) standards.',
+            'pillar.space_title': 'Artisan Roastery Space',
+            'pillar.space_desc': 'Harmonious architectural blend of brushed metal, aged oak, and the intoxicating scent of fresh roasts.',
+
+            // Table Booking & Loyalty Banner
+            'banner.loyalty_tag': 'UTEClub Loyalty Privilege • Click for Details',
+            'banner.table_title': 'Online Reservations & Automatic Loyalty Points on Every Order',
+            'banner.table_desc': 'Experience refined spaces at 3 Flagship roasteries (Thu Duc, District 1, Binh Thanh). Earn 10% points on every order to unlock Silver, Gold, and Diamond tiers with incomparable privileges.',
+            'banner.btn_privilege': 'View Privileges',
+            'banner.btn_reserve': 'Reserve Table Now',
+
+            // UTEClub Modal
+            'modal.uteclub_tag': 'UTEClub Loyalty Privilege',
+            'modal.uteclub_title': 'UTECoffe Honorary Member Privileges',
+            'modal.pillar1_title': '10% Cashback on Every Bill',
+            'modal.pillar1_desc': 'Every 1,000₫ spent earns 1 point, redeemable for premium beverages and artisanal gifts.',
+            'modal.pillar2_title': 'Birthday Celebration Gift',
+            'modal.pillar2_desc': 'Complimentary Signature drink and personalized birthday greeting during your birth month.',
+            'modal.pillar3_title': 'Free Up-size Every Thursday',
+            'modal.pillar3_desc': 'Free cup size upgrade from M to L across the entire menu every Thursday.',
+            'modal.pillar4_title': 'VIP Lounge Priority',
+            'modal.pillar4_desc': 'Guaranteed prime center table and private meeting suite reservations.',
+            'modal.tiers_badge': '4 Membership Tiers',
+            'modal.tiers_title': 'Tier Progression & Accumulation Journey',
+            'modal.tiers_desc': 'Instant tier progression based on lifetime points (1,000₫ paid = 1 UTEClub Point)',
+            'modal.tier_bronze_badge': 'BRONZE TIER',
+            'modal.tier_bronze_pts': '0 - 499 pts',
+            'modal.tier_bronze_name': 'Starter Member',
+            'modal.tier_bronze_desc': 'Activated immediately upon creating a free account at UTECoffe.',
+            'modal.tier_bronze_b1': '20% welcome discount voucher for first order',
+            'modal.tier_bronze_b2': '10% points accumulation on all purchases',
+            'modal.tier_bronze_b3': 'Early access announcements for fresh micro-lot batches',
+            'modal.tier_silver_badge': 'SILVER TIER',
+            'modal.tier_silver_pts': '500 - 1,499 pts',
+            'modal.tier_silver_name': 'Silver Member',
+            'modal.tier_silver_desc': 'Dedicated to loyal guests who regularly visit our roasteries.',
+            'modal.tier_silver_b1': 'All Bronze tier privileges included',
+            'modal.tier_silver_b2': '10% discount voucher at the start of each month',
+            'modal.tier_silver_b3': 'Complimentary size upgrade (Size L) every Thursday',
+            'modal.tier_silver_b4': '1 complimentary artisan topping choice each month',
+            'modal.tier_gold_popular': 'MOST POPULAR',
+            'modal.tier_gold_badge': 'GOLD TIER',
+            'modal.tier_gold_pts': '1,500 - 2,999 pts',
+            'modal.tier_gold_name': 'VIP Gold Member',
+            'modal.tier_gold_desc': 'Experience bespoke service and exclusive deep discounts.',
+            'modal.tier_gold_b1': 'Direct 10% discount on the entire artisan menu',
+            'modal.tier_gold_b2': '01 complimentary Signature beverage on your Birthday',
+            'modal.tier_gold_b3': 'Priority prime seating at VIP Lounge',
+            'modal.tier_gold_b4': 'Redeem points directly for payment vouchers',
+            'modal.tier_diamond_badge': 'DIAMOND TIER',
+            'modal.tier_diamond_pts': '3,000+ pts',
+            'modal.tier_diamond_name': 'Diamond Connoisseur',
+            'modal.tier_diamond_desc': 'Pinnacle of personalized privilege and exclusive roastery craft.',
+            'modal.tier_diamond_b1': 'Direct 15% lifetime discount on every order',
+            'modal.tier_diamond_b2': '01 complimentary artisan French croissant each week',
+            'modal.tier_diamond_b3': 'VIP invitations to Private Cupping with Master Roasters',
+            'modal.tier_diamond_b4': 'Dedicated 24/7 concierge & priority table booking',
+            'modal.btn_close': 'Close',
+            'modal.btn_details': 'View Full Privileges',
+            'modal.btn_register': 'Join UTEClub Free',
+
+            // Menu Details & Callout
+            'menu.hero_desc': 'Savor exquisite flavor profiles from 1,600m Cau Dat highlands and ancient tea estates. Each batch is micro-roasted by Master Roasters to honor its terroir.',
+            'menu.search_placeholder': 'Search specialty coffee, artisan tea, cold brew, pastries...',
+            'menu.taste_btn': '✨ AI Cupping Experience: Find Your Coffee Match (Sensory Matcher)',
+            'menu.taste_title': 'Sensory Flavor Profiling (Vector Space Model)',
+            'menu.taste_subtitle': 'Cosine Similarity algorithm matches your palate against SCA Cupping specs of artisanal micro-lots',
+            'menu.taste_acidity': 'Acidity & Brightness',
+            'menu.taste_body': 'Body & Mouthfeel',
+            'menu.taste_sweetness': 'Sweetness & Aftertaste',
+            'menu.taste_bitterness': 'Pleasant Bitterness',
+            'menu.taste_aroma': 'Floral & Fruit Aroma',
+            'menu.taste_run': 'ANALYZE SENSORY PALATE MATCH',
+            'menu.taste_result_title': 'Best Coffee Matches For Your Palate:',
+            'menu.sort_label': 'Sort by:',
+            'menu.empty_title': 'No Matching Beverages Found',
+            'menu.empty_desc': 'We could not find items matching your search. Please try another keyword or explore the full menu.',
+            'menu.empty_reset': 'View Entire Menu',
+            'menu.sca_badge': 'International SCA Standards',
+            'menu.sca_title': 'Craft Your Signature Coffee Cup',
+            'menu.sca_desc': 'Every beverage at UTECoffe is fully customizable: Choose from 3 sizes (S/M/L), add artisanal toppings, adjust roast intensity, floral notes, and milk ratios to match your taste.',
+            'menu.sca_btn_story': 'Discover Roasting Craftsmanship',
+            'menu.sca_btn_reserve': 'Reserve a Table at Roastery',
+
+            // Stores & Story & Reservation
+            'stores.subtitle': 'ARTISANAL ROASTERY SPACES',
+            'stores.desc': 'Every UTECoffe space harmonizes modern minimalist design with the rustic warmth of an artisanal roastery, delivering a multisensory coffee experience.',
+            'stores.filter_all': 'All Locations',
+            'stores.filter_thuduc': 'Thu Duc City (Flagship)',
+            'stores.filter_quan1': 'District 1 (Downtown)',
+            'stores.filter_binhthanh': 'Binh Thanh (Garden)',
+            'stores.btn_gps': 'Find Nearest Roastery',
+            'story.badge': 'BORN FROM AUTHENTIC PASSION',
+            'story.desc': 'At UTECoffe, we believe every cup of coffee is a living work of art, born from the legendary 1,600m Cau Dat basalt terroir and the meticulous craft of artisanal roasters.',
+            'story.stat1': 'Highland Terroir Altitude',
+            'story.stat2': 'International Cupping Score',
+            'story.stat3': 'Hand-Picked Ripe Cherries',
+            'story.stat4': 'Natural Slow Fermentation',
+            'res.badge': 'ATTENTIVE GUEST CONCIERGE',
+            'res.desc': 'Reserve your ideal table in advance at UTECoffe to make your meetings, conversations, or focus sessions smooth and serene.',
+            'res.perk_title': 'ONLINE BOOKING PRIVILEGE:',
+            'res.perk_desc': 'Every online reservation booked via our website includes 01 complimentary tasting shot of Signature Valencia Orange Cold Brew.',
+
+            // In Development Modal
+            'in_dev.title': 'Experience Notice',
+            'in_dev.default_feature': 'Official Channel In Development',
+            'in_dev.desc': 'UTECOFFE Official is curating exclusive content and preparing to launch on this platform to deliver the most refined experience. Thank you for your patience and support!',
+            'in_dev.btn_understand': 'Understood & Anticipating',
+            'in_dev.btn_explore': 'Explore Menu'
         }
     };
 
@@ -413,6 +649,24 @@
             const key = el.getAttribute('data-i18n');
             if (dict[key]) {
                 el.textContent = dict[key];
+            }
+        });
+
+        // Translate data-i18n-placeholder elements
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (dict[key]) {
+                el.setAttribute('placeholder', dict[key]);
+            }
+        });
+
+        // Translate Category Filter Buttons
+        document.querySelectorAll('.filter-btn[data-category-name]').forEach(el => {
+            const name = el.getAttribute('data-category-name');
+            if (lang === 'en') {
+                el.textContent = CATEGORY_I18N[name] || removeVietnameseAccents(name);
+            } else {
+                el.textContent = name;
             }
         });
 

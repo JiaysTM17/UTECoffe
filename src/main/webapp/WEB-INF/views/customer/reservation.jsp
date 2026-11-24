@@ -8,13 +8,13 @@
     <!-- Header Banner -->
     <div class="py-5 bg-espresso border-bottom border-gold text-center position-relative overflow-hidden">
         <div class="container py-3 position-relative" style="z-index: 2;">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;">
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;" data-i18n="res.badge">
                 <i class="fa-solid fa-bell-concierge me-1"></i> DỊCH VỤ TIẾP ĐÓN CHU ĐÁO
             </span>
             <h1 class="font-serif display-4 fw-bold text-gold-gradient mb-3" data-i18n="nav.reservation">
                 Đặt Bàn Thưởng Thức
             </h1>
-            <p class="text-secondary mx-auto fs-6 mb-0" style="max-width: 680px; line-height: 1.7;">
+            <p class="text-secondary mx-auto fs-6 mb-0" style="max-width: 680px; line-height: 1.7;" data-i18n="res.desc">
                 Giữ trước vị trí thưởng thức lý tưởng tại UTECoffe để những buổi gặp gỡ, trò chuyện hay làm việc của bạn trở nên trọn vẹn và thư thái nhất.
             </p>
         </div>
@@ -29,8 +29,8 @@
                         <i class="fa-solid fa-gift"></i>
                     </div>
                     <div>
-                        <div class="fw-bold text-gold small">ĐẶC QUYỀN ĐẶT BÀN TRỰC TUYẾN:</div>
-                        <div class="small text-secondary">
+                        <div class="fw-bold text-gold small" data-i18n="res.perk_title">ĐẶC QUYỀN ĐẶT BÀN TRỰC TUYẾN:</div>
+                        <div class="small text-secondary" data-i18n="res.perk_desc">
                             Mỗi lượt đặt chỗ trực tuyến qua website được tặng kèm <strong>01 shot Cold Brew Cam Vàng Signature</strong> dùng thử trước khi bắt đầu thưởng thức.
                         </div>
                     </div>

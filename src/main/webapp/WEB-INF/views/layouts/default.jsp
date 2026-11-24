@@ -249,7 +249,7 @@
                         <span class="badge bg-gold-gradient text-obsidian rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                             <i class="fa-solid fa-sparkles"></i>
                         </span>
-                        <h5 class="modal-title font-serif text-gold-gradient fw-bold mb-0" id="inDevelopmentModalLabel">Thông Báo Trải Nghiệm</h5>
+                        <h5 class="modal-title font-serif text-gold-gradient fw-bold mb-0" id="inDevelopmentModalLabel" data-i18n="in_dev.title">Thông Báo Trải Nghiệm</h5>
                     </div>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -259,16 +259,16 @@
                             <i class="fa-solid fa-compass-drafting text-gold fs-2"></i>
                         </div>
                     </div>
-                    <h5 class="font-serif fw-bold text-light mb-2" id="inDevFeatureTitle">Kênh Truyền Thông Đang Nâng Cấp</h5>
-                    <p class="text-secondary small px-3 mb-0" id="inDevFeatureDesc" style="line-height: 1.8;">
+                    <h5 class="font-serif fw-bold text-light mb-2" id="inDevFeatureTitle" data-i18n="in_dev.default_feature">Kênh Truyền Thông Đang Nâng Cấp</h5>
+                    <p class="text-secondary small px-3 mb-0" id="inDevFeatureDesc" style="line-height: 1.8;" data-i18n="in_dev.desc">
                         UTECOFFE Official đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền trên nền tảng này nhằm mang đến trải nghiệm tinh tế và trọn vẹn nhất cho bạn. Xin vui lòng đón chờ trong thời gian sớm nhất!
                     </p>
                 </div>
                 <div class="modal-footer border-0 pt-0 justify-content-center gap-2">
                     <button type="button" class="btn btn-gold btn-sm px-4 rounded-pill font-accent" data-bs-dismiss="modal">
-                        <i class="fa-solid fa-check me-1"></i> Đã Hiểu &amp; Đón Chờ
+                        <i class="fa-solid fa-check me-1"></i> <span data-i18n="in_dev.btn_understand">Đã Hiểu &amp; Đón Chờ</span>
                     </button>
-                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold btn-sm px-3 rounded-pill font-accent">
+                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold btn-sm px-3 rounded-pill font-accent" data-i18n="in_dev.btn_explore">
                         Khám Phá Menu
                     </a>
                 </div>
@@ -281,22 +281,27 @@
     <script src="${pageContext.request.contextPath}/assets/js/luxury.js"></script>
     <script>
         function showUnderDevelopment(featureName, customMessage) {
+            const isEn = (localStorage.getItem('utecoffe_lang') === 'en');
             const titleEl = document.getElementById('inDevFeatureTitle');
             const descEl = document.getElementById('inDevFeatureDesc');
             if (titleEl && featureName) {
-                titleEl.textContent = featureName + ' - Đang Nâng Cấp';
+                titleEl.textContent = featureName + (isEn ? ' - Under Active Development' : ' - Đang Nâng Cấp');
             }
             if (descEl && customMessage) {
                 descEl.textContent = customMessage;
             } else if (descEl) {
-                descEl.innerHTML = 'Kênh truyền thông & tính năng này của <strong>UTECOFFE Artisanal Roasters</strong> đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền. Chúng tôi cam kết mang tới tiêu chuẩn phục vụ tinh tế và trọn vẹn nhất cho bạn. Xin chân thành cảm ơn sự đồng hành của quý khách!';
+                if (isEn) {
+                    descEl.innerHTML = 'This official communication channel & feature of <strong>UTECOFFE Artisanal Roasters</strong> is currently under active curation and will debut exclusively soon. We are committed to delivering the highest standard of elegance for you. Thank you for your continued patronage!';
+                } else {
+                    descEl.innerHTML = 'Kênh truyền thông & tính năng này của <strong>UTECOFFE Artisanal Roasters</strong> đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền. Chúng tôi cam kết mang tới tiêu chuẩn phục vụ tinh tế và trọn vẹn nhất cho bạn. Xin chân thành cảm ơn sự đồng hành của quý khách!';
+                }
             }
             const modalEl = document.getElementById('inDevelopmentModal');
             if (modalEl && typeof bootstrap !== 'undefined') {
                 const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
                 modal.show();
             } else {
-                alert(featureName + ': Tính năng đang được hoàn thiện. Vui lòng đón chờ!');
+                alert(featureName + (isEn ? ': Feature is under development. Please stay tuned!' : ': Tính năng đang được hoàn thiện. Vui lòng đón chờ!'));
             }
         }
     </script>

@@ -8,13 +8,13 @@
     <!-- Editorial Story Hero -->
     <section class="py-5 bg-espresso border-bottom border-gold text-center position-relative overflow-hidden">
         <div class="container py-lg-4 position-relative" style="z-index: 2;">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;">
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;" data-i18n="story.badge">
                 <i class="fa-solid fa-gem me-1"></i> KHỞI NGUỒN TỪ ĐAM MÊ NGUYÊN BẢN
             </span>
             <h1 class="font-serif display-3 fw-bold text-gold-gradient mb-3" data-i18n="nav.story">
                 Hành Trình Di Sản Cà Phê
             </h1>
-            <p class="lead text-secondary mx-auto" style="max-width: 760px; font-weight: 300; line-height: 1.8;">
+            <p class="lead text-secondary mx-auto" style="max-width: 760px; font-weight: 300; line-height: 1.8;" data-i18n="story.desc">
                 Tại UTECoffe, chúng tôi tin rằng mỗi tách cà phê là một tác phẩm nghệ thuật sống động, kết tinh từ thổ nhưỡng bazan huyền thoại Cầu Đất 1.600m và sự tỉ mỉ của những nghệ nhân rang mộc thủ công.
             </p>
         </div>
@@ -29,7 +29,7 @@
                         <h2 class="font-serif text-gold fw-bold mb-1">
                             <span class="counter-metric" data-counter="1600" data-counter-format="comma" data-counter-suffix="m">1.600m</span>
                         </h2>
-                        <span class="text-secondary small text-uppercase font-accent fw-semibold">Độ Cao Thổ Nhưỡng</span>
+                        <span class="text-secondary small text-uppercase font-accent fw-semibold" data-i18n="story.stat1">Độ Cao Thổ Nhưỡng</span>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
@@ -37,7 +37,7 @@
                         <h2 class="font-serif text-gold fw-bold mb-1">
                             <span class="counter-metric" data-counter="85" data-counter-suffix="+">85+</span>
                         </h2>
-                        <span class="text-secondary small text-uppercase font-accent fw-semibold">Điểm Cupping Quốc Tế</span>
+                        <span class="text-secondary small text-uppercase font-accent fw-semibold" data-i18n="story.stat2">Điểm Cupping Quốc Tế</span>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
@@ -45,7 +45,7 @@
                         <h2 class="font-serif text-gold fw-bold mb-1">
                             <span class="counter-metric" data-counter="100" data-counter-suffix="%">100%</span>
                         </h2>
-                        <span class="text-secondary small text-uppercase font-accent fw-semibold">Trái Chín Hái Thủ Công</span>
+                        <span class="text-secondary small text-uppercase font-accent fw-semibold" data-i18n="story.stat3">Trái Chín Hái Thủ Công</span>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
@@ -53,7 +53,7 @@
                         <h2 class="font-serif text-gold fw-bold mb-1">
                             <span class="counter-metric" data-counter="48" data-counter-suffix="h">48h</span>
                         </h2>
-                        <span class="text-secondary small text-uppercase font-accent fw-semibold">Lên Men Chậm Tự Nhiên</span>
+                        <span class="text-secondary small text-uppercase font-accent fw-semibold" data-i18n="story.stat4">Lên Men Chậm Tự Nhiên</span>
                     </div>
                 </div>
             </div>

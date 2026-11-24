@@ -8,32 +8,32 @@
     <!-- Header Section -->
     <div class="py-5 bg-espresso border-bottom border-gold text-center position-relative overflow-hidden">
         <div class="container py-3 position-relative" style="z-index: 2;">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;">
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;" data-i18n="stores.subtitle">
                 <i class="fa-solid fa-store me-1"></i> KHÔNG GIAN THƯỞNG THỨC NGHỆ THUẬT
             </span>
             <h1 class="font-serif display-4 fw-bold text-gold-gradient mb-3" data-i18n="nav.stores">
                 Hệ Thống Flagship Roasteries
             </h1>
-            <p class="text-secondary mx-auto fs-6 mb-4" style="max-width: 680px; line-height: 1.7;">
+            <p class="text-secondary mx-auto fs-6 mb-4" style="max-width: 680px; line-height: 1.7;" data-i18n="stores.desc">
                 Mỗi không gian UTECoffe là sự giao thoa hài hòa giữa kiến trúc tối giản hiện đại và hơi thở mộc mạc của xưởng rang cà phê, mang đến trải nghiệm thưởng thức trọn vẹn mọi giác quan.
             </p>
 
             <!-- Quick District Filter Pills & Haversine Distance Calculator -->
             <div class="d-flex justify-content-center flex-wrap gap-2 mb-2">
-                <button type="button" class="btn btn-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn active" data-filter="all">
+                <button type="button" class="btn btn-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn active" data-filter="all" data-i18n="stores.filter_all">
                     Tất Cả Chi Nhánh
                 </button>
-                <button type="button" class="btn btn-outline-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn" data-filter="thuduc">
+                <button type="button" class="btn btn-outline-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn" data-filter="thuduc" data-i18n="stores.filter_thuduc">
                     TP. Thủ Đức (Flagship)
                 </button>
-                <button type="button" class="btn btn-outline-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn" data-filter="quan1">
+                <button type="button" class="btn btn-outline-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn" data-filter="quan1" data-i18n="stores.filter_quan1">
                     Quận 1 (Trung Tâm)
                 </button>
-                <button type="button" class="btn btn-outline-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn" data-filter="binhthanh">
+                <button type="button" class="btn btn-outline-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn" data-filter="binhthanh" data-i18n="stores.filter_binhthanh">
                     Bình Thạnh (Garden)
                 </button>
                 <button type="button" class="btn btn-outline-warning btn-sm px-4 py-2 rounded-pill font-accent" id="btnGpsNearest" onclick="calculateGpsNearest()">
-                    <i class="fa-solid fa-location-crosshairs me-1"></i> Tìm Chi Nhánh Gần Nhất
+                    <i class="fa-solid fa-location-crosshairs me-1"></i> <span data-i18n="stores.btn_gps">Tìm Chi Nhánh Gần Nhất</span>
                 </button>
             </div>
             <div id="gpsStatusNotice" class="text-center small text-gold mt-2 d-none"></div>
