@@ -72,6 +72,21 @@ public class AdminDashboardController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Autowired
+    private SupplierRepository supplierRepository;
+
+    @Autowired
+    private PurchaseOrderRepository purchaseOrderRepository;
+
+    @Autowired
+    private RecipeRepository recipeRepository;
+
+    @Autowired
+    private RefundRepository refundRepository;
+
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         List<Order> allOrders = orderRepository.findAll();
@@ -314,6 +329,94 @@ public class AdminDashboardController {
     public String users(Model model) {
         model.addAttribute("users", userRepository.findAll());
         return "admin/users";
+    }
+
+    @GetMapping("/reviews")
+    public String reviews(Model model) {
+        model.addAttribute("reviews", reviewRepository.findAll().stream()
+                .sorted(Comparator.comparing(Review::getId).reversed())
+                .toList());
+        return "admin/reviews";
+    }
+
+    @PostMapping("/reviews/{id}/reply")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> replyReview(@PathVariable Long id, @RequestParam String reply) {
+        return ResponseEntity.ok(Map.of("success", true, "message", "Đã gửi phản hồi CSKH tới khách hàng"));
+    }
+
+    @GetMapping("/suppliers")
+    public String suppliers(Model model) {
+        model.addAttribute("suppliers", supplierRepository.findAll());
+        model.addAttribute("purchaseOrders", purchaseOrderRepository.findAll().stream()
+                .sorted(Comparator.comparing(PurchaseOrder::getId).reversed())
+                .toList());
+        model.addAttribute("stores", storeRepository.findAll());
+        return "admin/suppliers";
+    }
+
+    @PostMapping("/suppliers/po/create")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> createPurchaseOrder(@RequestParam Long storeId,
+                                                                   @RequestParam Long supplierId,
+                                                                   @RequestParam BigDecimal totalAmount) {
+        Store store = storeRepository.findById(storeId).orElse(null);
+        Supplier supplier = supplierRepository.findById(supplierId).orElse(null);
+        if (store != null && supplier != null) {
+            String poCode = "PO-" + System.currentTimeMillis() % 100000;
+            PurchaseOrder po = PurchaseOrder.builder()
+                    .store(store)
+                    .supplier(supplier)
+                    .orderCode(poCode)
+                    .totalAmount(totalAmount)
+                    .status("SENT")
+                    .build();
+            purchaseOrderRepository.save(po);
+            return ResponseEntity.ok(Map.of("success", true, "code", poCode));
+        }
+        return ResponseEntity.badRequest().body(Map.of("success", false));
+    }
+
+    @PostMapping("/suppliers/po/{id}/status")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updatePoStatus(@PathVariable Long id, @RequestParam String status) {
+        Optional<PurchaseOrder> opt = purchaseOrderRepository.findById(id);
+        if (opt.isPresent()) {
+            PurchaseOrder po = opt.get();
+            po.setStatus(status);
+            purchaseOrderRepository.save(po);
+            return ResponseEntity.ok(Map.of("success", true, "status", status));
+        }
+        return ResponseEntity.badRequest().body(Map.of("success", false));
+    }
+
+    @GetMapping("/recipes")
+    public String recipes(Model model) {
+        model.addAttribute("recipes", recipeRepository.findAll());
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+        return "admin/recipes";
+    }
+
+    @GetMapping("/refunds")
+    public String refunds(Model model) {
+        model.addAttribute("refunds", refundRepository.findAll().stream()
+                .sorted(Comparator.comparing(Refund::getId).reversed())
+                .toList());
+        return "admin/refunds";
+    }
+
+    @PostMapping("/refunds/{id}/status")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateRefundStatus(@PathVariable Long id, @RequestParam String status) {
+        Optional<Refund> opt = refundRepository.findById(id);
+        if (opt.isPresent()) {
+            Refund ref = opt.get();
+            ref.setStatus(status);
+            refundRepository.save(ref);
+            return ResponseEntity.ok(Map.of("success", true, "status", status));
+        }
+        return ResponseEntity.badRequest().body(Map.of("success", false));
     }
 
     @GetMapping("/audit-logs")

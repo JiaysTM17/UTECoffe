@@ -103,25 +103,59 @@
                 <div class="badge bg-dark-roast border border-gold text-gold mt-2 py-1 px-2 small font-accent">EXECUTIVE SUITE</div>
             </div>
 
-            <nav class="flex-grow-1 overflow-auto py-3" id="adminSidebarNav">
+            <nav class="flex-grow-1 overflow-auto py-2" id="adminSidebarNav">
+                <!-- Group 1: BÁO CÁO & ĐIỀU HÀNH -->
+                <div class="px-3 pt-2 pb-1 text-gold-subtle text-uppercase font-accent fw-bold" style="font-size: 0.68rem; letter-spacing: 0.1em; opacity: 0.85;">
+                    Báo Cáo &amp; Điều Hành
+                </div>
                 <a href="${pageContext.request.contextPath}/admin/dashboard" class="admin-nav-link ${pageContext.request.requestURI.endsWith('/admin/dashboard') ? 'active' : ''}">
                     <i class="fa-solid fa-chart-line text-gold"></i> Tổng Quan
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/orders" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/orders') ? 'active' : ''}">
                     <i class="fa-solid fa-receipt text-gold"></i> Quản Lý Đơn Hàng
                 </a>
-                <a href="${pageContext.request.contextPath}/admin/inventory" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/inventory') ? 'active' : ''}">
-                    <i class="fa-solid fa-warehouse text-gold"></i> Kho Nguyên Liệu BOM
+                <a href="${pageContext.request.contextPath}/admin/refunds" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/refunds') ? 'active' : ''}">
+                    <i class="fa-solid fa-hand-holding-dollar text-gold"></i> Khiếu Nại &amp; Hoàn Tiền
                 </a>
+                <a href="${pageContext.request.contextPath}/barista/kds" class="admin-nav-link text-warning">
+                    <i class="fa-solid fa-display text-warning"></i> Điều Phối KDS Barista
+                </a>
+
+                <!-- Group 2: THỰC ĐƠN & KHÁCH HÀNG -->
+                <div class="px-3 pt-3 pb-1 text-gold-subtle text-uppercase font-accent fw-bold border-top border-secondary border-opacity-25 mt-2" style="font-size: 0.68rem; letter-spacing: 0.1em; opacity: 0.85;">
+                    Thực Đơn &amp; Khách Hàng
+                </div>
                 <a href="${pageContext.request.contextPath}/admin/products" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/products') ? 'active' : ''}">
                     <i class="fa-solid fa-mug-saucer text-gold"></i> Danh Mục &amp; Món
                 </a>
-                <a href="${pageContext.request.contextPath}/admin/stores" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/stores') ? 'active' : ''}">
-                    <i class="fa-solid fa-store text-gold"></i> Chuỗi Cửa Hàng &amp; Bàn
+                <a href="${pageContext.request.contextPath}/admin/recipes" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/recipes') ? 'active' : ''}">
+                    <i class="fa-solid fa-flask text-gold"></i> Công Thức Chuẩn SOP
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/coupons" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/coupons') ? 'active' : ''}">
-                    <i class="fa-solid fa-tags text-gold"></i> Mã Khuyến Mãi
+                    <i class="fa-solid fa-tags text-gold"></i> Khuyến Mãi &amp; Voucher
                 </a>
+                <a href="${pageContext.request.contextPath}/admin/reviews" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/reviews') ? 'active' : ''}">
+                    <i class="fa-solid fa-star text-gold"></i> Đánh Giá &amp; CSKH
+                </a>
+
+                <!-- Group 3: CƠ SỞ & CUNG ỨNG -->
+                <div class="px-3 pt-3 pb-1 text-gold-subtle text-uppercase font-accent fw-bold border-top border-secondary border-opacity-25 mt-2" style="font-size: 0.68rem; letter-spacing: 0.1em; opacity: 0.85;">
+                    Cơ Sở &amp; Cung Ứng
+                </div>
+                <a href="${pageContext.request.contextPath}/admin/stores" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/stores') ? 'active' : ''}">
+                    <i class="fa-solid fa-store text-gold"></i> 3 Chi Nhánh &amp; Đặt Bàn
+                </a>
+                <a href="${pageContext.request.contextPath}/admin/inventory" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/inventory') ? 'active' : ''}">
+                    <i class="fa-solid fa-warehouse text-gold"></i> Kho Nguyên Liệu BOM
+                </a>
+                <a href="${pageContext.request.contextPath}/admin/suppliers" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/suppliers') ? 'active' : ''}">
+                    <i class="fa-solid fa-truck-ramp-box text-gold"></i> Nhà Cung Cấp &amp; PO
+                </a>
+
+                <!-- Group 4: HỆ THỐNG & NHÂN SỰ -->
+                <div class="px-3 pt-3 pb-1 text-gold-subtle text-uppercase font-accent fw-bold border-top border-secondary border-opacity-25 mt-2" style="font-size: 0.68rem; letter-spacing: 0.1em; opacity: 0.85;">
+                    Hệ Thống &amp; Nhân Sự
+                </div>
                 <a href="${pageContext.request.contextPath}/admin/users" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/users') ? 'active' : ''}">
                     <i class="fa-solid fa-users-gear text-gold"></i> Người Dùng &amp; Quyền
                 </a>
@@ -131,12 +165,6 @@
                 <div class="border-top border-secondary opacity-25 my-2"></div>
                 <a href="${pageContext.request.contextPath}/swagger-ui.html" target="_blank" class="admin-nav-link text-info">
                     <i class="fa-solid fa-code text-info"></i> OpenAPI Swagger UI
-                </a>
-                <a href="${pageContext.request.contextPath}/actuator/health" target="_blank" class="admin-nav-link text-success">
-                    <i class="fa-solid fa-heart-pulse text-success"></i> Health Probes
-                </a>
-                <a href="${pageContext.request.contextPath}/barista/kds" class="admin-nav-link text-warning">
-                    <i class="fa-solid fa-display text-warning"></i> Chuyển Sang KDS
                 </a>
             </nav>
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 @Profile("!test")
@@ -65,6 +66,24 @@ public class DatabaseSeeder implements CommandLineRunner {
     private UserCouponRepository userCouponRepository;
 
     @Autowired
+    private SupplierRepository supplierRepository;
+
+    @Autowired
+    private PurchaseOrderRepository purchaseOrderRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Autowired
+    private RecipeRepository recipeRepository;
+
+    @Autowired
+    private RefundRepository refundRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -75,6 +94,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             seedCatalogAndBOM();
             seedCoupons();
             seedCustomerProfilesAndOrders();
+            seedEnterpriseModules();
             System.out.println(">>> UTECoffe: Database seeded successfully with 3 distinct customer roles & accounts!");
         }
     }
@@ -699,5 +719,149 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .createdAt(LocalDateTime.now().minusDays(2))
                 .build());
         orderItemRepository.save(OrderItem.builder().order(oDiamond3).product(products.size() > 6 ? products.get(6) : products.get(0)).unitPrice(BigDecimal.valueOf(175000)).quantity(2).subtotal(BigDecimal.valueOf(350000)).note("Set Pour-Over Geisha Cầu Đất").build());
+    }
+
+    private void seedEnterpriseModules() {
+        if (supplierRepository.count() > 0) return;
+
+        List<Store> stores = storeRepository.findAll();
+        List<Product> products = productRepository.findAll();
+        List<Ingredient> ingredients = ingredientRepository.findAll();
+        List<User> users = userRepository.findAll();
+        List<Order> orders = orderRepository.findAll();
+
+        Store s1 = stores.get(0);
+        Store s2 = stores.size() > 1 ? stores.get(1) : s1;
+
+        // 1. Suppliers
+        Supplier sup1 = supplierRepository.save(Supplier.builder()
+                .name("Nông Trại Cầu Đất Farm")
+                .contactName("Anh Tuấn Cầu Đất")
+                .phone("02633888999")
+                .email("caudat.coffee@farm.vn")
+                .address("Xã Trạm Hành, Cao Nguyên Cầu Đất, TP. Đà Lạt")
+                .isActive(true)
+                .build());
+
+        Supplier sup2 = supplierRepository.save(Supplier.builder()
+                .name("Nông Trường Trà Mộc Châu")
+                .contactName("Chị Lan Mộc Châu")
+                .phone("02123868686")
+                .email("contact@mocchautea.vn")
+                .address("Tiểu khu 34, TT. Nông Trường Mộc Châu, Sơn La")
+                .isActive(true)
+                .build());
+
+        Supplier sup3 = supplierRepository.save(Supplier.builder()
+                .name("Công Ty CP Sữa Dalat Milk")
+                .contactName("Phòng Phân Phối F&B")
+                .phone("02633848484")
+                .email("sales@dalatmilk.vn")
+                .address("Xã Tu Tra, Huyện Đơn Dương, Tỉnh Lâm Đồng")
+                .isActive(true)
+                .build());
+
+        Supplier sup4 = supplierRepository.save(Supplier.builder()
+                .name("Elle & Vire Dairy Products France")
+                .contactName("Đại Diện Nhập Khẩu Thực Phẩm")
+                .phone("02838229999")
+                .email("orders@ellevire.vn")
+                .address("Tòa nhà Bitexco, Bến Nghé, Quận 1, TP.HCM")
+                .isActive(true)
+                .build());
+
+        // 2. Purchase Orders (PO)
+        User admin = users.stream().filter(u -> u.getRole().getName() == RoleName.ROLE_ADMIN).findFirst().orElse(users.get(0));
+        purchaseOrderRepository.save(PurchaseOrder.builder()
+                .store(s1)
+                .supplier(sup1)
+                .orderCode("PO-2026-001")
+                .totalAmount(BigDecimal.valueOf(18500000))
+                .status("RECEIVED")
+                .createdBy(admin)
+                .build());
+
+        purchaseOrderRepository.save(PurchaseOrder.builder()
+                .store(s2)
+                .supplier(sup3)
+                .orderCode("PO-2026-002")
+                .totalAmount(BigDecimal.valueOf(4800000))
+                .status("SENT")
+                .createdBy(admin)
+                .build());
+
+        // 3. Customer Reviews
+        if (!products.isEmpty() && !users.isEmpty()) {
+            User uVy = users.stream().filter(u -> "vy.diamond@utecoffe.vn".equals(u.getEmail())).findFirst().orElse(users.get(0));
+            User uBao = users.stream().filter(u -> "bao.silver@utecoffe.vn".equals(u.getEmail())).findFirst().orElse(users.get(0));
+            User uPhuong = users.stream().filter(u -> "phuong.bronze@utecoffe.vn".equals(u.getEmail())).findFirst().orElse(users.get(0));
+
+            reviewRepository.save(Review.builder()
+                    .user(uVy)
+                    .product(products.get(0))
+                    .rating(5)
+                    .comment("Cold Brew Cam Vàng ở chi nhánh Thủ Đức hương vị đỉnh cao! Vị cam vàng Sunkist thanh mát kết hợp cà phê ủ lạnh 18h thơm bùi rất tuyệt vời.")
+                    .build());
+
+            reviewRepository.save(Review.builder()
+                    .user(uBao)
+                    .product(products.size() > 2 ? products.get(2) : products.get(0))
+                    .rating(5)
+                    .comment("Trà Oolong nướng thơm đậm đà, lớp macchiato kem cheese béo ngậy vừa vặn, không gian chi nhánh Quận 1 yên tĩnh lịch sự.")
+                    .build());
+
+            reviewRepository.save(Review.builder()
+                    .user(uPhuong)
+                    .product(products.size() > 3 ? products.get(3) : products.get(0))
+                    .rating(4)
+                    .comment("Bánh sừng bò nướng giòn rụm thơm nức mùi bơ Pháp Elle & Vire, chấm cùng cà phê rất hợp. Sẽ ghé lại thường xuyên.")
+                    .build());
+        }
+
+        // 4. Recipes (Công thức SOP)
+        if (!products.isEmpty() && !ingredients.isEmpty()) {
+            recipeRepository.save(Recipe.builder()
+                    .product(products.get(0))
+                    .ingredient(ingredients.get(0))
+                    .quantityRequired(BigDecimal.valueOf(30)) // 30g hat Arabica
+                    .build());
+
+            if (products.size() > 1) {
+                recipeRepository.save(Recipe.builder()
+                        .product(products.get(1))
+                        .ingredient(ingredients.get(0))
+                        .quantityRequired(BigDecimal.valueOf(18)) // 18g double shot
+                        .build());
+            }
+
+            if (products.size() > 2 && ingredients.size() > 2) {
+                recipeRepository.save(Recipe.builder()
+                        .product(products.get(2))
+                        .ingredient(ingredients.get(2))
+                        .quantityRequired(BigDecimal.valueOf(15)) // 15g tra Oolong
+                        .build());
+            }
+        }
+
+        // 5. Refunds & Payment sample
+        if (!orders.isEmpty()) {
+            Order o1 = orders.get(0);
+            Payment pay = paymentRepository.save(Payment.builder()
+                    .order(o1)
+                    .paymentMethod(PaymentMethod.VIETQR)
+                    .status(PaymentStatus.PAID)
+                    .transactionId("VQR-2026-998811")
+                    .amount(o1.getFinalAmount())
+                    .paymentTime(LocalDateTime.now().minusDays(1))
+                    .build());
+
+            refundRepository.save(Refund.builder()
+                    .payment(pay)
+                    .refundCode("REF-2026-001")
+                    .amount(BigDecimal.valueOf(59000))
+                    .reason("Shipper làm nghiêng đổ thức uống, hoàn tiền 100% vào Ví Điểm thưởng UTEClub")
+                    .status("REFUNDED")
+                    .build());
+        }
     }
 }

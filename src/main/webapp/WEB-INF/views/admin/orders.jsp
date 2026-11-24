@@ -20,35 +20,47 @@
         </div>
     </div>
 
-    <!-- Filter & Search Toolbar -->
+    <!-- Filter & Search Toolbar (2-Tier Immune to Overflow) -->
     <div class="card-luxury p-3 border-gold shadow-sm mb-3 bg-espresso">
-        <div class="row g-2 align-items-center">
-            <!-- Search Input -->
-            <div class="col-lg-5 col-md-6">
+        <!-- Row 1: Search & Branch Selector -->
+        <div class="row g-2 align-items-center mb-2 pb-2 border-bottom border-gold-subtle">
+            <div class="col-md-7">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text bg-dark-roast border-gold text-gold"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    <input type="text" id="orderSearchInput" class="form-control form-control-luxury" placeholder="Tìm theo mã đơn, tên khách, SĐT..." onkeyup="filterOrdersTable()">
+                    <input type="text" id="orderSearchInput" class="form-control form-control-luxury" placeholder="Tìm theo mã đơn #ORD, tên khách hàng, số điện thoại..." onkeyup="filterOrdersTable()">
                 </div>
             </div>
-
-            <!-- Branch Filter -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-md-5">
                 <select id="branchFilterSelect" class="form-select form-select-sm form-select-luxury" onchange="filterOrdersTable()">
-                    <option value="ALL">-- Tất Cả Chi Nhánh --</option>
+                    <option value="ALL">-- Tất Cả 3 Chi Nhánh --</option>
                     <c:forEach var="st" items="${stores}">
                         <option value="${st.name}">${st.name}</option>
                     </c:forEach>
                 </select>
             </div>
+        </div>
 
-            <!-- Status Filter Pills -->
-            <div class="col-lg-4 col-md-12 text-lg-end text-start">
-                <div class="d-flex flex-wrap gap-1 justify-content-lg-end align-items-center">
-                    <button type="button" class="btn btn-sm btn-gold status-filter-btn active rounded-pill px-2 py-1 font-accent" data-status="ALL" onclick="setStatusFilter('ALL', this)">Tất Cả</button>
-                    <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-2 py-1 font-accent" data-status="PENDING" onclick="setStatusFilter('PENDING', this)">Chờ Xử Lý</button>
-                    <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-2 py-1 font-accent" data-status="PREPARING" onclick="setStatusFilter('PREPARING', this)">Đang Pha</button>
-                    <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-2 py-1 font-accent" data-status="COMPLETED" onclick="setStatusFilter('COMPLETED', this)">Hoàn Tất</button>
-                </div>
+        <!-- Row 2: Status Filter Pills with Full Width (Never Overflows) -->
+        <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-1 small text-secondary">
+                <i class="fa-solid fa-filter text-gold me-1"></i> <span class="font-accent">Trạng thái:</span>
+            </div>
+            <div class="d-flex flex-wrap gap-1">
+                <button type="button" class="btn btn-sm btn-gold status-filter-btn active rounded-pill px-3 py-1 font-accent" data-status="ALL" onclick="setStatusFilter('ALL', this)">
+                    Tất Cả (${orders.size()})
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-3 py-1 font-accent" data-status="PENDING" onclick="setStatusFilter('PENDING', this)">
+                    ⏳ Chờ Xử Lý
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-3 py-1 font-accent" data-status="PREPARING" onclick="setStatusFilter('PREPARING', this)">
+                    ☕ Đang Pha
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-3 py-1 font-accent" data-status="COMPLETED" onclick="setStatusFilter('COMPLETED', this)">
+                    ✅ Hoàn Tất
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-3 py-1 font-accent" data-status="CANCELLED" onclick="setStatusFilter('CANCELLED', this)">
+                    ❌ Đã Hủy
+                </button>
             </div>
         </div>
     </div>
