@@ -59,8 +59,8 @@ public class DatabaseConfig {
             }
         }
 
-        // 3. Ensure SSL mode for remote cloud databases (Render / Neon / Supabase)
-        if (rawUrl != null && !rawUrl.contains("sslmode=") && !rawUrl.contains("localhost") && !rawUrl.contains("127.0.0.1") && !rawUrl.contains("utecoffe-db")) {
+        // 3. Ensure SSL mode ONLY for remote cloud PostgreSQL databases (Render / Neon / Supabase)
+        if (rawUrl != null && rawUrl.startsWith("jdbc:postgresql://") && !rawUrl.contains("sslmode=") && !rawUrl.contains("localhost") && !rawUrl.contains("127.0.0.1") && !rawUrl.contains("utecoffe-db")) {
             rawUrl += (rawUrl.contains("?") ? "&" : "?") + "sslmode=prefer";
         }
 
