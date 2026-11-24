@@ -132,13 +132,15 @@ public class DatabaseConfig {
         }
 
         // 5. Connection pool settings for Cloud Production
-        config.setMaximumPoolSize(10);
-        config.setMinimumIdle(1);
-        config.setConnectionTimeout(10000); // 10 seconds timeout so user doesn't wait 30s
-        config.setInitializationFailTimeout(-1); // Do not fail Spring Boot startup if DB takes time to connect
-        config.setIdleTimeout(300000);
-        config.setMaxLifetime(900000);
-        config.setLeakDetectionThreshold(15000); // Log leak warning after 15s
+        config.setMaximumPoolSize(20);
+        config.setMinimumIdle(2);
+        config.setConnectionTimeout(6000); // 6s timeout so requests fail fast if pool is busy
+        config.setInitializationFailTimeout(-1);
+        config.setIdleTimeout(120000);
+        config.setMaxLifetime(600000);
+        config.setLeakDetectionThreshold(5000);
+        config.addDataSourceProperty("socketTimeout", "10"); // 10s socket timeout
+        config.addDataSourceProperty("loginTimeout", "5");
 
         log.info("Initialized Cloud HikariDataSource with JDBC URL: {}", rawUrl != null && rawUrl.contains("@") ? rawUrl.replaceAll(":[^:@]+@", ":****@") : rawUrl);
 

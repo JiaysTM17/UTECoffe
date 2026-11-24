@@ -84,6 +84,22 @@ public class DiagController {
                 dbTest.put("directConnectSuccess", true);
                 dbTest.put("dbProduct", conn.getMetaData().getDatabaseProductName());
                 dbTest.put("dbVersion", conn.getMetaData().getDatabaseProductVersion());
+
+                // Check active queries and locks in PostgreSQL
+                java.util.List<Map<String, Object>> activities = new java.util.ArrayList<>();
+                try (java.sql.Statement stmt = conn.createStatement();
+                     java.sql.ResultSet rs = stmt.executeQuery("SELECT pid, state, wait_event_type, wait_event, query FROM pg_stat_activity WHERE datname = 'utecoffe_db'")) {
+                    while (rs.next()) {
+                        Map<String, Object> act = new LinkedHashMap<>();
+                        act.put("pid", rs.getInt("pid"));
+                        act.put("state", rs.getString("state"));
+                        act.put("wait_event_type", rs.getString("wait_event_type"));
+                        act.put("wait_event", rs.getString("wait_event"));
+                        act.put("query", rs.getString("query"));
+                        activities.add(act);
+                    }
+                }
+                dbTest.put("pg_stat_activity", activities);
             }
         } catch (Throwable t) {
             dbTest.put("directConnectSuccess", false);
