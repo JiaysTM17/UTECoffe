@@ -7,6 +7,9 @@ services:
     plan: free
     region: singapore
     autoDeploy: true
+    domains:
+      - utecoffe.io.vn
+      - www.utecoffe.io.vn
     envVars:
       - key: PORT
         value: 8080
