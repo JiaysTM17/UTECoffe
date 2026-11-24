@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+import java.net.URI;
 import javax.sql.DataSource;
 
 /**
@@ -49,24 +50,6 @@ public class DatabaseConfig {
             rawUrl = datasourceUrl;
         }
 
-        // 2. Normalize Cloud URI formats (postgres:// or postgresql://) to jdbc:postgresql://
-        if (rawUrl != null) {
-            String trimmed = rawUrl.trim();
-            if (trimmed.startsWith("postgres://")) {
-                rawUrl = "jdbc:postgresql://" + trimmed.substring("postgres://".length());
-            } else if (trimmed.startsWith("postgresql://")) {
-                rawUrl = "jdbc:postgresql://" + trimmed.substring("postgresql://".length());
-            }
-        }
-
-        // 3. Ensure SSL mode ONLY for remote cloud PostgreSQL databases (Render / Neon / Supabase)
-        if (rawUrl != null && rawUrl.startsWith("jdbc:postgresql://") && !rawUrl.contains("sslmode=") && !rawUrl.contains("localhost") && !rawUrl.contains("127.0.0.1") && !rawUrl.contains("utecoffe-db")) {
-            rawUrl += (rawUrl.contains("?") ? "&" : "?") + "sslmode=prefer";
-        }
-
-        config.setJdbcUrl(rawUrl);
-
-        // 4. User & Password fallback
         String envUser = System.getenv("DB_USERNAME");
         if (envUser == null || envUser.isBlank()) {
             envUser = datasourceUsername;
@@ -75,6 +58,47 @@ public class DatabaseConfig {
         if (envPass == null || envPass.isBlank()) {
             envPass = datasourcePassword;
         }
+
+        // 2. Normalize Cloud URI formats (postgres:// or postgresql://) to clean JDBC format
+        if (rawUrl != null && (rawUrl.startsWith("postgres://") || rawUrl.startsWith("postgresql://"))) {
+            try {
+                URI uri = new URI(rawUrl);
+                String host = uri.getHost();
+                int port = uri.getPort() > 0 ? uri.getPort() : 5432;
+                String path = uri.getPath() != null ? uri.getPath() : "/utecoffe_db";
+                String query = uri.getQuery();
+
+                if (uri.getUserInfo() != null) {
+                    String[] userInfo = uri.getUserInfo().split(":", 2);
+                    if (userInfo.length > 0 && (envUser == null || envUser.isBlank() || "postgres".equals(envUser))) {
+                        envUser = userInfo[0];
+                    }
+                    if (userInfo.length > 1 && (envPass == null || envPass.isBlank() || "postgres".equals(envPass))) {
+                        envPass = userInfo[1];
+                    }
+                }
+
+                rawUrl = "jdbc:postgresql://" + host + ":" + port + path;
+                if (query != null && !query.isBlank()) {
+                    rawUrl += "?" + query;
+                }
+            } catch (Exception e) {
+                log.warn("Failed to parse raw cloud database URL as URI: {}", e.getMessage());
+                String trimmed = rawUrl.trim();
+                if (trimmed.startsWith("postgres://")) {
+                    rawUrl = "jdbc:postgresql://" + trimmed.substring("postgres://".length());
+                } else if (trimmed.startsWith("postgresql://")) {
+                    rawUrl = "jdbc:postgresql://" + trimmed.substring("postgresql://".length());
+                }
+            }
+        }
+
+        // 3. Ensure SSL mode ONLY for remote cloud PostgreSQL databases (Render external / Neon / Supabase)
+        if (rawUrl != null && rawUrl.startsWith("jdbc:postgresql://") && !rawUrl.contains("sslmode=") && !rawUrl.contains("localhost") && !rawUrl.contains("127.0.0.1") && !rawUrl.contains("utecoffe-db")) {
+            rawUrl += (rawUrl.contains("?") ? "&" : "?") + "sslmode=prefer";
+        }
+
+        config.setJdbcUrl(rawUrl);
 
         if (envUser != null && !envUser.isBlank()) {
             config.setUsername(envUser);
