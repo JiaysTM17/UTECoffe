@@ -1,11 +1,23 @@
 package com.utecoffe.controller.mvc;
 
+import com.utecoffe.entity.Order;
+import com.utecoffe.entity.Store;
+import com.utecoffe.enums.OrderStatus;
 import com.utecoffe.repository.*;
+import com.utecoffe.service.ExcelExportService;
+import com.utecoffe.service.OrderService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,32 +47,94 @@ public class AdminDashboardController {
     @Autowired
     private AuditLogRepository auditLogRepository;
 
+    @Autowired
+    private ExcelExportService excelExportService;
+
+    @Autowired
+    private OrderService orderService;
+
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
-        model.addAttribute("totalOrders", orderRepository.count());
+        List<Order> allOrders = orderRepository.findAll();
+        BigDecimal totalRevenue = allOrders.stream()
+                .filter(o -> o.getStatus() == OrderStatus.COMPLETED)
+                .map(Order::getFinalAmount)
+                .filter(Objects::nonNull)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        long pendingOrdersCount = allOrders.stream()
+                .filter(o -> o.getStatus() == OrderStatus.PENDING || o.getStatus() == OrderStatus.PREPARING)
+                .count();
+
+        long completedOrdersCount = allOrders.stream()
+                .filter(o -> o.getStatus() == OrderStatus.COMPLETED)
+                .count();
+
+        List<Store> stores = storeRepository.findAll();
+        Map<Long, Long> storeOrderCounts = new HashMap<>();
+        Map<Long, BigDecimal> storeRevenues = new HashMap<>();
+
+        for (Store st : stores) {
+            long count = allOrders.stream()
+                    .filter(o -> o.getStore() != null && o.getStore().getId().equals(st.getId()))
+                    .count();
+            BigDecimal rev = allOrders.stream()
+                    .filter(o -> o.getStore() != null && o.getStore().getId().equals(st.getId()) && o.getStatus() == OrderStatus.COMPLETED)
+                    .map(Order::getFinalAmount)
+                    .filter(Objects::nonNull)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            storeOrderCounts.put(st.getId(), count);
+            storeRevenues.put(st.getId(), rev);
+        }
+
+        model.addAttribute("totalOrders", allOrders.size());
+        model.addAttribute("totalRevenue", totalRevenue);
+        model.addAttribute("pendingOrdersCount", pendingOrdersCount);
+        model.addAttribute("completedOrdersCount", completedOrdersCount);
         model.addAttribute("totalProducts", productRepository.count());
-        model.addAttribute("totalStores", storeRepository.count());
+        model.addAttribute("totalStores", stores.size());
+        model.addAttribute("stores", stores);
+        model.addAttribute("storeOrderCounts", storeOrderCounts);
+        model.addAttribute("storeRevenues", storeRevenues);
         model.addAttribute("totalUsers", userRepository.count());
-        model.addAttribute("recentOrders", orderRepository.findAll().stream().limit(10).toList());
+        model.addAttribute("recentOrders", allOrders.stream()
+                .sorted(Comparator.comparing(Order::getId).reversed())
+                .limit(10)
+                .toList());
+
         return "admin/dashboard";
     }
 
-    @Autowired
-    private com.utecoffe.service.ExcelExportService excelExportService;
-
     @GetMapping("/orders/export")
-    public void exportOrders(jakarta.servlet.http.HttpServletResponse response) throws java.io.IOException {
+    public void exportOrders(HttpServletResponse response) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        String headerValue = "attachment; filename=orders_export_" + java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")) + ".xlsx";
+        String headerValue = "attachment; filename=orders_export_" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) + ".xlsx";
         response.setHeader("Content-Disposition", headerValue);
-        java.util.List<com.utecoffe.entity.Order> orders = orderRepository.findAll();
+        List<Order> orders = orderRepository.findAll();
         excelExportService.exportOrdersToExcel(orders, response.getOutputStream());
     }
 
     @GetMapping("/orders")
     public String orders(Model model) {
-        model.addAttribute("orders", orderRepository.findAll());
+        List<Order> orders = orderRepository.findAll().stream()
+                .sorted(Comparator.comparing(Order::getId).reversed())
+                .toList();
+        model.addAttribute("orders", orders);
+        model.addAttribute("stores", storeRepository.findAll());
         return "admin/orders";
+    }
+
+    @PostMapping("/orders/{orderId}/status")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateOrderStatus(@PathVariable Long orderId,
+                                                                 @RequestParam OrderStatus status,
+                                                                 @RequestParam(required = false) String note) {
+        Order updated = orderService.updateOrderStatus(orderId, status, note);
+        Map<String, Object> resp = new HashMap<>();
+        resp.put("success", true);
+        resp.put("orderId", orderId);
+        resp.put("status", updated.getStatus().name());
+        return ResponseEntity.ok(resp);
     }
 
     @GetMapping("/products")

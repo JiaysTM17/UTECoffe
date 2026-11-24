@@ -5,7 +5,7 @@
 </head>
 <body class="bg-obsidian">
     <div class="container py-5 min-vh-75 d-flex align-items-center justify-content-center">
-        <div class="card card-luxury border-gold p-4 p-md-5 shadow-lg w-100" style="max-width: 460px;">
+        <div class="card card-luxury border-gold p-4 shadow-lg w-100" style="max-width: 480px;">
             <div class="text-center mb-4">
                 <img src="${pageContext.request.contextPath}/assets/images/logo_icon.svg" alt="UTECOFFE" height="48" class="mb-3">
                 <h3 class="font-serif fw-bold text-gold-gradient mb-1">Chào Mừng Trở Lại</h3>
@@ -47,11 +47,13 @@
 
             <!-- Quick Demo Role Switcher -->
             <div class="pt-3 border-top border-gold-subtle mt-2">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-gold font-accent small fw-bold text-uppercase" style="letter-spacing: 0.08em;">
-                        <i class="fa-solid fa-users me-1"></i> Tài Khoản Thử Nghiệm (1-Click)
+                <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-gold-subtle">
+                    <span class="text-gold font-accent small fw-bold text-uppercase d-flex align-items-center gap-1 text-nowrap">
+                        <i class="fa-solid fa-bolt text-gold"></i> Đăng Nhập Nhanh (Demo)
                     </span>
-                    <small class="text-secondary" style="font-size: 0.7rem;">Pass: Admin@2026</small>
+                    <span class="badge bg-espresso border border-gold-subtle text-secondary font-monospace text-nowrap" style="font-size: 0.72rem;">
+                        Pass: Admin@2026
+                    </span>
                 </div>
 
                 <div class="d-flex flex-column gap-2 mb-3">
@@ -59,55 +61,55 @@
                     <button type="button" class="btn btn-dark-roast border text-start p-2 rounded-3 demo-role-btn d-flex align-items-center justify-content-between" 
                             style="border-color: #cd7f32 !important;"
                             onclick="fillDemoAccount('phuong.bronze@utecoffe.vn', 'Admin@2026')">
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="badge text-white px-2 py-1 small fw-bold" style="background: #cd7f32;">ĐỒNG</span>
-                            <div>
-                                <div class="text-light small fw-bold mb-0">Nguyễn Thị Mai Phương</div>
-                                <div class="text-secondary" style="font-size: 0.72rem;">Khách Mới • 120 điểm • Voucher 20%</div>
+                        <div class="d-flex align-items-center gap-2 overflow-hidden">
+                            <span class="badge text-white px-2 py-1 small fw-bold text-nowrap" style="background: #cd7f32; min-width: 80px; text-align: center;">ĐỒNG</span>
+                            <div class="text-truncate">
+                                <div class="text-light small fw-bold text-truncate mb-0">Nguyễn Thị Mai Phương</div>
+                                <div class="text-secondary text-truncate" style="font-size: 0.72rem;">120 điểm • Khách Mới (Voucher 20%)</div>
                             </div>
                         </div>
-                        <i class="fa-solid fa-arrow-right text-secondary small"></i>
+                        <i class="fa-solid fa-arrow-right text-secondary small ms-2 flex-shrink-0"></i>
                     </button>
 
                     <!-- Customer 2: Silver -->
                     <button type="button" class="btn btn-dark-roast border text-start p-2 rounded-3 demo-role-btn d-flex align-items-center justify-content-between" 
                             style="border-color: #c0c0c0 !important;"
                             onclick="fillDemoAccount('bao.silver@utecoffe.vn', 'Admin@2026')">
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="badge text-dark px-2 py-1 small fw-bold" style="background: #c0c0c0;">BẠC</span>
-                            <div>
-                                <div class="text-light small fw-bold mb-0">Trần Quốc Bảo</div>
-                                <div class="text-secondary" style="font-size: 0.72rem;">Thân Thiết • 850 điểm • Free Up-size T5</div>
+                        <div class="d-flex align-items-center gap-2 overflow-hidden">
+                            <span class="badge text-dark px-2 py-1 small fw-bold text-nowrap" style="background: #c0c0c0; min-width: 80px; text-align: center;">BẠC</span>
+                            <div class="text-truncate">
+                                <div class="text-light small fw-bold text-truncate mb-0">Trần Quốc Bảo</div>
+                                <div class="text-secondary text-truncate" style="font-size: 0.72rem;">850 điểm • Thân Thiết (Free Up-size T5)</div>
                             </div>
                         </div>
-                        <i class="fa-solid fa-arrow-right text-secondary small"></i>
+                        <i class="fa-solid fa-arrow-right text-secondary small ms-2 flex-shrink-0"></i>
                     </button>
 
                     <!-- Customer 3: Diamond -->
                     <button type="button" class="btn btn-dark-roast border text-start p-2 rounded-3 demo-role-btn d-flex align-items-center justify-content-between" 
-                            style="border-color: #b9f2ff !important; background: linear-gradient(90deg, rgba(185,242,255,0.06) 0%, rgba(20,20,20,0.8) 100%);"
+                            style="border-color: #b9f2ff !important; background: linear-gradient(90deg, rgba(185,242,255,0.08) 0%, rgba(20,20,20,0.85) 100%);"
                             onclick="fillDemoAccount('vy.diamond@utecoffe.vn', 'Admin@2026')">
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="badge text-dark px-2 py-1 small fw-bold" style="background: #b9f2ff;"><i class="fa-solid fa-crown me-1"></i>KIM CƯƠNG</span>
-                            <div>
-                                <div class="text-gold small fw-bold mb-0">Lê Hoàng Yến Vy</div>
-                                <div class="text-secondary" style="font-size: 0.72rem;">Thượng Khách VIP • 3.650 điểm • Giảm 15%</div>
+                        <div class="d-flex align-items-center gap-2 overflow-hidden">
+                            <span class="badge text-dark px-2 py-1 small fw-bold text-nowrap" style="background: #b9f2ff; min-width: 80px; text-align: center;"><i class="fa-solid fa-crown me-1 text-warning"></i>KIM CƯƠNG</span>
+                            <div class="text-truncate">
+                                <div class="text-gold small fw-bold text-truncate mb-0">Lê Hoàng Yến Vy</div>
+                                <div class="text-secondary text-truncate" style="font-size: 0.72rem;">3.650 điểm • VIP (Giảm trực tiếp 15%)</div>
                             </div>
                         </div>
-                        <i class="fa-solid fa-arrow-right text-gold small"></i>
+                        <i class="fa-solid fa-arrow-right text-gold small ms-2 flex-shrink-0"></i>
                     </button>
 
                     <!-- Staff Roles: Barista & Admin -->
                     <div class="d-flex gap-2 pt-1">
-                        <button type="button" class="btn btn-outline-warning btn-sm flex-grow-1 rounded-pill py-1 text-nowrap" 
+                        <button type="button" class="btn btn-outline-warning btn-sm flex-grow-1 rounded-pill py-2 text-nowrap d-flex align-items-center justify-content-center gap-1 shadow-sm" 
                                 style="font-size: 0.75rem;"
                                 onclick="fillDemoAccount('barista.thuduc@utecoffe.vn', 'Admin@2026')">
-                            <i class="fa-solid fa-mug-hot me-1"></i> Barista KDS
+                            <i class="fa-solid fa-mug-hot"></i> Barista KDS
                         </button>
-                        <button type="button" class="btn btn-outline-danger btn-sm flex-grow-1 rounded-pill py-1 text-nowrap" 
+                        <button type="button" class="btn btn-outline-danger btn-sm flex-grow-1 rounded-pill py-2 text-nowrap d-flex align-items-center justify-content-center gap-1 shadow-sm" 
                                 style="font-size: 0.75rem;"
                                 onclick="fillDemoAccount('admin@utecoffe.vn', 'Admin@2026')">
-                            <i class="fa-solid fa-shield-halved me-1"></i> Admin Portal
+                            <i class="fa-solid fa-shield-halved"></i> Quản Trị Admin
                         </button>
                     </div>
                 </div>
