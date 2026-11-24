@@ -59,9 +59,14 @@ public class DatabaseConfig {
             }
         }
 
+        // 3. Ensure SSL mode for remote cloud databases (Render / Neon / Supabase)
+        if (rawUrl != null && !rawUrl.contains("sslmode=") && !rawUrl.contains("localhost") && !rawUrl.contains("127.0.0.1") && !rawUrl.contains("utecoffe-db")) {
+            rawUrl += (rawUrl.contains("?") ? "&" : "?") + "sslmode=prefer";
+        }
+
         config.setJdbcUrl(rawUrl);
 
-        // 3. User & Password fallback
+        // 4. User & Password fallback
         String envUser = System.getenv("DB_USERNAME");
         if (envUser == null || envUser.isBlank()) {
             envUser = datasourceUsername;
@@ -78,7 +83,7 @@ public class DatabaseConfig {
             config.setPassword(envPass);
         }
 
-        // 4. Memory-efficient connection pool settings for 512MB Cloud Tier (Render Free)
+        // 5. Memory-efficient connection pool settings for 512MB Cloud Tier (Render Free)
         config.setMaximumPoolSize(5);
         config.setMinimumIdle(1);
         config.setConnectionTimeout(30000);
