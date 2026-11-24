@@ -15,6 +15,18 @@ services:
         value: 10000
       - key: SPRING_PROFILES_ACTIVE
         value: prod
+      - key: DB_HOST
+        fromDatabase:
+          name: utecoffe-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: utecoffe-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: utecoffe-db
+          property: database
       - key: DB_URL
         fromDatabase:
           name: utecoffe-db

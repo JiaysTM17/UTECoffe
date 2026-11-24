@@ -41,15 +41,6 @@ public class DatabaseConfig {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName(driverClassName);
 
-        // 1. Resolve raw URL from environment or properties
-        String rawUrl = System.getenv("DATABASE_URL");
-        if (rawUrl == null || rawUrl.isBlank()) {
-            rawUrl = System.getenv("DB_URL");
-        }
-        if (rawUrl == null || rawUrl.isBlank()) {
-            rawUrl = datasourceUrl;
-        }
-
         String envUser = System.getenv("DB_USERNAME");
         if (envUser == null || envUser.isBlank()) {
             envUser = datasourceUsername;
@@ -57,6 +48,32 @@ public class DatabaseConfig {
         String envPass = System.getenv("DB_PASSWORD");
         if (envPass == null || envPass.isBlank()) {
             envPass = datasourcePassword;
+        }
+
+        // 0. Direct Render fromDatabase parameters (100% reliable, no regex or URI parsing needed)
+        String directHost = System.getenv("DB_HOST");
+        String directPort = System.getenv("DB_PORT");
+        String directName = System.getenv("DB_NAME");
+        String rawUrl = null;
+
+        if (directHost != null && !directHost.isBlank()) {
+            int portNum = 5432;
+            if (directPort != null && !directPort.isBlank()) {
+                try { portNum = Integer.parseInt(directPort.trim()); } catch (Exception ignored) {}
+            }
+            rawUrl = "jdbc:postgresql://" + directHost.trim() + ":" + portNum + "/" + (directName != null && !directName.isBlank() ? directName.trim() : "utecoffe_db");
+            log.info("Constructed direct Cloud PostgreSQL JDBC URL from DB_HOST={}", directHost);
+        }
+
+        // 1. Fallback: Resolve raw URL from environment or properties
+        if (rawUrl == null || rawUrl.isBlank()) {
+            rawUrl = System.getenv("DATABASE_URL");
+        }
+        if (rawUrl == null || rawUrl.isBlank()) {
+            rawUrl = System.getenv("DB_URL");
+        }
+        if (rawUrl == null || rawUrl.isBlank()) {
+            rawUrl = datasourceUrl;
         }
 
         // 2. Normalize Cloud URI formats (postgres:// or postgresql://) to clean JDBC format
@@ -107,12 +124,13 @@ public class DatabaseConfig {
             config.setPassword(envPass);
         }
 
-        // 5. Memory-efficient connection pool settings for 512MB Cloud Tier (Render Free)
-        config.setMaximumPoolSize(5);
-        config.setMinimumIdle(1);
+        // 5. Connection pool settings for Cloud Production
+        config.setMaximumPoolSize(15);
+        config.setMinimumIdle(2);
         config.setConnectionTimeout(30000);
         config.setIdleTimeout(300000);
         config.setMaxLifetime(900000);
+        config.setLeakDetectionThreshold(60000);
 
         log.info("Initialized Cloud HikariDataSource with JDBC URL: {}", rawUrl != null && rawUrl.contains("@") ? rawUrl.replaceAll(":[^:@]+@", ":****@") : rawUrl);
 
