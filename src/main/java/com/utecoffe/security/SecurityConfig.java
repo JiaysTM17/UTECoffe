@@ -105,7 +105,7 @@ public class SecurityConfig {
                 .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                 .requestMatchers("/static/**", "/assets/**", "/css/**", "/js/**", "/images/**", "/favicon.ico", "/robots.txt", "/sitemap.xml").permitAll()
                 // Public storefront pages
-                .requestMatchers("/", "/menu/**", "/stores/**", "/story/**", "/reservation/**", "/cart/**").permitAll()
+                .requestMatchers("/", "/ping", "/diag", "/menu/**", "/stores/**", "/story/**", "/reservation/**", "/cart/**").permitAll()
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/ws-utecoffe/**").permitAll()
                 // Role-restricted areas
