@@ -185,7 +185,7 @@
     <section class="py-5 position-relative bg-espresso" style="border-top: 1px solid var(--border-gold);">
         <div class="container py-3">
             <div class="row align-items-center g-4">
-                <div class="col-xl-8 col-lg-8">
+                <div class="col-xl-7 col-lg-7 pe-xl-4">
                     <button type="button" class="btn btn-link p-0 text-decoration-none text-gold font-accent fw-bold text-uppercase small d-inline-flex align-items-center gap-2 mb-2" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal" style="letter-spacing: 0.12em; cursor: pointer;">
                         <i class="fa-solid fa-crown text-gold"></i>
                         <span data-i18n="banner.loyalty_tag">Đặc Quyền Hội Viên UTEClub</span>
@@ -193,7 +193,7 @@
                     <h3 class="font-serif fw-bold mb-2 text-gold-gradient" data-i18n="banner.table_title" style="white-space: normal; letter-spacing: -0.01em;">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
                     <p class="text-secondary mb-0 small" data-i18n="banner.table_desc">Thưởng thức không gian tinh tế tại 3 chi nhánh Flagship (Thủ Đức, Quận 1, Bình Thạnh). Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.</p>
                 </div>
-                <div class="col-xl-4 col-lg-4 text-lg-end">
+                <div class="col-xl-5 col-lg-5 text-lg-end">
                     <div class="d-flex flex-column flex-sm-row justify-content-lg-end align-items-stretch align-items-sm-center gap-3">
                         <button type="button" class="btn btn-gold rounded-pill px-4 py-2.5 fw-semibold d-inline-flex align-items-center justify-content-center text-nowrap shadow-gold-sm" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal">
                             <i class="fa-solid fa-crown me-2"></i> <span data-i18n="banner.btn_privilege">Xem Đặc Quyền</span>
@@ -271,8 +271,8 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="card-luxury p-3 h-100 text-start border position-relative" style="border-color: #cd7f32 !important;">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="badge px-2 py-1 text-white fw-bold" style="background: #cd7f32;" data-i18n="modal.tier_bronze_badge">HẠNG ĐỒNG</span>
-                                    <span class="text-secondary small" data-i18n="modal.tier_bronze_pts">0 - 499 điểm</span>
+                                    <span class="badge px-2 py-1 text-white fw-bold font-accent" style="background: #cd7f32;" data-i18n="modal.tier_bronze_badge">HẠNG ĐỒNG</span>
+                                    <span class="text-secondary small text-nowrap font-monospace" data-i18n="modal.tier_bronze_pts">0 - 499 pts</span>
                                 </div>
                                 <h5 class="font-serif fw-bold text-light mb-2" data-i18n="modal.tier_bronze_name">Thành Viên Khởi Đầu</h5>
                                 <p class="text-secondary small mb-3" data-i18n="modal.tier_bronze_desc">Kích hoạt ngay khi tạo tài khoản miễn phí tại UTECoffe.</p>
@@ -288,8 +288,8 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="card-luxury p-3 h-100 text-start border position-relative" style="border-color: #c0c0c0 !important;">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="badge px-2 py-1 text-dark fw-bold" style="background: #c0c0c0;" data-i18n="modal.tier_silver_badge">HẠNG BẠC</span>
-                                    <span class="text-secondary small" data-i18n="modal.tier_silver_pts">500 - 1.499 điểm</span>
+                                    <span class="badge px-2 py-1 text-dark fw-bold font-accent" style="background: #c0c0c0;" data-i18n="modal.tier_silver_badge">HẠNG BẠC</span>
+                                    <span class="text-secondary small text-nowrap font-monospace" data-i18n="modal.tier_silver_pts">500 - 1.499 pts</span>
                                 </div>
                                 <h5 class="font-serif fw-bold text-light mb-2" data-i18n="modal.tier_silver_name">Hội Viên Bạc</h5>
                                 <p class="text-secondary small mb-3" data-i18n="modal.tier_silver_desc">Dành cho khách hàng thân thiết thường xuyên ghé thăm.</p>
@@ -306,8 +306,8 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="card-luxury p-3 h-100 text-start border position-relative" style="border-color: #ffd700 !important; background: linear-gradient(180deg, rgba(212,175,55,0.06) 0%, rgba(20,20,20,0.6) 100%);">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="badge px-2 py-1 text-dark fw-bold" style="background: #ffd700;" data-i18n="modal.tier_gold_badge">HẠNG VÀNG</span>
-                                    <span class="text-gold small fw-bold" data-i18n="modal.tier_gold_pts">1.500 - 2.999 điểm</span>
+                                    <span class="badge px-2 py-1 text-dark fw-bold font-accent" style="background: #ffd700;" data-i18n="modal.tier_gold_badge">HẠNG VÀNG</span>
+                                    <span class="text-gold small fw-bold text-nowrap font-monospace" data-i18n="modal.tier_gold_pts">1.500 - 2.999 pts</span>
                                 </div>
                                 <h5 class="font-serif fw-bold text-gold-gradient mb-2" data-i18n="modal.tier_gold_name">Hội Viên Vàng VIP</h5>
                                 <p class="text-secondary small mb-3" data-i18n="modal.tier_gold_desc">Trải nghiệm dịch vụ chuyên biệt và ưu đãi giảm giá sâu.</p>
@@ -324,8 +324,8 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="card-luxury p-3 h-100 text-start border position-relative" style="border-color: #b9f2ff !important; background: linear-gradient(180deg, rgba(185,242,255,0.08) 0%, rgba(20,20,20,0.6) 100%);">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="badge px-2 py-1 text-dark fw-bold" style="background: #b9f2ff;" data-i18n="modal.tier_diamond_badge">KIM CƯƠNG</span>
-                                    <span class="text-info small fw-bold" data-i18n="modal.tier_diamond_pts">3.000+ điểm</span>
+                                    <span class="badge px-2 py-1 text-dark fw-bold font-accent" style="background: #b9f2ff;" data-i18n="modal.tier_diamond_badge">KIM CƯƠNG</span>
+                                    <span class="text-info small fw-bold text-nowrap font-monospace" data-i18n="modal.tier_diamond_pts">3.000+ pts</span>
                                 </div>
                                 <h5 class="font-serif fw-bold text-light mb-2" data-i18n="modal.tier_diamond_name">Thượng Khách Kim Cương</h5>
                                 <p class="text-secondary small mb-3" data-i18n="modal.tier_diamond_desc">Đỉnh cao đặc quyền cá nhân hóa và trải nghiệm roastery độc bản.</p>
