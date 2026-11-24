@@ -3,6 +3,14 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <head>
     <title>Trang Chủ - UTECoffe Specialty Tea &amp; Coffee Roastery</title>
+    <style>
+        @media (min-width: 1200px) {
+            .banner-table-title {
+                white-space: nowrap !important;
+                font-size: clamp(1.3rem, 1.75vw, 1.75rem) !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -184,17 +192,17 @@
     <!-- Table Booking & Membership Banner -->
     <section class="py-5 position-relative bg-espresso" style="border-top: 1px solid var(--border-gold);">
         <div class="container py-3">
-            <div class="row align-items-center g-4">
-                <div class="col-xl-7 col-lg-7 pe-xl-4">
+            <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-4">
+                <div class="flex-grow-1">
                     <button type="button" class="btn btn-link p-0 text-decoration-none text-gold font-accent fw-bold text-uppercase small d-inline-flex align-items-center gap-2 mb-2" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal" style="letter-spacing: 0.12em; cursor: pointer;">
                         <i class="fa-solid fa-crown text-gold"></i>
                         <span data-i18n="banner.loyalty_tag">Đặc Quyền Hội Viên UTEClub</span>
                     </button>
-                    <h3 class="font-serif fw-bold mb-2 text-gold-gradient" data-i18n="banner.table_title" style="white-space: normal; letter-spacing: -0.01em;">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
-                    <p class="text-secondary mb-0 small" data-i18n="banner.table_desc">Thưởng thức không gian tinh tế tại 3 chi nhánh Flagship (Thủ Đức, Quận 1, Bình Thạnh). Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.</p>
+                    <h3 class="font-serif fw-bold mb-2 text-gold-gradient banner-table-title" data-i18n="banner.table_title" style="letter-spacing: -0.02em;">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
+                    <p class="text-secondary mb-0 small" data-i18n="banner.table_desc" style="max-width: 740px;">Thưởng thức không gian tinh tế tại 3 chi nhánh Flagship (Thủ Đức, Quận 1, Bình Thạnh). Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.</p>
                 </div>
-                <div class="col-xl-5 col-lg-5 text-lg-end">
-                    <div class="d-flex flex-column flex-sm-row justify-content-lg-end align-items-stretch align-items-sm-center gap-3">
+                <div class="flex-shrink-0 text-xl-end">
+                    <div class="d-flex flex-column flex-sm-row justify-content-xl-end align-items-stretch align-items-sm-center gap-3">
                         <button type="button" class="btn btn-gold rounded-pill px-4 py-2.5 fw-semibold d-inline-flex align-items-center justify-content-center text-nowrap shadow-gold-sm" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal">
                             <i class="fa-solid fa-crown me-2"></i> <span data-i18n="banner.btn_privilege">Xem Đặc Quyền</span>
                         </button>

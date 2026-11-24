@@ -17,6 +17,10 @@ public class OpenApiConfig {
     public OpenAPI utecoffeOpenAPI() {
         final String securitySchemeName = "bearerAuth";
         return new OpenAPI()
+                .servers(java.util.Arrays.asList(
+                        new io.swagger.v3.oas.models.servers.Server().url("https://utecoffe.io.vn").description("Production Server (utecoffe.io.vn)"),
+                        new io.swagger.v3.oas.models.servers.Server().url("http://localhost:8080").description("Local Development Server")
+                ))
                 .info(new Info()
                         .title("UTECoffe Platform API Specification")
                         .description("He thong Thuong Mai Dien Tu Chuoi Ban Tra va Ca Phe Dac San UTECoffe - RESTful API Documentation")

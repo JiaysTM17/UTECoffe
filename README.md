@@ -12,6 +12,7 @@
 </p>
 
 <p align="center">
+  <a href="https://utecoffe.io.vn"><img src="https://img.shields.io/badge/Domain-utecoffe.io.vn-D4AF37?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Official Domain"/></a>
   <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Java-21_LTS-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21"/></a>
   <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot 3.3.5"/></a>
   <a href="#-công-nghệ-sử-dụng"><img src="https://img.shields.io/badge/Algorithms-8_Enterprise-FFD700?style=for-the-badge&logo=probot&logoColor=black" alt="8 Enterprise Algorithms"/></a>
@@ -21,14 +22,28 @@
 </p>
 
 <p align="center">
+  <a href="#-tên-miền-chính-thức-utecoffe-iovn">🌐 Tên Miền</a> •
   <a href="#-giới-thiệu-đề-tài">Giới Thiệu</a> •
   <a href="#-nghiệp-vụ-cốt-lõi">Nghiệp Vụ F&B</a> •
   <a href="#-kiến-trúc-hệ-thống">Kiến Trúc</a> •
-  <a href="#-cơ-sở-dữ-liệu">CSDL 32 Bảng</a> •
+  <a href="#-cơ-sở-dữ-liệu">CSDL 34 Bảng</a> •
   <a href="#-tài-liệu-báo-cáo-word">Hồ Sơ Báo Cáo</a> •
   <a href="#-hướng-dẫn-cài-đặt">Cài Đặt</a> •
   <a href="#-tác-giả--bản-quyền">Tác Giả</a>
 </p>
+
+---
+
+## 🌐 Tên Miền Chính Thức: utecoffe.io.vn
+
+Hệ thống đã được thiết lập sẵn sàng để chạy trực tiếp trên tên miền chính thức **[https://utecoffe.io.vn](https://utecoffe.io.vn)**:
+- **DNS Records:** A Record `@` trỏ về IP máy chủ VPS, CNAME `www` trỏ về `utecoffe.io.vn`.
+- **Nginx Reverse Proxy & SSL:** Đã tích hợp cấu hình mẫu tại [`deployment/nginx/utecoffe.io.vn.conf`](deployment/nginx/utecoffe.io.vn.conf) hỗ trợ tự động chuyển hướng HTTPS, HTTP/2, WebSocket STOMP (`/ws-utecoffe`), và nén Gzip.
+- **SEO & Meta Tags:** Thẻ Canonical, OpenGraph, Twitter Card, `robots.txt` và `sitemap.xml` đã được cấu hình trỏ chuẩn xác về domain chính thức `https://utecoffe.io.vn`.
+- **CORS & Cookies:** Đã cấp quyền CORS và cấu hình Session Cookie phân giải an toàn trên domain `utecoffe.io.vn`.
+- **Tài liệu hướng dẫn triển khai:** Xem chi tiết tại [`deployment/DOMAIN_SETUP_GUIDE.md`](deployment/DOMAIN_SETUP_GUIDE.md).
+
+---
 
 ---
 

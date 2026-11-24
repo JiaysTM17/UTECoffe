@@ -8,6 +8,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><sitemesh:write property='title'/> - UTECoffe Specialty Tea &amp; Coffee Roastery</title>
     
+    <!-- Primary Domain & SEO Meta Tags -->
+    <meta name="title" content="UTECOFFE - Nghệ Thuật Cà Phê &amp; Trà Đặc Sản Cầu Đất 1.600m">
+    <meta name="description" content="Thương hiệu Cà phê rang mộc thủ công &amp; Trà hoa cao cấp UTECoffe. Trải nghiệm OMO Omnichannel, Đặt bàn trực tuyến, Tích điểm UTEClub tại utecoffe.io.vn">
+    <meta name="keywords" content="utecoffe, utecoffe.io.vn, cà phê đặc sản, trà thủ công, specialty coffee, cà phê cầu đất, cold brew, đặt bàn cà phê">
+    <link rel="canonical" href="https://utecoffe.io.vn">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://utecoffe.io.vn">
+    <meta property="og:title" content="UTECOFFE - Nghệ Thuật Cà Phê &amp; Trà Đặc Sản Cầu Đất">
+    <meta property="og:description" content="Thương hiệu Cà phê rang mộc thủ công &amp; Trà hoa cao cấp UTECoffe. Khám phá menu và đặt bàn tại utecoffe.io.vn">
+    <meta property="og:image" content="https://utecoffe.io.vn/assets/images/logo_dark.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://utecoffe.io.vn">
+    <meta property="twitter:title" content="UTECOFFE - Specialty Coffee &amp; Tea Roastery">
+    <meta property="twitter:description" content="Trải nghiệm cà phê đặc sản Cầu Đất 1.600m tại utecoffe.io.vn">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/favicon.png">
     

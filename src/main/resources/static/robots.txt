@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /barista/
+Disallow: /api/admin/
+Disallow: /api/barista/
+Disallow: /actuator/
+Disallow: /h2-console/
+
+Sitemap: https://utecoffe.io.vn/sitemap.xml
