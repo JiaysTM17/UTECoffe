@@ -44,7 +44,7 @@
                                 </label>
                             </div>
                             <div class="col-6">
-                                <input type="radio" class="btn-check" name="orderType" id="typeTakeaway" value="TAKEAWAY">
+                                <input type="radio" class="btn-check" name="orderType" id="typeTakeaway" value="TAKE_AWAY">
                                 <label class="btn btn-outline-gold w-100 py-3 text-center rounded-3 cursor-pointer" for="typeTakeaway">
                                     <i class="fa-solid fa-store fs-3 d-block mb-1 text-gold"></i>
                                     <span class="fw-bold font-accent">Lấy Tại Quán</span>
@@ -53,14 +53,23 @@
                             </div>
                         </div>
 
-                        <!-- Store Branch Selection -->
+                        <!-- Store Branch Selection with Haversine Geolocation Detection -->
                         <div class="mb-3">
-                            <label class="form-label small text-gold fw-bold">Chi Nhánh Chế Biến Thức Uống:</label>
-                            <select class="form-select form-control-luxury" name="storeId" required>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <label class="form-label small text-gold fw-bold mb-0">Chi Nhánh Chế Biến Thức Uống:</label>
+                                <button type="button" class="btn btn-outline-gold btn-sm py-0 px-2 rounded-pill font-accent" style="font-size: 0.72rem;" onclick="detectNearestStore()">
+                                    <i class="fa-solid fa-location-crosshairs text-gold me-1"></i> Định Vị Gần Nhất
+                                </button>
+                            </div>
+                            <select class="form-select form-control-luxury" name="storeId" id="storeSelect" required>
                                 <option value="1">UTECoffe Flagship Thủ Đức - 01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức</option>
                                 <option value="2">UTECoffe Roastery Quận 1 - 68 Lê Lợi, P. Bến Nghé, Quận 1</option>
                                 <option value="3">UTECoffe Garden Bình Thạnh - 180 Ung Văn Khiêm, Phường 25, Q. Bình Thạnh, TP.HCM</option>
                             </select>
+                            <div id="nearestStoreNotice" class="small text-gold mt-1 d-none">
+                                <i class="fa-solid fa-circle-check me-1 text-success"></i> <span id="nearestStoreText"></span>
+                            </div>
+                            <input type="hidden" name="idempotencyKey" id="idempotencyKeyInput" value="">
                         </div>
 
                         <!-- Recipient Name & Phone -->
@@ -203,12 +212,71 @@
         </form>
     </div>
 
-    <!-- Toggle Delivery Address Script -->
+    <!-- Toggle Delivery Address, Idempotency & Geolocation Script -->
     <script>
+        // Generate UUID v4 for strict Idempotency Key
+        function generateUUID() {
+            return 'idemp-' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        // Automatic Store Detection using Haversine Geolocation API
+        function detectNearestStore() {
+            const noticeEl = document.getElementById('nearestStoreNotice');
+            const textEl = document.getElementById('nearestStoreText');
+            const storeSelect = document.getElementById('storeSelect');
+
+            if (!navigator.geolocation) {
+                alert('Trình duyệt của bạn không hỗ trợ định vị địa lý.');
+                return;
+            }
+
+            if (noticeEl) {
+                noticeEl.classList.remove('d-none');
+                textEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang tính toán chi nhánh gần nhất theo thuật toán Haversine...';
+            }
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                fetch('${pageContext.request.contextPath}/api/stores/nearest?lat=' + lat + '&lng=' + lng)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success && data.data && data.data.length > 0) {
+                            const nearest = data.data[0];
+                            if (storeSelect) {
+                                storeSelect.value = nearest.store.id;
+                            }
+                            if (textEl) {
+                                textEl.innerHTML = 'Đã chọn chi nhánh gần bạn nhất: <strong>' + nearest.store.name + '</strong> (Khoảng cách: <strong>' + nearest.formattedDistance + '</strong> • Dự kiến: <strong>' + nearest.estimatedDeliveryMinutes + ' phút</strong>)';
+                            }
+                        }
+                    })
+                    .catch(() => {
+                        if (textEl) textEl.textContent = 'Mặc định chọn Flagship Thủ Đức.';
+                    });
+            }, function (error) {
+                if (textEl) {
+                    textEl.textContent = 'Chưa thể lấy vị trí GPS (vui lòng chọn chi nhánh thủ công).';
+                }
+            }, { timeout: 10000 });
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
+            // Set Idempotency Key on load
+            const keyInput = document.getElementById('idempotencyKeyInput');
+            if (keyInput && !keyInput.value) {
+                keyInput.value = generateUUID();
+            }
+
             const typeDelivery = document.getElementById('typeDelivery');
             const typeTakeaway = document.getElementById('typeTakeaway');
             const addressGroup = document.getElementById('deliveryAddressGroup');
+            const checkoutForm = document.getElementById('checkoutForm');
+            const submitBtn = document.getElementById('submitOrderBtn');
 
             function toggleAddress() {
                 if (typeTakeaway && typeTakeaway.checked) {
@@ -220,6 +288,22 @@
 
             if (typeDelivery) typeDelivery.addEventListener('change', toggleAddress);
             if (typeTakeaway) typeTakeaway.addEventListener('change', toggleAddress);
+
+            // Double-Submit Protection (Idempotency UI Shield)
+            let isSubmitting = false;
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', function (e) {
+                    if (isSubmitting) {
+                        e.preventDefault();
+                        return false;
+                    }
+                    isSubmitting = true;
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i> Đang Bảo Mật & Xác Nhận Đơn Hàng...';
+                    }
+                });
+            }
         });
     </script>
 </body>

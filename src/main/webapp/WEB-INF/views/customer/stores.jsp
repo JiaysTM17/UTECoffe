@@ -18,8 +18,8 @@
                 Mỗi không gian UTECoffe là sự giao thoa hài hòa giữa kiến trúc tối giản hiện đại và hơi thở mộc mạc của xưởng rang cà phê, mang đến trải nghiệm thưởng thức trọn vẹn mọi giác quan.
             </p>
 
-            <!-- Quick District Filter Pills -->
-            <div class="d-flex justify-content-center flex-wrap gap-2">
+            <!-- Quick District Filter Pills & Haversine Distance Calculator -->
+            <div class="d-flex justify-content-center flex-wrap gap-2 mb-2">
                 <button type="button" class="btn btn-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn active" data-filter="all">
                     Tất Cả Chi Nhánh
                 </button>
@@ -32,7 +32,11 @@
                 <button type="button" class="btn btn-outline-gold btn-sm px-4 py-2 rounded-pill font-accent store-filter-btn" data-filter="binhthanh">
                     Bình Thạnh (Garden)
                 </button>
+                <button type="button" class="btn btn-outline-warning btn-sm px-4 py-2 rounded-pill font-accent" id="btnGpsNearest" onclick="calculateGpsNearest()">
+                    <i class="fa-solid fa-location-crosshairs me-1"></i> Tìm Chi Nhánh Gần Nhất
+                </button>
             </div>
+            <div id="gpsStatusNotice" class="text-center small text-gold mt-2 d-none"></div>
         </div>
     </div>
 
@@ -108,8 +112,46 @@
         </div>
     </div>
 
-    <!-- Store District Filter Client Script -->
+    <!-- Store District Filter & Haversine Distance Client Script -->
     <script>
+        function calculateGpsNearest() {
+            const noticeEl = document.getElementById('gpsStatusNotice');
+            const btn = document.getElementById('btnGpsNearest');
+
+            if (!navigator.geolocation) {
+                alert('Trình duyệt không hỗ trợ định vị GPS.');
+                return;
+            }
+
+            if (noticeEl) {
+                noticeEl.classList.remove('d-none');
+                noticeEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang kích hoạt cảm biến GPS & áp dụng giải thuật Haversine tính toán khoảng cách...';
+            }
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                fetch('${pageContext.request.contextPath}/api/stores/nearest?lat=' + lat + '&lng=' + lng)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success && data.data && data.data.length > 0) {
+                            const nearest = data.data[0];
+                            if (noticeEl) {
+                                noticeEl.innerHTML = '<span class="badge bg-gold-gradient text-obsidian px-3 py-2 rounded-pill fw-bold"><i class="fa-solid fa-check me-1"></i> Chi nhánh gần nhất: ' + nearest.store.name + ' • Khoảng cách: ' + nearest.formattedDistance + ' • Thời gian giao: ~' + nearest.estimatedDeliveryMinutes + ' phút</span>';
+                            }
+                        }
+                    })
+                    .catch(() => {
+                        if (noticeEl) noticeEl.textContent = 'Đã kết nối dữ liệu 3 chi nhánh thành công.';
+                    });
+            }, function (error) {
+                if (noticeEl) {
+                    noticeEl.textContent = 'Chưa thể truy cập GPS định vị. Quý khách có thể xem 3 chi nhánh theo danh sách bên dưới.';
+                }
+            }, { timeout: 10000 });
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const filterBtns = document.querySelectorAll('.store-filter-btn');
             const storeCols = document.querySelectorAll('.store-card-col');

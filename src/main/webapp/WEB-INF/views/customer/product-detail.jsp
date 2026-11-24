@@ -722,6 +722,57 @@
             </div>
         </div>
 
+        <!-- Smart Flavor Pairing Section (Recommendation Algorithm) -->
+        <c:if test="${not empty pairings}">
+            <div class="card-luxury p-4 p-lg-5 mb-5 border-gold">
+                <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <span class="badge bg-gold-gradient text-obsidian px-3 py-1 rounded-pill small font-accent fw-bold text-uppercase mb-2">
+                            <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Thuật Toán Ghép Vị Thượng Hạng
+                        </span>
+                        <h4 class="font-serif fw-bold text-gold-gradient mb-1">
+                            Gợi Ý Kết Hợp Hoàn Hảo (Artisanal Flavor Pairing)
+                        </h4>
+                        <p class="text-secondary small mb-0">Các chuyên gia pha chế UTECoffe đề xuất món dùng kèm tối ưu nhất để bùng nổ trọn vẹn tầng hương Terroir.</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <c:forEach var="pair" items="${pairings}">
+                        <div class="col-md-4">
+                            <div class="card card-luxury h-100 p-3 border-gold-subtle bg-espresso product-hover-lift d-flex flex-column">
+                                <div class="position-relative overflow-hidden rounded-3 mb-3" style="aspect-ratio: 16/10;">
+                                    <img src="${not empty pair.recommendedProduct.imageUrl ? pair.recommendedProduct.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80'}" 
+                                         alt="${pair.recommendedProduct.name}" 
+                                         class="w-100 h-100 object-fit-cover">
+                                    <span class="badge bg-gold-gradient text-obsidian position-absolute top-0 end-0 m-2 px-2 py-1 rounded-pill small fw-bold">
+                                        <fmt:formatNumber value="${pair.pairingScore * 100}" pattern="#0"/>% Hòa Hợp
+                                    </span>
+                                </div>
+                                <span class="badge bg-dark-roast text-gold border border-gold-subtle mb-2 align-self-start small font-accent" style="font-size: 0.7rem;">
+                                    ${pair.pairingTag}
+                                </span>
+                                <h6 class="font-serif fw-bold text-light mb-1">
+                                    <a href="${pageContext.request.contextPath}/menu/${pair.recommendedProduct.slug}" class="text-light text-decoration-none hover-gold">
+                                        ${pair.recommendedProduct.name}
+                                    </a>
+                                </h6>
+                                <p class="text-secondary small mb-3 flex-grow-1" style="font-size: 0.8rem; line-height: 1.6;">
+                                    ${pair.harmonyReason}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center pt-2 border-top border-gold-subtle">
+                                    <span class="price-gold fw-bold"><fmt:formatNumber value="${pair.recommendedProduct.basePrice}" pattern="#,##0"/> VNĐ</span>
+                                    <a href="${pageContext.request.contextPath}/menu/${pair.recommendedProduct.slug}" class="btn btn-outline-gold btn-sm rounded-pill px-3 py-1 font-accent">
+                                        <i class="fa-solid fa-plus me-1"></i> Xem Món
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </c:if>
+
         <!-- Customer Reviews & Tasting Notes Section -->
         <div class="card-luxury p-4 p-lg-5 mb-5">
             <h4 class="font-serif fw-bold text-gold-gradient mb-4">

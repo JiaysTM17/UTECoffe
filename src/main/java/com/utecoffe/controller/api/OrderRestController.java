@@ -1,5 +1,6 @@
 package com.utecoffe.controller.api;
 
+import com.utecoffe.aspect.Idempotent;
 import com.utecoffe.dto.request.OrderCreateRequest;
 import com.utecoffe.dto.response.ApiResponse;
 import com.utecoffe.entity.Order;
@@ -30,6 +31,7 @@ public class OrderRestController {
     private OrderNotificationService notificationService;
 
     @PostMapping
+    @Idempotent
     public ResponseEntity<ApiResponse<Order>> createOrder(@Valid @RequestBody OrderCreateRequest request,
                                                          @AuthenticationPrincipal UserDetails userDetails) {
         Long userId = null;

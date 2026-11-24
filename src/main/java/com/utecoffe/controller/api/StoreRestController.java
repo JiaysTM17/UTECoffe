@@ -1,6 +1,7 @@
 package com.utecoffe.controller.api;
 
 import com.utecoffe.dto.response.ApiResponse;
+import com.utecoffe.dto.response.StoreDistanceDto;
 import com.utecoffe.entity.Store;
 import com.utecoffe.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class StoreRestController {
     }
 
     @GetMapping("/nearest")
-    public ResponseEntity<ApiResponse<List<Store>>> getNearest(@RequestParam double lat, @RequestParam double lng) {
-        return ResponseEntity.ok(ApiResponse.success(storeService.findNearestStores(lat, lng), "Chi nhanh gan nhat"));
+    public ResponseEntity<ApiResponse<List<StoreDistanceDto>>> getNearest(@RequestParam double lat, @RequestParam double lng) {
+        return ResponseEntity.ok(ApiResponse.success(storeService.findNearestStoresWithDistance(lat, lng), "Chi nhanh gan nhat theo thuat toan Haversine"));
     }
 }

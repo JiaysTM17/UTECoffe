@@ -92,20 +92,61 @@ flowchart TD
 
 ---
 
-## 🎯 10 Khối Nghiệp Vụ F&B Cốt Lõi
+## 🎯 14 Khối Nghiệp Vụ F&B Doanh Nghiệp & Chuỗi Cửa Hàng
 
 | Khối Nghiệp Vụ | Mô Tả Chức Năng Chi Tiết |
 | :--- | :--- |
 | **1. Tùy Biến Đồ Uống (BOM Recipe)** | Hỗ trợ Size S/M/L, chọn % đường (0%, 30%, 50%, 70%, 100%, đường ăn kiêng), chọn mức đá (Nóng, 0%, 30%, 50%, 70%, 100%, Đá riêng), topping đa dạng (Trân châu, kem cheese, pudding). Với cà phê hạt: chọn mức độ rang (Light/Medium/Dark) và cỡ xay (Nguyên hạt, pha phin, pha máy Espresso, Cold Brew). Gợi ý bánh ngọt ăn kèm (Cross-sell). |
-| **2. Bán Hàng Đa Kênh (Omnichannel)** | **Giao tận nơi (Delivery):** Tự động xác định chi nhánh gần nhất theo tọa độ địa lý, tính phí vận chuyển theo khoảng cách thực tế (km).<br>**Lấy tại quán (Takeaway Pickup):** Khách chọn chi nhánh, đặt giờ hẹn nhận món và nhận mã QR nhận hàng tại quầy. |
+| **2. Bán Hàng Đa Kênh (Omnichannel)** | **Giao tận nơi (Delivery):** Tự động xác định chi nhánh gần nhất theo tọa độ địa lý (Haversine), tính phí vận chuyển theo khoảng cách thực tế (km).<br>**Lấy tại quán (Takeaway Pickup):** Khách chọn chi nhánh, đặt giờ hẹn nhận món và nhận mã QR nhận hàng tại quầy. |
 | **3. Tồn Kho Đa Chi Nhánh (Store Stock)** | Kiểm soát tồn kho nguyên liệu độc lập tại từng cơ sở. Tự động chuyển trạng thái "Tạm hết món" tại chi nhánh thiếu nguyên liệu mà không làm ảnh hưởng tới việc kinh doanh của các chi nhánh khác. |
 | **4. Quầy Pha Chế KDS Thời Gian Thực** | Đẩy đơn hàng mới tức thì qua WebSocket STOMP kèm âm thanh chuông báo tới màn hình Barista của chi nhánh. Xếp hàng pha chế theo cơ chế FIFO (First-In, First-Out), cảnh báo đổi màu theo thời gian chờ. Barista đổi trạng thái 1-chạm (*Tiếp nhận -> Đang pha -> Pha xong*). |
 | **5. Cập Nhật Tiến Trình Realtime** | Khi Barista hoàn thành pha chế, WebSocket tự động đẩy dữ liệu cập nhật trạng thái đơn hàng trên thanh tiến trình (Tracking Stepper) của khách hàng mà không cần tải lại trang. |
-| **6. Hội Viên & Điểm Thưởng (Loyalty)** | Tích lũy điểm thưởng: **10.000 VNĐ = 1 Coffee Bean**. Tự động xếp 4 hạng: **Đồng (Bronze) -> Bạc (Silver) -> Vàng (Gold - Giảm 5%) -> Kim Cương (Diamond - Giảm 10%)**. Ví voucher cá nhân, đổi điểm lấy mã giảm giá hoặc topping miễn phí. |
+| **6. Hội Viên & Điểm Thưởng (Loyalty)** | Tích lũy điểm thưởng: **10.000 VNĐ = 1 Coffee Bean (hoặc 10% giá trị đơn)**. Tự động xếp 4 hạng: **Đồng (Bronze) -> Bạc (Silver) -> Vàng (Gold - Giảm 10%) -> Kim Cương (Diamond - Giảm 15%)**. Ví voucher cá nhân, đổi điểm lấy mã giảm giá hoặc quà tặng sinh nhật. |
 | **7. Khuyến Mãi Đa Tầng (Promotion Engine)** | Mã giảm giá Coupon, khung giờ vàng Happy Hour, mua 1 tặng 1 (BOGO), combo tiết kiệm (Trà + Bánh). Cơ chế kiểm tra điều kiện áp dụng và giới hạn lượt dùng chống lạm dụng mã. |
 | **8. Thanh Toán Đa Kênh & Hoàn Tiền** | Tiền mặt khi nhận hàng (COD), VNPay, MoMo, ZaloPay. **VietQR động:** Tạo mã QR chuyển khoản chứa mã đơn và số tiền chính xác, tự động đối soát giao dịch. Tự động hoàn tiền/hoàn điểm khi hủy đơn do sự cố. |
-| **9. Đặt Bàn Trực Tuyến (Table Reservation)** | Chọn chi nhánh, ngày giờ, số lượng khách và khu vực bàn (*Máy lạnh trong nhà, Ban công ngắm phố, Sân vườn, Phòng họp nhóm*). Hỗ trợ gọi trước đồ uống kèm theo bàn để rút ngắn thời gian phục vụ. |
-| **10. Báo Cáo Kinh Doanh & Phân Quyền** | Báo cáo doanh thu theo ngày/tháng/năm, so sánh doanh thu giữa các chi nhánh, thống kê Top 10 đồ uống bán chạy nhất qua biểu đồ Chart.js. Phân quyền chặt chẽ 5 vai trò (*Admin, Store Manager, Barista, Shipper, Customer*) và Audit Log ghi vết thao tác. |
+| **9. Đặt Bàn Trực Tuyến (Table Reservation)** | Chọn 3 chi nhánh Flagship, ngày giờ, số lượng khách và khu vực bàn (*Quầy Barista trải nghiệm, Sofa VIP Lounge, Sân Vườn Xanh, Bàn Đôi Lãng Mạn*). |
+| **10. Báo Cáo Kinh Doanh & Phân Quyền** | Báo cáo doanh thu theo ngày/tháng/năm, so sánh doanh thu giữa 3 chi nhánh, thống kê Top 10 đồ uống bán chạy nhất qua biểu đồ Chart.js. Phân quyền chặt chẽ 5 vai trò (*Admin, Store Manager, Barista, Shipper, Customer*) và Audit Log ghi vết thao tác AOP. |
+| **11. Quản Lý Đánh Giá & CX Khách Hàng (`/admin/reviews`)** | Theo dõi điểm hài lòng trung bình (4.9/5.0 ⭐), tỷ lệ phản hồi 100%, duyệt phản hồi và gửi phản hồi CSKH trực tiếp từ Ban quản trị. |
+| **12. Chuỗi Cung Ứng & PO Nhập Kho (`/admin/suppliers`)** | Quản lý đối tác nông trại chiến lược (*Cầu Đất Farm, Mộc Châu Tea, Dalat Milk, Elle & Vire*), theo dõi vòng đời Đơn đặt hàng nhập kho (PO) từ tạo đơn, vận chuyển đến kiểm đếm nhập kho. |
+| **13. Chuẩn Hóa Công Thức SOP (`/admin/recipes`)** | Bộ tiêu chuẩn định lượng pha chế: tỷ lệ chiết xuất (1:2 Espresso / 1:10 Cold Brew), nhiệt độ nước (92°C - 94°C), thời gian ủ lạnh (18 - 24 tiếng) bảo đảm chất lượng đồ uống đồng nhất toàn chuỗi. |
+| **14. Xử Lý Khiếu Nại & Hoàn Tiền (`/admin/refunds`)** | Theo dõi đối soát đơn lỗi/đổ vỡ, xử lý bồi hoàn 100% vào Ví Điểm Thưởng UTEClub cho thành viên trong vòng 15 phút. |
+
+---
+
+## ⚡ Giải Thuật Chuyên Sâu & Mẫu Thiết Kế Doanh Nghiệp (Enterprise Algorithms & Patterns)
+
+Dự án áp dụng các giải thuật và mẫu thiết kế chuẩn công nghiệp để đảm bảo tính toàn vẹn dữ liệu, hiệu năng cao và độ tin cậy tuyệt đối:
+
+### 1. Thuật Toán Bảo Toàn Tính Bất Biến (Idempotency Algorithm & Pattern)
+- **Vấn đề giải quyết:** Chống tạo đơn hàng trùng lặp hoặc trừ tiền/trừ kho 2 lần khi khách hàng nhấn đúp nút thanh toán, mạng bị gián đoạn hoặc cơ chế tự động gửi lại (retry) của trình duyệt.
+- **Cơ chế triển khai:**
+  - Client gửi kèm HTTP Header `Idempotency-Key` (UUIDv4) duy nhất cho mỗi phiên thanh toán.
+  - Server áp dụng Aspect `@Idempotent` tính toán mã băm SHA-256 từ Request Body và kiểm tra bảng `idempotency_keys`:
+    - Nếu khóa **chưa tồn tại**: Tạo bản ghi trạng thái `PROCESSING`, thực hiện giao dịch, sau đó chuyển thành `COMPLETED` và lưu bộ nhớ đệm (Response Cache).
+    - Nếu khóa **đang ở trạng thái `PROCESSING`**: Trả về `409 Conflict` ngăn chặn giao dịch đồng thời.
+    - Nếu khóa **đã ở trạng thái `COMPLETED`**: Lập tức trả về kết quả đã lưu trong bộ đệm mà không thực hiện lại logic trừ kho hay tạo đơn mới.
+
+### 2. Thuật Toán Giới Hạn Tần Suất Token Bucket (Sliding Window Rate Limiter)
+- **Vấn đề giải quyết:** Phòng chống tấn công từ chối dịch vụ (DDoS), Brute-Force mật khẩu và spam tạo đơn tự động.
+- **Cơ chế triển khai:**
+  - Dùng thuật toán **Token Bucket** trong bộ nhớ đồng thời (`ConcurrentHashMap` + Atomic Timestamp).
+  - Tích hợp qua Aspect `@RateLimited` áp dụng cho API Đăng nhập (tối đa 10 lần/phút) và API Đặt hàng (tối đa 20 lần/phút). Vượt ngưỡng sẽ nhận phản hồi `429 Too Many Requests` lịch sự.
+
+### 3. Thuật Toán Khoảng Cách Trắc Địa Trái Đất (Haversine Spherical Distance Formula)
+- **Vấn đề giải quyết:** Tính toán khoảng cách mặt cầu thực tế giữa vị trí GPS của khách hàng và 3 chi nhánh Flagship để tự động chọn cơ sở gần nhất và ước tính thời gian giao hàng.
+- **Công thức giải thuật:**
+  $$\Delta\phi = \text{radians}(\text{lat}_2 - \text{lat}_1), \quad \Delta\lambda = \text{radians}(\text{lng}_2 - \text{lng}_1)$$
+  $$a = \sin^2\left(\frac{\Delta\phi}{2}\right) + \cos(\text{lat}_1) \cdot \cos(\text{lat}_2) \cdot \sin^2\left(\frac{\Delta\lambda}{2}\right)$$
+  $$c = 2 \cdot \text{atan2}\left(\sqrt{a}, \sqrt{1-a}\right), \quad d = R \cdot c \quad (R = 6.371\text{ km})$$
+- Tích hợp nút **"Định Vị Gần Nhất"** tại trang Checkout và danh sách Cửa hàng.
+
+### 4. Thuật Toán Gợi Ý Ghép Vị Cảm Quan (Artisanal Flavor Pairing Engine)
+- **Vấn đề giải quyết:** Đề xuất cặp đôi đồ uống & bánh nướng tối ưu nhằm bùng nổ hương vị Terroir cho thực khách.
+- **Cơ chế triển khai:**
+  - Ma trận hòa hợp hương vị (Flavor Harmony Matrix) kết hợp quy tắc đối ngẫu cảm quan:
+    - *Đồ uống hương chua sáng / Cam chanh* (Geisha, Cold Brew Cam Vàng) $\leftrightarrow$ *Bánh ngậy bơ Pháp* (Croissant Elle & Vire, Danish Phúc Bồn Tử).
+    - *Đồ uống đậm đà / Muối béo* (Cà phê muối, Espresso) $\leftrightarrow$ *Bánh phô mai & Cacao* (Tiramisu, Basque Cheesecake).
+    - *Trà hoa thanh tao* (Ô Long Mộc Châu, Sen Tây Hồ) $\leftrightarrow$ *Bánh thanh nhẹ* (Mousse Chanh Leo, Macaron).
 
 ---
 
@@ -189,6 +230,12 @@ stateDiagram-v2
   ├── refunds (Lịch sử hoàn tiền khi hủy đơn hàng, lý do hoàn tiền)
   ├── reviews (Đánh giá chất lượng 1-5 sao, nhận xét chữ, ảnh chụp đồ uống thực tế)
   └── audit_logs (Nhật ký kiểm toán: ghi nhận người thực hiện, thao tác, IP truy cập, thời điểm)
+
+[7. Chuỗi Cung Ứng & Bảo Toàn Giao Dịch]
+  ├── suppliers (Nhà cung cấp nông trại: Cầu Đất Farm, Mộc Châu Tea, Dalat Milk, Elle & Vire)
+  ├── purchase_orders (Đơn đặt hàng nhập kho PO: mã PO, tổng chi phí, trạng thái PENDING/SHIPPED/RECEIVED)
+  ├── purchase_order_items (Chi tiết từng loại nguyên liệu số lượng đặt trong PO)
+  └── idempotency_keys (Bảo toàn tính bất biến: key_value, request_hash, status, response_payload cache)
 ```
 </details>
 
