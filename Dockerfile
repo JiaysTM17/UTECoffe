@@ -1,7 +1,7 @@
 # ============================================================================
-# Stage 1: Build with Maven and JDK 21
+# Stage 1: Build with Maven 3.9 and JDK 21
 # ============================================================================
-FROM eclipse-temurin:21-jdk AS builder
+FROM maven:3.9-eclipse-temurin-21 AS builder
 
 WORKDIR /build
 
@@ -9,9 +9,8 @@ WORKDIR /build
 COPY pom.xml .
 COPY src ./src
 
-# Build production WAR package skipping tests
-RUN apt-get update && apt-get install -y maven && \
-    mvn clean package -DskipTests -q
+# Build production WAR package skipping tests for fast and reliable CI/CD
+RUN mvn clean package -DskipTests -B -q
 
 # ============================================================================
 # Stage 2: Minimal Production JRE Runtime
@@ -30,8 +29,8 @@ RUN chown -R utecoffe:utecoffe /app
 USER utecoffe
 
 EXPOSE 8080
-
+ENV PORT=8080
 ENV SPRING_PROFILES_ACTIVE=prod
 ENV JAVA_OPTS="-XX:+UseG1GC -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/./urandom"
 
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.war"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.war --server.port=${PORT}"]

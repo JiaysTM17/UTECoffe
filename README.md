@@ -34,14 +34,15 @@
 
 ---
 
-## 🌐 Tên Miền Chính Thức: utecoffe.io.vn
+## 🌐 Tên Miền Chính Thức: utecoffe.io.vn & Triển Khai 24/7
 
-Hệ thống đã được thiết lập sẵn sàng để chạy trực tiếp trên tên miền chính thức **[https://utecoffe.io.vn](https://utecoffe.io.vn)**:
-- **DNS Records:** A Record `@` trỏ về IP máy chủ VPS, CNAME `www` trỏ về `utecoffe.io.vn`.
+Hệ thống đã được thiết lập sẵn sàng để chạy trực tiếp trên tên miền chính thức **[https://utecoffe.io.vn](https://utecoffe.io.vn)** hoạt động 24/7 trên toàn thế giới:
+- **Triển khai 24/7 Cloud (Render Blueprint):** Đã cấu hình sẵn file [`render.yaml`](render.yaml) và [`railway.json`](railway.json) hỗ trợ 1-click deploy Web + PostgreSQL database miễn phí chạy 24/24. Xem chi tiết tại [Hướng Dẫn Triển Khai 24/7](deployment/HUONG_DAN_CHAY_247_INTERNET_RENDER.md).
+- **DNS Records:** A Record `@` trỏ về IP máy chủ / VPS / Cloud, CNAME `www` trỏ về `utecoffe.io.vn`.
 - **Nginx Reverse Proxy & SSL:** Đã tích hợp cấu hình mẫu tại [`deployment/nginx/utecoffe.io.vn.conf`](deployment/nginx/utecoffe.io.vn.conf) hỗ trợ tự động chuyển hướng HTTPS, HTTP/2, WebSocket STOMP (`/ws-utecoffe`), và nén Gzip.
 - **SEO & Meta Tags:** Thẻ Canonical, OpenGraph, Twitter Card, `robots.txt` và `sitemap.xml` đã được cấu hình trỏ chuẩn xác về domain chính thức `https://utecoffe.io.vn`.
 - **CORS & Cookies:** Đã cấp quyền CORS và cấu hình Session Cookie phân giải an toàn trên domain `utecoffe.io.vn`.
-- **Tài liệu hướng dẫn triển khai:** Xem chi tiết tại [`deployment/DOMAIN_SETUP_GUIDE.md`](deployment/DOMAIN_SETUP_GUIDE.md).
+- **Tài liệu hướng dẫn triển khai:** Xem chi tiết tại [`deployment/DOMAIN_SETUP_GUIDE.md`](deployment/DOMAIN_SETUP_GUIDE.md) và [`deployment/HUONG_DAN_CHAY_247_INTERNET_RENDER.md`](deployment/HUONG_DAN_CHAY_247_INTERNET_RENDER.md).
 
 ---
 
