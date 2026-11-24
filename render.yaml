@@ -12,7 +12,7 @@ services:
       - www.utecoffe.io.vn
     envVars:
       - key: PORT
-        value: 8080
+        value: 10000
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: DB_URL

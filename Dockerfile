@@ -15,9 +15,9 @@ COPY app.war /app/app.war
 RUN chown -R utecoffe:utecoffe /app
 USER utecoffe
 
-EXPOSE 8080
-ENV PORT=8080
+EXPOSE 10000 8080
+ENV PORT=10000
 ENV SPRING_PROFILES_ACTIVE=prod
 ENV JAVA_OPTS="-XX:+UseSerialGC -XX:MaxRAMPercentage=70.0 -Djava.security.egd=file:/dev/./urandom"
 
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.war --server.port=${PORT}"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.war --server.port=${PORT:-10000} --server.address=0.0.0.0"]
