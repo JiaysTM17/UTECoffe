@@ -1,9 +1,12 @@
 # ============================================================================
-# Stage 1: Build with Maven 3.9 and JDK 21
+# Stage 1: Build with Maven 3.9 and JDK 21 (Optimized for Cloud 512MB RAM)
 # ============================================================================
 FROM maven:3.9-eclipse-temurin-21 AS builder
 
 WORKDIR /build
+
+# Constrain Maven heap memory to prevent container OOM on Cloud Free tiers
+ENV MAVEN_OPTS="-Xmx384m -XX:+UseSerialGC"
 
 # Copy Maven POM and source files
 COPY pom.xml .
@@ -31,6 +34,6 @@ USER utecoffe
 EXPOSE 8080
 ENV PORT=8080
 ENV SPRING_PROFILES_ACTIVE=prod
-ENV JAVA_OPTS="-XX:+UseG1GC -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/./urandom"
+ENV JAVA_OPTS="-XX:+UseSerialGC -XX:MaxRAMPercentage=70.0 -Djava.security.egd=file:/dev/./urandom"
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.war --server.port=${PORT}"]

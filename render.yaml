@@ -16,6 +16,10 @@ services:
         fromDatabase:
           name: utecoffe-db
           property: connectionString
+      - key: DATABASE_URL
+        fromDatabase:
+          name: utecoffe-db
+          property: connectionString
       - key: DB_USERNAME
         fromDatabase:
           name: utecoffe-db

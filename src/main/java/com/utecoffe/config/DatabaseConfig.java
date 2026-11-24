@@ -10,13 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
-import java.net.URI;
 
 /**
  * Cloud-Native Database Configuration.
- * Automatically handles standard JDBC URLs, Docker Compose,
- * as well as Cloud Provider URI formats (e.g. Render, Railway, Supabase, Neon)
- * where DATABASE_URL is provided in `postgres://` or `postgresql://` URI format.
+ * Automatically normalizes Render / Railway / Supabase connection strings
+ * (e.g. postgres:// or postgresql://) to standard JDBC format (jdbc:postgresql://)
+ * and configures an optimal HikariCP pool for cloud container runtimes.
  */
 @Configuration
 public class DatabaseConfig {
@@ -41,51 +40,52 @@ public class DatabaseConfig {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName(driverClassName);
 
+        // 1. Resolve raw URL from environment or properties
         String rawUrl = System.getenv("DATABASE_URL");
+        if (rawUrl == null || rawUrl.isBlank()) {
+            rawUrl = System.getenv("DB_URL");
+        }
         if (rawUrl == null || rawUrl.isBlank()) {
             rawUrl = datasourceUrl;
         }
 
-        if (rawUrl != null && (rawUrl.startsWith("postgres://") || rawUrl.startsWith("postgresql://"))) {
-            try {
-                URI uri = new URI(rawUrl);
-                String host = uri.getHost();
-                int port = uri.getPort() > 0 ? uri.getPort() : 5432;
-                String path = uri.getPath();
-                String dbName = (path != null && path.length() > 1) ? path.substring(1) : "utecoffe_db";
-
-                String jdbcUrl = "jdbc:postgresql://" + host + ":" + port + "/" + dbName;
-                config.setJdbcUrl(jdbcUrl);
-
-                String userInfo = uri.getUserInfo();
-                if (userInfo != null && !userInfo.isBlank()) {
-                    String[] parts = userInfo.split(":", 2);
-                    config.setUsername(parts[0]);
-                    if (parts.length > 1) {
-                        config.setPassword(parts[1]);
-                    }
-                } else {
-                    config.setUsername(datasourceUsername);
-                    config.setPassword(datasourcePassword);
-                }
-                log.info("Initialized Cloud PostgreSQL DataSource from parsed URI: {}", jdbcUrl);
-            } catch (Exception e) {
-                log.warn("Failed to parse DATABASE_URL URI, falling back to raw datasource config: {}", e.getMessage());
-                config.setJdbcUrl(rawUrl);
-                config.setUsername(datasourceUsername);
-                config.setPassword(datasourcePassword);
+        // 2. Normalize Cloud URI formats (postgres:// or postgresql://) to jdbc:postgresql://
+        if (rawUrl != null) {
+            String trimmed = rawUrl.trim();
+            if (trimmed.startsWith("postgres://")) {
+                rawUrl = "jdbc:postgresql://" + trimmed.substring("postgres://".length());
+            } else if (trimmed.startsWith("postgresql://")) {
+                rawUrl = "jdbc:postgresql://" + trimmed.substring("postgresql://".length());
             }
-        } else {
-            config.setJdbcUrl(rawUrl);
-            config.setUsername(datasourceUsername);
-            config.setPassword(datasourcePassword);
         }
 
-        config.setMaximumPoolSize(10);
-        config.setMinimumIdle(2);
+        config.setJdbcUrl(rawUrl);
+
+        // 3. User & Password fallback
+        String envUser = System.getenv("DB_USERNAME");
+        if (envUser == null || envUser.isBlank()) {
+            envUser = datasourceUsername;
+        }
+        String envPass = System.getenv("DB_PASSWORD");
+        if (envPass == null || envPass.isBlank()) {
+            envPass = datasourcePassword;
+        }
+
+        if (envUser != null && !envUser.isBlank()) {
+            config.setUsername(envUser);
+        }
+        if (envPass != null && !envPass.isBlank()) {
+            config.setPassword(envPass);
+        }
+
+        // 4. Memory-efficient connection pool settings for 512MB Cloud Tier (Render Free)
+        config.setMaximumPoolSize(5);
+        config.setMinimumIdle(1);
         config.setConnectionTimeout(30000);
-        config.setIdleTimeout(600000);
-        config.setMaxLifetime(1800000);
+        config.setIdleTimeout(300000);
+        config.setMaxLifetime(900000);
+
+        log.info("Initialized Cloud HikariDataSource with JDBC URL: {}", rawUrl != null && rawUrl.contains("@") ? rawUrl.replaceAll(":[^:@]+@", ":****@") : rawUrl);
 
         return new HikariDataSource(config);
     }
