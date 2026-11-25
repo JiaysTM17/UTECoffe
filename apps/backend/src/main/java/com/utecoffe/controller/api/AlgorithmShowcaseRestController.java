@@ -41,7 +41,7 @@ public class AlgorithmShowcaseRestController {
     @GetMapping("/dynamic-pricing")
     public ResponseEntity<ApiResponse<List<DynamicPricingResultDto>>> getDynamicPricing() {
         List<DynamicPricingResultDto> data = dynamicPricingService.evaluateStorewidePricing();
-        return ResponseEntity.ok(ApiResponse.success(data, "Tính toán định giá động thành công theo chu kỳ nhu cầu"));
+        return ResponseEntity.ok(ApiResponse.success(data, "Cập nhật bảng giá ưu đãi theo thời điểm thành công"));
     }
 
     @Operation(summary = "Market Basket Analysis & Product Pairing (Apriori Algorithm)")
@@ -50,7 +50,7 @@ public class AlgorithmShowcaseRestController {
             @PathVariable Long productId,
             @RequestParam(defaultValue = "4") int limit) {
         List<CrossSellRecommendationDto> data = marketBasketAnalysisService.getRecommendationsForProduct(productId, limit);
-        return ResponseEntity.ok(ApiResponse.success(data, "Khai phá luật kết hợp sản phẩm thành công (Lift >= 1.0)"));
+        return ResponseEntity.ok(ApiResponse.success(data, "Gợi ý kết hợp món thưởng thức hoàn hảo"));
     }
 
     public static class CouponKnapsackRequest {
@@ -83,6 +83,6 @@ public class AlgorithmShowcaseRestController {
                 "tokenAcquired", allowed,
                 "status", allowed ? "ALLOWED (HTTP 200)" : "RATE_LIMITED (HTTP 429)"
         );
-        return ResponseEntity.ok(ApiResponse.success(data, "Kiểm tra Token Bucket hoàn tất"));
+        return ResponseEntity.ok(ApiResponse.success(data, "Kiểm tra an toàn kết nối hoàn tất"));
     }
 }

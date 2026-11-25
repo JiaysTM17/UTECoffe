@@ -377,6 +377,8 @@ public class DatabaseSeeder implements CommandLineRunner {
         if (ingredientRepository.count() == 0) {
             ingredientRepository.save(Ingredient.builder().name("Hạt Cà Phê Arabica Cầu Đất").sku("ING-CF-ARA").unit("gram").minThreshold(BigDecimal.valueOf(5000)).currentCostPrice(BigDecimal.valueOf(320)).build());
             ingredientRepository.save(Ingredient.builder().name("Lá Trà Oolong Lâm Đồng").sku("ING-TEA-OOL").unit("gram").minThreshold(BigDecimal.valueOf(3000)).currentCostPrice(BigDecimal.valueOf(450)).build());
+            ingredientRepository.save(Ingredient.builder().name("Sữa Tươi Thanh Trùng Dalat Milk").sku("ING-MILK-DL").unit("ml").minThreshold(BigDecimal.valueOf(10000)).currentCostPrice(BigDecimal.valueOf(42)).build());
+            ingredientRepository.save(Ingredient.builder().name("Bơ Pháp Elle & Vire").sku("ING-BUTTER-EV").unit("gram").minThreshold(BigDecimal.valueOf(5000)).currentCostPrice(BigDecimal.valueOf(280)).build());
         }
     }
 
@@ -863,6 +865,21 @@ public class DatabaseSeeder implements CommandLineRunner {
                         .ingredient(ingredients.get(2))
                         .quantityRequired(BigDecimal.valueOf(15)) // 15g tra Oolong
                         .build());
+            }
+        }
+
+        // 4.1. Store Inventory (Tồn kho nguyên liệu tại từng chi nhánh)
+        if (storeInventoryRepository.count() == 0 && !stores.isEmpty() && !ingredients.isEmpty()) {
+            for (Store st : stores) {
+                for (Ingredient ing : ingredients) {
+                    storeInventoryRepository.save(StoreInventory.builder()
+                            .store(st)
+                            .ingredient(ing)
+                            .currentStock(BigDecimal.valueOf(80000))
+                            .safetyStock(BigDecimal.valueOf(5000))
+                            .lastRestockedAt(LocalDateTime.now())
+                            .build());
+                }
             }
         }
 

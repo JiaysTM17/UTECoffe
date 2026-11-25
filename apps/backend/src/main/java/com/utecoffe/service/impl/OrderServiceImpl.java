@@ -185,11 +185,16 @@ public class OrderServiceImpl implements OrderService {
                 .build();
         paymentRepository.save(payment);
 
-        // Initial Tracking record
+        // Initial Tracking record with stock availability check
+        boolean stockAvailable = true;
+        try {
+            stockAvailable = inventoryService.verifyStockForOrder(savedOrder);
+        } catch (Exception ignored) {}
+
         OrderTracking tracking = OrderTracking.builder()
                 .order(savedOrder)
                 .status(OrderStatus.PENDING)
-                .message("Don hang da duoc tao thanh cong va cho xac nhan")
+                .message(stockAvailable ? "Đơn hàng đã được tạo thành công và chuyển đến quầy Barista" : "Đơn hàng đã ghi nhận, đang kiểm tra tồn kho nguyên liệu")
                 .build();
         orderTrackingRepository.save(tracking);
 
@@ -250,10 +255,19 @@ public class OrderServiceImpl implements OrderService {
             loyaltyService.accumulatePointsForOrder(order);
         }
 
+        String defaultMsg = switch (newStatus) {
+            case CONFIRMED -> "Barista đã xác nhận đơn hàng và chuẩn bị nguyên liệu";
+            case PREPARING -> "Thức uống đang được nghệ nhân Barista tỉ mỉ pha chế";
+            case DELIVERING -> "Shipper đang giao thức uống đến tận tay bạn";
+            case COMPLETED -> "Đơn hàng đã hoàn thành. Chúc bạn thưởng thức trọn vẹn hương vị UTECoffe!";
+            case CANCELLED -> "Đơn hàng đã được hủy thành công";
+            default -> "Đơn hàng đang được hệ thống xử lý";
+        };
+
         OrderTracking tracking = OrderTracking.builder()
                 .order(order)
                 .status(newStatus)
-                .message(note != null ? note : "Trang thai don hang chuyen sang: " + newStatus.name())
+                .message(note != null && !note.isBlank() ? note : defaultMsg)
                 .build();
         orderTrackingRepository.save(tracking);
 

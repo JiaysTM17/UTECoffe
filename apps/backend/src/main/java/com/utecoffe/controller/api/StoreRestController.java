@@ -24,6 +24,6 @@ public class StoreRestController {
 
     @GetMapping("/nearest")
     public ResponseEntity<ApiResponse<List<StoreDistanceDto>>> getNearest(@RequestParam double lat, @RequestParam double lng) {
-        return ResponseEntity.ok(ApiResponse.success(storeService.findNearestStoresWithDistance(lat, lng), "Chi nhanh gan nhat theo thuat toan Haversine"));
+        return ResponseEntity.ok(ApiResponse.success(storeService.findNearestStoresWithDistance(lat, lng), "Danh sách chi nhánh gần bạn nhất"));
     }
 }

@@ -64,7 +64,7 @@ public class ProductRestController {
             @RequestParam(value = "limit", defaultValue = "8") int limit) {
         return ResponseEntity.ok(ApiResponse.success(
                 fuzzySearchService.fuzzySearch(q, threshold, limit),
-                "Ket qua tim kiem thong minh Damerau-Levenshtein"));
+                "Kết quả tìm kiếm sản phẩm"));
     }
 
     @GetMapping("/taste-match")
@@ -77,7 +77,7 @@ public class ProductRestController {
             @RequestParam(value = "limit", defaultValue = "4") int limit) {
         return ResponseEntity.ok(ApiResponse.success(
                 tasteProfileService.matchPalate(acidity, body, sweetness, bitterness, aroma, limit),
-                "Ket qua goi y ca phe theo do tuong dong Cosine"));
+                "Gợi ý hương vị cà phê phù hợp với gu thưởng thức"));
     }
 
     @GetMapping("/{id}/pairings")
