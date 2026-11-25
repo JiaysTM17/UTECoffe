@@ -96,7 +96,7 @@ public class SecurityConfig {
     public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/ws-utecoffe/**", "/h2-console/**", "/auth/login-process", "/barista/orders/**", "/admin/**", "/cart/**", "/checkout/**", "/reservation/**"))
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/ws-utecoffe/**", "/h2-console/**", "/auth/login-process", "/barista/orders/**", "/admin/**", "/cart/**", "/checkout/**", "/reservation/**", "/profile/**"))
             .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
             .authorizeHttpRequests(auth -> auth
                 // Static resources
@@ -105,7 +105,7 @@ public class SecurityConfig {
                 .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                 .requestMatchers("/static/**", "/assets/**", "/css/**", "/js/**", "/images/**", "/favicon.ico", "/robots.txt", "/sitemap.xml").permitAll()
                 // Public storefront pages
-                .requestMatchers("/", "/ping", "/diag", "/menu/**", "/stores/**", "/story/**", "/reservation/**", "/cart/**", "/checkout/**", "/orders/tracking/**").permitAll()
+                .requestMatchers("/", "/ping", "/diag", "/menu/**", "/stores/**", "/story/**", "/reservation/**", "/cart/**", "/checkout/**", "/orders/tracking/**", "/profile/**").permitAll()
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/ws-utecoffe/**").permitAll()
                 // Role-restricted areas

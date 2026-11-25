@@ -21,6 +21,12 @@ public class ProfileMvcController {
     private AuthService authService;
 
     @Autowired
+    private com.utecoffe.repository.UserRepository userRepository;
+
+    @Autowired
+    private com.utecoffe.service.LoyaltyService loyaltyService;
+
+    @Autowired
     private LoyaltyCardRepository loyaltyCardRepository;
 
     @Autowired
@@ -42,20 +48,13 @@ public class ProfileMvcController {
             user = authService.getByEmail("khachhang@gmail.com");
         }
         if (user == null) {
+            user = userRepository.findAll().stream().findFirst().orElse(null);
+        }
+        if (user == null) {
             return "redirect:/auth/login";
         }
 
-        LoyaltyCard card = loyaltyCardRepository.findByUserId(user.getId()).orElse(null);
-        if (card == null) {
-            card = LoyaltyCard.builder()
-                    .user(user)
-                    .cardNumber("#UTE-2026-" + String.format("%04d", user.getId()))
-                    .pointsBalance(120)
-                    .lifetimePoints(120)
-                    .tier(com.utecoffe.enums.LoyaltyTier.BRONZE)
-                    .build();
-            card = loyaltyCardRepository.save(card);
-        }
+        LoyaltyCard card = loyaltyService.getOrCreateCardForUser(user.getId());
 
         model.addAttribute("user", user);
         model.addAttribute("loyaltyCard", card);
@@ -65,5 +64,27 @@ public class ProfileMvcController {
         model.addAttribute("userCoupons", userCouponRepository.findByUserIdAndIsUsedFalse(user.getId()));
         model.addAttribute("orders", orderService.getUserOrders(user.getId()));
         return "customer/profile";
+    }
+
+    @org.springframework.web.bind.annotation.PostMapping("/profile/update")
+    public String updateProfile(
+            @org.springframework.web.bind.annotation.RequestParam(name = "fullName", required = false) String fullName,
+            @org.springframework.web.bind.annotation.RequestParam(name = "phoneNumber", required = false) String phoneNumber,
+            @AuthenticationPrincipal UserDetails userDetails,
+            org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
+        User user = null;
+        if (userDetails != null) {
+            user = authService.getByEmail(userDetails.getUsername());
+        }
+        if (user == null) {
+            user = authService.getByEmail("khachhang@gmail.com");
+        }
+        if (user != null) {
+            if (fullName != null && !fullName.isBlank()) user.setFullName(fullName.trim());
+            if (phoneNumber != null && !phoneNumber.isBlank()) user.setPhoneNumber(phoneNumber.trim());
+            userRepository.save(user);
+            redirectAttributes.addFlashAttribute("successMessage", "Cập nhật hồ sơ thành viên thành công!");
+        }
+        return "redirect:/profile?updated=true";
     }
 }

@@ -19,6 +19,8 @@ $srcFiles = @(
     'src/main/java/com/utecoffe/dto/request/ReservationRequest.java',
     'src/main/java/com/utecoffe/service/TableReservationService.java',
     'src/main/java/com/utecoffe/service/impl/TableReservationServiceImpl.java',
+    'src/main/java/com/utecoffe/service/LoyaltyService.java',
+    'src/main/java/com/utecoffe/service/impl/LoyaltyServiceImpl.java',
     'src/main/java/com/utecoffe/service/impl/OrderServiceImpl.java',
     'src/main/java/com/utecoffe/config/DatabaseSeeder.java',
     'src/main/java/com/utecoffe/controller/api/ProductRestController.java',
