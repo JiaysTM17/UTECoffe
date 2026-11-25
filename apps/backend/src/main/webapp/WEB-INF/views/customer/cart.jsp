@@ -72,13 +72,13 @@
                                                     <div class="d-flex align-items-center gap-2.5">
                                                         <img src="${not empty item.product.imageUrl ? item.product.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=200&q=80'}" 
                                                              class="rounded-2 border border-gold-subtle object-fit-cover flex-shrink-0" 
-                                                             style="width: 50px; height: 50px;" 
+                                                             style="width: 52px; height: 52px;" 
                                                              alt="${item.product.name}">
                                                         <div>
-                                                            <div class="cart-product-title text-light">${item.product.name}</div>
-                                                            <div class="cart-product-meta text-gold mt-0.5">
-                                                                <span class="badge bg-espresso border border-gold-subtle me-1 px-1.5 py-0.5" style="font-size: 0.68rem;">Size: ${item.productSize.name}</span>
-                                                                <span>${item.sugarLevel}% Đường</span> • <span>${item.iceLevel}% Đá</span>
+                                                            <div class="cart-product-title text-light" style="font-size: 1.02rem; font-weight: 700; line-height: 1.35;">${item.product.name}</div>
+                                                            <div class="cart-product-meta text-gold mt-1">
+                                                                <span class="badge bg-espresso border border-gold-subtle me-1 px-2 py-0.5" style="font-size: 0.72rem;">Size: ${item.productSize.name}</span>
+                                                                <span style="font-size: 0.76rem;">${item.sugarLevel}% Đường • ${item.iceLevel}% Đá</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -122,24 +122,26 @@
                                         Phổ biến cùng đơn hàng
                                     </span>
                                 </div>
-                                <div class="row g-2">
+                                <div class="row g-2.5">
                                     <c:forEach var="rec" items="${cart.pairingRecommendations}">
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="cart-rec-item d-flex align-items-center justify-content-between gap-2">
-                                                <div class="d-flex align-items-center gap-2 overflow-hidden">
+                                        <div class="col-sm-4">
+                                            <div class="cart-rec-item p-2.5 h-100 d-flex flex-column justify-content-between">
+                                                <div class="d-flex align-items-center gap-2 mb-2">
                                                     <img src="${not empty rec.targetImageUrl ? rec.targetImageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=200&q=80'}" 
                                                          class="rounded-2 border border-gold-subtle object-fit-cover flex-shrink-0" 
-                                                         style="width: 42px; height: 42px;" 
+                                                         style="width: 44px; height: 44px;" 
                                                          alt="${rec.targetProductName}">
-                                                    <div class="text-truncate">
-                                                        <div class="text-light fw-bold text-truncate" style="font-size: 0.82rem;">${rec.targetProductName}</div>
-                                                        <div class="price-gold font-monospace" style="font-size: 0.78rem;">
+                                                    <div class="min-w-0 flex-grow-1">
+                                                        <div class="text-light fw-bold lh-sm" title="${rec.targetProductName}" style="font-size: 0.84rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.1em;">
+                                                            ${rec.targetProductName}
+                                                        </div>
+                                                        <div class="price-gold font-monospace fw-bold mt-1" style="font-size: 0.8rem;">
                                                             <fmt:formatNumber value="${rec.targetPrice}" pattern="#,##0"/> VNĐ
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-outline-gold btn-sm px-2 py-0.5 rounded-pill font-accent flex-shrink-0" style="font-size: 0.75rem; white-space: nowrap;" onclick="quickAddPairing(${rec.targetProductId})">
-                                                    <i class="fa-solid fa-plus me-0.5"></i> Thêm
+                                                <button type="button" class="btn btn-outline-gold btn-sm w-100 py-1 rounded-pill font-accent d-flex align-items-center justify-content-center gap-1" style="font-size: 0.75rem;" onclick="quickAddPairing(${rec.targetProductId})">
+                                                    <i class="fa-solid fa-plus fa-xs"></i> <span>Thêm Nhanh</span>
                                                 </button>
                                             </div>
                                         </div>
