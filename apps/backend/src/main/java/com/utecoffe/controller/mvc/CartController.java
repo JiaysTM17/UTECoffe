@@ -7,8 +7,10 @@ import com.utecoffe.dto.response.ApiResponse;
 import com.utecoffe.dto.response.CouponKnapsackResultDto;
 import com.utecoffe.dto.response.CrossSellRecommendationDto;
 import com.utecoffe.entity.*;
+import com.utecoffe.enums.DiscountType;
 import com.utecoffe.enums.OrderType;
 import com.utecoffe.enums.PaymentMethod;
+import com.utecoffe.repository.CouponRepository;
 import com.utecoffe.repository.ProductRepository;
 import com.utecoffe.repository.ProductSizeRepository;
 import com.utecoffe.repository.ToppingRepository;
@@ -25,6 +27,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -39,6 +43,9 @@ public class CartController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private CouponRepository couponRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -108,13 +115,34 @@ public class CartController {
             cart.setOptimalCoupon(optimal);
         } catch (Exception ignored) {}
 
-        // Apply selected voucher if any
+        // Apply selected voucher from Database or Fallback Rules
         BigDecimal discount = BigDecimal.ZERO;
         if (cart.getCouponCode() != null && !cart.getCouponCode().isBlank()) {
             String code = cart.getCouponCode().trim().toUpperCase();
-            if ("UTE2026".equals(code)) {
+            Optional<Coupon> optCoupon = couponRepository.findByCodeAndIsActiveTrue(code);
+            if (optCoupon.isPresent()) {
+                Coupon coupon = optCoupon.get();
+                LocalDateTime now = LocalDateTime.now();
+                boolean validDate = (coupon.getStartDate() == null || !now.isBefore(coupon.getStartDate()))
+                        && (coupon.getEndDate() == null || !now.isAfter(coupon.getEndDate()));
+                boolean validMin = (coupon.getMinOrderValue() == null || subtotal.compareTo(coupon.getMinOrderValue()) >= 0);
+
+                if (validDate && validMin) {
+                    if (coupon.getDiscountType() == DiscountType.PERCENTAGE) {
+                        discount = subtotal.multiply(coupon.getDiscountValue()).divide(BigDecimal.valueOf(100), 0, RoundingMode.HALF_UP);
+                        if (coupon.getMaxDiscountAmount() != null && discount.compareTo(coupon.getMaxDiscountAmount()) > 0) {
+                            discount = coupon.getMaxDiscountAmount();
+                        }
+                    } else {
+                        discount = coupon.getDiscountValue();
+                    }
+                    if ("FREESHIP".equals(code)) {
+                        cart.setShippingFee(BigDecimal.ZERO);
+                    }
+                }
+            } else if ("UTE2026".equals(code)) {
                 // 20% discount up to 50,000 VND
-                discount = subtotal.multiply(BigDecimal.valueOf(0.20));
+                discount = subtotal.multiply(BigDecimal.valueOf(0.20)).setScale(0, RoundingMode.HALF_UP);
                 if (discount.compareTo(BigDecimal.valueOf(50000)) > 0) {
                     discount = BigDecimal.valueOf(50000);
                 }

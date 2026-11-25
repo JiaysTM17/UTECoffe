@@ -23,7 +23,8 @@ $srcFiles = @(
     'src/main/java/com/utecoffe/controller/api/PaymentRestController.java',
     'src/main/java/com/utecoffe/controller/mvc/CartController.java',
     'src/main/java/com/utecoffe/controller/mvc/MenuController.java',
-    'src/main/java/com/utecoffe/controller/mvc/StoreMvcController.java'
+    'src/main/java/com/utecoffe/controller/mvc/StoreMvcController.java',
+    'src/main/java/com/utecoffe/controller/mvc/ProfileMvcController.java'
 )
 
 & javac -parameters -encoding UTF-8 -cp $cp -processorpath $lombok -d target/classes $srcFiles
