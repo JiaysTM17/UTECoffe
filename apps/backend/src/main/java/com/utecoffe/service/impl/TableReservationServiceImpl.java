@@ -38,9 +38,30 @@ public class TableReservationServiceImpl implements TableReservationService {
 
         User user = (userId != null) ? userRepository.findById(userId).orElse(null) : null;
 
-        StoreTable table = (request.getTableId() != null)
-                ? tableRepository.findById(request.getTableId()).orElse(null)
-                : null;
+        StoreTable table = null;
+        if (request.getTableId() != null) {
+            table = tableRepository.findById(request.getTableId()).orElse(null);
+        }
+
+        // Greedy Best-Fit Capacity Table Assignment Algorithm
+        if (table == null && request.getGuestCount() != null && request.getGuestCount() > 0) {
+            List<StoreTable> candidateTables = tableRepository.findByStoreIdAndIsActiveTrue(store.getId());
+            StoreTable bestFit = null;
+            int minWaste = Integer.MAX_VALUE;
+
+            for (StoreTable candidate : candidateTables) {
+                if (candidate.getCapacity() >= request.getGuestCount()) {
+                    int waste = candidate.getCapacity() - request.getGuestCount();
+                    if (waste < minWaste) {
+                        minWaste = waste;
+                        bestFit = candidate;
+                    }
+                }
+            }
+            if (bestFit != null) {
+                table = bestFit;
+            }
+        }
 
         TableReservation reservation = TableReservation.builder()
                 .user(user)
@@ -48,7 +69,7 @@ public class TableReservationServiceImpl implements TableReservationService {
                 .storeTable(table)
                 .reservationTime(request.getReservationTime())
                 .guestCount(request.getGuestCount())
-                .status(ReservationStatus.PENDING)
+                .status(ReservationStatus.CONFIRMED)
                 .note(request.getNote())
                 .build();
 
@@ -62,6 +83,6 @@ public class TableReservationServiceImpl implements TableReservationService {
 
     @Override
     public List<TableReservation> getStoreReservations(Long storeId) {
-        return reservationRepository.findByStoreIdAndStatus(storeId, ReservationStatus.CONFIRMED);
+        return reservationRepository.findByStoreId(storeId);
     }
 }

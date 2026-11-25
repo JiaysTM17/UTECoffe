@@ -56,6 +56,7 @@ public class PaymentRestController {
         response.put("accountNo", "108868686868");
         response.put("accountName", "UTECOFFE SPECIALTY");
         response.put("description", "THANH TOAN DON " + order.getOrderCode());
+        response.put("emvCoPayload", vietQrService.generateEmvCoPayload(order));
 
         return ResponseEntity.ok(ApiResponse.success(response, "Lay thong tin VietQR thanh cong"));
     }

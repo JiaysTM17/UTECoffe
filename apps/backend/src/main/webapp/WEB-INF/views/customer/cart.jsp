@@ -186,7 +186,7 @@
         </c:choose>
     </div>
 
-    <!-- Interactive Voucher & Quantity Script -->
+    <!-- Interactive Dynamic Cart Engine with Algorithmic Voucher & Free Shipping Progress -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const voucherInput = document.getElementById('voucherCodeInput');
@@ -194,25 +194,155 @@
             const voucherFeedback = document.getElementById('voucherFeedback');
             const voucherFeedbackText = document.getElementById('voucherFeedbackText');
             const discountText = document.getElementById('cartDiscountText');
+            const subtotalText = document.getElementById('cartSubtotalText');
+            const shippingText = document.getElementById('cartShippingText');
             const finalTotalText = document.getElementById('cartFinalTotalText');
+            const freeShippingBar = document.getElementById('freeShippingBar');
+            const freeShippingNotice = document.getElementById('freeShippingNotice');
+            const shippingStatusBadge = document.getElementById('shippingStatusBadge');
 
+            function formatCurrency(val) {
+                return Math.round(val).toLocaleString('vi-VN') + ' VNĐ';
+            }
+
+            function updateFreeShippingProgress(subtotal) {
+                const threshold = 150000;
+                const percent = Math.min(100, Math.round((subtotal / threshold) * 100));
+                if (freeShippingBar) {
+                    freeShippingBar.style.width = percent + '%';
+                    freeShippingBar.setAttribute('aria-valuenow', percent);
+                }
+                if (freeShippingNotice) {
+                    if (subtotal >= threshold) {
+                        freeShippingNotice.innerHTML = '<i class="fa-solid fa-circle-check text-success me-2"></i>Đơn hàng đã đủ điều kiện <strong>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC!</strong>';
+                        if (shippingStatusBadge) {
+                            shippingStatusBadge.className = 'badge bg-success text-light fw-bold font-monospace px-3 py-1 rounded-pill';
+                            shippingStatusBadge.textContent = 'FREESHIP ĐẠT';
+                        }
+                        if (shippingText) shippingText.textContent = 'Miễn Phí';
+                    } else {
+                        const remaining = threshold - subtotal;
+                        freeShippingNotice.innerHTML = '<i class="fa-solid fa-truck-fast text-gold me-2"></i>Mua thêm <strong>' + formatCurrency(remaining) + '</strong> để được <strong>MIỄN PHÍ VẬN CHUYỂN!</strong>';
+                        if (shippingStatusBadge) {
+                            shippingStatusBadge.className = 'badge bg-gold text-obsidian fw-bold font-monospace px-3 py-1 rounded-pill';
+                            shippingStatusBadge.textContent = 'CẦN THÊM ' + percent + '%';
+                        }
+                    }
+                }
+            }
+
+            // Initial calculation
+            const rawSubtotal = parseFloat(subtotalText ? subtotalText.getAttribute('data-raw-price') : 0) || 0;
+            updateFreeShippingProgress(rawSubtotal);
+
+            // Quantity increment & decrement handlers
+            document.querySelectorAll('.cart-item-row').forEach(row => {
+                const itemId = row.getAttribute('data-item-id');
+                const unitPrice = parseFloat(row.getAttribute('data-unit-price')) || 0;
+                const qtyInput = row.querySelector('.item-qty-input');
+                const subtotalCell = row.querySelector('.item-subtotal-cell');
+                const btnPlus = row.querySelector('.btn-qty-plus');
+                const btnMinus = row.querySelector('.btn-qty-minus');
+
+                function updateItemQuantity(newQty) {
+                    const formData = new URLSearchParams();
+                    formData.append('itemId', itemId);
+                    formData.append('quantity', newQty);
+
+                    fetch('${pageContext.request.contextPath}/cart/update', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRF-TOKEN': '${_csrf.token}'
+                        },
+                        body: formData.toString()
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            if (newQty <= 0) {
+                                row.remove();
+                                if (document.querySelectorAll('.cart-item-row').length === 0) {
+                                    window.location.reload();
+                                }
+                            } else {
+                                if (qtyInput) qtyInput.value = newQty;
+                                if (subtotalCell) subtotalCell.textContent = formatCurrency(unitPrice * newQty);
+                            }
+                            if (subtotalText) {
+                                subtotalText.textContent = formatCurrency(data.totalAmount);
+                                subtotalText.setAttribute('data-raw-price', data.totalAmount);
+                            }
+                            if (finalTotalText) finalTotalText.textContent = formatCurrency(data.finalAmount);
+                            updateFreeShippingProgress(data.totalAmount);
+                        }
+                    })
+                    .catch(e => console.warn('Quantity update error:', e));
+                }
+
+                if (btnPlus) {
+                    btnPlus.addEventListener('click', function () {
+                        const curQty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
+                        updateItemQuantity(curQty + 1);
+                    });
+                }
+
+                if (btnMinus) {
+                    btnMinus.addEventListener('click', function () {
+                        const curQty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
+                        if (curQty > 1) {
+                            updateItemQuantity(curQty - 1);
+                        } else if (confirm('Bạn có muốn xóa thức uống này khỏi giỏ hàng?')) {
+                            updateItemQuantity(0);
+                        }
+                    });
+                }
+            });
+
+            // Voucher Application with Knapsack Optimization Feedback
             if (applyVoucherBtn && voucherInput) {
                 applyVoucherBtn.addEventListener('click', function () {
                     const code = voucherInput.value.trim().toUpperCase();
-                    if (code === 'UTE2026') {
-                        voucherFeedback.className = 'small mt-1 text-success';
-                        voucherFeedbackText.textContent = 'Mã UTE2026: Giảm 20% tổng đơn hàng!';
-                        voucherFeedback.classList.remove('d-none');
-                        if (discountText) discountText.textContent = '-20.000₫';
-                    } else if (code === 'FREESHIP') {
-                        voucherFeedback.className = 'small mt-1 text-success';
-                        voucherFeedbackText.textContent = 'Mã FREESHIP: Miễn phí vận chuyển toàn quốc!';
-                        voucherFeedback.classList.remove('d-none');
-                    } else if (code) {
+                    if (!code) return;
+
+                    const formData = new URLSearchParams();
+                    formData.append('code', code);
+
+                    fetch('${pageContext.request.contextPath}/cart/apply-voucher', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRF-TOKEN': '${_csrf.token}'
+                        },
+                        body: formData.toString()
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            voucherFeedback.className = 'small mt-1 text-success';
+                            if (code === 'UTE2026') {
+                                voucherFeedbackText.textContent = 'Mã UTE2026: Giảm 20% (Tiết kiệm ' + formatCurrency(data.discountAmount) + ')!';
+                            } else if (code === 'FREESHIP') {
+                                voucherFeedbackText.textContent = 'Mã FREESHIP: Miễn phí vận chuyển toàn quốc!';
+                            } else {
+                                voucherFeedbackText.textContent = data.message || 'Đã áp dụng mã ' + code;
+                            }
+                            voucherFeedback.classList.remove('d-none');
+
+                            if (discountText) discountText.textContent = '-' + formatCurrency(data.discountAmount);
+                            if (finalTotalText) finalTotalText.textContent = formatCurrency(data.finalAmount);
+                            if (data.shippingFee === 0 && shippingText) shippingText.textContent = 'Miễn Phí';
+                        } else {
+                            voucherFeedback.className = 'small mt-1 text-danger';
+                            voucherFeedbackText.textContent = data.message || 'Mã ưu đãi không hợp lệ.';
+                            voucherFeedback.classList.remove('d-none');
+                        }
+                    })
+                    .catch(() => {
                         voucherFeedback.className = 'small mt-1 text-danger';
-                        voucherFeedbackText.textContent = 'Mã ưu đãi không hợp lệ hoặc đã hết hạn.';
+                        voucherFeedbackText.textContent = 'Không thể kết nối máy chủ để kiểm tra voucher.';
                         voucherFeedback.classList.remove('d-none');
-                    }
+                    });
                 });
             }
         });

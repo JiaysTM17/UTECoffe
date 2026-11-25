@@ -11,4 +11,5 @@ import java.util.List;
 public interface TableReservationRepository extends JpaRepository<TableReservation, Long> {
     List<TableReservation> findByUserIdOrderByReservationTimeDesc(Long userId);
     List<TableReservation> findByStoreIdAndStatus(Long storeId, ReservationStatus status);
+    List<TableReservation> findByStoreId(Long storeId);
 }

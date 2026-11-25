@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" width="1000" height="1200">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap');
+      .c1v-title-dark {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 64px;
+        font-weight: 700;
+        letter-spacing: 16px;
+        fill: #F5F2EB;
+        text-anchor: middle;
+      }
+      .c1v-subtitle-dark {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 9px;
+        fill: #E5C37E;
+        text-anchor: middle;
+      }
+      .c1v-meta-dark {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 6px;
+        fill: #A89F94;
+        text-anchor: middle;
+      }
+    </style>
+    <linearGradient id="goldDropVDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EED59B"/>
+      <stop offset="45%" stop-color="#DEB76A"/>
+      <stop offset="100%" stop-color="#B88E44"/>
+    </linearGradient>
+    <linearGradient id="beanDropVDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D2824"/>
+      <stop offset="100%" stop-color="#1A1715"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(500, 440)">
+    <path d="M 0,-150 C 40,-80 130,-10 130,85 C 130,175 60,230 0,230 C -25,230 -50,220 -70,205 C -45,185 -20,150 -20,105 C -20,25 0,-80 0,-150 Z" 
+          fill="url(#beanDropVDark)" stroke="#4A423A" stroke-width="2"/>
+    <path d="M 0,-150 C -40,-80 -130,-10 -130,85 C -130,175 -60,230 0,230 C 15,230 30,225 45,215 C 10,185 -10,140 -10,95 C -10,20 0,-80 0,-150 Z" 
+          fill="url(#goldDropVDark)"/>
+    <path d="M 0,-15 L 12,0 L 0,15 L -12,0 Z" fill="#FFFFFF"/>
+    <path d="M 0,-130 C -8,-40 12,40 0,210" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(500, 770)">
+    <line x1="-60" y1="0" x2="60" y2="0" stroke="url(#goldDropVDark)" stroke-width="2"/>
+    <circle cx="0" cy="0" r="3.5" fill="#E5C37E"/>
+  </g>
+
+  <text x="508" y="860" class="c1v-title-dark">UTECOFFE</text>
+  <text x="504" y="915" class="c1v-subtitle-dark">SPECIALTY TEA &amp; COFFEE ROASTERY</text>
+  <text x="503" y="965" class="c1v-meta-dark">EST. 2026 • ARTISANAL CRAFT</text>
+</svg>
