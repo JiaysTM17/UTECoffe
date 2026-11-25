@@ -6,98 +6,101 @@
 </head>
 <body class="bg-obsidian">
 
-    <!-- Header Banner -->
-    <div class="py-5 bg-espresso border-bottom border-gold text-center">
-        <div class="container py-2">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" style="letter-spacing: 0.12em;" data-i18n="cart.badge">
+    <!-- Header Banner: Compact & Elegant -->
+    <div class="py-3 bg-espresso border-bottom border-gold text-center">
+        <div class="container py-1">
+            <span class="badge bg-gold-subtle text-gold px-2.5 py-0.5 rounded-pill small font-accent mb-1 text-uppercase" style="letter-spacing: 0.1em; font-size: 0.72rem;" data-i18n="cart.badge">
                 <i class="fa-solid fa-bag-shopping me-1"></i> TÚI THƯỞNG THỨC NGHỆ NHÂN
             </span>
-            <h1 class="font-serif display-5 fw-bold text-gold-gradient mb-2" data-i18n="cart.title">
+            <h1 class="font-serif fs-4 fw-bold text-gold-gradient mb-1" data-i18n="cart.title">
                 Giỏ Hàng Thức Uống
             </h1>
-            <p class="text-secondary mx-auto small mb-0" style="max-width: 600px;" data-i18n="cart.desc">
-                Mỗi ly cà phê và tách trà đều được pha mới ngay khi nhận đơn để đảm bảo độ tươi và hương vị trọn vẹn nhất.
+            <p class="text-secondary mx-auto small mb-0" style="max-width: 540px; font-size: 0.82rem;" data-i18n="cart.desc">
+                Mỗi thức uống được pha chế thủ công ngay khi nhận đơn để đảm bảo hương vị trọn vẹn nhất.
             </p>
         </div>
     </div>
 
-    <div class="container py-5">
+    <!-- Main Content Container: Tightly Bounded to Prevent Stretched Elements -->
+    <div class="container py-4 cart-container-compact">
         <c:choose>
             <c:when test="${not empty cart and not empty cart.items}">
-                <!-- Free Shipping Progress Tracker -->
-                <div class="card-luxury p-4 mb-4 bg-espresso border-gold-subtle">
-                    <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
-                        <span class="small fw-bold text-light" id="freeShippingNotice">
+                <!-- Free Shipping Progress Tracker: Compact & Neat -->
+                <div class="card-luxury p-3 mb-3 bg-espresso border-gold-subtle">
+                    <div class="d-flex justify-content-between align-items-center mb-1.5 flex-wrap gap-2">
+                        <span class="small fw-bold text-light" id="freeShippingNotice" style="font-size: 0.82rem;">
                             <i class="fa-solid fa-truck-fast text-gold me-2"></i>
                             <span data-i18n="cart.freeship_notice">Đơn hàng từ <strong>150.000₫</strong> được <strong>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC</strong></span>
                         </span>
-                        <span class="badge bg-gold text-obsidian fw-bold font-monospace px-3 py-1 rounded-pill" id="shippingStatusBadge" data-i18n="cart.freeship_badge">
+                        <span class="badge bg-gold text-obsidian fw-bold font-monospace px-2.5 py-0.5 rounded-pill" id="shippingStatusBadge" style="font-size: 0.72rem;" data-i18n="cart.freeship_badge">
                             FREESHIP
                         </span>
                     </div>
-                    <div class="progress" style="height: 6px; background-color: rgba(212, 175, 55, 0.2);">
+                    <div class="progress" style="height: 5px; background-color: rgba(212, 175, 55, 0.15);">
                         <div class="progress-bar bg-gold-gradient" role="progressbar" id="freeShippingBar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
-                <div class="row g-4">
-                    <!-- Left: Cart Items Table -->
+                <div class="row g-3">
+                    <!-- Left: Cart Items & Smart Pairing Suggestions -->
                     <div class="col-lg-8">
-                        <div class="card-luxury p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold">
-                                <h5 class="font-serif fw-bold text-gold mb-0"><span data-i18n="cart.item_list">Danh Sách Thức Uống</span> (${cart.items.size()})</h5>
-                                <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold btn-sm px-3 rounded-pill">
+                        <div class="card-luxury p-3 p-md-3.5 mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2.5 pb-2 border-bottom border-gold">
+                                <h6 class="font-serif fw-bold text-gold mb-0" style="font-size: 0.95rem;">
+                                    <span data-i18n="cart.item_list">Danh Sách Thức Uống</span> (${cart.items.size()})
+                                </h6>
+                                <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold btn-sm px-2.5 py-1 rounded-pill" style="font-size: 0.78rem;">
                                     <i class="fa-solid fa-plus me-1"></i> <span data-i18n="cart.add_more">Chọn Thêm Món</span>
                                 </a>
                             </div>
 
                             <div class="table-responsive">
-                                <table class="table table-luxury align-middle">
+                                <table class="table table-luxury table-cart-compact align-middle mb-0">
                                     <thead>
                                         <tr class="small text-secondary">
                                             <th data-i18n="cart.th_beverage">Thức Uống</th>
                                             <th data-i18n="cart.th_unit_price">Đơn Giá</th>
                                             <th class="text-center" data-i18n="cart.th_quantity">Số Lượng</th>
                                             <th class="text-end" data-i18n="cart.th_total">Tạm Tính</th>
-                                            <th></th>
+                                            <th style="width: 36px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <c:forEach var="item" items="${cart.items}">
                                             <tr class="cart-item-row" data-item-id="${item.id}" data-unit-price="${item.unitPrice}">
                                                 <td>
-                                                    <div class="d-flex align-items-center gap-3">
+                                                    <div class="d-flex align-items-center gap-2.5">
                                                         <img src="${not empty item.product.imageUrl ? item.product.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=200&q=80'}" 
-                                                             class="rounded-3 border border-gold-subtle object-fit-cover" 
-                                                             style="width: 60px; height: 60px;" 
+                                                             class="rounded-2 border border-gold-subtle object-fit-cover flex-shrink-0" 
+                                                             style="width: 50px; height: 50px;" 
                                                              alt="${item.product.name}">
                                                         <div>
-                                                            <div class="fw-bold font-serif fs-6 text-light">${item.product.name}</div>
-                                                            <div class="small text-gold mt-1">
-                                                                <span class="badge bg-espresso border border-gold-subtle me-1">Size: ${item.productSize.name}</span>
+                                                            <div class="cart-product-title text-light">${item.product.name}</div>
+                                                            <div class="cart-product-meta text-gold mt-0.5">
+                                                                <span class="badge bg-espresso border border-gold-subtle me-1 px-1.5 py-0.5" style="font-size: 0.68rem;">Size: ${item.productSize.name}</span>
                                                                 <span>${item.sugarLevel}% Đường</span> • <span>${item.iceLevel}% Đá</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="font-monospace text-secondary">
+                                                <td class="font-monospace text-secondary" style="font-size: 0.85rem;">
                                                     <fmt:formatNumber value="${item.unitPrice}" pattern="#,##0"/> VNĐ
                                                 </td>
                                                 <td class="text-center">
-                                                    <div class="input-group input-group-sm mx-auto" style="width: 105px;">
-                                                        <button class="btn btn-outline-gold px-2 btn-qty-minus" type="button"><i class="fa-solid fa-minus fa-xs"></i></button>
-                                                        <input type="text" class="form-control text-center font-monospace fw-bold bg-dark text-light border-gold item-qty-input" value="${item.quantity}" readonly>
-                                                        <button class="btn btn-outline-gold px-2 btn-qty-plus" type="button"><i class="fa-solid fa-plus fa-xs"></i></button>
+                                                    <div class="input-group input-group-sm mx-auto" style="width: 96px;">
+                                                        <button class="btn btn-outline-gold px-1.5 btn-qty-minus" type="button"><i class="fa-solid fa-minus fa-2xs"></i></button>
+                                                        <input type="text" class="form-control text-center font-monospace fw-bold bg-dark text-light border-gold item-qty-input px-1" style="font-size: 0.85rem;" value="${item.quantity}" readonly>
+                                                        <button class="btn btn-outline-gold px-1.5 btn-qty-plus" type="button"><i class="fa-solid fa-plus fa-2xs"></i></button>
                                                     </div>
                                                 </td>
-                                                <td class="text-end fw-bold text-gold font-monospace item-subtotal-cell">
+                                                <td class="text-end fw-bold text-gold font-monospace item-subtotal-cell" style="font-size: 0.9rem;">
                                                     <fmt:formatNumber value="${item.subtotal}" pattern="#,##0"/> VNĐ
                                                 </td>
                                                 <td class="text-end">
                                                     <form action="${pageContext.request.contextPath}/cart/remove/${item.id}" method="post" class="d-inline">
                                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger border-0 p-2 rounded-circle" title="Xóa món">
-                                                            <i class="fa-solid fa-trash-can"></i>
+                                                        <button type="submit" class="btn btn-sm btn-link text-secondary text-hover-danger p-1" title="Xóa món">
+                                                            <i class="fa-solid fa-trash-can fa-sm"></i>
                                                         </button>
                                                     </form>
                                                 </td>
@@ -108,31 +111,35 @@
                             </div>
                         </div>
 
-                        <!-- Apriori Market Basket Analysis Recommendations -->
+                        <!-- Recommendations: Compact Shelf -->
                         <c:if test="${not empty cart.pairingRecommendations}">
-                            <div class="card-luxury p-4 mt-4 bg-espresso border-gold-subtle">
-                                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold flex-wrap gap-2">
-                                    <h6 class="font-serif fw-bold text-gold mb-0">
-                                        <i class="fa-solid fa-wand-magic-sparkles me-2"></i> Gợi Ý Món Dùng Kèm Hoàn Hảo
+                            <div class="cart-rec-shelf p-3 mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+                                    <h6 class="font-serif fw-bold text-gold mb-0" style="font-size: 0.88rem;">
+                                        <i class="fa-solid fa-wand-magic-sparkles me-1 text-gold"></i> Gợi Ý Món Dùng Kèm Hoàn Hảo
                                     </h6>
-                                    <span class="badge bg-gold-subtle text-gold font-accent small px-2.5 py-1 rounded-pill">
-                                        Được yêu thích nhất
+                                    <span class="badge bg-gold-subtle text-gold font-accent" style="font-size: 0.68rem;">
+                                        Phổ biến cùng đơn hàng
                                     </span>
                                 </div>
-                                <div class="row g-3">
+                                <div class="row g-2">
                                     <c:forEach var="rec" items="${cart.pairingRecommendations}">
                                         <div class="col-md-4 col-sm-6">
-                                            <div class="card-luxury p-2.5 h-100 d-flex flex-column justify-content-between border border-gold-subtle bg-dark">
-                                                <div class="d-flex align-items-center gap-2.5 mb-2">
-                                                    <img src="${not empty rec.targetImageUrl ? rec.targetImageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=200&q=80'}" class="rounded-2 border border-gold-subtle object-fit-cover" style="width: 48px; height: 48px;" alt="${rec.targetProductName}">
+                                            <div class="cart-rec-item d-flex align-items-center justify-content-between gap-2">
+                                                <div class="d-flex align-items-center gap-2 overflow-hidden">
+                                                    <img src="${not empty rec.targetImageUrl ? rec.targetImageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=200&q=80'}" 
+                                                         class="rounded-2 border border-gold-subtle object-fit-cover flex-shrink-0" 
+                                                         style="width: 42px; height: 42px;" 
+                                                         alt="${rec.targetProductName}">
                                                     <div class="text-truncate">
-                                                        <div class="small fw-bold text-light text-truncate">${rec.targetProductName}</div>
-                                                        <div class="small price-gold font-monospace"><fmt:formatNumber value="${rec.targetPrice}" pattern="#,##0"/> VNĐ</div>
+                                                        <div class="text-light fw-bold text-truncate" style="font-size: 0.82rem;">${rec.targetProductName}</div>
+                                                        <div class="price-gold font-monospace" style="font-size: 0.78rem;">
+                                                            <fmt:formatNumber value="${rec.targetPrice}" pattern="#,##0"/> VNĐ
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <small class="text-secondary d-block mb-2 text-truncate" style="font-size: 0.72rem;">${rec.pairingRationale}</small>
-                                                <button type="button" class="btn btn-outline-gold btn-sm w-100 py-1 rounded-pill font-accent" onclick="quickAddPairing(${rec.targetProductId})">
-                                                    <i class="fa-solid fa-plus me-1"></i> Thêm Nhanh
+                                                <button type="button" class="btn btn-outline-gold btn-sm px-2 py-0.5 rounded-pill font-accent flex-shrink-0" style="font-size: 0.75rem; white-space: nowrap;" onclick="quickAddPairing(${rec.targetProductId})">
+                                                    <i class="fa-solid fa-plus me-0.5"></i> Thêm
                                                 </button>
                                             </div>
                                         </div>
@@ -142,65 +149,65 @@
                         </c:if>
                     </div>
 
-                    <!-- Right: Order Summary & Voucher Promo Box -->
+                    <!-- Right: Order Summary & Voucher Promo Box (Compact & Balanced) -->
                     <div class="col-lg-4">
-                        <div class="card-luxury p-4 sticky-top" style="top: 100px;">
-                            <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold pb-2">
-                                <i class="fa-solid fa-receipt me-2"></i><span data-i18n="cart.order_summary">Tóm Tắt Đơn Hàng</span>
-                            </h5>
+                        <div class="card-luxury p-3 p-md-3.5 sticky-top" style="top: 85px;">
+                            <h6 class="font-serif fw-bold text-gold-gradient mb-2.5 border-bottom border-gold pb-2" style="font-size: 0.98rem;">
+                                <i class="fa-solid fa-receipt me-1.5"></i><span data-i18n="cart.order_summary">Tóm Tắt Đơn Hàng</span>
+                            </h6>
                             
                             <!-- Voucher Promo Input -->
-                            <div class="mb-4">
-                                <label class="form-label small text-gold fw-bold" data-i18n="cart.voucher_label">Mã Ưu Đãi / Voucher:</label>
-                                <div class="input-group">
-                                    <input type="text" id="voucherCodeInput" class="form-control form-control-luxury font-monospace text-uppercase" placeholder="VD: UTE2026, FREESHIP">
-                                    <button class="btn btn-outline-gold px-3 font-accent fw-bold" type="button" id="applyVoucherBtn">
+                            <div class="mb-3">
+                                <label class="form-label small text-gold fw-bold mb-1" style="font-size: 0.78rem;" data-i18n="cart.voucher_label">Mã Ưu Đãi / Voucher:</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="text" id="voucherCodeInput" class="form-control form-control-luxury font-monospace text-uppercase" placeholder="VD: UTE2026, FREESHIP" style="font-size: 0.82rem;">
+                                    <button class="btn btn-outline-gold px-2.5 font-accent fw-bold" type="button" id="applyVoucherBtn" style="font-size: 0.8rem;">
                                         <span data-i18n="cart.voucher_apply">Áp Dụng</span>
                                     </button>
                                 </div>
-                                <div class="d-flex flex-wrap gap-1.5 mt-2">
-                                    <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" onclick="quickApplyVoucher('UTE2026')">
+                                <div class="d-flex flex-wrap gap-1 mt-1.5">
+                                    <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" style="font-size: 0.7rem;" onclick="quickApplyVoucher('UTE2026')">
                                         <i class="fa-solid fa-tag me-1"></i> UTE2026 (-20%)
                                     </button>
-                                    <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" onclick="quickApplyVoucher('FREESHIP')">
+                                    <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" style="font-size: 0.7rem;" onclick="quickApplyVoucher('FREESHIP')">
                                         <i class="fa-solid fa-truck-fast me-1"></i> FREESHIP
                                     </button>
                                 </div>
-                                <div id="voucherFeedback" class="small mt-2 text-success d-none">
+                                <div id="voucherFeedback" class="small mt-1 text-success d-none" style="font-size: 0.78rem;">
                                     <i class="fa-solid fa-circle-check me-1"></i> <span id="voucherFeedbackText">Đã áp dụng mã UTE2026 (-20%)</span>
                                 </div>
                             </div>
 
                             <!-- Cost Breakdown -->
-                            <div class="d-flex justify-content-between mb-2 small text-secondary">
+                            <div class="d-flex justify-content-between mb-1.5 small text-secondary" style="font-size: 0.82rem;">
                                 <span data-i18n="cart.subtotal_label">Tổng tiền món:</span>
                                 <span class="text-light fw-bold font-monospace product-price-val" id="cartSubtotalText" data-raw-price="${cart.totalAmount}" data-vnd="${cart.totalAmount}">
                                     <fmt:formatNumber value="${cart.totalAmount}" pattern="#,##0"/> VNĐ
                                 </span>
                             </div>
-                            <div class="d-flex justify-content-between mb-2 small text-secondary">
+                            <div class="d-flex justify-content-between mb-1.5 small text-secondary" style="font-size: 0.82rem;">
                                 <span data-i18n="cart.shipping_label">Phí vận chuyển:</span>
                                 <span class="text-success fw-bold" id="cartShippingText" data-i18n="cart.free_text">Miễn Phí</span>
                             </div>
-                            <div class="d-flex justify-content-between mb-3 small text-secondary">
+                            <div class="d-flex justify-content-between mb-2 small text-secondary" style="font-size: 0.82rem;">
                                 <span data-i18n="cart.discount_label">Giảm giá voucher:</span>
                                 <span class="text-gold fw-bold font-monospace" id="cartDiscountText">-0 VNĐ</span>
                             </div>
 
-                            <hr class="border-secondary opacity-25">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <span class="fw-bold fs-6" data-i18n="cart.final_total_label">Thành Tiền:</span>
-                                <span class="price-gold fs-3 fw-bold product-price-val" id="cartFinalTotalText" data-raw-price="${cart.totalAmount}" data-vnd="${cart.totalAmount}">
+                            <hr class="border-secondary opacity-25 my-2">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold" style="font-size: 0.92rem;" data-i18n="cart.final_total_label">Thành Tiền:</span>
+                                <span class="price-gold fs-4 fw-bold product-price-val" id="cartFinalTotalText" data-raw-price="${cart.totalAmount}" data-vnd="${cart.totalAmount}">
                                     <fmt:formatNumber value="${cart.totalAmount}" pattern="#,##0"/> VNĐ
                                 </span>
                             </div>
 
-                            <a href="${pageContext.request.contextPath}/cart/checkout" class="btn btn-gold w-100 py-3 fw-bold fs-6 rounded-pill shadow-gold">
-                                <i class="fa-solid fa-credit-card me-2"></i> <span data-i18n="cart.btn_checkout">Tiến Hành Thanh Toán</span>
+                            <a href="${pageContext.request.contextPath}/cart/checkout" class="btn btn-gold w-100 py-2.5 fw-bold fs-6 rounded-pill shadow-gold">
+                                <i class="fa-solid fa-credit-card me-1.5"></i> <span data-i18n="cart.btn_checkout">Tiến Hành Thanh Toán</span>
                             </a>
 
-                            <div class="text-center mt-3">
-                                <span class="small text-secondary" style="font-size: 0.75rem;">
+                            <div class="text-center mt-2.5">
+                                <span class="text-secondary" style="font-size: 0.72rem;">
                                     <i class="fa-solid fa-shield-halved text-gold me-1"></i> <span data-i18n="cart.ssl_notice">Thanh toán bảo mật SSL 256-bit</span>
                                 </span>
                             </div>
@@ -209,16 +216,16 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <div class="text-center py-5">
-                    <div class="card-luxury p-5 mx-auto" style="max-width: 560px;">
-                        <div class="mb-4">
-                            <i class="fa-solid fa-bag-shopping text-gold display-1 opacity-50"></i>
+                <div class="text-center py-4">
+                    <div class="card-luxury p-4 mx-auto" style="max-width: 480px;">
+                        <div class="mb-3">
+                            <i class="fa-solid fa-bag-shopping text-gold display-3 opacity-50"></i>
                         </div>
-                        <h3 class="font-serif fw-bold text-gold-gradient mb-2" data-i18n="cart.empty_title">Giỏ Hàng Của Bạn Đang Trống</h3>
-                        <p class="text-secondary small mb-4" data-i18n="cart.empty_desc">
+                        <h4 class="font-serif fw-bold text-gold-gradient mb-2" data-i18n="cart.empty_title">Giỏ Hàng Của Bạn Đang Trống</h4>
+                        <p class="text-secondary small mb-3" style="font-size: 0.82rem;" data-i18n="cart.empty_desc">
                             Hãy khám phá thực đơn cà phê rang mộc thủ công và trà hoa tinh tuyển của UTECoffe để chọn cho mình thức uống ưng ý.
                         </p>
-                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-2.5 rounded-pill font-accent fw-bold shadow-gold-sm">
+                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-3.5 py-2 rounded-pill font-accent fw-bold shadow-gold-sm" style="font-size: 0.85rem;">
                             <i class="fa-solid fa-arrow-right me-1"></i> <span data-i18n="cart.empty_btn">Khám Phá Thực Đơn Ngay</span>
                         </a>
                     </div>
@@ -257,7 +264,7 @@
                     if (subtotal >= threshold) {
                         freeShippingNotice.innerHTML = '<i class="fa-solid fa-circle-check text-success me-2"></i>Đơn hàng đã đủ điều kiện <strong>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC!</strong>';
                         if (shippingStatusBadge) {
-                            shippingStatusBadge.className = 'badge bg-success text-light fw-bold font-monospace px-3 py-1 rounded-pill';
+                            shippingStatusBadge.className = 'badge bg-success text-light fw-bold font-monospace px-2.5 py-0.5 rounded-pill';
                             shippingStatusBadge.textContent = 'FREESHIP ĐẠT';
                         }
                         if (shippingText) shippingText.textContent = 'Miễn Phí';
@@ -265,7 +272,7 @@
                         const remaining = threshold - subtotal;
                         freeShippingNotice.innerHTML = '<i class="fa-solid fa-truck-fast text-gold me-2"></i>Mua thêm <strong>' + formatCurrency(remaining) + '</strong> để được <strong>MIỄN PHÍ VẬN CHUYỂN!</strong>';
                         if (shippingStatusBadge) {
-                            shippingStatusBadge.className = 'badge bg-gold text-obsidian fw-bold font-monospace px-3 py-1 rounded-pill';
+                            shippingStatusBadge.className = 'badge bg-gold text-obsidian fw-bold font-monospace px-2.5 py-0.5 rounded-pill';
                             shippingStatusBadge.textContent = 'CẦN THÊM ' + percent + '%';
                         }
                     }

@@ -612,6 +612,51 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     background-color: var(--gold-subtle);
 }
 
+/* Compact Cart & Checkout Enhancements */
+.table-cart-compact thead th {
+    padding: 0.6rem 0.75rem !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.08em;
+}
+
+.table-cart-compact tbody td {
+    padding: 0.7rem 0.75rem !important;
+}
+
+.cart-container-compact {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.cart-product-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.cart-product-meta {
+    font-size: 0.75rem;
+}
+
+.cart-rec-shelf {
+    background: rgba(26, 21, 18, 0.75);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 12px;
+}
+
+.cart-rec-item {
+    background: rgba(11, 9, 8, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.cart-rec-item:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(26, 21, 18, 0.95);
+}
+
 /* ==========================================================================
    Footer Luxury
    ========================================================================== */
