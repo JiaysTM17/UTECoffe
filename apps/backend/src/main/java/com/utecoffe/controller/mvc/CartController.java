@@ -396,27 +396,31 @@ public class CartController {
         // Reset cart in session
         session.removeAttribute(CART_SESSION_KEY);
 
-        // Payment gateway routing
-        if (paymentMethod == PaymentMethod.VNPAY) {
-            String vnpUrl = vnPayService.createPaymentUrl(order, request);
-            return "redirect:" + vnpUrl;
-        } else if (paymentMethod == PaymentMethod.MOMO) {
-            String momoUrl = moMoPaymentService.createPaymentRequest(order);
-            return "redirect:" + momoUrl;
-        } else if (paymentMethod == PaymentMethod.VIETQR) {
-            return "redirect:/orders/tracking/" + order.getOrderCode() + "?payment=vietqr";
-        } else {
+        // In-App Simulated QR Payment - Keep customer 100% on UTECoffe website!
+        String methodCode = paymentMethod != null ? paymentMethod.name().toLowerCase() : "vietqr";
+        if (paymentMethod == PaymentMethod.COD) {
             return "redirect:/orders/tracking/" + order.getOrderCode() + "?payment=cod";
+        } else {
+            return "redirect:/orders/tracking/" + order.getOrderCode() + "?payment=" + methodCode + "&showQr=true";
         }
     }
 
     @GetMapping("/orders/tracking/{orderCode}")
-    public String orderTracking(@PathVariable("orderCode") String orderCode, Model model) {
+    public String orderTracking(
+            @PathVariable("orderCode") String orderCode,
+            @RequestParam(name = "payment", required = false) String paymentParam,
+            @RequestParam(name = "showQr", required = false) Boolean showQr,
+            Model model) {
         Order order = orderService.getOrderByCode(orderCode);
         model.addAttribute("order", order);
 
         String vietQrUrl = vietQrService.generateVietQrUrl(order);
         model.addAttribute("vietQrUrl", vietQrUrl);
+
+        boolean isElectronicPayment = order.getPaymentMethod() != null && !"COD".equalsIgnoreCase(order.getPaymentMethod());
+        boolean displayQr = Boolean.TRUE.equals(showQr) || (isElectronicPayment && "PENDING".equalsIgnoreCase(String.valueOf(order.getStatus())));
+        model.addAttribute("showQr", displayQr);
+        model.addAttribute("paymentParam", paymentParam != null ? paymentParam : (order.getPaymentMethod() != null ? order.getPaymentMethod().toLowerCase() : "vietqr"));
 
         return "customer/order-tracking";
     }

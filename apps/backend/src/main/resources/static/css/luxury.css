@@ -691,9 +691,73 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 /* Explicit Navbar Button Sizing & Zero-Wrapping Guarantee */
-.btn-gold,
-.btn-outline-gold {
+.navbar-luxury .btn-gold,
+.navbar-luxury .btn-outline-gold {
     white-space: nowrap !important;
+}
+
+/* Universal Overflow Protections */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+body {
+    overflow-x: hidden;
+}
+
+/* Delivery & Takeaway Option Cards */
+.delivery-option-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    padding: 1.15rem 0.75rem !important;
+    border: 1.5px solid var(--border-gold) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: var(--text-gold) !important;
+    transition: var(--transition-smooth) !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    user-select: none;
+}
+.delivery-option-btn:hover {
+    background: rgba(212, 175, 55, 0.08) !important;
+    border-color: var(--text-gold) !important;
+    transform: translateY(-2px);
+}
+.btn-check:checked + .delivery-option-btn {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(26, 21, 16, 0.95) 100%) !important;
+    border-color: var(--text-gold) !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25) !important;
+}
+[data-theme="light"] .btn-check:checked + .delivery-option-btn {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, #faf8f5 100%) !important;
+}
+
+/* Payment Option Cards */
+.payment-option-card {
+    transition: var(--transition-smooth);
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1.5px solid var(--border-gold-subtle) !important;
+    cursor: pointer;
+    white-space: normal !important;
+    word-break: break-word;
+}
+.payment-option-card:hover {
+    border-color: var(--text-gold) !important;
+    background: rgba(212, 175, 55, 0.06) !important;
+}
+.payment-option-card:has(input:checked) {
+    border-color: var(--text-gold) !important;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(26, 21, 16, 0.95) 100%) !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2) !important;
+}
+[data-theme="light"] .payment-option-card:has(input:checked) {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, #faf8f5 100%) !important;
 }
 
 .btn-gold.btn-sm,

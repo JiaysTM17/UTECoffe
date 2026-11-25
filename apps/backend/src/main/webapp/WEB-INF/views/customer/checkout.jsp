@@ -35,20 +35,20 @@
                         </h5>
 
                         <div class="row g-3 mb-4">
-                            <div class="col-6">
+                            <div class="col-sm-6">
                                 <input type="radio" class="btn-check" name="orderType" id="typeDelivery" value="DELIVERY" checked>
-                                <label class="btn btn-outline-gold w-100 py-3 text-center rounded-3 cursor-pointer" for="typeDelivery">
-                                    <i class="fa-solid fa-motorcycle fs-3 d-block mb-1 text-gold"></i>
-                                    <span class="fw-bold font-accent" data-i18n="checkout.delivery">Giao Tận Nơi</span>
-                                    <small class="d-block text-secondary" style="font-size: 0.75rem;" data-i18n="checkout.delivery_hint">Siêu tốc 20 - 35 phút</small>
+                                <label class="delivery-option-btn" for="typeDelivery">
+                                    <i class="fa-solid fa-motorcycle fs-3 mb-2 text-gold"></i>
+                                    <span class="fw-bold font-accent fs-6 d-block text-gold" data-i18n="checkout.delivery">GIAO TẬN NƠI</span>
+                                    <small class="text-secondary d-block mt-1" style="font-size: 0.75rem;" data-i18n="checkout.delivery_hint">Siêu tốc 20 - 35 phút</small>
                                 </label>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-6">
                                 <input type="radio" class="btn-check" name="orderType" id="typeTakeaway" value="TAKE_AWAY">
-                                <label class="btn btn-outline-gold w-100 py-3 text-center rounded-3 cursor-pointer" for="typeTakeaway">
-                                    <i class="fa-solid fa-store fs-3 d-block mb-1 text-gold"></i>
-                                    <span class="fw-bold font-accent" data-i18n="checkout.takeaway">Lấy Tại Quán</span>
-                                    <small class="d-block text-secondary" style="font-size: 0.75rem;" data-i18n="checkout.takeaway_hint">Chuẩn bị sẵn không chờ</small>
+                                <label class="delivery-option-btn" for="typeTakeaway">
+                                    <i class="fa-solid fa-store fs-3 mb-2 text-gold"></i>
+                                    <span class="fw-bold font-accent fs-6 d-block text-gold" data-i18n="checkout.takeaway">LẤY TẠI QUÁN</span>
+                                    <small class="text-secondary d-block mt-1" style="font-size: 0.75rem;" data-i18n="checkout.takeaway_hint">Chuẩn bị sẵn không chờ</small>
                                 </label>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                     <i class="fa-solid fa-location-crosshairs text-gold me-1"></i> <span data-i18n="checkout.gps_btn">Định Vị Gần Nhất</span>
                                 </button>
                             </div>
-                            <select class="form-select form-control-luxury" name="storeId" id="storeSelect" required>
+                            <select class="form-select form-control-luxury text-truncate" name="storeId" id="storeSelect" required>
                                 <option value="1">UTECoffe Flagship Thủ Đức - 01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức</option>
                                 <option value="2">UTECoffe Roastery Quận 1 - 68 Lê Lợi, P. Bến Nghé, Quận 1</option>
                                 <option value="3">UTECoffe Garden Bình Thạnh - 180 Ung Văn Khiêm, Phường 25, Q. Bình Thạnh, TP.HCM</option>
@@ -108,56 +108,63 @@
 
                         <div class="d-flex flex-column gap-3">
                             <!-- VietQR Dynamic -->
-                            <label class="p-3 border border-gold rounded-3 bg-espresso d-flex align-items-center gap-3 cursor-pointer payment-option-card">
+                            <label class="p-3 rounded-3 d-flex align-items-center gap-3 cursor-pointer payment-option-card">
                                 <input type="radio" name="paymentMethod" value="VIETQR" checked class="form-check-input flex-shrink-0">
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold d-flex align-items-center gap-2">
+                                    <div class="fw-bold d-flex align-items-center gap-2 flex-wrap">
                                         <i class="fa-solid fa-qrcode text-gold fs-5"></i>
-                                        <span>Chuyển Khoản Ngân Hàng Tự Động (VietQR Động)</span>
+                                        <span>Chuyển Khoản Ngân Hàng (VietQR Động Trực Tiếp)</span>
                                         <span class="badge bg-gold text-obsidian small px-2 py-0">Khuyên dùng</span>
                                     </div>
                                     <small class="text-secondary d-block mt-1">
-                                        Mã QR chứa sẵn số tiền và mã đơn. Hệ thống tự động xác nhận sau 3 giây và chuyển lệnh pha chế.
+                                        Hiển thị mã QR chứa sẵn số tiền và mã đơn ngay trên website. Tự động xác nhận sau khi quét.
                                     </small>
                                 </div>
                             </label>
 
-                            <!-- VNPay Sandbox -->
-                            <label class="p-3 border border-secondary rounded-3 bg-espresso d-flex align-items-center gap-3 cursor-pointer payment-option-card">
+                            <!-- VNPay In-App QR -->
+                            <label class="p-3 rounded-3 d-flex align-items-center gap-3 cursor-pointer payment-option-card">
                                 <input type="radio" name="paymentMethod" value="VNPAY" class="form-check-input flex-shrink-0">
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold d-flex align-items-center gap-2">
-                                        <i class="fa-regular fa-credit-card text-gold fs-5"></i>
-                                        <span>Cổng VNPay (Thẻ ATM, Visa, MasterCard, QR Pay)</span>
+                                    <div class="fw-bold d-flex align-items-center gap-2 flex-wrap">
+                                        <i class="fa-solid fa-wallet text-gold fs-5"></i>
+                                        <span>Cổng VNPay-QR (Quét mã trực tiếp trên Web)</span>
+                                        <span class="badge bg-espresso border border-gold text-gold small px-2 py-0">Không chuyển hướng</span>
                                     </div>
                                     <small class="text-secondary d-block mt-1">
-                                        Hỗ trợ 40+ ngân hàng Việt Nam và thẻ thanh toán quốc tế qua cổng VNPay.
+                                        Tạo mã QR thanh toán an toàn trực tiếp trên giao diện website UTECoffe, hỗ trợ tất cả App ngân hàng.
                                     </small>
                                 </div>
                             </label>
 
-                            <!-- MoMo Sandbox -->
-                            <label class="p-3 border border-secondary rounded-3 bg-espresso d-flex align-items-center gap-3 cursor-pointer payment-option-card">
+                            <!-- MoMo In-App QR -->
+                            <label class="p-3 rounded-3 d-flex align-items-center gap-3 cursor-pointer payment-option-card">
                                 <input type="radio" name="paymentMethod" value="MOMO" class="form-check-input flex-shrink-0">
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold d-flex align-items-center gap-2">
-                                        <i class="fa-solid fa-wallet text-gold fs-5"></i>
-                                        <span>Ví Điện Tử MoMo</span>
+                                    <div class="fw-bold d-flex align-items-center gap-2 flex-wrap">
+                                        <i class="fa-solid fa-mobile-screen-button text-gold fs-5"></i>
+                                        <span>Ví Điện Tử MoMo QR (Trực Tiếp Trên Web)</span>
                                     </div>
                                     <small class="text-secondary d-block mt-1">
-                                        Quét mã thanh toán tức thì qua ứng dụng MoMo trên điện thoại.
+                                        Mở app MoMo quét mã QR động được tạo ngay trên đơn hàng để hoàn tất thanh toán.
                                     </small>
                                 </div>
                             </label>
 
                             <!-- COD -->
-                            <label class="p-3 border border-secondary rounded-3 bg-espresso d-flex align-items-center gap-3 cursor-pointer payment-option-card">
+                            <label class="p-3 rounded-3 d-flex align-items-center gap-3 cursor-pointer payment-option-card">
                                 <input type="radio" name="paymentMethod" value="COD" class="form-check-input flex-shrink-0">
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold d-flex align-items-center gap-2">
+                                    <div class="fw-bold d-flex align-items-center gap-2 flex-wrap">
                                         <i class="fa-solid fa-money-bill-wave text-gold fs-5"></i>
                                         <span>Tiền Mặt Khi Nhận Hàng (COD)</span>
                                     </div>
+                                    <small class="text-secondary d-block mt-1">
+                                        Thanh toán tiền mặt trực tiếp cho nhân viên giao hàng khi nhận thức uống tận tay.
+                                    </small>
+                                </div>
+                            </label>
+                        </div>
                                     <small class="text-secondary d-block mt-1">
                                         Thanh toán tiền mặt trực tiếp cho nhân viên giao hàng khi nhận thức uống.
                                     </small>

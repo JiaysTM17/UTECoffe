@@ -184,58 +184,221 @@
                                     </span>
                                 </div>
 
-                                <c:if test="${order.paymentMethod == 'VIETQR' and (order.status == 'PENDING' or param.payment == 'vietqr')}">
-                                    <div class="card-luxury p-3 text-center border-gold bg-espresso mt-3" id="vietQrPaymentBox">
-                                        <div class="small fw-bold text-gold text-uppercase mb-2">
-                                            <i class="fa-solid fa-qrcode me-1"></i> Quét Mã VietQR Chuyển Khoản
+                                <!-- In-App Simulated Universal QR Payment Center -->
+                                <c:choose>
+                                    <c:when test="${order.paymentMethod != 'COD' and (order.status == 'PENDING' or param.showQr == 'true' or showQr == true)}">
+                                        <div class="card-luxury p-3 p-md-4 text-center border-gold bg-espresso mt-3 shadow-lg" id="vietQrPaymentBox">
+                                            <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom border-gold flex-wrap gap-1">
+                                                <span class="badge bg-gold text-obsidian small font-accent fw-bold px-2 py-1 rounded-pill">
+                                                    <i class="fa-solid fa-qrcode me-1"></i> THANH TOÁN QR TRỰC TIẾP
+                                                </span>
+                                                <span class="small text-secondary font-monospace" style="font-size: 0.75rem;">
+                                                    <i class="fa-regular fa-clock me-1 text-gold"></i> Hết hạn: <strong class="text-gold" id="qrCountdown">14:59</strong>
+                                                </span>
+                                            </div>
+
+                                            <!-- Bank / Wallet Tab Selector -->
+                                            <div class="d-flex justify-content-center gap-1 mb-3">
+                                                <button type="button" class="btn btn-outline-gold btn-sm py-1 px-2.5 active font-accent qr-tab-btn" onclick="selectQrTab('ICB', 'VietinBank', '108820269999', this)">
+                                                    VietinBank
+                                                </button>
+                                                <button type="button" class="btn btn-outline-gold btn-sm py-1 px-2.5 font-accent qr-tab-btn" onclick="selectQrTab('TCB', 'Techcombank', '190368202699', this)">
+                                                    Techcombank
+                                                </button>
+                                                <button type="button" class="btn btn-outline-gold btn-sm py-1 px-2.5 font-accent qr-tab-btn" onclick="selectQrTab('970415', 'Ví MoMo / VNPay-QR', '108820269999', this)">
+                                                    MoMo / VNPay
+                                                </button>
+                                            </div>
+
+                                            <!-- Dynamic High-Resolution Universal QR Code -->
+                                            <div class="position-relative d-inline-block mx-auto mb-3 p-2 bg-white rounded-3 shadow-gold-sm">
+                                                <img id="dynamicQrImage" 
+                                                     src="https://img.vietqr.io/image/ICB-108820269999-compact2.png?amount=${order.finalAmount}&addInfo=THANH+TOAN+DON+${order.orderCode}&accountName=CONG+TY+CP+CA+PHE+UTE+COFFE"
+                                                     class="img-fluid rounded-2 d-block mx-auto"
+                                                     style="max-width: 210px; height: auto;"
+                                                     alt="Mã QR Thanh Toán UTECoffe">
+                                            </div>
+
+                                            <!-- Transfer Details with 1-Click Copy -->
+                                            <div class="text-start bg-obsidian p-3 rounded-3 border border-gold-subtle mb-3 small">
+                                                <div class="d-flex justify-content-between align-items-center mb-1.5 pb-1 border-bottom border-dark">
+                                                    <span class="text-secondary">Ngân Hàng:</span>
+                                                    <strong class="text-light" id="qrBankName">VietinBank (Chi nhánh Thủ Đức)</strong>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center mb-1.5 pb-1 border-bottom border-dark">
+                                                    <span class="text-secondary">Số Tài Khoản:</span>
+                                                    <div class="d-flex align-items-center gap-1.5">
+                                                        <strong class="text-gold font-monospace fs-6" id="qrAccNo">108820269999</strong>
+                                                        <button type="button" class="btn btn-outline-gold btn-sm py-0 px-2 rounded-pill" style="font-size: 0.7rem;" onclick="copyToClipboard('108820269999', this)">
+                                                            <i class="fa-regular fa-copy"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center mb-1.5 pb-1 border-bottom border-dark">
+                                                    <span class="text-secondary">Chủ Tài Khoản:</span>
+                                                    <strong class="text-light text-uppercase">CONG TY CP CA PHE UTE COFFE</strong>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center mb-1.5 pb-1 border-bottom border-dark">
+                                                    <span class="text-secondary">Số Tiền:</span>
+                                                    <strong class="price-gold fs-6">
+                                                        <fmt:formatNumber value="${order.finalAmount}" pattern="#,##0"/> VNĐ
+                                                    </strong>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="text-secondary">Nội Dung:</span>
+                                                    <div class="d-flex align-items-center gap-1.5">
+                                                        <strong class="text-gold font-monospace" id="qrMemoText">THANH TOAN DON ${order.orderCode}</strong>
+                                                        <button type="button" class="btn btn-outline-gold btn-sm py-0 px-2 rounded-pill" style="font-size: 0.7rem;" onclick="copyToClipboard('THANH TOAN DON ${order.orderCode}', this)">
+                                                            <i class="fa-regular fa-copy"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- User Action Buttons -->
+                                            <button type="button" class="btn btn-gold w-100 py-2.5 rounded-pill fw-bold shadow-gold mb-2 font-accent" id="btnConfirmPaid" onclick="executePaymentVerification()">
+                                                <i class="fa-solid fa-circle-check me-1.5"></i> Tôi Đã Chuyển Khoản Thành Công
+                                            </button>
+
+                                            <button type="button" class="btn btn-outline-gold w-100 py-1.5 rounded-pill small font-accent text-gold" id="btnSimulateScan" onclick="simulateDemoFastPayment()">
+                                                <i class="fa-solid fa-bolt text-warning me-1.5"></i> Giả Lập Quét QR Thành Công (Thử Nghiệm Demo)
+                                            </button>
                                         </div>
-                                        <img src="${not empty vietQrUrl ? vietQrUrl : 'https://img.vietqr.io/image/ICB-108868686868-compact2.png?amount=125000&addInfo=THANH+TOAN+DON+'.concat(order.orderCode).concat('&accountName=UTECOFFE+SPECIALTY')}"
-                                             class="rounded-3 border border-gold-subtle mx-auto d-block img-fluid shadow-sm mb-2"
-                                             style="max-width: 220px;"
-                                             alt="VietQR Payment">
-                                        <div class="small text-light">
-                                            Ngân hàng: <strong>VietinBank</strong> • STK: <strong class="text-gold font-monospace">108868686868</strong>
-                                        </div>
-                                        <div class="small text-secondary font-monospace mt-1">
-                                            Nội dung: <strong>THANH TOAN DON ${order.orderCode}</strong>
-                                        </div>
-                                        <button type="button" class="btn btn-gold btn-sm rounded-pill mt-3 w-100 fw-bold" id="btnConfirmPaid" onclick="confirmVietQrPaid()">
-                                            <i class="fa-solid fa-circle-check me-1"></i> Tôi Đã Chuyển Khoản Thành Công
-                                        </button>
-                                    </div>
-                                    <script>
-                                        function confirmVietQrPaid() {
-                                            const btn = document.getElementById('btnConfirmPaid');
-                                            if (btn) {
-                                                btn.disabled = true;
-                                                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang xác nhận giao dịch...';
+
+                                        <script>
+                                            function copyToClipboard(text, btnElement) {
+                                                navigator.clipboard.writeText(text).then(() => {
+                                                    const originalHtml = btnElement.innerHTML;
+                                                    btnElement.innerHTML = '<i class="fa-solid fa-check text-success"></i>';
+                                                    setTimeout(() => { btnElement.innerHTML = originalHtml; }, 2000);
+                                                });
                                             }
-                                            fetch('${pageContext.request.contextPath}/api/payments/vietqr/verify/${order.orderCode}', {
-                                                method: 'POST',
-                                                headers: {
-                                                    'X-CSRF-TOKEN': '${_csrf.token}'
+
+                                            function selectQrTab(bankCode, bankName, accNo, btn) {
+                                                document.querySelectorAll('.qr-tab-btn').forEach(b => b.classList.remove('active'));
+                                                if (btn) btn.classList.add('active');
+
+                                                const qrImg = document.getElementById('dynamicQrImage');
+                                                const bankNameEl = document.getElementById('qrBankName');
+                                                const accNoEl = document.getElementById('qrAccNo');
+
+                                                if (bankNameEl) bankNameEl.textContent = bankName;
+                                                if (accNoEl) accNoEl.textContent = accNo;
+
+                                                if (qrImg) {
+                                                    const amount = '${order.finalAmount}';
+                                                    const memo = 'THANH+TOAN+DON+${order.orderCode}';
+                                                    const accountName = 'CONG+TY+CP+CA+PHE+UTE+COFFE';
+                                                    qrImg.src = 'https://img.vietqr.io/image/' + bankCode + '-' + accNo + '-compact2.png?amount=' + amount + '&addInfo=' + memo + '&accountName=' + accountName;
                                                 }
-                                            })
-                                            .then(res => res.json())
-                                            .then(data => {
+                                            }
+
+                                            (function initQrTimer() {
+                                                let totalSeconds = 15 * 60;
+                                                const timerEl = document.getElementById('qrCountdown');
+                                                if (!timerEl) return;
+
+                                                const interval = setInterval(() => {
+                                                    totalSeconds--;
+                                                    if (totalSeconds <= 0) {
+                                                        clearInterval(interval);
+                                                        timerEl.textContent = 'Đã hết hạn';
+                                                        return;
+                                                    }
+                                                    const minutes = Math.floor(totalSeconds / 60);
+                                                    const seconds = totalSeconds % 60;
+                                                    timerEl.textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                                                }, 1000);
+                                            })();
+
+                                            function executePaymentVerification() {
+                                                const btn = document.getElementById('btnConfirmPaid');
+                                                const btnDemo = document.getElementById('btnSimulateScan');
                                                 if (btn) {
-                                                    btn.className = 'btn btn-success btn-sm rounded-pill mt-3 w-100 fw-bold';
-                                                    btn.innerHTML = '<i class="fa-solid fa-check me-1"></i> Đã Xác Nhận Thanh Toán!';
+                                                    btn.disabled = true;
+                                                    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1.5"></i> Đang xác thực với cổng Napas 247...';
                                                 }
-                                                const box = document.getElementById('vietQrPaymentBox');
-                                                if (box) {
-                                                    setTimeout(() => box.remove(), 2500);
+                                                if (btnDemo) btnDemo.disabled = true;
+
+                                                fetch('${pageContext.request.contextPath}/api/payments/vietqr/verify/${order.orderCode}', {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'X-CSRF-TOKEN': '${_csrf.token}'
+                                                    }
+                                                })
+                                                .then(res => res.json())
+                                                .then(data => {
+                                                    showPaymentSuccessUI(data.message || 'Xác nhận thanh toán thành công!');
+                                                })
+                                                .catch(() => {
+                                                    if (btn) {
+                                                        btn.disabled = false;
+                                                        btn.innerHTML = '<i class="fa-solid fa-circle-check me-1.5"></i> Tôi Đã Chuyển Khoản Thành Công';
+                                                    }
+                                                    if (btnDemo) btnDemo.disabled = false;
+                                                });
+                                            }
+
+                                            function simulateDemoFastPayment() {
+                                                const btnDemo = document.getElementById('btnSimulateScan');
+                                                if (btnDemo) {
+                                                    btnDemo.disabled = true;
+                                                    btnDemo.innerHTML = '<i class="fa-solid fa-bolt fa-fade text-warning me-1.5"></i> Đang giả lập quét mã QR...';
                                                 }
-                                            })
-                                            .catch(() => {
-                                                if (btn) {
-                                                    btn.disabled = false;
-                                                    btn.innerHTML = '<i class="fa-solid fa-circle-check me-1"></i> Tôi Đã Chuyển Khoản Thành Công';
+                                                setTimeout(() => {
+                                                    executePaymentVerification();
+                                                }, 800);
+                                            }
+
+                                            function showPaymentSuccessUI(msg) {
+                                                const paymentBox = document.getElementById('vietQrPaymentBox');
+                                                if (paymentBox) {
+                                                    paymentBox.innerHTML = `
+                                                        <div class="py-4 text-center animate-fade-in">
+                                                            <div class="d-inline-flex p-3 rounded-circle bg-success bg-opacity-25 border border-success mb-3 shadow-lg">
+                                                                <i class="fa-solid fa-circle-check text-success display-4"></i>
+                                                            </div>
+                                                            <h5 class="font-serif fw-bold text-gold mb-2">Thanh Toán Thành Công!</h5>
+                                                            <p class="small text-light mb-3">Khoản thanh toán đã được ghi nhận. Lệnh pha chế đã được chuyển tới quầy Barista.</p>
+                                                            <span class="badge bg-espresso border border-gold text-gold font-monospace px-3 py-1.5 rounded-pill">
+                                                                <i class="fa-solid fa-mug-hot me-1.5 text-warning fa-bounce"></i> Barista đang bắt đầu pha chế
+                                                            </span>
+                                                        </div>
+                                                    `;
                                                 }
-                                            });
-                                        }
-                                    </script>
-                                </c:if>
+
+                                                const statusText = document.getElementById('currentStatusText');
+                                                if (statusText) statusText.textContent = 'PREPARING (Đang Pha Chế)';
+
+                                                const progressBar = document.getElementById('stepperProgressBar');
+                                                if (progressBar) progressBar.style.width = '50%';
+
+                                                const step2 = document.getElementById('step-PREPARING');
+                                                if (step2) {
+                                                    const circle = step2.querySelector('.step-circle');
+                                                    if (circle) circle.classList.add('active');
+                                                    const label = step2.querySelector('.step-label');
+                                                    if (label) {
+                                                        label.classList.remove('text-secondary');
+                                                        label.classList.add('text-gold');
+                                                    }
+                                                }
+
+                                                const statusDesc = document.getElementById('statusDescText');
+                                                if (statusDesc) {
+                                                    statusDesc.textContent = 'Đã nhận thanh toán. Barista tại ${order.store.name} đang tiến hành định lượng và chiết xuất thức uống.';
+                                                }
+                                            }
+                                        </script>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="p-3 bg-espresso rounded-3 border border-gold-subtle mt-3 text-center">
+                                            <i class="fa-solid fa-circle-check text-success fs-3 mb-2 d-block"></i>
+                                            <div class="small fw-bold text-light">Đơn Hàng Đang Được Xử Lý An Toàn</div>
+                                            <div class="small text-secondary mt-1">Phương thức: <strong>${order.paymentMethod}</strong></div>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
 
                             <div class="pt-3 border-top border-gold mt-4 d-flex gap-2">

@@ -107,6 +107,39 @@
                                 </table>
                             </div>
                         </div>
+
+                        <!-- Apriori Market Basket Analysis Recommendations -->
+                        <c:if test="${not empty cart.pairingRecommendations}">
+                            <div class="card-luxury p-4 mt-4 bg-espresso border-gold-subtle">
+                                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold flex-wrap gap-2">
+                                    <h6 class="font-serif fw-bold text-gold mb-0">
+                                        <i class="fa-solid fa-wand-magic-sparkles me-2"></i> Gợi Ý Thưởng Thức Kèm (Thuật Toán Apriori)
+                                    </h6>
+                                    <span class="badge bg-gold-subtle text-gold font-accent small px-2.5 py-1 rounded-pill">
+                                        Phổ biến cùng đơn hàng
+                                    </span>
+                                </div>
+                                <div class="row g-3">
+                                    <c:forEach var="rec" items="${cart.pairingRecommendations}">
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="card-luxury p-2.5 h-100 d-flex flex-column justify-content-between border border-gold-subtle bg-dark">
+                                                <div class="d-flex align-items-center gap-2.5 mb-2">
+                                                    <img src="${not empty rec.targetImageUrl ? rec.targetImageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=200&q=80'}" class="rounded-2 border border-gold-subtle object-fit-cover" style="width: 48px; height: 48px;" alt="${rec.targetProductName}">
+                                                    <div class="text-truncate">
+                                                        <div class="small fw-bold text-light text-truncate">${rec.targetProductName}</div>
+                                                        <div class="small price-gold font-monospace"><fmt:formatNumber value="${rec.targetPrice}" pattern="#,##0"/> VNĐ</div>
+                                                    </div>
+                                                </div>
+                                                <small class="text-secondary d-block mb-2 text-truncate" style="font-size: 0.72rem;">${rec.pairingRationale}</small>
+                                                <button type="button" class="btn btn-outline-gold btn-sm w-100 py-1 rounded-pill font-accent" onclick="quickAddPairing(${rec.targetProductId})">
+                                                    <i class="fa-solid fa-plus me-1"></i> Thêm Nhanh
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
 
                     <!-- Right: Order Summary & Voucher Promo Box -->
@@ -125,7 +158,15 @@
                                         <span data-i18n="cart.voucher_apply">Áp Dụng</span>
                                     </button>
                                 </div>
-                                <div id="voucherFeedback" class="small mt-1 text-success d-none">
+                                <div class="d-flex flex-wrap gap-1.5 mt-2">
+                                    <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" onclick="quickApplyVoucher('UTE2026')">
+                                        <i class="fa-solid fa-tag me-1"></i> UTE2026 (-20%)
+                                    </button>
+                                    <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" onclick="quickApplyVoucher('FREESHIP')">
+                                        <i class="fa-solid fa-truck-fast me-1"></i> FREESHIP
+                                    </button>
+                                </div>
+                                <div id="voucherFeedback" class="small mt-2 text-success d-none">
                                     <i class="fa-solid fa-circle-check me-1"></i> <span id="voucherFeedbackText">Đã áp dụng mã UTE2026 (-20%)</span>
                                 </div>
                             </div>
@@ -346,5 +387,39 @@
                 });
             }
         });
+
+        function quickApplyVoucher(code) {
+            const input = document.getElementById('voucherCodeInput');
+            if (input) {
+                input.value = code;
+                const btn = document.getElementById('applyVoucherBtn');
+                if (btn) btn.click();
+            }
+        }
+
+        function quickAddPairing(productId) {
+            const formData = new URLSearchParams();
+            formData.append('productId', productId);
+            formData.append('size', 'M');
+            formData.append('sugar', '100');
+            formData.append('ice', '100');
+            formData.append('quantity', '1');
+
+            fetch('${pageContext.request.contextPath}/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRF-TOKEN': '${_csrf.token}'
+                },
+                body: formData.toString()
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                }
+            })
+            .catch(e => console.warn('Quick add error:', e));
+        }
     </script>
 </body>
