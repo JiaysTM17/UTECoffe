@@ -53,6 +53,9 @@ public class TableReservationServiceImpl implements TableReservationService {
             user = userRepository.findAll().stream().findFirst().orElse(null);
         }
         LocalDateTime reqTime = request.getReservationTime();
+        if (reqTime == null || reqTime.isBefore(LocalDateTime.now().minusMinutes(15))) {
+            reqTime = LocalDateTime.now().plusHours(2);
+        }
         int guests = (request.getGuestCount() != null && request.getGuestCount() > 0) ? request.getGuestCount() : 2;
 
         StoreTable table = null;
@@ -120,6 +123,17 @@ public class TableReservationServiceImpl implements TableReservationService {
             }
         }
 
+        // Safe Fallback Allocation: If preferred zone has no free tables, allocate best available table
+        if (table == null) {
+            List<StoreTable> allTables = tableRepository.findByStoreIdAndIsActiveTrue(store.getId());
+            if (!allTables.isEmpty()) {
+                table = allTables.stream()
+                        .filter(t -> t.getCapacity() >= guests)
+                        .findFirst()
+                        .orElse(allTables.get(0));
+            }
+        }
+
         TableReservation reservation = TableReservation.builder()
                 .user(user)
                 .store(store)
@@ -141,5 +155,28 @@ public class TableReservationServiceImpl implements TableReservationService {
     @Override
     public List<TableReservation> getStoreReservations(Long storeId) {
         return reservationRepository.findByStoreId(storeId);
+    }
+
+    @Override
+    public TableReservation getReservationById(Long id) {
+        return reservationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy thông tin đặt bàn: " + id));
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public TableReservation updateStatus(Long id, ReservationStatus status) {
+        TableReservation res = getReservationById(id);
+        res.setStatus(status);
+        if (res.getStoreTable() != null) {
+            if (status == ReservationStatus.SEATED) {
+                res.getStoreTable().setIsOccupied(true);
+                tableRepository.save(res.getStoreTable());
+            } else if (status == ReservationStatus.COMPLETED || status == ReservationStatus.CANCELLED) {
+                res.getStoreTable().setIsOccupied(false);
+                tableRepository.save(res.getStoreTable());
+            }
+        }
+        return reservationRepository.save(res);
     }
 }

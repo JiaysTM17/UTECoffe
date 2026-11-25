@@ -61,7 +61,21 @@ public class StoreMvcController {
             if (user != null) userId = user.getId();
         }
 
-        LocalDateTime dateTime = LocalDateTime.parse(reservationDate + "T" + reservationTime + ":00");
+        LocalDateTime dateTime;
+        try {
+            if (reservationDate != null && reservationTime != null) {
+                String timeStr = reservationTime.trim();
+                if (timeStr.length() == 5) timeStr += ":00";
+                dateTime = LocalDateTime.parse(reservationDate.trim() + "T" + timeStr);
+            } else {
+                dateTime = LocalDateTime.now().plusHours(2);
+            }
+        } catch (Exception ex) {
+            dateTime = LocalDateTime.now().plusHours(2);
+        }
+        if (dateTime.isBefore(LocalDateTime.now().minusMinutes(10))) {
+            dateTime = LocalDateTime.now().plusHours(2);
+        }
 
         ReservationRequest req = new ReservationRequest();
         req.setStoreId(storeId);

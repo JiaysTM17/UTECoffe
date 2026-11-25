@@ -33,6 +33,18 @@ public class ReservationRestController {
             if (user != null) userId = user.getId();
         }
         TableReservation res = reservationService.createReservation(request, userId);
-        return ResponseEntity.ok(ApiResponse.success(res, "Dat ban thanh cong! Chung toi se lien he xac nhan som nhat"));
+        return ResponseEntity.ok(ApiResponse.success(res, "Đặt bàn thành công! UTECoffe hân hạnh được đón tiếp bạn thưởng thức không gian cà phê đặc sản."));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<TableReservation>> getReservation(@PathVariable Long id) {
+        TableReservation res = reservationService.getReservationById(id);
+        return ResponseEntity.ok(ApiResponse.success(res, "Chi tiết thông tin đặt bàn"));
+    }
+
+    @GetMapping("/store/{storeId}")
+    public ResponseEntity<ApiResponse<java.util.List<TableReservation>>> getStoreReservations(@PathVariable Long storeId) {
+        java.util.List<TableReservation> list = reservationService.getStoreReservations(storeId);
+        return ResponseEntity.ok(ApiResponse.success(list, "Danh sách đặt bàn tại chi nhánh"));
     }
 }

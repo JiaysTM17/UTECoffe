@@ -220,6 +220,15 @@ public class AdminDashboardController {
         if (opt.isPresent()) {
             TableReservation res = opt.get();
             res.setStatus(status);
+            if (res.getStoreTable() != null) {
+                if (status == ReservationStatus.SEATED) {
+                    res.getStoreTable().setIsOccupied(true);
+                    storeTableRepository.save(res.getStoreTable());
+                } else if (status == ReservationStatus.COMPLETED || status == ReservationStatus.CANCELLED) {
+                    res.getStoreTable().setIsOccupied(false);
+                    storeTableRepository.save(res.getStoreTable());
+                }
+            }
             tableReservationRepository.save(res);
             return ResponseEntity.ok(Map.of("success", true, "id", id, "status", status.name()));
         }

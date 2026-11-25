@@ -10,4 +10,6 @@ public interface TableReservationService {
     TableReservation createReservationWithZone(ReservationRequest request, Long userId, String zonePreference);
     List<TableReservation> getUserReservations(Long userId);
     List<TableReservation> getStoreReservations(Long storeId);
+    TableReservation getReservationById(Long id);
+    TableReservation updateStatus(Long id, com.utecoffe.enums.ReservationStatus status);
 }

@@ -80,7 +80,7 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/products/**", "/api/categories/**", "/api/stores/**", "/api/orders/**", "/api/payments/**", "/api/kds/**", "/api/inventory/**", "/api/v1/algorithms/**").permitAll()
+                .requestMatchers("/api/products/**", "/api/categories/**", "/api/stores/**", "/api/orders/**", "/api/payments/**", "/api/kds/**", "/api/inventory/**", "/api/reservations/**", "/api/v1/algorithms/**").permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/barista/**").hasAnyRole("BARISTA", "STORE_MANAGER", "ADMIN")
                 .anyRequest().authenticated()
@@ -96,7 +96,7 @@ public class SecurityConfig {
     public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/ws-utecoffe/**", "/h2-console/**", "/auth/login-process", "/barista/orders/**", "/admin/**", "/cart/**", "/checkout/**"))
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/ws-utecoffe/**", "/h2-console/**", "/auth/login-process", "/barista/orders/**", "/admin/**", "/cart/**", "/checkout/**", "/reservation/**"))
             .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
             .authorizeHttpRequests(auth -> auth
                 // Static resources
