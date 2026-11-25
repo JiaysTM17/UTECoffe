@@ -91,12 +91,18 @@ public class DatabaseSeeder implements CommandLineRunner {
         if (roleRepository.count() == 0) {
             seedRolesAndUsers();
             seedStoresAndTables();
-            seedCatalogAndBOM();
-            seedCoupons();
-            seedCustomerProfilesAndOrders();
-            seedEnterpriseModules();
-            System.out.println(">>> UTECoffe: Database seeded successfully with 3 distinct customer roles & accounts!");
         }
+        if (productRepository.count() < 36) {
+            seedCatalogAndBOM();
+        }
+        if (couponRepository.count() == 0) {
+            seedCoupons();
+        }
+        if (orderRepository.count() == 0) {
+            seedCustomerProfilesAndOrders();
+        }
+        seedEnterpriseModules();
+        System.out.println(">>> UTECoffe: Database status verified. Products in DB: " + productRepository.count());
     }
 
     private void seedRolesAndUsers() {
@@ -211,10 +217,10 @@ public class DatabaseSeeder implements CommandLineRunner {
         storeTableRepository.save(StoreTable.builder().store(s3).tableNumber("BT-GARDEN").capacity(8).isOccupied(false).isActive(true).build());
     }
 
-    private void seedCatalogAndBOM() {
-        Category cCoffee = categoryRepository.save(Category.builder().name("Cà Phê Đặc Sản").slug("ca-phe-dac-san").displayOrder(1).isActive(true).build());
-        Category cTea = categoryRepository.save(Category.builder().name("Trà Thượng Hạng").slug("tra-thuong-hang").displayOrder(2).isActive(true).build());
-        Category cPastry = categoryRepository.save(Category.builder().name("Bánh Ngọt Thủ Công").slug("banh-ngot-thu-cong").displayOrder(3).isActive(true).build());
+    public void seedCatalogAndBOM() {
+        Category cCoffee = getOrCreateCategory("Cà Phê Đặc Sản", "ca-phe-dac-san", 1);
+        Category cTea = getOrCreateCategory("Trà Thượng Hạng", "tra-thuong-hang", 2);
+        Category cPastry = getOrCreateCategory("Bánh Ngọt Thủ Công", "banh-ngot-thu-cong", 3);
 
         // Specialty Coffee (13 items)
         createProductWithSizes(cCoffee, "Cold Brew Cam Vàng Specialty", "cold-brew-cam-vang-specialty",
@@ -362,15 +368,32 @@ public class DatabaseSeeder implements CommandLineRunner {
         createProductWithSizes(cPastry, "Bánh Sourdough Bơ Tỏi Lá Thyme", "banh-sourdough-bo-toi-la-thyme",
                 "Bánh mì men tự nhiên ủ 36 giờ nướng giòn tan trên đá, phết đẫm bơ Elle & Vire tỏi nướng và lá thyme thơm lừng nức mũi.",
                 "https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?q=80&w=800", 45000, false);
-        toppingRepository.save(Topping.builder().name("Trân Châu Oolong Hoàng Kim").price(BigDecimal.valueOf(10000)).isAvailable(true).build());
-        toppingRepository.save(Topping.builder().name("Kem Cheese Kem Mặn Signature").price(BigDecimal.valueOf(15000)).isAvailable(true).build());
-        toppingRepository.save(Topping.builder().name("Thạch Nha Đam Mật Ong").price(BigDecimal.valueOf(10000)).isAvailable(true).build());
+        if (toppingRepository.count() == 0) {
+            toppingRepository.save(Topping.builder().name("Trân Châu Oolong Hoàng Kim").price(BigDecimal.valueOf(10000)).isAvailable(true).build());
+            toppingRepository.save(Topping.builder().name("Kem Cheese Kem Mặn Signature").price(BigDecimal.valueOf(15000)).isAvailable(true).build());
+            toppingRepository.save(Topping.builder().name("Thạch Nha Đam Mật Ong").price(BigDecimal.valueOf(10000)).isAvailable(true).build());
+        }
 
-        ingredientRepository.save(Ingredient.builder().name("Hạt Cà Phê Arabica Cầu Đất").sku("ING-CF-ARA").unit("gram").minThreshold(BigDecimal.valueOf(5000)).currentCostPrice(BigDecimal.valueOf(320)).build());
-        ingredientRepository.save(Ingredient.builder().name("Lá Trà Oolong Lâm Đồng").sku("ING-TEA-OOL").unit("gram").minThreshold(BigDecimal.valueOf(3000)).currentCostPrice(BigDecimal.valueOf(450)).build());
+        if (ingredientRepository.count() == 0) {
+            ingredientRepository.save(Ingredient.builder().name("Hạt Cà Phê Arabica Cầu Đất").sku("ING-CF-ARA").unit("gram").minThreshold(BigDecimal.valueOf(5000)).currentCostPrice(BigDecimal.valueOf(320)).build());
+            ingredientRepository.save(Ingredient.builder().name("Lá Trà Oolong Lâm Đồng").sku("ING-TEA-OOL").unit("gram").minThreshold(BigDecimal.valueOf(3000)).currentCostPrice(BigDecimal.valueOf(450)).build());
+        }
+    }
+
+    private Category getOrCreateCategory(String name, String slug, int order) {
+        return categoryRepository.findBySlug(slug)
+                .orElseGet(() -> categoryRepository.save(Category.builder()
+                        .name(name)
+                        .slug(slug)
+                        .displayOrder(order)
+                        .isActive(true)
+                        .build()));
     }
 
     private void createProductWithSizes(Category cat, String name, String slug, String desc, String img, int price, boolean featured) {
+        if (productRepository.findBySlug(slug).isPresent()) {
+            return;
+        }
         Product p = productRepository.save(Product.builder()
                 .category(cat)
                 .name(name)

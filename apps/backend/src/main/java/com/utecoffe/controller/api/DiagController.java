@@ -16,9 +16,38 @@ public class DiagController {
     @Autowired(required = false)
     private DataSource dataSource;
 
+    @Autowired(required = false)
+    private com.utecoffe.config.DatabaseSeeder databaseSeeder;
+
+    @Autowired(required = false)
+    private com.utecoffe.repository.ProductRepository productRepository;
+
+    @Autowired(required = false)
+    private com.utecoffe.repository.CategoryRepository categoryRepository;
+
     @GetMapping("/ping")
     public String ping() {
-        return "PONG - UTECoffe Platform Online (Build 2026-11-25.02)";
+        return "PONG - UTECoffe Platform Online (Build 2026-11-25.03)";
+    }
+
+    @GetMapping("/sync-catalog")
+    public Map<String, Object> syncCatalog() {
+        Map<String, Object> res = new LinkedHashMap<>();
+        if (databaseSeeder != null) {
+            try {
+                databaseSeeder.seedCatalogAndBOM();
+                res.put("status", "SUCCESS");
+                res.put("totalProducts", productRepository != null ? productRepository.count() : -1);
+                res.put("totalCategories", categoryRepository != null ? categoryRepository.count() : -1);
+            } catch (Exception e) {
+                res.put("status", "ERROR");
+                res.put("error", e.getMessage());
+            }
+        } else {
+            res.put("status", "ERROR");
+            res.put("message", "DatabaseSeeder bean not found");
+        }
+        return res;
     }
 
     @GetMapping("/threads")
