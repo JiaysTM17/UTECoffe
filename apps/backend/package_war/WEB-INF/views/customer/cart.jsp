@@ -80,11 +80,14 @@
                                                             <div class="cart-product-meta d-flex align-items-center flex-wrap gap-1">
                                                                 <span class="badge bg-espresso border border-gold-subtle px-2 py-0.5 text-gold" style="font-size: 0.72rem; letter-spacing: 0.04em;">
                                                                     <c:choose>
-                                                                        <c:when test="${item.productSize.name.toLowerCase().startsWith('size')}">
+                                                                        <c:when test="${not empty item.productSize and not empty item.productSize.name and item.productSize.name.toLowerCase().startsWith('size')}">
                                                                             ${item.productSize.name}
                                                                         </c:when>
-                                                                        <c:otherwise>
+                                                                        <c:when test="${not empty item.productSize and not empty item.productSize.name}">
                                                                             Size ${item.productSize.name}
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            Size M
                                                                         </c:otherwise>
                                                                     </c:choose>
                                                                 </span>
@@ -428,6 +431,8 @@
 
             fetch('${pageContext.request.contextPath}/cart/add', {
                 method: 'POST',
+                keepalive: true,
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'X-CSRF-TOKEN': '${_csrf.token}'

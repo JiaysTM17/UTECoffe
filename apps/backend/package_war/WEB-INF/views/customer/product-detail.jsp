@@ -1025,27 +1025,42 @@
 
             fetch('${pageContext.request.contextPath}/cart/add', {
                 method: 'POST',
+                keepalive: true,
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'X-CSRF-TOKEN': '${_csrf.token}'
                 },
                 body: formData.toString()
-            }).catch(e => console.warn('Cart sync note:', e));
+            })
+            .then(res => res.json())
+            .then(data => {
+                // Visual Feedback Toast
+                const toast = document.createElement('div');
+                toast.className = 'position-fixed bottom-4 end-4 p-3 bg-espresso border border-gold rounded-3 shadow-lg z-index-1050 text-gold d-flex align-items-center gap-3 animate-fade-in';
+                toast.style.zIndex = '9999';
+                toast.style.bottom = '24px';
+                toast.style.right = '24px';
+                toast.innerHTML = '<i class="fa-solid fa-circle-check fs-4"></i> <div><strong>Đã thêm vào giỏ hàng!</strong><div class="small text-secondary">${product.name} (x' + quantity + ')</div></div>';
+                document.body.appendChild(toast);
 
-            // Visual Feedback Toast
-            const toast = document.createElement('div');
-            toast.className = 'position-fixed bottom-4 end-4 p-3 bg-espresso border border-gold rounded-3 shadow-lg z-index-1050 text-gold d-flex align-items-center gap-3 animate-fade-in';
-            toast.style.zIndex = '9999';
-            toast.style.bottom = '24px';
-            toast.style.right = '24px';
-            toast.innerHTML = '<i class="fa-solid fa-circle-check fs-4"></i> <div><strong>Đã thêm vào giỏ hàng!</strong><div class="small text-secondary">${product.name} (x' + quantity + ')</div></div>';
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transition = 'opacity 0.5s ease';
-                setTimeout(() => toast.remove(), 500);
-            }, 3000);
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => toast.remove(), 500);
+                }, 3000);
+            })
+            .catch(e => {
+                console.warn('Cart sync note:', e);
+                const toast = document.createElement('div');
+                toast.className = 'position-fixed bottom-4 end-4 p-3 bg-espresso border border-gold rounded-3 shadow-lg z-index-1050 text-gold d-flex align-items-center gap-3 animate-fade-in';
+                toast.style.zIndex = '9999';
+                toast.style.bottom = '24px';
+                toast.style.right = '24px';
+                toast.innerHTML = '<i class="fa-solid fa-circle-check fs-4"></i> <div><strong>Đã thêm vào giỏ hàng!</strong><div class="small text-secondary">${product.name} (x' + quantity + ')</div></div>';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
+            });
         }
 
         function submitReview(e) {

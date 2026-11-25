@@ -205,6 +205,7 @@ public class CartController {
     public String cart(HttpSession session, Model model) {
         CartViewDto cart = getOrCreateCart(session);
         recalculateCart(cart);
+        session.setAttribute(CART_SESSION_KEY, cart);
         model.addAttribute("cart", cart);
         return "customer/cart";
     }
@@ -285,8 +286,25 @@ public class CartController {
                 .note(note)
                 .build();
 
-        cart.getItems().add(newItem);
+        boolean merged = false;
+        if (cart.getItems() != null) {
+            for (CartItemViewDto existing : cart.getItems()) {
+                if (existing.getProduct() != null && Objects.equals(existing.getProduct().getId(), product.getId())
+                        && Objects.equals(existing.getSugarLevel(), sugar)
+                        && Objects.equals(existing.getIceLevel(), ice)
+                        && existing.getProductSize() != null && Objects.equals(existing.getProductSize().getSizeName(), productSize.getSizeName())) {
+                    existing.setQuantity(existing.getQuantity() + finalQty);
+                    existing.setSubtotal(existing.getUnitPrice().multiply(BigDecimal.valueOf(existing.getQuantity())));
+                    merged = true;
+                    break;
+                }
+            }
+        }
+        if (!merged) {
+            cart.getItems().add(newItem);
+        }
         recalculateCart(cart);
+        session.setAttribute(CART_SESSION_KEY, cart);
 
         Map<String, Object> resp = new HashMap<>();
         resp.put("success", true);
@@ -318,6 +336,7 @@ public class CartController {
             }
         }
         recalculateCart(cart);
+        session.setAttribute(CART_SESSION_KEY, cart);
 
         Map<String, Object> resp = new HashMap<>();
         resp.put("success", true);
@@ -333,6 +352,7 @@ public class CartController {
             cart.getItems().removeIf(it -> Objects.equals(it.getId(), itemId));
         }
         recalculateCart(cart);
+        session.setAttribute(CART_SESSION_KEY, cart);
         return "redirect:/cart";
     }
 
@@ -342,6 +362,7 @@ public class CartController {
         CartViewDto cart = getOrCreateCart(session);
         cart.setCouponCode(code);
         recalculateCart(cart);
+        session.setAttribute(CART_SESSION_KEY, cart);
 
         Map<String, Object> resp = new HashMap<>();
         resp.put("success", true);
