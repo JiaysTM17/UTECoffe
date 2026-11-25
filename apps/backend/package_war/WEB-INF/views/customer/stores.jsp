@@ -125,7 +125,7 @@
 
             if (noticeEl) {
                 noticeEl.classList.remove('d-none');
-                noticeEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang kích hoạt cảm biến GPS & áp dụng giải thuật Haversine tính toán khoảng cách...';
+                noticeEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang tìm cửa hàng UTECoffe gần vị trí của bạn nhất...';
             }
 
             navigator.geolocation.getCurrentPosition(function (position) {

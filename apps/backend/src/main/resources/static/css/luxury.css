@@ -662,12 +662,13 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 
 /* QR & Invoice Slate Luxury Styling */
 .transfer-slate {
-    background: rgba(14, 11, 9, 0.92) !important;
-    border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    background: rgba(18, 14, 11, 0.95) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
     border-radius: 14px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
 }
 .transfer-line {
-    border-bottom: 1px dashed rgba(212, 175, 55, 0.2) !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12) !important;
 }
 .qr-token-card {
     border-radius: 16px !important;

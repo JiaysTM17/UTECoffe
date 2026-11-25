@@ -220,7 +220,7 @@
         function loadEoqData() {
             const tbody = document.getElementById('eoqTableBody');
             if (!tbody) return;
-            tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-gold"><i class="fa-solid fa-spinner fa-spin me-2"></i> Đang phân tích thuật toán EOQ...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-gold"><i class="fa-solid fa-spinner fa-spin me-2"></i> Đang tính toán định mức dự trữ tối ưu...</td></tr>';
 
             fetch('${pageContext.request.contextPath}/api/inventory/optimization')
                 .then(res => res.json())

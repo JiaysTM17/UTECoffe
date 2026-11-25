@@ -25,5 +25,7 @@ public class ReservationRequest {
     @Min(value = 1, message = "So luong khach toi thieu la 1 nguoi")
     private Integer guestCount;
 
+    private String zonePreference;
+
     private String note;
 }

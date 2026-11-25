@@ -612,6 +612,94 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     background-color: var(--gold-subtle);
 }
 
+/* Compact Cart & Checkout Enhancements */
+.table-cart-compact thead th {
+    padding: 0.6rem 0.75rem !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.08em;
+}
+
+.table-cart-compact tbody td {
+    padding: 0.7rem 0.75rem !important;
+}
+
+.cart-container-compact {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.cart-product-title {
+    font-family: var(--font-serif) !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #fbf8f2 !important;
+    line-height: 1.35 !important;
+    letter-spacing: -0.01em;
+}
+
+.cart-product-meta {
+    font-size: 0.75rem;
+}
+
+.cart-rec-shelf {
+    background: rgba(26, 21, 18, 0.75);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 12px;
+}
+
+.cart-rec-item {
+    background: rgba(11, 9, 8, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.cart-rec-item:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(26, 21, 18, 0.95);
+}
+
+/* QR & Invoice Slate Luxury Styling */
+.transfer-slate {
+    background: rgba(18, 14, 11, 0.95) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+}
+.transfer-line {
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12) !important;
+}
+.qr-token-card {
+    border-radius: 16px !important;
+    border: 2px solid rgba(212, 175, 55, 0.35) !important;
+    background: #ffffff !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+.bank-segment-wrap {
+    background: rgba(14, 11, 9, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 50rem;
+    padding: 4px;
+    display: inline-flex;
+}
+.bank-segment-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 0.4rem 1.15rem;
+    border-radius: 50rem;
+    font-size: 0.78rem;
+    font-family: var(--font-accent);
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+.bank-segment-btn.active {
+    background: var(--gold-gradient) !important;
+    color: #0b0908 !important;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
+}
+
 /* ==========================================================================
    Footer Luxury
    ========================================================================== */
@@ -691,9 +779,117 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 /* Explicit Navbar Button Sizing & Zero-Wrapping Guarantee */
-.btn-gold,
-.btn-outline-gold {
+.navbar-luxury .btn-gold,
+.navbar-luxury .btn-outline-gold {
     white-space: nowrap !important;
+}
+
+/* Universal Overflow Protections */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+body {
+    overflow-x: hidden;
+}
+
+/* Delivery & Takeaway Option Cards */
+.delivery-option-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    padding: 1.15rem 0.75rem !important;
+    border: 1.5px solid var(--border-gold) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: var(--text-gold) !important;
+    transition: var(--transition-smooth) !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    user-select: none;
+}
+.delivery-option-btn:hover {
+    background: rgba(212, 175, 55, 0.08) !important;
+    border-color: var(--text-gold) !important;
+    transform: translateY(-2px);
+}
+.btn-check:checked + .delivery-option-btn {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(26, 21, 16, 0.95) 100%) !important;
+    border-color: var(--text-gold) !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25) !important;
+}
+[data-theme="light"] .btn-check:checked + .delivery-option-btn {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, #faf8f5 100%) !important;
+}
+
+/* Payment Option Cards - Spacious, Luxury & High End */
+.payment-option-card {
+    transition: var(--transition-smooth);
+    background: rgba(22, 17, 14, 0.75) !important;
+    border: 1.5px solid rgba(212, 175, 55, 0.22) !important;
+    border-radius: 14px !important;
+    padding: 1.15rem 1.25rem !important;
+    cursor: pointer;
+    white-space: normal !important;
+    word-break: break-word;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    margin-bottom: 0.85rem !important;
+}
+.payment-option-card:hover {
+    border-color: var(--text-gold) !important;
+    background: rgba(212, 175, 55, 0.08) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+.payment-option-card:has(input:checked) {
+    border-color: var(--text-gold) !important;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(26, 21, 16, 0.98) 100%) !important;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25) !important;
+}
+.payment-icon-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.payment-radio-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    background: rgba(11, 9, 8, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    transition: all 0.25s ease;
+}
+.payment-option-card:has(input:checked) .payment-radio-circle {
+    border-color: var(--text-gold);
+    background: var(--gold-gradient);
+    color: #0b0908 !important;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+.payment-option-card:has(input:checked) .payment-icon-wrap {
+    background: var(--gold-gradient);
+    border-color: var(--text-gold);
+}
+.payment-option-card:has(input:checked) .payment-icon-wrap i {
+    color: #0b0908 !important;
+}
+[data-theme="light"] .payment-option-card:has(input:checked) {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, #faf8f5 100%) !important;
 }
 
 .btn-gold.btn-sm,

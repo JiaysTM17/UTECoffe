@@ -728,7 +728,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
                     <div>
                         <span class="badge bg-gold-gradient text-obsidian px-3 py-1 rounded-pill small font-accent fw-bold text-uppercase mb-2">
-                            <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Thuật Toán Ghép Vị Thượng Hạng
+                            <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Nghệ Thuật Ghép Vị Thượng Hạng
                         </span>
                         <h4 class="font-serif fw-bold text-gold-gradient mb-1">
                             Gợi Ý Kết Hợp Hoàn Hảo (Artisanal Flavor Pairing)

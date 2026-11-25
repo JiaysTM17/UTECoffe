@@ -69,13 +69,14 @@
                                         <c:forEach var="item" items="${cart.items}">
                                             <tr class="cart-item-row" data-item-id="${item.id}" data-unit-price="${item.unitPrice}">
                                                 <td>
-                                                    <div class="d-flex align-items-center gap-3">
-                                                        <img src="${not empty item.product.imageUrl ? item.product.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=200&q=80'}" 
-                                                             class="rounded-3 border border-gold-subtle object-fit-cover flex-shrink-0 shadow-sm" 
-                                                             style="width: 54px; height: 54px;" 
-                                                             alt="${item.product.name}">
-                                                        <div>
-                                                            <div class="cart-product-title font-serif fw-bold text-light mb-1" style="font-size: 1.08rem; letter-spacing: -0.01em;">${item.product.name}</div>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-shrink-0 me-3 position-relative" style="width: 56px; height: 56px;">
+                                                            <img src="${not empty item.product.imageUrl ? item.product.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=200&q=80'}" 
+                                                                 class="rounded-3 border border-gold-subtle object-fit-cover shadow-sm w-100 h-100" 
+                                                                 alt="${item.product.name}">
+                                                        </div>
+                                                        <div class="flex-grow-1 min-w-0">
+                                                            <div class="cart-product-title font-serif fw-bold text-light mb-1" style="font-size: 1.05rem; letter-spacing: -0.01em; word-break: break-word;">${item.product.name}</div>
                                                             <div class="cart-product-meta d-flex align-items-center flex-wrap gap-1">
                                                                 <span class="badge bg-espresso border border-gold-subtle px-2 py-0.5 text-gold" style="font-size: 0.72rem; letter-spacing: 0.04em;">
                                                                     <c:choose>

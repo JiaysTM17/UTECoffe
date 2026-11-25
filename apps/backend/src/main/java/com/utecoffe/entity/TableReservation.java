@@ -18,7 +18,7 @@ public class TableReservation {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -47,5 +47,33 @@ public class TableReservation {
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
+    }
+
+    public String getReservationCode() {
+        if (this.id != null) {
+            String datePart = (this.createdAt != null) 
+                    ? String.format("%ty%tm%td", this.createdAt, this.createdAt, this.createdAt) 
+                    : "261125";
+            return "UTE-RES-" + datePart + "-" + String.format("%04d", this.id);
+        }
+        return "UTE-RES-261125-9999";
+    }
+
+    public String getFormattedReservationTime() {
+        if (this.reservationTime != null) {
+            return this.reservationTime.format(java.time.format.DateTimeFormatter.ofPattern("HH:mm - dd/MM/yyyy"));
+        }
+        return "";
+    }
+
+    public String getAssignedZoneName() {
+        if (this.storeTable != null) {
+            String num = this.storeTable.getTableNumber().toUpperCase();
+            if (num.contains("BAR") || num.startsWith("B") || num.equals("T-01") || num.equals("Q1-01") || num.equals("BT-01")) return "Quầy Barista Nghệ Nhân";
+            if (num.contains("VIP") || num.contains("LOUNGE") || num.startsWith("L")) return "Sofa VIP Lounge Sang Trọng";
+            if (num.contains("GARDEN") || num.startsWith("G") || num.startsWith("V")) return "Sân Vườn Xanh Thoáng Mát";
+            if (num.contains("WORK") || num.startsWith("W") || num.startsWith("CW")) return "Bàn Co-Working Hiện Đại";
+        }
+        return "Không Gian Tiêu Chuẩn";
     }
 }

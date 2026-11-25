@@ -1,6 +1,7 @@
 package com.utecoffe.controller.mvc;
 
 import com.utecoffe.dto.request.ReservationRequest;
+import com.utecoffe.entity.TableReservation;
 import com.utecoffe.entity.User;
 import com.utecoffe.service.AuthService;
 import com.utecoffe.service.StoreService;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 
@@ -50,7 +52,8 @@ public class StoreMvcController {
             @RequestParam(required = false) String customerName,
             @RequestParam(required = false) String phoneNumber,
             @RequestParam(required = false) String zonePreference,
-            @AuthenticationPrincipal UserDetails userDetails) {
+            @AuthenticationPrincipal UserDetails userDetails,
+            RedirectAttributes redirectAttributes) {
 
         Long userId = null;
         if (userDetails != null) {
@@ -79,7 +82,15 @@ public class StoreMvcController {
         }
         req.setNote(noteBuilder.toString());
 
-        reservationService.createReservation(req, userId);
+        TableReservation saved = reservationService.createReservationWithZone(req, userId, zonePreference);
+        redirectAttributes.addFlashAttribute("confirmedReservation", saved);
+        redirectAttributes.addFlashAttribute("customerName", customerName != null && !customerName.isBlank() ? customerName : "Quý Khách");
+        redirectAttributes.addFlashAttribute("phoneNumber", phoneNumber != null ? phoneNumber : "");
+        redirectAttributes.addFlashAttribute("reservationCode", saved.getReservationCode());
+        redirectAttributes.addFlashAttribute("tableNumber", saved.getStoreTable() != null ? saved.getStoreTable().getTableNumber() : "VIP 02");
+        redirectAttributes.addFlashAttribute("assignedZoneName", saved.getAssignedZoneName());
+        redirectAttributes.addFlashAttribute("storeName", saved.getStore() != null ? saved.getStore().getName() : "UTECoffe Flagship");
+        redirectAttributes.addFlashAttribute("formattedTime", saved.getFormattedReservationTime());
 
         return "redirect:/reservation?success=true";
     }

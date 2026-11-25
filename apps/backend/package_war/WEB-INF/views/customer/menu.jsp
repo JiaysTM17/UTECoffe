@@ -49,8 +49,8 @@
                 <!-- Fuzzy Search Suggestions Dropdown -->
                 <div id="fuzzySuggestionsBox" class="position-absolute w-100 bg-card-dark border border-gold rounded-3 shadow-lg mt-1 p-2 text-start d-none" style="z-index: 1050;">
                     <div class="d-flex justify-content-between align-items-center px-2 py-1 border-bottom border-gold-subtle mb-1">
-                        <small class="text-gold font-accent"><i class="fa-solid fa-brain me-1"></i> Gợi ý thông minh (Damerau-Levenshtein)</small>
-                        <span class="badge bg-gold-subtle text-gold small">AI Fuzzy</span>
+                        <small class="text-gold font-accent"><i class="fa-solid fa-wand-magic-sparkles me-1"></i> Gợi ý tìm kiếm phù hợp</small>
+                        <span class="badge bg-gold-subtle text-gold small">Gợi ý</span>
                     </div>
                     <div id="fuzzySuggestionsList" class="d-flex flex-column gap-1"></div>
                 </div>
@@ -59,7 +59,7 @@
             <!-- Taste Matcher Trigger Button -->
             <div class="mt-3">
                 <button class="btn btn-dark-roast border border-gold text-gold rounded-pill px-4 py-2 font-accent shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#tasteMatcherCollapse" aria-expanded="false" aria-controls="tasteMatcherCollapse">
-                    <i class="fa-solid fa-wand-magic-sparkles text-gold me-2"></i><span data-i18n="menu.taste_btn">✨ Trải Nghiệm AI Cupping: Tìm Cà Phê Hợp Gu (Sensory Matcher)</span>
+                    <i class="fa-solid fa-wand-magic-sparkles text-gold me-2"></i><span data-i18n="menu.taste_btn">✨ Trải Nghiệm Tìm Cà Phê Hợp Gu (Sensory Taste Matcher)</span>
                 </button>
             </div>
 
@@ -69,11 +69,11 @@
                     <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-gold pb-2">
                         <div>
                             <h5 class="font-serif fw-bold text-gold-gradient mb-0" data-i18n="menu.taste_title">
-                                <i class="fa-solid fa-compass-drafting me-2 text-gold"></i>Định Hình Khẩu Vị Cảm Quan (Vector Space Model)
+                                <i class="fa-solid fa-compass-drafting me-2 text-gold"></i>Định Hình Khẩu Vị Cảm Quan (Artisanal Cupping Profile)
                             </h5>
-                            <small class="text-secondary" data-i18n="menu.taste_subtitle">Thuật toán Cosine Similarity đối chiếu gu của bạn với thông số SCA Cupping của các mẻ rang đặc sản</small>
+                            <small class="text-secondary" data-i18n="menu.taste_subtitle">Phân tích gu thưởng thức của bạn để gợi ý các mẻ rang đặc sản chuẩn vị SCA Cupping</small>
                         </div>
-                        <span class="badge bg-gold text-dark font-accent fw-bold px-3 py-1">COSINE SIMILARITY</span>
+                        <span class="badge bg-gold text-dark font-accent fw-bold px-3 py-1">SCA MATCH</span>
                     </div>
 
                     <div class="row g-3">
@@ -334,7 +334,7 @@
                 sortedCards.forEach(card => productGrid.appendChild(card));
             }
 
-            // 2. Damerau-Levenshtein Fuzzy Search API Hook
+            // 2. Smart Fuzzy Search API Hook
             let debounceTimer = null;
             searchInput.addEventListener('input', function () {
                 filterAndSort();
@@ -432,7 +432,7 @@
 
             if (btnMatch) {
                 btnMatch.addEventListener('click', function () {
-                    btnMatch.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i> Đang tính toán ma trận Cosine...';
+                    btnMatch.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i> Đang tìm hương vị phù hợp nhất...';
                     btnMatch.disabled = true;
 
                     const url = '${pageContext.request.contextPath}/api/products/taste-match?'

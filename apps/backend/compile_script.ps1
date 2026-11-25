@@ -15,11 +15,15 @@ $srcFiles = @(
     'src/main/java/com/utecoffe/service/impl/VietQrServiceImpl.java',
     'src/main/java/com/utecoffe/service/impl/ProductServiceImpl.java',
     'src/main/java/com/utecoffe/repository/TableReservationRepository.java',
+    'src/main/java/com/utecoffe/entity/TableReservation.java',
+    'src/main/java/com/utecoffe/dto/request/ReservationRequest.java',
+    'src/main/java/com/utecoffe/service/TableReservationService.java',
     'src/main/java/com/utecoffe/service/impl/TableReservationServiceImpl.java',
     'src/main/java/com/utecoffe/service/impl/OrderServiceImpl.java',
     'src/main/java/com/utecoffe/controller/api/PaymentRestController.java',
     'src/main/java/com/utecoffe/controller/mvc/CartController.java',
-    'src/main/java/com/utecoffe/controller/mvc/MenuController.java'
+    'src/main/java/com/utecoffe/controller/mvc/MenuController.java',
+    'src/main/java/com/utecoffe/controller/mvc/StoreMvcController.java'
 )
 
 & javac -parameters -encoding UTF-8 -cp $cp -processorpath $lombok -d target/classes $srcFiles

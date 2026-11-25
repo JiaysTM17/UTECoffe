@@ -275,6 +275,28 @@
                             </small>
                         </div>
                     </div>
+
+                    <!-- Roastery Quality & Care Guarantee Card -->
+                    <div class="card-luxury p-3 mt-3 bg-espresso border-gold-subtle">
+                        <div class="d-flex align-items-center gap-2 mb-2 pb-1.5 border-bottom border-gold border-opacity-25">
+                            <i class="fa-solid fa-medal text-gold"></i>
+                            <span class="font-serif fw-bold text-light" style="font-size: 0.88rem;">Cam Kết Hương Vị Nghệ Nhân</span>
+                        </div>
+                        <ul class="list-unstyled mb-0 small text-secondary d-flex flex-column gap-1.5" style="font-size: 0.78rem;">
+                            <li class="d-flex align-items-start gap-2">
+                                <i class="fa-solid fa-seedling text-gold mt-1 flex-shrink-0" style="font-size: 0.7rem;"></i>
+                                <span>100% Cà phê Arabica Cầu Đất rang mộc thủ công, chiết xuất tươi mới ngay khi có đơn.</span>
+                            </li>
+                            <li class="d-flex align-items-start gap-2">
+                                <i class="fa-solid fa-box text-gold mt-1 flex-shrink-0" style="font-size: 0.7rem;"></i>
+                                <span>Đóng gói túi cách nhiệt chuyên dụng, đá viên để riêng bảo toàn độ đậm vị.</span>
+                            </li>
+                            <li class="d-flex align-items-start gap-2">
+                                <i class="fa-solid fa-headset text-gold mt-1 flex-shrink-0" style="font-size: 0.7rem;"></i>
+                                <span>Hotline Barista hỗ trợ nhanh: <strong class="text-gold font-monospace">1900 2026</strong> (07:00 - 22:30).</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </form>
