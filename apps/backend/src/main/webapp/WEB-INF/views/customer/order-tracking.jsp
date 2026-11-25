@@ -10,7 +10,7 @@
     <div class="py-5 bg-espresso border-bottom border-gold text-center">
         <div class="container py-2">
             <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" style="letter-spacing: 0.12em;" data-i18n="track.badge">
-                <i class="fa-solid fa-satellite-dish me-1 fa-fade"></i> TRUYỀN DỮ LIỆU THỜI GIAN THỰC (WEBSOCKET)
+                <i class="fa-solid fa-satellite-dish me-1 fa-fade"></i> CẬP NHẬT TRẠNG THÁI TRỰC TIẾP TỪ BARISTA
             </span>
             <h1 class="font-serif display-5 fw-bold text-gold-gradient mb-2" data-i18n="track.title">
                 Hành Trình Tách Cà Phê Của Bạn

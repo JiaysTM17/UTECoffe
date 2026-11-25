@@ -113,10 +113,10 @@
                             <div class="card-luxury p-4 mt-4 bg-espresso border-gold-subtle">
                                 <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold flex-wrap gap-2">
                                     <h6 class="font-serif fw-bold text-gold mb-0">
-                                        <i class="fa-solid fa-wand-magic-sparkles me-2"></i> Gợi Ý Thưởng Thức Kèm (Thuật Toán Apriori)
+                                        <i class="fa-solid fa-wand-magic-sparkles me-2"></i> Gợi Ý Món Dùng Kèm Hoàn Hảo
                                     </h6>
                                     <span class="badge bg-gold-subtle text-gold font-accent small px-2.5 py-1 rounded-pill">
-                                        Phổ biến cùng đơn hàng
+                                        Được yêu thích nhất
                                     </span>
                                 </div>
                                 <div class="row g-3">

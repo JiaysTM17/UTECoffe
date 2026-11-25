@@ -165,12 +165,6 @@
                                 </div>
                             </label>
                         </div>
-                                    <small class="text-secondary d-block mt-1">
-                                        Thanh toán tiền mặt trực tiếp cho nhân viên giao hàng khi nhận thức uống.
-                                    </small>
-                                </div>
-                            </label>
-                        </div>
                     </div>
                 </div>
 
@@ -257,7 +251,7 @@
 
             if (noticeEl) {
                 noticeEl.classList.remove('d-none');
-                textEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang tính toán chi nhánh gần nhất theo thuật toán Haversine...';
+                textEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang tìm chi nhánh gần vị trí của bạn nhất...';
             }
 
             navigator.geolocation.getCurrentPosition(function (position) {
