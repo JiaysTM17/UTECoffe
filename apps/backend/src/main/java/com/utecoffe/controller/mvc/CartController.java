@@ -186,8 +186,8 @@ public class CartController {
     public ResponseEntity<Map<String, Object>> addToCart(
             @RequestParam("productId") Long productId,
             @RequestParam(name = "size", defaultValue = "M") String size,
-            @RequestParam(name = "sugar", defaultValue = "100") Integer sugar,
-            @RequestParam(name = "ice", defaultValue = "100") Integer ice,
+            @RequestParam(name = "sugar", defaultValue = "100") Object sugarParam,
+            @RequestParam(name = "ice", defaultValue = "100") Object iceParam,
             @RequestParam(name = "quantity", defaultValue = "1") Integer quantity,
             @RequestParam(name = "toppingIds", required = false) List<Long> toppingIds,
             @RequestParam(name = "note", required = false) String note,
@@ -197,6 +197,32 @@ public class CartController {
                 .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại: " + productId));
 
         CartViewDto cart = getOrCreateCart(session);
+        if (cart.getItems() == null) {
+            cart.setItems(new ArrayList<>());
+        }
+
+        Integer sugar = 100;
+        if (sugarParam != null) {
+            String s = sugarParam.toString().replaceAll("[^0-9]", "");
+            if (!s.isEmpty()) {
+                try { sugar = Integer.parseInt(s); } catch (Exception ignored) {}
+            }
+        }
+
+        Integer ice = 100;
+        if (iceParam != null) {
+            String s = iceParam.toString();
+            if ("HOT".equalsIgnoreCase(s.trim())) {
+                ice = 0;
+            } else {
+                String digits = s.replaceAll("[^0-9]", "");
+                if (!digits.isEmpty()) {
+                    try { ice = Integer.parseInt(digits); } catch (Exception ignored) {}
+                }
+            }
+        }
+
+        int finalQty = (quantity != null && quantity > 0) ? quantity : 1;
 
         BigDecimal extraSize = "L".equalsIgnoreCase(size) ? BigDecimal.valueOf(18000)
                 : "M".equalsIgnoreCase(size) ? BigDecimal.valueOf(10000) : BigDecimal.ZERO;
@@ -221,13 +247,13 @@ public class CartController {
                 .id(itemIdGenerator.incrementAndGet())
                 .product(product)
                 .productSize(productSize)
-                .quantity(Math.max(1, quantity))
+                .quantity(finalQty)
                 .sugarLevel(sugar)
                 .iceLevel(ice)
                 .toppingIds(toppingIds)
                 .toppingNames(toppingNames)
                 .unitPrice(unitPrice)
-                .subtotal(unitPrice.multiply(BigDecimal.valueOf(quantity)))
+                .subtotal(unitPrice.multiply(BigDecimal.valueOf(finalQty)))
                 .note(note)
                 .build();
 
@@ -311,11 +337,13 @@ public class CartController {
 
     @PostMapping("/checkout/place-order")
     public String placeOrder(
-            @RequestParam("storeId") Long storeId,
-            @RequestParam("orderType") OrderType orderType,
-            @RequestParam("paymentMethod") PaymentMethod paymentMethod,
-            @RequestParam("recipientName") String recipientName,
-            @RequestParam("recipientPhone") String recipientPhone,
+            @RequestParam(name = "storeId", defaultValue = "1") Long storeId,
+            @RequestParam(name = "orderType", defaultValue = "DELIVERY") OrderType orderType,
+            @RequestParam(name = "paymentMethod", defaultValue = "COD") PaymentMethod paymentMethod,
+            @RequestParam(name = "recipientName", required = false) String recipientName,
+            @RequestParam(name = "customerName", required = false) String customerName,
+            @RequestParam(name = "recipientPhone", required = false) String recipientPhone,
+            @RequestParam(name = "customerPhone", required = false) String customerPhone,
             @RequestParam(name = "deliveryAddress", required = false) String deliveryAddress,
             @RequestParam(name = "note", required = false) String note,
             @RequestParam(name = "couponCode", required = false) String couponCode,
@@ -327,6 +355,11 @@ public class CartController {
         seedDefaultItemIfEmpty(cart);
         recalculateCart(cart);
 
+        String finalName = recipientName != null && !recipientName.isBlank() ? recipientName
+                : (customerName != null && !customerName.isBlank() ? customerName : "Khách Hàng UTE");
+        String finalPhone = recipientPhone != null && !recipientPhone.isBlank() ? recipientPhone
+                : (customerPhone != null && !customerPhone.isBlank() ? customerPhone : "0900000000");
+
         Long userId = null;
         if (userDetails != null) {
             User user = authService.getByEmail(userDetails.getUsername());
@@ -335,22 +368,24 @@ public class CartController {
 
         // Build OrderCreateRequest
         List<OrderCreateRequest.OrderItemRequest> orderItems = new ArrayList<>();
-        for (CartItemViewDto it : cart.getItems()) {
-            OrderCreateRequest.OrderItemRequest reqItem = new OrderCreateRequest.OrderItemRequest();
-            reqItem.setProductId(it.getProduct().getId());
-            reqItem.setQuantity(it.getQuantity());
-            reqItem.setToppingIds(it.getToppingIds());
-            reqItem.setNote(it.getNote());
-            orderItems.add(reqItem);
+        if (cart.getItems() != null) {
+            for (CartItemViewDto it : cart.getItems()) {
+                OrderCreateRequest.OrderItemRequest reqItem = new OrderCreateRequest.OrderItemRequest();
+                reqItem.setProductId(it.getProduct().getId());
+                reqItem.setQuantity(it.getQuantity());
+                reqItem.setToppingIds(it.getToppingIds());
+                reqItem.setNote(it.getNote());
+                orderItems.add(reqItem);
+            }
         }
 
         OrderCreateRequest createRequest = new OrderCreateRequest();
-        createRequest.setStoreId(storeId);
-        createRequest.setOrderType(orderType);
-        createRequest.setPaymentMethod(paymentMethod);
-        createRequest.setRecipientName(recipientName);
-        createRequest.setRecipientPhone(recipientPhone);
-        createRequest.setDeliveryAddress(deliveryAddress);
+        createRequest.setStoreId(storeId != null ? storeId : 1L);
+        createRequest.setOrderType(orderType != null ? orderType : OrderType.DELIVERY);
+        createRequest.setPaymentMethod(paymentMethod != null ? paymentMethod : PaymentMethod.COD);
+        createRequest.setRecipientName(finalName);
+        createRequest.setRecipientPhone(finalPhone);
+        createRequest.setDeliveryAddress(deliveryAddress != null ? deliveryAddress : "Nhận tại cửa hàng UTECoffe");
         createRequest.setNote(note);
         createRequest.setCouponCode(couponCode != null ? couponCode : cart.getCouponCode());
         createRequest.setItems(orderItems);

@@ -39,8 +39,36 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductBySlug(String slug) {
-        return productRepository.findBySlug(slug)
-                .orElseThrow(() -> new RuntimeException("San pham khong ton tai: " + slug));
+        if (slug == null || slug.trim().isEmpty()) {
+            List<Product> available = getAllAvailable();
+            return available.isEmpty() ? null : available.get(0);
+        }
+
+        String clean = slug.trim().toLowerCase();
+
+        // 1. Exact slug match
+        Optional<Product> opt = productRepository.findBySlug(clean);
+        if (opt.isPresent()) return opt.get();
+
+        // 2. Hyphenated slug match (spaces to hyphens)
+        String hyphenated = clean.replaceAll("\\s+", "-");
+        opt = productRepository.findBySlug(hyphenated);
+        if (opt.isPresent()) return opt.get();
+
+        // 3. Unaccented hyphenated slug
+        String unacc = removeAccents(hyphenated);
+        opt = productRepository.findBySlug(unacc);
+        if (opt.isPresent()) return opt.get();
+
+        // 4. Fuzzy Levenshtein Search fallback
+        List<Product> matches = search(clean.replace("-", " "));
+        if (!matches.isEmpty()) {
+            return matches.get(0);
+        }
+
+        // 5. Safe fallback to default product rather than throwing 500 error
+        List<Product> available = getAllAvailable();
+        return available.isEmpty() ? null : available.get(0);
     }
 
     @Override

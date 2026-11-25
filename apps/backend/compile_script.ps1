@@ -8,6 +8,7 @@ $srcFiles = @(
     'src/main/java/com/utecoffe/dto/cart/CartViewDto.java',
     'src/main/java/com/utecoffe/entity/Order.java',
     'src/main/java/com/utecoffe/entity/OrderItem.java',
+    'src/main/java/com/utecoffe/entity/Review.java',
     'src/main/java/com/utecoffe/entity/ProductSize.java',
     'src/main/java/com/utecoffe/security/SecurityConfig.java',
     'src/main/java/com/utecoffe/service/VietQrService.java',
@@ -17,7 +18,8 @@ $srcFiles = @(
     'src/main/java/com/utecoffe/service/impl/TableReservationServiceImpl.java',
     'src/main/java/com/utecoffe/service/impl/OrderServiceImpl.java',
     'src/main/java/com/utecoffe/controller/api/PaymentRestController.java',
-    'src/main/java/com/utecoffe/controller/mvc/CartController.java'
+    'src/main/java/com/utecoffe/controller/mvc/CartController.java',
+    'src/main/java/com/utecoffe/controller/mvc/MenuController.java'
 )
 
 & javac -parameters -encoding UTF-8 -cp $cp -processorpath $lombok -d target/classes $srcFiles
