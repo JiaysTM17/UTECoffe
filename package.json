@@ -1,0 +1,16 @@
+{
+  "name": "utecoffe-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "UTECoffe Specialty Coffee & Tea E-Commerce Platform - Decoupled Monorepo for Vercel + Render",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:frontend": "cd apps/frontend && npm run dev",
+    "build:frontend": "cd apps/frontend && npm run build",
+    "start:frontend": "cd apps/frontend && npm start",
+    "build:backend": "cd apps/backend && ./mvnw clean package -DskipTests",
+    "build": "cd apps/frontend && npm run build"
+  }
+}

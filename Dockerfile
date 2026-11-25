@@ -1,6 +1,6 @@
 # ============================================================================
 # Minimal Production JRE Runtime with Pre-compiled Exploded WAR
-# Instant Docker build, instant JSP resolution, zero archive extraction locks
+# Monorepo compatibility: builds apps/backend/app.war
 # ============================================================================
 FROM eclipse-temurin:21-jdk-jammy
 
@@ -9,8 +9,8 @@ WORKDIR /app
 # Non-root user for security
 RUN groupadd -r utecoffe && useradd -r -g utecoffe utecoffe
 
-# Copy production WAR package and explode for direct disk access
-COPY app.war /app/app.war
+# Copy production WAR package from apps/backend
+COPY apps/backend/app.war /app/app.war
 RUN mkdir -p /app/exploded /app/tomcat-work && \
     cd /app/exploded && jar -xf /app/app.war && \
     rm /app/app.war && \
