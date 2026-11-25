@@ -8,3 +8,7 @@ target/
 .vscode
 01_Tai_Lieu_Bao_Cao_Word/
 02_Tai_Lieu_Nguon_Markdown_Backup/
+apps/frontend/
+node_modules/
+.next/
+
