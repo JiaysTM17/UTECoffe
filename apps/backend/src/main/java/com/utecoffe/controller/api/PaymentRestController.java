@@ -60,6 +60,27 @@ public class PaymentRestController {
         return ResponseEntity.ok(ApiResponse.success(response, "Lay thong tin VietQR thanh cong"));
     }
 
+    @PostMapping("/vietqr/verify/{orderCode}")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> verifyVietQr(@PathVariable String orderCode) {
+        Order order = orderService.getOrderByCode(orderCode);
+        Payment payment = paymentRepository.findByOrderId(order.getId()).orElse(null);
+        if (payment != null) {
+            payment.setStatus(PaymentStatus.PAID);
+            payment.setPaymentTime(LocalDateTime.now());
+            payment.setTransactionId("VQR-" + System.currentTimeMillis());
+            paymentRepository.save(payment);
+        }
+        orderService.updateOrderStatus(order.getId(), OrderStatus.PREPARING, "Xac nhan thanh toan VietQR thanh cong! Barista dang pha che.");
+        notificationService.notifyOrderStatusChanged(order, "Thanh toan VietQR thanh cong! Don hang da duoc chuyen sang quay pha che.");
+        notificationService.notifyNewOrderToKds(order);
+
+        Map<String, Object> resp = new HashMap<>();
+        resp.put("orderCode", order.getOrderCode());
+        resp.put("status", "PREPARING");
+        resp.put("message", "Thanh toan VietQR thanh cong! Barista dang bat dau chiet xuat.");
+        return ResponseEntity.ok(ApiResponse.success(resp, "Xac nhan thanh toan VietQR thanh cong"));
+    }
+
     @GetMapping("/vnpay/create-url/{orderCode}")
     public ResponseEntity<ApiResponse<String>> createVnPayUrl(@PathVariable String orderCode, HttpServletRequest request) {
         Order order = orderService.getOrderByCode(orderCode);

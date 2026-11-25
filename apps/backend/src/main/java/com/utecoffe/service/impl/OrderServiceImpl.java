@@ -203,8 +203,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderByCode(String orderCode) {
-        return orderRepository.findByOrderCode(orderCode)
+        Order order = orderRepository.findByOrderCode(orderCode)
                 .orElseThrow(() -> new RuntimeException("Khong tim thay don hang: " + orderCode));
+        List<OrderItem> items = orderItemRepository.findByOrderId(order.getId());
+        order.setItems(items);
+        paymentRepository.findByOrderId(order.getId()).ifPresent(p -> {
+            if (p.getPaymentMethod() != null) {
+                order.setPaymentMethod(p.getPaymentMethod().name());
+            }
+        });
+        return order;
     }
 
     @Override

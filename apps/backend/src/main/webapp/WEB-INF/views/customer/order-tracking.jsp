@@ -16,7 +16,7 @@
                 Hành Trình Tách Cà Phê Của Bạn
             </h1>
             <p class="text-secondary mx-auto small mb-0" style="max-width: 600px;">
-                <span data-i18n="track.code_label">Mã Đơn Hàng:</span> <span class="text-gold fw-bold font-monospace fs-6">#${order.orderCode}</span> • <span data-i18n="track.time_label">Đặt lúc:</span> <span class="text-light"><fmt:formatDate value="${order.createdAt}" pattern="HH:mm - dd/MM/yyyy"/></span>
+                <span data-i18n="track.code_label">Mã Đơn Hàng:</span> <span class="text-gold fw-bold font-monospace fs-6">#${order.orderCode}</span> • <span data-i18n="track.time_label">Đặt lúc:</span> <span class="text-light">${not empty order.formattedCreatedAt ? order.formattedCreatedAt : order.createdAt}</span>
             </p>
         </div>
     </div>
@@ -126,7 +126,7 @@
                                                 <td>
                                                     <div class="fw-bold font-serif text-light">${item.product.name}</div>
                                                     <small class="text-gold d-block">
-                                                        Size: ${item.productSize.name} • ${item.sugarLevel}% Đường • ${item.iceLevel}% Đá
+                                                        Size: ${not empty item.productSize ? item.productSize.name : 'M'} • ${not empty item.sugarLevel ? item.sugarLevel : 100}% Đường • ${not empty item.iceLevel ? item.iceLevel : 100}% Đá
                                                     </small>
                                                 </td>
                                                 <td class="text-center font-monospace fw-bold">${item.quantity}</td>
@@ -183,6 +183,59 @@
                                         <i class="fa-solid fa-credit-card me-1"></i> ${order.paymentMethod}
                                     </span>
                                 </div>
+
+                                <c:if test="${order.paymentMethod == 'VIETQR' and (order.status == 'PENDING' or param.payment == 'vietqr')}">
+                                    <div class="card-luxury p-3 text-center border-gold bg-espresso mt-3" id="vietQrPaymentBox">
+                                        <div class="small fw-bold text-gold text-uppercase mb-2">
+                                            <i class="fa-solid fa-qrcode me-1"></i> Quét Mã VietQR Chuyển Khoản
+                                        </div>
+                                        <img src="${not empty vietQrUrl ? vietQrUrl : 'https://img.vietqr.io/image/ICB-108868686868-compact2.png?amount=125000&addInfo=THANH+TOAN+DON+'.concat(order.orderCode).concat('&accountName=UTECOFFE+SPECIALTY')}"
+                                             class="rounded-3 border border-gold-subtle mx-auto d-block img-fluid shadow-sm mb-2"
+                                             style="max-width: 220px;"
+                                             alt="VietQR Payment">
+                                        <div class="small text-light">
+                                            Ngân hàng: <strong>VietinBank</strong> • STK: <strong class="text-gold font-monospace">108868686868</strong>
+                                        </div>
+                                        <div class="small text-secondary font-monospace mt-1">
+                                            Nội dung: <strong>THANH TOAN DON ${order.orderCode}</strong>
+                                        </div>
+                                        <button type="button" class="btn btn-gold btn-sm rounded-pill mt-3 w-100 fw-bold" id="btnConfirmPaid" onclick="confirmVietQrPaid()">
+                                            <i class="fa-solid fa-circle-check me-1"></i> Tôi Đã Chuyển Khoản Thành Công
+                                        </button>
+                                    </div>
+                                    <script>
+                                        function confirmVietQrPaid() {
+                                            const btn = document.getElementById('btnConfirmPaid');
+                                            if (btn) {
+                                                btn.disabled = true;
+                                                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang xác nhận giao dịch...';
+                                            }
+                                            fetch('${pageContext.request.contextPath}/api/payments/vietqr/verify/${order.orderCode}', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'X-CSRF-TOKEN': '${_csrf.token}'
+                                                }
+                                            })
+                                            .then(res => res.json())
+                                            .then(data => {
+                                                if (btn) {
+                                                    btn.className = 'btn btn-success btn-sm rounded-pill mt-3 w-100 fw-bold';
+                                                    btn.innerHTML = '<i class="fa-solid fa-check me-1"></i> Đã Xác Nhận Thanh Toán!';
+                                                }
+                                                const box = document.getElementById('vietQrPaymentBox');
+                                                if (box) {
+                                                    setTimeout(() => box.remove(), 2500);
+                                                }
+                                            })
+                                            .catch(() => {
+                                                if (btn) {
+                                                    btn.disabled = false;
+                                                    btn.innerHTML = '<i class="fa-solid fa-circle-check me-1"></i> Tôi Đã Chuyển Khoản Thành Công';
+                                                }
+                                            });
+                                        }
+                                    </script>
+                                </c:if>
                             </div>
 
                             <div class="pt-3 border-top border-gold mt-4 d-flex gap-2">

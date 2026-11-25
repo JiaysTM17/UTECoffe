@@ -26,7 +26,7 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 
@@ -69,6 +69,17 @@ public class Order {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @Transient
+    private java.util.List<OrderItem> items;
+
+    @Transient
+    private String paymentMethod;
+
+    public String getFormattedCreatedAt() {
+        if (createdAt == null) return "";
+        return createdAt.format(java.time.format.DateTimeFormatter.ofPattern("HH:mm - dd/MM/yyyy"));
+    }
 
     @PrePersist
     protected void onCreate() {

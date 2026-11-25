@@ -26,4 +26,8 @@ public class ProductSize {
     @Builder.Default
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal extraPrice = BigDecimal.ZERO;
+
+    public String getName() {
+        return sizeName != null ? sizeName : "Standard";
+    }
 }

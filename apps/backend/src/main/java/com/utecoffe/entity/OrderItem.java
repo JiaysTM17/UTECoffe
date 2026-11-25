@@ -39,4 +39,12 @@ public class OrderItem {
 
     @Column(length = 255)
     private String note;
+
+    public Integer getSugarLevel() {
+        return 100;
+    }
+
+    public Integer getIceLevel() {
+        return 100;
+    }
 }

@@ -22,7 +22,7 @@
     </div>
 
     <div class="container py-5">
-        <form action="${pageContext.request.contextPath}/api/orders" method="post" id="checkoutForm">
+        <form action="${pageContext.request.contextPath}/checkout/place-order" method="post" id="checkoutForm">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             
             <div class="row g-4">
@@ -177,15 +177,28 @@
                         <div class="mb-3">
                             <div class="d-flex justify-content-between small text-secondary mb-2">
                                 <span>Tạm tính thức uống:</span>
-                                <span class="text-light fw-bold font-monospace">125.000 VNĐ</span>
+                                <span class="text-light fw-bold font-monospace">
+                                    <fmt:formatNumber value="${not empty cart ? cart.totalAmount : 125000}" pattern="#,##0"/> VNĐ
+                                </span>
                             </div>
                             <div class="d-flex justify-content-between small text-secondary mb-2">
                                 <span>Phí vận chuyển:</span>
-                                <span class="text-success fw-bold">Miễn Phí</span>
+                                <c:choose>
+                                    <c:when test="${not empty cart and cart.shippingFee == 0}">
+                                        <span class="text-success fw-bold">Miễn Phí</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="text-light fw-bold font-monospace">
+                                            <fmt:formatNumber value="${not empty cart ? cart.shippingFee : 15000}" pattern="#,##0"/> VNĐ
+                                        </span>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="d-flex justify-content-between small text-secondary mb-2">
-                                <span>Ưu đãi thành viên:</span>
-                                <span class="text-gold font-monospace fw-bold">-20.000 VNĐ</span>
+                                <span>Ưu đãi áp dụng:</span>
+                                <span class="text-gold font-monospace fw-bold">
+                                    -<fmt:formatNumber value="${not empty cart ? cart.discountAmount : 0}" pattern="#,##0"/> VNĐ
+                                </span>
                             </div>
                         </div>
 
@@ -193,7 +206,9 @@
 
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <span class="fw-bold fs-6">Tổng Thanh Toán:</span>
-                            <span class="price-gold fs-3 fw-bold">105.000 VNĐ</span>
+                            <span class="price-gold fs-3 fw-bold">
+                                <fmt:formatNumber value="${not empty cart ? cart.finalAmount : 125000}" pattern="#,##0"/> VNĐ
+                            </span>
                         </div>
 
                         <!-- Submit Button -->

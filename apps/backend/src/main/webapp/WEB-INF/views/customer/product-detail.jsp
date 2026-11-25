@@ -1001,6 +1001,37 @@
         }
 
         function handleAddToCart() {
+            // Get active size
+            let selectedSize = 'M';
+            const sizeActive = document.querySelector('.btn-option-pill[data-type="size"].active');
+            if (sizeActive) selectedSize = sizeActive.getAttribute('data-value') || 'M';
+
+            // Get active sugar & ice
+            let selectedSugar = 100;
+            const sugarActive = document.querySelector('.btn-option-pill[data-type="sugar"].active');
+            if (sugarActive) selectedSugar = parseInt(sugarActive.getAttribute('data-value')) || 100;
+
+            let selectedIce = 100;
+            const iceActive = document.querySelector('.btn-option-pill[data-type="ice"].active');
+            if (iceActive) selectedIce = iceActive.getAttribute('data-value') === 'HOT' ? 0 : (parseInt(iceActive.getAttribute('data-value')) || 100);
+
+            // Send to backend
+            const formData = new URLSearchParams();
+            formData.append('productId', '${product.id}');
+            formData.append('size', selectedSize);
+            formData.append('sugar', selectedSugar);
+            formData.append('ice', selectedIce);
+            formData.append('quantity', quantity);
+
+            fetch('${pageContext.request.contextPath}/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRF-TOKEN': '${_csrf.token}'
+                },
+                body: formData.toString()
+            }).catch(e => console.warn('Cart sync note:', e));
+
             // Visual Feedback Toast
             const toast = document.createElement('div');
             toast.className = 'position-fixed bottom-4 end-4 p-3 bg-espresso border border-gold rounded-3 shadow-lg z-index-1050 text-gold d-flex align-items-center gap-3 animate-fade-in';
