@@ -101,68 +101,93 @@
                         </div>
                     </div>
 
-                    <!-- Payment Gateways Selection -->
-                    <div class="card-luxury p-3 p-md-3.5">
-                        <h6 class="font-serif fw-bold text-gold-gradient mb-2.5 border-bottom border-gold pb-2" style="font-size: 0.98rem;">
-                            <i class="fa-solid fa-credit-card me-1.5"></i><span data-i18n="checkout.step2">2. Cổng Thanh Toán An Toàn</span>
-                        </h6>
+                    <!-- Payment Gateways Selection: Spacious & High-End -->
+                    <div class="card-luxury p-3.5 p-md-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold">
+                            <h6 class="font-serif fw-bold text-gold-gradient mb-0" style="font-size: 1.05rem;">
+                                <i class="fa-solid fa-shield-halved me-2 text-gold"></i><span data-i18n="checkout.step2">2. Cổng Thanh Toán Bảo Mật</span>
+                            </h6>
+                            <span class="badge bg-gold-subtle text-gold small font-accent px-2.5 py-1 rounded-pill" style="font-size: 0.72rem;">
+                                Mã hóa SSL 256-bit
+                            </span>
+                        </div>
 
-                        <div class="d-flex flex-column gap-2">
-                            <!-- VietQR Dynamic -->
-                            <label class="p-2.5 rounded-3 d-flex align-items-center gap-2.5 cursor-pointer payment-option-card">
-                                <input type="radio" name="paymentMethod" value="VIETQR" checked class="form-check-input flex-shrink-0 mt-0">
+                        <div class="d-flex flex-column gap-3">
+                            <!-- Option 1: VietQR Dynamic -->
+                            <label class="payment-option-card position-relative" for="payVietQR">
+                                <input type="radio" name="paymentMethod" id="payVietQR" value="VIETQR" checked class="form-check-input d-none">
+                                <div class="payment-radio-circle flex-shrink-0">
+                                    <i class="fa-solid fa-check fa-xs"></i>
+                                </div>
+                                <div class="payment-icon-wrap flex-shrink-0">
+                                    <i class="fa-solid fa-qrcode fs-5 text-gold"></i>
+                                </div>
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold d-flex align-items-center gap-2 flex-wrap" style="font-size: 0.85rem;">
-                                        <i class="fa-solid fa-qrcode text-gold"></i>
-                                        <span>Chuyển Khoản Ngân Hàng (VietQR Động Trực Tiếp)</span>
-                                        <span class="badge bg-gold text-obsidian small px-2 py-0" style="font-size: 0.68rem;">Khuyên dùng</span>
+                                    <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                                        <span class="font-serif fw-bold text-light fs-6">Chuyển Khoản Ngân Hàng (VietQR Động)</span>
+                                        <span class="badge bg-gold text-obsidian small px-2 py-0.5 rounded-pill font-accent fw-bold" style="font-size: 0.68rem;">Khuyên dùng</span>
                                     </div>
-                                    <small class="text-secondary d-block mt-0.5" style="font-size: 0.74rem;">
-                                        Hiển thị mã QR chứa sẵn số tiền và mã đơn ngay trên website. Tự động xác nhận sau khi quét.
-                                    </small>
+                                    <div class="text-secondary small" style="font-size: 0.8rem; line-height: 1.4;">
+                                        Hệ thống tự động sinh mã QR đúng số tiền và nội dung đơn. Xác thực giao dịch tự động trong 3 giây.
+                                    </div>
                                 </div>
                             </label>
 
-                            <!-- VNPay In-App QR -->
-                            <label class="p-2.5 rounded-3 d-flex align-items-center gap-2.5 cursor-pointer payment-option-card">
-                                <input type="radio" name="paymentMethod" value="VNPAY" class="form-check-input flex-shrink-0 mt-0">
+                            <!-- Option 2: VNPay In-App QR -->
+                            <label class="payment-option-card position-relative" for="payVNPay">
+                                <input type="radio" name="paymentMethod" id="payVNPay" value="VNPAY" class="form-check-input d-none">
+                                <div class="payment-radio-circle flex-shrink-0">
+                                    <i class="fa-solid fa-check fa-xs"></i>
+                                </div>
+                                <div class="payment-icon-wrap flex-shrink-0">
+                                    <i class="fa-solid fa-wallet fs-5 text-gold"></i>
+                                </div>
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold d-flex align-items-center gap-2 flex-wrap" style="font-size: 0.85rem;">
-                                        <i class="fa-solid fa-wallet text-gold"></i>
-                                        <span>Cổng VNPay-QR (Quét mã trực tiếp trên Web)</span>
-                                        <span class="badge bg-espresso border border-gold text-gold small px-2 py-0" style="font-size: 0.68rem;">Không chuyển hướng</span>
+                                    <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                                        <span class="font-serif fw-bold text-light fs-6">Cổng VNPay-QR Trực Tiếp</span>
+                                        <span class="badge bg-espresso border border-gold-subtle text-gold small px-2 py-0.5 rounded-pill font-accent" style="font-size: 0.68rem;">Không chuyển hướng</span>
                                     </div>
-                                    <small class="text-secondary d-block mt-0.5" style="font-size: 0.74rem;">
-                                        Tạo mã QR thanh toán an toàn trực tiếp trên giao diện website UTECoffe, hỗ trợ tất cả App ngân hàng.
-                                    </small>
+                                    <div class="text-secondary small" style="font-size: 0.8rem; line-height: 1.4;">
+                                        Mở ứng dụng ngân hàng quét mã thanh toán an toàn trực tiếp trên giao diện UTECoffe.
+                                    </div>
                                 </div>
                             </label>
 
-                            <!-- MoMo In-App QR -->
-                            <label class="p-2.5 rounded-3 d-flex align-items-center gap-2.5 cursor-pointer payment-option-card">
-                                <input type="radio" name="paymentMethod" value="MOMO" class="form-check-input flex-shrink-0 mt-0">
+                            <!-- Option 3: MoMo In-App QR -->
+                            <label class="payment-option-card position-relative" for="payMoMo">
+                                <input type="radio" name="paymentMethod" id="payMoMo" value="MOMO" class="form-check-input d-none">
+                                <div class="payment-radio-circle flex-shrink-0">
+                                    <i class="fa-solid fa-check fa-xs"></i>
+                                </div>
+                                <div class="payment-icon-wrap flex-shrink-0">
+                                    <i class="fa-solid fa-mobile-screen fs-5 text-gold"></i>
+                                </div>
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold d-flex align-items-center gap-2 flex-wrap" style="font-size: 0.85rem;">
-                                        <i class="fa-solid fa-mobile-screen-button text-gold"></i>
-                                        <span>Ví Điện Tử MoMo QR (Trực Tiếp Trên Web)</span>
+                                    <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                                        <span class="font-serif fw-bold text-light fs-6">Ví Điện Tử MoMo QR</span>
                                     </div>
-                                    <small class="text-secondary d-block mt-0.5" style="font-size: 0.74rem;">
-                                        Mở app MoMo quét mã QR động được tạo ngay trên đơn hàng để hoàn tất thanh toán.
-                                    </small>
+                                    <div class="text-secondary small" style="font-size: 0.8rem; line-height: 1.4;">
+                                        Quét mã QR động qua ứng dụng MoMo, thanh toán tức thì và tích lũy điểm thưởng.
+                                    </div>
                                 </div>
                             </label>
 
-                            <!-- COD -->
-                            <label class="p-2.5 rounded-3 d-flex align-items-center gap-2.5 cursor-pointer payment-option-card">
-                                <input type="radio" name="paymentMethod" value="COD" class="form-check-input flex-shrink-0 mt-0">
+                            <!-- Option 4: COD -->
+                            <label class="payment-option-card position-relative" for="payCOD">
+                                <input type="radio" name="paymentMethod" id="payCOD" value="COD" class="form-check-input d-none">
+                                <div class="payment-radio-circle flex-shrink-0">
+                                    <i class="fa-solid fa-check fa-xs"></i>
+                                </div>
+                                <div class="payment-icon-wrap flex-shrink-0">
+                                    <i class="fa-solid fa-money-bill-wave fs-5 text-gold"></i>
+                                </div>
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold d-flex align-items-center gap-2 flex-wrap" style="font-size: 0.85rem;">
-                                        <i class="fa-solid fa-money-bill-wave text-gold"></i>
-                                        <span>Tiền Mặt Khi Nhận Hàng (COD)</span>
+                                    <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                                        <span class="font-serif fw-bold text-light fs-6">Tiền Mặt Khi Nhận Hàng (COD)</span>
                                     </div>
-                                    <small class="text-secondary d-block mt-0.5" style="font-size: 0.74rem;">
+                                    <div class="text-secondary small" style="font-size: 0.8rem; line-height: 1.4;">
                                         Thanh toán tiền mặt trực tiếp cho nhân viên giao hàng khi nhận thức uống tận tay.
-                                    </small>
+                                    </div>
                                 </div>
                             </label>
                         </div>

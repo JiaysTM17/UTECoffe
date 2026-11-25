@@ -69,21 +69,32 @@
                                         <c:forEach var="item" items="${cart.items}">
                                             <tr class="cart-item-row" data-item-id="${item.id}" data-unit-price="${item.unitPrice}">
                                                 <td>
-                                                    <div class="d-flex align-items-center gap-2.5">
+                                                    <div class="d-flex align-items-center gap-3">
                                                         <img src="${not empty item.product.imageUrl ? item.product.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=200&q=80'}" 
-                                                             class="rounded-2 border border-gold-subtle object-fit-cover flex-shrink-0" 
-                                                             style="width: 52px; height: 52px;" 
+                                                             class="rounded-3 border border-gold-subtle object-fit-cover flex-shrink-0 shadow-sm" 
+                                                             style="width: 54px; height: 54px;" 
                                                              alt="${item.product.name}">
                                                         <div>
-                                                            <div class="cart-product-title text-light" style="font-size: 1.02rem; font-weight: 700; line-height: 1.35;">${item.product.name}</div>
-                                                            <div class="cart-product-meta text-gold mt-1">
-                                                                <span class="badge bg-espresso border border-gold-subtle me-1 px-2 py-0.5" style="font-size: 0.72rem;">Size: ${item.productSize.name}</span>
-                                                                <span style="font-size: 0.76rem;">${item.sugarLevel}% Đường • ${item.iceLevel}% Đá</span>
+                                                            <div class="cart-product-title font-serif fw-bold text-light mb-1" style="font-size: 1.08rem; letter-spacing: -0.01em;">${item.product.name}</div>
+                                                            <div class="cart-product-meta d-flex align-items-center flex-wrap gap-1">
+                                                                <span class="badge bg-espresso border border-gold-subtle px-2 py-0.5 text-gold" style="font-size: 0.72rem; letter-spacing: 0.04em;">
+                                                                    <c:choose>
+                                                                        <c:when test="${item.productSize.name.toLowerCase().startsWith('size')}">
+                                                                            ${item.productSize.name}
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            Size ${item.productSize.name}
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </span>
+                                                                <span class="text-secondary small font-monospace">${item.sugarLevel}% Đường</span>
+                                                                <span class="text-gold opacity-50">•</span>
+                                                                <span class="text-secondary small font-monospace">${item.iceLevel}% Đá</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="font-monospace text-secondary" style="font-size: 0.85rem;">
+                                                <td class="font-monospace text-secondary text-nowrap" style="font-size: 0.88rem; white-space: nowrap !important;">
                                                     <fmt:formatNumber value="${item.unitPrice}" pattern="#,##0"/> VNĐ
                                                 </td>
                                                 <td class="text-center">
@@ -93,14 +104,14 @@
                                                         <button class="btn btn-outline-gold px-1.5 btn-qty-plus" type="button"><i class="fa-solid fa-plus fa-2xs"></i></button>
                                                     </div>
                                                 </td>
-                                                <td class="text-end fw-bold text-gold font-monospace item-subtotal-cell" style="font-size: 0.9rem;">
+                                                <td class="text-end fw-bold text-gold font-monospace item-subtotal-cell text-nowrap" style="font-size: 0.95rem; white-space: nowrap !important;">
                                                     <fmt:formatNumber value="${item.subtotal}" pattern="#,##0"/> VNĐ
                                                 </td>
                                                 <td class="text-end">
                                                     <form action="${pageContext.request.contextPath}/cart/remove/${item.id}" method="post" class="d-inline">
                                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                                        <button type="submit" class="btn btn-sm btn-link text-secondary text-hover-danger p-1" title="Xóa món">
-                                                            <i class="fa-solid fa-trash-can fa-sm"></i>
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger border-0 rounded-circle p-2 text-secondary hover-danger" title="Xóa món">
+                                                            <i class="fa-regular fa-trash-can fa-sm"></i>
                                                         </button>
                                                     </form>
                                                 </td>

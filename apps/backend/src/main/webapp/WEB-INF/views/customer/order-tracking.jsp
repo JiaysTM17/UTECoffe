@@ -187,70 +187,77 @@
             <div class="col-lg-7">
                 <c:choose>
                     <c:when test="${order.paymentMethod != 'COD' and (order.status == 'PENDING' or param.showQr == 'true' or showQr == true)}">
-                        <div class="card-luxury p-3 p-md-3.5 text-center border-gold bg-espresso shadow-lg h-100 d-flex flex-column justify-content-between" id="vietQrPaymentBox">
+                        <div class="card-luxury p-3.5 p-md-4 text-center border-gold bg-espresso shadow-lg h-100 d-flex flex-column justify-content-between" id="vietQrPaymentBox">
                             <div>
-                                <div class="d-flex justify-content-between align-items-center mb-2.5 pb-2 border-bottom border-gold flex-wrap gap-1">
+                                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold flex-wrap gap-2">
                                     <span class="badge bg-gold text-obsidian small font-accent fw-bold px-2.5 py-1 rounded-pill" style="font-size: 0.75rem;">
                                         <i class="fa-solid fa-qrcode me-1"></i> THANH TOÁN QR TRỰC TIẾP
                                     </span>
                                     <span class="text-secondary font-monospace" style="font-size: 0.78rem;">
-                                        <i class="fa-regular fa-clock me-1 text-gold"></i> Hết hạn: <strong class="text-gold" id="qrCountdown">14:59</strong>
+                                        <i class="fa-regular fa-clock me-1 text-gold"></i> Hết hạn sau: <strong class="text-gold" id="qrCountdown">14:59</strong>
                                     </span>
                                 </div>
 
-                                <!-- Bank / Wallet Tab Selector -->
-                                <div class="d-flex justify-content-center gap-1.5 mb-2.5">
-                                    <button type="button" class="btn btn-outline-gold btn-sm py-1 px-2.5 active font-accent qr-tab-btn" style="font-size: 0.78rem;" onclick="selectQrTab('ICB', 'VietinBank', '108820269999', this)">
-                                        VietinBank
-                                    </button>
-                                    <button type="button" class="btn btn-outline-gold btn-sm py-1 px-2.5 font-accent qr-tab-btn" style="font-size: 0.78rem;" onclick="selectQrTab('TCB', 'Techcombank', '190368202699', this)">
-                                        Techcombank
-                                    </button>
-                                    <button type="button" class="btn btn-outline-gold btn-sm py-1 px-2.5 font-accent qr-tab-btn" style="font-size: 0.78rem;" onclick="selectQrTab('970415', 'Ví MoMo / VNPay-QR', '108820269999', this)">
-                                        MoMo / VNPay
-                                    </button>
+                                <!-- Bank / Wallet Segmented Control -->
+                                <div class="text-center mb-3">
+                                    <div class="bank-segment-wrap">
+                                        <button type="button" class="bank-segment-btn active qr-tab-btn" onclick="selectQrTab('ICB', 'VietinBank', '108820269999', this)">
+                                            VietinBank
+                                        </button>
+                                        <button type="button" class="bank-segment-btn qr-tab-btn" onclick="selectQrTab('TCB', 'Techcombank', '190368202699', this)">
+                                            Techcombank
+                                        </button>
+                                        <button type="button" class="bank-segment-btn qr-tab-btn" onclick="selectQrTab('970415', 'Ví MoMo / VNPay-QR', '108820269999', this)">
+                                            MoMo / VNPay
+                                        </button>
+                                    </div>
                                 </div>
 
-                                <!-- Dynamic High-Resolution Universal QR Code -->
-                                <div class="position-relative d-inline-block mx-auto mb-2.5 p-2 bg-white rounded-3 shadow-gold-sm">
+                                <!-- Dynamic High-Resolution Universal QR Code Frame -->
+                                <div class="qr-token-card mx-auto mb-3 p-3 position-relative d-inline-block">
                                     <img id="dynamicQrImage" 
                                          src="https://img.vietqr.io/image/ICB-108820269999-compact2.png?amount=${order.finalAmount}&addInfo=THANH+TOAN+DON+${order.orderCode}&accountName=CONG+TY+CP+CA+PHE+UTE+COFFE"
                                          class="img-fluid rounded-2 d-block mx-auto"
-                                         style="max-width: 190px; height: auto;"
+                                         style="max-width: 195px; height: auto;"
                                          alt="Mã QR Thanh Toán UTECoffe">
+                                    <div class="mt-2 text-center">
+                                        <span class="badge bg-espresso text-gold border border-gold-subtle px-2.5 py-1 rounded-pill" style="font-size: 0.72rem; letter-spacing: 0.05em;">
+                                            <i class="fa-solid fa-qrcode me-1 text-gold"></i> Quét Bằng Mọi App Ngân Hàng
+                                        </span>
+                                    </div>
                                 </div>
 
-                                <!-- Transfer Details with 1-Click Copy -->
-                                <div class="text-start bg-obsidian p-2.5 rounded-3 border border-gold-subtle mb-3 small" style="font-size: 0.8rem;">
-                                    <div class="d-flex justify-content-between align-items-center mb-1 pb-1 border-bottom border-dark">
-                                        <span class="text-secondary">Ngân Hàng:</span>
-                                        <strong class="text-light" id="qrBankName">VietinBank (Chi nhánh Thủ Đức)</strong>
+                                <!-- Transfer Details: Luxury Invoice Slate -->
+                                <div class="transfer-slate p-3 mb-3 text-start">
+                                    <div class="d-flex justify-content-between align-items-center py-1.5 transfer-line">
+                                        <span class="text-secondary small">Ngân Hàng Thụ Hưởng:</span>
+                                        <strong class="text-light" id="qrBankName" style="font-size: 0.88rem;">VietinBank (Chi nhánh Thủ Đức)</strong>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-1 pb-1 border-bottom border-dark">
-                                        <span class="text-secondary">Số Tài Khoản:</span>
-                                        <div class="d-flex align-items-center gap-1.5">
-                                            <strong class="text-gold font-monospace fs-6" id="qrAccNo">108820269999</strong>
-                                            <button type="button" class="btn btn-outline-gold btn-sm py-0 px-1.5 rounded-pill" style="font-size: 0.68rem;" onclick="copyToClipboard('108820269999', this)">
-                                                <i class="fa-regular fa-copy"></i>
+                                    <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
+                                        <span class="text-secondary small">Số Tài Khoản:</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <strong class="text-gold font-monospace fs-5" id="qrAccNo">108820269999</strong>
+                                            <button type="button" class="btn btn-outline-gold btn-sm py-0.5 px-2 rounded-pill font-accent d-flex align-items-center gap-1" style="font-size: 0.72rem;" onclick="copyToClipboard('108820269999', this)">
+                                                <i class="fa-regular fa-copy"></i> <span>Sao Chép</span>
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-1 pb-1 border-bottom border-dark">
-                                        <span class="text-secondary">Chủ Tài Khoản:</span>
-                                        <strong class="text-light text-uppercase">CONG TY CP CA PHE UTE COFFE</strong>
+                                    <div class="d-flex justify-content-between align-items-center py-1.5 transfer-line">
+                                        <span class="text-secondary small">Chủ Tài Khoản:</span>
+                                        <strong class="text-light text-uppercase font-serif" style="font-size: 0.85rem; letter-spacing: 0.03em;">CONG TY CP CA PHE UTE COFFE</strong>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-1 pb-1 border-bottom border-dark">
-                                        <span class="text-secondary">Số Tiền:</span>
-                                        <strong class="price-gold fs-6">
+                                    <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
+                                        <span class="text-secondary small">Số Tiền Cần Chuyển:</span>
+                                        <strong class="price-gold fs-5 font-monospace">
                                             <fmt:formatNumber value="${order.finalAmount}" pattern="#,##0"/> VNĐ
                                         </strong>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="text-secondary">Nội Dung:</span>
-                                        <div class="d-flex align-items-center gap-1.5">
-                                            <strong class="text-gold font-monospace" id="qrMemoText">THANH TOAN DON ${order.orderCode}</strong>
-                                            <button type="button" class="btn btn-outline-gold btn-sm py-0 px-1.5 rounded-pill" style="font-size: 0.68rem;" onclick="copyToClipboard('THANH TOAN DON ${order.orderCode}', this)">
-                                                <i class="fa-regular fa-copy"></i>
+                                    <div class="d-flex justify-content-between align-items-center py-2">
+                                        <span class="text-secondary small">Nội Dung Chuyển Khoản:</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="badge bg-espresso border border-gold text-gold font-monospace px-2.5 py-1.5" style="font-size: 0.86rem; letter-spacing: 0.05em;" id="qrMemoText">THANH TOAN DON ${order.orderCode}</span>
+                                            <button type="button" class="btn btn-outline-gold btn-sm py-0.5 px-2 rounded-pill font-accent d-flex align-items-center gap-1" style="font-size: 0.72rem;" onclick="copyToClipboard('THANH TOAN DON ${order.orderCode}', this)">
+                                                <i class="fa-regular fa-copy"></i> <span>Sao Chép</span>
                                             </button>
                                         </div>
                                     </div>
@@ -259,12 +266,12 @@
 
                             <!-- User Action Buttons -->
                             <div>
-                                <button type="button" class="btn btn-gold w-100 py-2.5 rounded-pill fw-bold shadow-gold mb-2 font-accent" id="btnConfirmPaid" style="font-size: 0.88rem;" onclick="executePaymentVerification()">
-                                    <i class="fa-solid fa-circle-check me-1.5"></i> Tôi Đã Chuyển Khoản Thành Công
+                                <button type="button" class="btn btn-gold w-100 py-3 rounded-pill fw-bold shadow-gold mb-1 font-accent fs-6" id="btnConfirmPaid" onclick="executePaymentVerification()">
+                                    <i class="fa-solid fa-circle-check me-2"></i> Xác Nhận Đã Chuyển Khoản
                                 </button>
 
-                                <button type="button" class="btn btn-outline-gold w-100 py-1.5 rounded-pill font-accent text-gold" id="btnSimulateScan" style="font-size: 0.78rem;" onclick="simulateDemoFastPayment()">
-                                    <i class="fa-solid fa-bolt text-warning me-1.5"></i> Giả Lập Quét QR Thành Công (Thử Nghiệm Demo)
+                                <button type="button" class="btn btn-link text-gold text-decoration-none small mx-auto d-block opacity-75 hover-opacity-100" style="font-size: 0.78rem;" id="btnSimulateScan" onclick="simulateDemoFastPayment()">
+                                    <i class="fa-solid fa-wand-magic-sparkles me-1 text-warning"></i> Thử nghiệm: Giả lập quét QR thành công
                                 </button>
                             </div>
                         </div>
