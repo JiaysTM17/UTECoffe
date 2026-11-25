@@ -8,10 +8,9 @@ services:
     region: singapore
     autoDeploy: true
     healthCheckPath: /ping
-    domains:
-      - utecoffe.io.vn
-      - www.utecoffe.io.vn
     envVars:
+      - key: APP_BUILD_VERSION
+        value: "2026-11-25.03"
       - key: PORT
         value: 10000
       - key: SPRING_PROFILES_ACTIVE
