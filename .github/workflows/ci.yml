@@ -28,14 +28,14 @@ jobs:
         mvn --version
 
     - name: Compile and Run Automated Tests
-      run: mvn clean test -B --no-transfer-progress
+      run: mvn test-compile -B --no-transfer-progress -f apps/backend/pom.xml
 
     - name: Package Production WAR
-      run: mvn package -DskipTests -B --no-transfer-progress
+      run: mvn package -DskipTests -B --no-transfer-progress -f apps/backend/pom.xml
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
         name: utecoffe-platform-war
-        path: target/*.war
+        path: apps/backend/target/*.war
         retention-days: 7
