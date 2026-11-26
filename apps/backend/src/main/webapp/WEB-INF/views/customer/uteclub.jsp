@@ -10,11 +10,11 @@
     <section class="py-5 bg-espresso border-bottom border-gold text-center position-relative overflow-hidden">
         <div class="position-absolute top-0 start-50 translate-middle-x w-100 h-100 opacity-25 pointer-events-none" style="background: radial-gradient(circle at 50% 30%, rgba(212,175,55,0.2) 0%, transparent 70%);"></div>
         <div class="container py-lg-4 position-relative" style="z-index: 2;">
-            <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill mb-3 border border-gold" style="background: rgba(212,175,55,0.1);">
+            <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-2 mb-3 border border-gold" style="background: rgba(212,175,55,0.1);">
                 <i class="fa-solid fa-crown text-gold"></i>
-                <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.15em;" data-i18n="ute.hero_tag">UTECLUB LOYALTY PRIVILEGE</span>
+                <span class="text-gold small fw-medium" data-i18n="ute.hero_tag">Đặc Quyền Hội Viên UTEClub</span>
             </div>
-            <h1 class="font-serif display-4 fw-bold text-gold-gradient mb-3" data-i18n="ute.hero_title">
+            <h1 class="font-serif display-4 fw-bold text-primary mb-3" data-i18n="ute.hero_title">
                 Đặc Quyền Hội Viên UTEClub
             </h1>
             <p class="lead text-secondary mx-auto mb-4" style="max-width: 760px; font-weight: 300; line-height: 1.8;" data-i18n="ute.hero_desc">
@@ -22,18 +22,18 @@
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-3">
                 <sec:authorize access="!isAuthenticated()">
-                    <a href="${pageContext.request.contextPath}/auth/register" class="btn btn-gold rounded-pill px-4 py-2.5 fw-semibold shadow-gold-sm">
+                    <a href="${pageContext.request.contextPath}/auth/register" class="btn btn-gold px-4 py-2.5 fw-semibold">
                         <i class="fa-solid fa-user-plus me-2"></i><span data-i18n="ute.btn_register">Đăng Ký Hội Viên Miễn Phí</span>
                     </a>
-                    <a href="${pageContext.request.contextPath}/auth/login" class="btn btn-outline-gold rounded-pill px-4 py-2.5 fw-semibold">
+                    <a href="${pageContext.request.contextPath}/auth/login" class="btn btn-outline-gold px-4 py-2.5 fw-semibold">
                         <i class="fa-solid fa-arrow-right-to-bracket me-2"></i><span data-i18n="ute.btn_login">Đăng Nhập UTEClub</span>
                     </a>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-                    <a href="${pageContext.request.contextPath}/profile" class="btn btn-gold rounded-pill px-4 py-2.5 fw-semibold shadow-gold-sm">
+                    <a href="${pageContext.request.contextPath}/profile" class="btn btn-gold px-4 py-2.5 fw-semibold">
                         <i class="fa-solid fa-award me-2"></i><span data-i18n="ute.btn_tier">Xem Hạng Thẻ Của Bạn</span>
                     </a>
-                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold rounded-pill px-4 py-2.5 fw-semibold">
+                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold px-4 py-2.5 fw-semibold">
                         <i class="fa-solid fa-mug-hot me-2"></i><span data-i18n="ute.btn_order">Đặt Món Tích Điểm Ngay</span>
                     </a>
                 </sec:authorize>
@@ -46,7 +46,7 @@
         <div class="container">
             <div class="text-center mb-5">
                 <span class="text-gold font-accent text-uppercase small fw-bold" style="letter-spacing: 0.12em;" data-i18n="ute.pillars_tag">4 TRỤ CỘT ĐẶC QUYỀN</span>
-                <h3 class="font-serif fw-bold text-gold-gradient mt-1" data-i18n="ute.pillars_title">Trải Nghiệm Dịch Vụ Vượt Chuẩn</h3>
+                <h3 class="font-serif fw-bold text-primary mt-1" data-i18n="ute.pillars_title">Trải Nghiệm Dịch Vụ Vượt Chuẩn</h3>
             </div>
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6">
@@ -94,7 +94,7 @@
         <div class="container py-lg-3">
             <div class="text-center mb-5">
                 <span class="badge bg-gold text-obsidian px-3 py-1 font-accent fw-bold text-uppercase" data-i18n="ute.tiers_tag">HỆ THỐNG THĂNG HẠNG</span>
-                <h2 class="font-serif display-5 fw-bold text-gold-gradient mt-2 mb-2" data-i18n="ute.tiers_title">4 Cấp Bậc Hội Viên Danh Dự</h2>
+                <h2 class="font-serif display-5 fw-bold text-primary mt-2 mb-2" data-i18n="ute.tiers_title">4 Cấp Bậc Hội Viên Danh Dự</h2>
                 <p class="text-secondary small mx-auto" style="max-width: 640px;" data-i18n="ute.tiers_desc">
                     Điểm tích lũy trọn đời được ghi nhận minh bạch trên từng đơn hàng. Khi đạt đủ mốc điểm, hệ thống tự động thăng hạng thẻ và mở khóa đặc quyền mới.
                 </p>
@@ -147,7 +147,7 @@
                             <span class="badge px-3 py-1.5 text-dark fw-bold font-accent" style="background: #ffd700;" data-i18n="modal.tier_gold_badge">HẠNG VÀNG</span>
                             <span class="text-gold small font-monospace fw-bold text-nowrap" data-i18n="modal.tier_gold_pts">1.500 - 2.999 pts</span>
                         </div>
-                        <h4 class="font-serif fw-bold text-gold-gradient mb-2" data-i18n="modal.tier_gold_name">Hội Viên Vàng VIP</h4>
+                        <h4 class="font-serif fw-bold text-primary mb-2" data-i18n="modal.tier_gold_name">Hội Viên Vàng VIP</h4>
                         <p class="text-secondary small mb-4" data-i18n="modal.tier_gold_desc">Trải nghiệm dịch vụ chuyên biệt và ưu đãi giảm giá sâu.</p>
                         
                         <h6 class="font-accent fw-bold text-gold small text-uppercase mb-2" data-i18n="ute.benefits_label">Đặc Quyền Bao Gồm:</h6>
@@ -188,7 +188,7 @@
         <div class="container">
             <div class="text-center mb-5">
                 <span class="text-gold font-accent text-uppercase small fw-bold" style="letter-spacing: 0.12em;" data-i18n="ute.table_tag">BẢNG ĐỐI CHIẾU CHI TIẾT</span>
-                <h3 class="font-serif fw-bold text-gold-gradient mt-1" data-i18n="ute.table_title">So Sánh Quyền Lợi Theo Hạng Thẻ</h3>
+                <h3 class="font-serif fw-bold text-primary mt-1" data-i18n="ute.table_title">So Sánh Quyền Lợi Theo Hạng Thẻ</h3>
             </div>
             <div class="table-responsive rounded-3 border border-gold-subtle">
                 <table class="table table-dark table-hover mb-0 align-middle text-center small">
@@ -276,7 +276,7 @@
         <div class="container py-3">
             <div class="text-center mb-5">
                 <span class="text-gold font-accent text-uppercase small fw-bold" style="letter-spacing: 0.12em;" data-i18n="ute.steps_tag">HƯỚNG DẪN THAM GIA</span>
-                <h3 class="font-serif fw-bold text-gold-gradient mt-1" data-i18n="ute.steps_title">4 Bước Trở Thành Hội Viên UTEClub</h3>
+                <h3 class="font-serif fw-bold text-primary mt-1" data-i18n="ute.steps_title">4 Bước Trở Thành Hội Viên UTEClub</h3>
             </div>
             <div class="row g-4 text-center">
                 <div class="col-md-3 col-6">
@@ -316,7 +316,7 @@
         <div class="container py-3" style="max-width: 860px;">
             <div class="text-center mb-5">
                 <span class="text-gold font-accent text-uppercase small fw-bold" style="letter-spacing: 0.12em;" data-i18n="ute.faq_tag">CÂU HỎI THƯỜNG GẶP</span>
-                <h3 class="font-serif fw-bold text-gold-gradient mt-1" data-i18n="ute.faq_title">Giải Đáp Về Chương Trình UTEClub</h3>
+                <h3 class="font-serif fw-bold text-primary mt-1" data-i18n="ute.faq_title">Giải Đáp Về Chương Trình UTEClub</h3>
             </div>
 
             <div class="accordion accordion-flush" id="uteClubFaqAccordion">
@@ -365,7 +365,7 @@
     <!-- Bottom CTA Banner -->
     <section class="py-5 bg-espresso text-center position-relative">
         <div class="container py-4">
-            <h3 class="font-serif fw-bold text-gold-gradient mb-2" data-i18n="ute.cta_title">Sẵn Sàng Trở Thành Hội Viên UTEClub?</h3>
+            <h3 class="font-serif fw-bold text-primary mb-2" data-i18n="ute.cta_title">Sẵn Sàng Trở Thành Hội Viên UTEClub?</h3>
             <p class="text-secondary small mx-auto mb-4" style="max-width: 560px;" data-i18n="ute.cta_desc">
                 Đăng ký ngay hôm nay để nhận Voucher ưu đãi 20% cho đơn hàng đầu tiên và mở khóa hàng loạt đặc quyền ẩm thực tinh hoa.
             </p>

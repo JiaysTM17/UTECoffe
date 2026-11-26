@@ -9,10 +9,10 @@
     <!-- Header Banner: Compact & Elegant -->
     <div class="py-3 bg-espresso border-bottom border-gold text-center">
         <div class="container py-1">
-            <span class="badge bg-gold-subtle text-gold px-2.5 py-0.5 rounded-pill small font-accent mb-1 text-uppercase" style="letter-spacing: 0.1em; font-size: 0.72rem;" data-i18n="cart.badge">
-                <i class="fa-solid fa-bag-shopping me-1"></i> TÚI THƯỞNG THỨC NGHỆ NHÂN
+            <span class="badge bg-gold-subtle text-gold px-2.5 py-0.5 rounded-2 small mb-1 fw-medium" style="font-size: 0.72rem;" data-i18n="cart.badge">
+                <i class="fa-solid fa-bag-shopping me-1"></i> Túi Thưởng Thức Nghệ Nhân
             </span>
-            <h1 class="font-serif fs-4 fw-bold text-gold-gradient mb-1" data-i18n="cart.title">
+            <h1 class="font-serif fs-4 fw-bold text-primary mb-1" data-i18n="cart.title">
                 Giỏ Hàng Thức Uống
             </h1>
             <p class="text-secondary mx-auto small mb-0" style="max-width: 540px; font-size: 0.82rem;" data-i18n="cart.desc">
@@ -32,12 +32,12 @@
                             <i class="fa-solid fa-truck-fast text-gold me-2"></i>
                             <span data-i18n="cart.freeship_notice">Đơn hàng từ <strong>150.000₫</strong> được <strong>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC</strong></span>
                         </span>
-                        <span class="badge bg-gold text-obsidian fw-bold font-monospace px-2.5 py-0.5 rounded-pill" id="shippingStatusBadge" style="font-size: 0.72rem;" data-i18n="cart.freeship_badge">
+                        <span class="badge bg-gold text-dark fw-semibold px-2.5 py-0.5 rounded-2" id="shippingStatusBadge" style="font-size: 0.72rem;" data-i18n="cart.freeship_badge">
                             FREESHIP
                         </span>
                     </div>
                     <div class="progress" style="height: 5px; background-color: rgba(212, 175, 55, 0.15);">
-                        <div class="progress-bar bg-gold-gradient" role="progressbar" id="freeShippingBar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gold" role="progressbar" id="freeShippingBar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@
                                 <h6 class="font-serif fw-bold text-gold mb-0" style="font-size: 0.95rem;">
                                     <span data-i18n="cart.item_list">Danh Sách Thức Uống</span> (${cart.items.size()})
                                 </h6>
-                                <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold btn-sm px-2.5 py-1 rounded-pill" style="font-size: 0.78rem;">
+                                <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold btn-sm px-2.5 py-1 rounded-2" style="font-size: 0.78rem;">
                                     <i class="fa-solid fa-plus me-1"></i> <span data-i18n="cart.add_more">Chọn Thêm Món</span>
                                 </a>
                             </div>
@@ -169,7 +169,7 @@
                     <!-- Right: Order Summary & Voucher Promo Box (Compact & Balanced) -->
                     <div class="col-lg-4">
                         <div class="card-luxury p-3 p-md-3.5 sticky-top" style="top: 85px;">
-                            <h6 class="font-serif fw-bold text-gold-gradient mb-2.5 border-bottom border-gold pb-2" style="font-size: 0.98rem;">
+                            <h6 class="font-serif fw-bold text-primary mb-2.5 border-bottom border-gold pb-2" style="font-size: 0.98rem;">
                                 <i class="fa-solid fa-receipt me-1.5"></i><span data-i18n="cart.order_summary">Tóm Tắt Đơn Hàng</span>
                             </h6>
                             
@@ -219,7 +219,7 @@
                                 </span>
                             </div>
 
-                            <a href="${pageContext.request.contextPath}/cart/checkout" class="btn btn-gold w-100 py-2.5 fw-bold fs-6 rounded-pill shadow-gold">
+                            <a href="${pageContext.request.contextPath}/cart/checkout" class="btn btn-gold w-100 py-2.5 fw-semibold fs-6">
                                 <i class="fa-solid fa-credit-card me-1.5"></i> <span data-i18n="cart.btn_checkout">Tiến Hành Thanh Toán</span>
                             </a>
 
@@ -238,11 +238,11 @@
                         <div class="mb-3">
                             <i class="fa-solid fa-bag-shopping text-gold display-3 opacity-50"></i>
                         </div>
-                        <h4 class="font-serif fw-bold text-gold-gradient mb-2" data-i18n="cart.empty_title">Giỏ Hàng Của Bạn Đang Trống</h4>
+                        <h4 class="font-serif fw-bold text-primary mb-2" data-i18n="cart.empty_title">Giỏ Hàng Của Bạn Đang Trống</h4>
                         <p class="text-secondary small mb-3" style="font-size: 0.82rem;" data-i18n="cart.empty_desc">
                             Hãy khám phá thực đơn cà phê rang mộc thủ công và trà hoa tinh tuyển của UTECoffe để chọn cho mình thức uống ưng ý.
                         </p>
-                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-3.5 py-2 rounded-pill font-accent fw-bold shadow-gold-sm" style="font-size: 0.85rem;">
+                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-2 fw-semibold" style="font-size: 0.85rem;">
                             <i class="fa-solid fa-arrow-right me-1"></i> <span data-i18n="cart.empty_btn">Khám Phá Thực Đơn Ngay</span>
                         </a>
                     </div>

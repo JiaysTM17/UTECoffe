@@ -54,7 +54,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="d-flex align-items-center gap-2 mb-1">
                     <span class="pulse-green"></span>
-                    <h5 class="font-serif fw-bold text-gold-gradient mb-0">
+                    <h5 class="font-serif fw-bold text-primary mb-0">
                         <i class="fa-solid fa-mug-saucer me-1"></i> KDS Barista: ${store.name}
                     </h5>
                 </div>
@@ -99,13 +99,13 @@
             <!-- Action Controls: Audio chime, WFQ Priority Dispatch, Refresh -->
             <div class="col-lg-3 col-md-12 text-lg-end text-start">
                 <div class="d-flex gap-2 justify-content-lg-end align-items-center">
-                    <button type="button" id="wfqToggleBtn" class="btn btn-dark-roast border border-gold text-gold btn-sm rounded-pill px-3 font-accent" onclick="toggleWfqPriorityQueue()">
+                    <button type="button" id="wfqToggleBtn" class="btn btn-dark-roast border border-gold text-gold btn-sm rounded-2 px-3 font-accent" onclick="toggleWfqPriorityQueue()">
                         <i class="fa-solid fa-bolt me-1 text-gold"></i> <span id="wfqStatusText">WFQ Ưu Tiên</span>
                     </button>
-                    <button type="button" id="chimeToggleBtn" class="btn btn-outline-gold btn-sm rounded-pill px-3" onclick="toggleSound()">
+                    <button type="button" id="chimeToggleBtn" class="btn btn-outline-gold btn-sm rounded-2 px-3" onclick="toggleSound()">
                         <i class="fa-solid fa-volume-high me-1"></i> <span id="chimeStatusText">Chuông</span>
                     </button>
-                    <button type="button" class="btn btn-gold btn-sm rounded-pill px-3" onclick="location.reload()" title="Tải lại đơn hàng">
+                    <button type="button" class="btn btn-gold btn-sm rounded-2 px-3" onclick="location.reload()" title="Tải lại đơn hàng">
                         <i class="fa-solid fa-arrows-rotate"></i>
                     </button>
                 </div>
@@ -123,16 +123,16 @@
         <!-- Order Type Filter Tabs -->
         <div class="border-top border-gold-subtle mt-3 pt-2 d-flex flex-wrap gap-2 align-items-center">
             <span class="small text-secondary me-2"><i class="fa-solid fa-filter me-1 text-gold"></i> Lọc đơn:</span>
-            <button type="button" class="btn btn-sm btn-gold rounded-pill px-3 py-1 font-accent filter-btn active" data-filter="ALL" onclick="filterTickets('ALL', this)">
+            <button type="button" class="btn btn-sm btn-gold rounded-2 px-3 py-1 font-accent filter-btn active" data-filter="ALL" onclick="filterTickets('ALL', this)">
                 Tất Cả (${not empty activeOrders ? activeOrders.size() : 0})
             </button>
-            <button type="button" class="btn btn-sm btn-outline-gold rounded-pill px-3 py-1 font-accent filter-btn" data-filter="DINE_IN" onclick="filterTickets('DINE_IN', this)">
+            <button type="button" class="btn btn-sm btn-outline-gold rounded-2 px-3 py-1 font-accent filter-btn" data-filter="DINE_IN" onclick="filterTickets('DINE_IN', this)">
                 🍽️ Tại Bàn (${dineInCount})
             </button>
-            <button type="button" class="btn btn-sm btn-outline-gold rounded-pill px-3 py-1 font-accent filter-btn" data-filter="TAKE_AWAY" onclick="filterTickets('TAKE_AWAY', this)">
+            <button type="button" class="btn btn-sm btn-outline-gold rounded-2 px-3 py-1 font-accent filter-btn" data-filter="TAKE_AWAY" onclick="filterTickets('TAKE_AWAY', this)">
                 🥤 Mang Đi (${takeAwayCount})
             </button>
-            <button type="button" class="btn btn-sm btn-outline-gold rounded-pill px-3 py-1 font-accent filter-btn" data-filter="DELIVERY" onclick="filterTickets('DELIVERY', this)">
+            <button type="button" class="btn btn-sm btn-outline-gold rounded-2 px-3 py-1 font-accent filter-btn" data-filter="DELIVERY" onclick="filterTickets('DELIVERY', this)">
                 🛵 Giao Hàng (${deliveryCount})
             </button>
         </div>
@@ -226,7 +226,7 @@
                 <div class="col-12 text-center py-5" id="emptyQueueMsg">
                     <div class="p-5 card-luxury border-gold rounded-4 d-inline-block shadow-lg" style="max-width: 500px;">
                         <i class="fa-solid fa-mug-hot text-gold fs-1 mb-3 d-block opacity-75"></i>
-                        <h4 class="font-serif text-gold-gradient fw-bold mb-2">Hàng Đợi Pha Chế Đang Trống</h4>
+                        <h4 class="font-serif text-primary fw-bold mb-2">Hàng Đợi Pha Chế Đang Trống</h4>
                         <p class="text-secondary small mb-0">Tất cả đơn hàng tại chi nhánh <strong>${store.name}</strong> đã được phục vụ trọn vẹn.</p>
                     </div>
                 </div>
@@ -358,7 +358,7 @@
 
             if (isWfqActive) {
                 isWfqActive = false;
-                btn.className = 'btn btn-dark-roast border border-gold text-gold btn-sm rounded-pill px-3 font-accent';
+                btn.className = 'btn btn-dark-roast border border-gold text-gold btn-sm rounded-2 px-3 font-accent';
                 if (banner) banner.classList.add('d-none');
                 location.reload();
                 return;
@@ -369,7 +369,7 @@
                 .then(res => res.json())
                 .then(res => {
                     btn.innerHTML = '<i class="fa-solid fa-check me-1 text-success"></i> WFQ BẬT';
-                    btn.className = 'btn btn-gold btn-sm rounded-pill px-3 font-accent fw-bold';
+                    btn.className = 'btn btn-gold btn-sm rounded-2 px-3 font-accent fw-bold';
                     isWfqActive = true;
                     if (banner) banner.classList.remove('d-none');
 

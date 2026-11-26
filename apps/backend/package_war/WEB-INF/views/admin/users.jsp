@@ -6,7 +6,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Quản Lý Người Dùng &amp; Phân Quyền RBAC</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Quản Lý Người Dùng &amp; Phân Quyền RBAC</h4>
             <small class="text-secondary">Quản trị danh sách khách hàng UTEClub, Barista chi nhánh và Ban điều hành</small>
         </div>
         <div class="d-flex gap-2">

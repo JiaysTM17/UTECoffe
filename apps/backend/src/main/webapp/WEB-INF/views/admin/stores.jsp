@@ -7,7 +7,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Hệ Thống 3 Chi Nhánh &amp; Sơ Đồ Bàn</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Hệ Thống 3 Chi Nhánh &amp; Sơ Đồ Bàn</h4>
             <small class="text-secondary">Quản trị vận hành thực tế cơ sở, quản lý bàn phục vụ và tiếp nhận đặt chỗ trực tuyến</small>
         </div>
         <div class="d-flex gap-2">
@@ -24,7 +24,7 @@
                 <div class="card-luxury p-4 h-100 border-gold shadow-lg d-flex flex-column justify-content-between" style="min-height: 290px;">
                     <div>
                         <div class="d-flex justify-content-between align-items-start mb-3">
-                            <h5 class="font-serif fw-bold text-gold-gradient mb-0 text-truncate" title="${store.name}">
+                            <h5 class="font-serif fw-bold text-primary mb-0 text-truncate" title="${store.name}">
                                 ${store.name}
                             </h5>
                             <span class="badge ${store.isActive ? 'bg-success-subtle text-success border border-success' : 'bg-secondary text-light'} small font-accent flex-shrink-0 ms-2">
@@ -55,7 +55,7 @@
     <div class="card-luxury p-4 border-gold shadow-lg mb-4">
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-2 border-bottom border-gold">
             <div>
-                <h5 class="font-serif fw-bold text-gold-gradient mb-0">
+                <h5 class="font-serif fw-bold text-primary mb-0">
                     <i class="fa-solid fa-chair me-2"></i>Tiếp Nhận Đặt Bàn Trực Tuyến &amp; Điều Phối Chỗ Ngồi
                 </h5>
                 <small class="text-secondary">Khách hàng đặt bàn từ website theo từng khung giờ và khu vực ưa thích</small>

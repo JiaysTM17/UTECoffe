@@ -21,10 +21,10 @@
     <!-- Header Luxury Hero Banner -->
     <div class="py-5 bg-espresso border-bottom border-gold text-center position-relative overflow-hidden">
         <div class="container py-4 position-relative" style="z-index: 2;">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;" data-i18n="feat.subtitle">
-                <i class="fa-solid fa-gem me-1"></i> BỘ SƯU TẬP HƯƠNG VỊ 2026
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-2 small mb-3 fw-medium" data-i18n="feat.subtitle">
+                <i class="fa-solid fa-gem me-1"></i> Bộ Sưu Tập Hương Vị 2026
             </span>
-            <h1 class="font-serif display-4 fw-bold text-gold-gradient mb-3" data-i18n="nav.menu">
+            <h1 class="font-serif display-4 fw-bold text-primary mb-3" data-i18n="nav.menu">
                 Thực Đơn Nghệ Nhân
             </h1>
             <p class="text-secondary mx-auto fs-6 mb-4" style="max-width: 680px; line-height: 1.7;" data-i18n="menu.hero_desc">
@@ -58,8 +58,8 @@
 
             <!-- Taste Matcher Trigger Button -->
             <div class="mt-3">
-                <button class="btn btn-dark-roast border border-gold text-gold rounded-pill px-4 py-2 font-accent shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#tasteMatcherCollapse" aria-expanded="false" aria-controls="tasteMatcherCollapse">
-                    <i class="fa-solid fa-wand-magic-sparkles text-gold me-2"></i><span data-i18n="menu.taste_btn">✨ Trải Nghiệm Tìm Cà Phê Hợp Gu (Sensory Taste Matcher)</span>
+                <button class="btn btn-dark-roast border border-gold text-gold rounded-2 px-3.5 py-2 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#tasteMatcherCollapse" aria-expanded="false" aria-controls="tasteMatcherCollapse">
+                    <i class="fa-solid fa-wand-magic-sparkles text-gold me-2"></i><span data-i18n="menu.taste_btn">Trải Nghiệm Tìm Cà Phê Hợp Gu (Sensory Taste Matcher)</span>
                 </button>
             </div>
 
@@ -68,7 +68,7 @@
                 <div class="card-luxury p-4 mx-auto border-gold shadow-lg" style="max-width: 820px; background: rgba(26, 21, 18, 0.96); backdrop-filter: blur(12px);">
                     <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-gold pb-2">
                         <div>
-                            <h5 class="font-serif fw-bold text-gold-gradient mb-0" data-i18n="menu.taste_title">
+                            <h5 class="font-serif fw-bold text-primary mb-0" data-i18n="menu.taste_title">
                                 <i class="fa-solid fa-compass-drafting me-2 text-gold"></i>Định Hình Khẩu Vị Cảm Quan (Artisanal Cupping Profile)
                             </h5>
                             <small class="text-secondary" data-i18n="menu.taste_subtitle">Phân tích gu thưởng thức của bạn để gợi ý các mẻ rang đặc sản chuẩn vị SCA Cupping</small>
@@ -137,13 +137,13 @@
             <div class="col-lg-9">
                 <div class="d-flex flex-wrap gap-2 category-filter-group" role="tablist">
                     <a href="${pageContext.request.contextPath}/menu" 
-                       class="btn ${empty selectedCategoryId ? 'btn-gold' : 'btn-outline-gold'} btn-sm px-4 py-2 rounded-pill fw-semibold font-accent filter-btn ${empty selectedCategoryId ? 'active' : ''}" 
+                       class="btn ${empty selectedCategoryId ? 'btn-gold' : 'btn-outline-gold'} btn-sm px-3.5 py-1.5 rounded-2 fw-medium filter-btn ${empty selectedCategoryId ? 'active' : ''}" 
                        data-cat="all">
                         <i class="fa-solid fa-layer-group me-1"></i> <span data-i18n="menu.filter_all">Tất Cả Món</span> (<span id="totalProductCount">${products.size()}</span>)
                     </a>
                     <c:forEach var="cat" items="${categories}">
                         <a href="${pageContext.request.contextPath}/menu?categoryId=${cat.id}" 
-                           class="btn ${selectedCategoryId == cat.id ? 'btn-gold' : 'btn-outline-gold'} btn-sm px-4 py-2 rounded-pill fw-semibold font-accent filter-btn product-category-badge ${selectedCategoryId == cat.id ? 'active' : ''}"
+                           class="btn ${selectedCategoryId == cat.id ? 'btn-gold' : 'btn-outline-gold'} btn-sm px-3.5 py-1.5 rounded-2 fw-medium filter-btn product-category-badge ${selectedCategoryId == cat.id ? 'active' : ''}"
                            data-cat="${cat.id}" data-category-name="${cat.name}">
                             ${cat.name}
                         </a>
@@ -227,7 +227,7 @@
                                 </div>
                                 <div>
                                     <a href="${pageContext.request.contextPath}/menu/${p.slug}" 
-                                       class="btn btn-gold btn-sm px-3 rounded-pill font-accent fw-semibold">
+                                       class="btn btn-gold btn-sm px-3 fw-semibold">
                                         <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="menu.customize">Tùy Chỉnh</span>
                                     </a>
                                 </div>
@@ -242,20 +242,20 @@
         <div class="mt-5 pt-4">
             <div class="card-luxury p-4 p-md-5 border-gold bg-gradient-dark text-center position-relative overflow-hidden">
                 <div class="position-relative" style="z-index: 2;">
-                    <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" data-i18n="menu.sca_badge">
+                    <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-2 small mb-2 fw-medium" data-i18n="menu.sca_badge">
                         <i class="fa-solid fa-certificate me-1"></i> Tiêu Chuẩn Quốc Tế SCA
                     </span>
-                    <h3 class="font-serif fw-bold text-gold-gradient mb-3" data-i18n="menu.sca_title">
+                    <h3 class="font-serif fw-bold text-primary mb-3" data-i18n="menu.sca_title">
                         Tùy Chỉnh Tách Cà Phê Của Riêng Bạn
                     </h3>
                     <p class="text-secondary mx-auto mb-4" style="max-width: 620px; font-size: 0.95rem;" data-i18n="menu.sca_desc">
                         Tất cả thức uống tại UTECoffe đều cho phép cá nhân hóa: Lựa chọn 3 size (S/M/L), thêm các loại hạt, thạch trà thủ công, điều chỉnh độ đậm hạt, hương hoa và tỷ lệ sữa để tạo nên ly cà phê chuẩn gu của bạn.
                     </p>
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a href="${pageContext.request.contextPath}/story" class="btn btn-outline-gold px-4 py-2 rounded-pill font-accent">
+                        <a href="${pageContext.request.contextPath}/story" class="btn btn-outline-gold px-4 py-2">
                             <i class="fa-solid fa-book-open me-1"></i> <span data-i18n="menu.sca_btn_story">Tìm Hiểu Nghệ Thuật Rang Mộc</span>
                         </a>
-                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-gold px-4 py-2 rounded-pill font-accent">
+                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-gold px-4 py-2">
                             <i class="fa-solid fa-calendar-check me-1"></i> <span data-i18n="menu.sca_btn_reserve">Đặt Bàn Thưởng Thức Tại Quán</span>
                         </a>
                     </div>

@@ -19,11 +19,11 @@
         <div class="container py-lg-5">
             <div class="row align-items-center g-5">
                 <div class="col-lg-7">
-                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3 border border-gold" style="background: var(--gold-subtle);">
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-2 mb-3 border border-gold" style="background: var(--gold-subtle);">
                         <i class="fa-solid fa-sparkles text-gold small"></i>
-                        <span class="text-gold font-accent fw-bold small text-uppercase" style="letter-spacing: 0.15em;" data-i18n="hero.tag">Di Sản Cà Phê &amp; Trà Đặc Sản Nguyên Bản</span>
+                        <span class="text-gold font-body small fw-medium" data-i18n="hero.tag">Di sản Cà phê &amp; Trà Đặc sản Nguyên bản</span>
                     </div>
-                    <h1 class="display-3 fw-bold font-serif mb-3 text-gold-gradient" style="line-height: 1.15;" data-i18n="hero.title">
+                    <h1 class="display-3 fw-bold font-serif mb-3 text-primary" style="line-height: 1.15;" data-i18n="hero.title">
                         Nghệ Thuật Rang Mộc &amp; Tách Cà Phê Hoàn Hảo
                     </h1>
                     <p class="lead text-secondary mb-4 pe-lg-4" style="font-weight: 300;" data-i18n="hero.desc">
@@ -75,11 +75,11 @@
 
                 <div class="col-lg-5 text-center">
                     <div class="position-relative d-inline-block">
-                        <div class="card-luxury p-3 shadow-lg" style="border-radius: 30px;">
+                        <div class="card-luxury p-3 shadow-md rounded-3">
                             <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80" 
-                                 alt="UTECOFFE Signature Pour Over" class="img-fluid rounded-4 shadow" style="max-height: 480px; object-fit: cover;">
+                                 alt="UTECOFFE Signature Pour Over" class="img-fluid rounded-3" style="max-height: 480px; object-fit: cover;">
                         </div>
-                        <div class="badge-luxury-tag px-3 py-2 fs-6 shadow pulse-gold" style="top: -15px; right: -15px; left: auto;">
+                        <div class="badge-luxury-tag px-3 py-1.5 small shadow-sm" style="top: 14px; right: 14px; left: auto;">
                             <i class="fa-solid fa-award text-gold me-1"></i> <span data-i18n="hero.badge_artisan">Artisanal Roasters</span>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center pt-3 border-top border-gold mt-auto gap-2">
                                     <span class="price-gold product-price-val fs-6 fw-bold text-nowrap" data-raw-price="${prod.basePrice}" data-vnd="${prod.basePrice}"><fmt:formatNumber value="${prod.basePrice}" pattern="#,##0"/> VNĐ</span>
-                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 rounded-pill text-nowrap font-accent fw-semibold">
+                                    <a href="${pageContext.request.contextPath}/menu/${prod.slug}" class="btn btn-gold btn-sm px-3 text-nowrap fw-semibold">
                                         <i class="fa-solid fa-sliders me-1"></i> <span data-i18n="feat.add_cart">Thêm Giỏ Hàng</span>
                                     </a>
                                 </div>
@@ -194,19 +194,19 @@
         <div class="container py-3">
             <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-4">
                 <div class="flex-grow-1">
-                    <button type="button" class="btn btn-link p-0 text-decoration-none text-gold font-accent fw-bold text-uppercase small d-inline-flex align-items-center gap-2 mb-2" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal" style="letter-spacing: 0.12em; cursor: pointer;">
+                    <button type="button" class="btn btn-link p-0 text-decoration-none text-gold small d-inline-flex align-items-center gap-2 mb-2" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal" style="cursor: pointer;">
                         <i class="fa-solid fa-crown text-gold"></i>
                         <span data-i18n="banner.loyalty_tag">Đặc Quyền Hội Viên UTEClub</span>
                     </button>
-                    <h3 class="font-serif fw-bold mb-2 text-gold-gradient banner-table-title" data-i18n="banner.table_title" style="letter-spacing: -0.02em;">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
+                    <h3 class="font-serif fw-bold mb-2 text-primary banner-table-title" data-i18n="banner.table_title" style="letter-spacing: -0.02em;">Đặt Bàn Trực Tuyến &amp; Tích Điểm Tự Động Cho Mọi Đơn Hàng</h3>
                     <p class="text-secondary mb-0 small" data-i18n="banner.table_desc" style="max-width: 740px;">Thưởng thức không gian tinh tế tại 3 chi nhánh Flagship (Thủ Đức, Quận 1, Bình Thạnh). Tích lũy 10% giá trị đơn hàng để nâng hạng thẻ Bạc, Vàng và Kim Cương với hàng loạt đặc quyền vô song.</p>
                 </div>
                 <div class="flex-shrink-0 text-xl-end">
                     <div class="d-flex flex-column flex-sm-row justify-content-xl-end align-items-stretch align-items-sm-center gap-3">
-                        <button type="button" class="btn btn-gold rounded-pill px-4 py-2.5 fw-semibold d-inline-flex align-items-center justify-content-center text-nowrap shadow-gold-sm" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal">
+                        <button type="button" class="btn btn-gold px-4 py-2 fw-semibold d-inline-flex align-items-center justify-content-center text-nowrap" data-bs-toggle="modal" data-bs-target="#uteClubPrivilegeModal">
                             <i class="fa-solid fa-crown me-2"></i> <span data-i18n="banner.btn_privilege">Xem Đặc Quyền</span>
                         </button>
-                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold rounded-pill px-4 py-2.5 fw-semibold d-inline-flex align-items-center justify-content-center text-nowrap">
+                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold px-4 py-2 fw-semibold d-inline-flex align-items-center justify-content-center text-nowrap">
                             <i class="fa-solid fa-chair me-2"></i> <span data-i18n="banner.btn_reserve">Đặt Bàn Ngay</span>
                         </a>
                     </div>

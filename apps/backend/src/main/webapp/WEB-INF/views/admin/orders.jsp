@@ -7,7 +7,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Quản Lý Đơn Hàng Toàn Hệ Thống</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Quản Lý Đơn Hàng Toàn Hệ Thống</h4>
             <small class="text-secondary">Theo dõi, điều phối và đối soát giao dịch thời gian thực OMO</small>
         </div>
         <div class="d-flex gap-2">

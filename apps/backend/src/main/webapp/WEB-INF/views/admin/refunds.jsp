@@ -7,7 +7,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Xử Lý Khiếu Nại, Đơn Lỗi &amp; Hoàn Tiền (Disputes &amp; Refunds)</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Xử Lý Khiếu Nại, Đơn Lỗi &amp; Hoàn Tiền (Disputes &amp; Refunds)</h4>
             <small class="text-secondary">Chính sách bảo vệ quyền lợi khách hàng, giải quyết sự cố giao hàng đổ vỡ hoặc chậm trễ</small>
         </div>
         <div class="d-flex gap-2">

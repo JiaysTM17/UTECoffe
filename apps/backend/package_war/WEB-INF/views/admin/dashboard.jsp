@@ -14,7 +14,7 @@
                     <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.1em;">Tổng Doanh Thu</span>
                     <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-coins fs-5"></i></div>
                 </div>
-                <h3 class="font-serif fw-bold text-gold-gradient mb-1">
+                <h3 class="font-serif fw-bold text-primary mb-1">
                     <fmt:formatNumber value="${totalRevenue}" pattern="#,##0"/> VNĐ
                 </h3>
                 <small class="text-success"><i class="fa-solid fa-arrow-trend-up me-1"></i> ${completedOrdersCount} đơn hoàn tất trọn vẹn</small>
@@ -64,7 +64,7 @@
             <div class="card-luxury p-4 border-gold shadow-lg">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold-subtle">
                     <div>
-                        <h5 class="font-serif fw-bold text-gold-gradient mb-0">
+                        <h5 class="font-serif fw-bold text-primary mb-0">
                             <i class="fa-solid fa-store me-2"></i>Hiệu Suất Vận Hành 3 Chi Nhánh
                         </h5>
                         <small class="text-secondary">Thống kê đơn hàng và doanh thu theo từng cơ sở</small>
@@ -108,7 +108,7 @@
         <!-- Channel Breakdown -->
         <div class="col-lg-6">
             <div class="card-luxury p-4 border-gold shadow-lg h-100">
-                <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold-subtle pb-2">
+                <h5 class="font-serif fw-bold text-primary mb-3 border-bottom border-gold-subtle pb-2">
                     <i class="fa-solid fa-chart-pie me-2"></i>Phân Bổ Kênh Phục Vụ
                 </h5>
                 <div class="d-flex flex-column gap-3">
@@ -146,7 +146,7 @@
         <!-- Top Selling Products -->
         <div class="col-lg-6">
             <div class="card-luxury p-4 border-gold shadow-lg h-100">
-                <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold-subtle pb-2">
+                <h5 class="font-serif fw-bold text-primary mb-3 border-bottom border-gold-subtle pb-2">
                     <i class="fa-solid fa-fire-flame-curved me-2"></i>Top 5 Thức Uống Bán Chạy Nhất
                 </h5>
                 <c:choose>
@@ -205,7 +205,7 @@
     <div class="card-luxury p-4 border-gold shadow-lg">
         <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-gold">
             <div>
-                <h5 class="font-serif fw-bold text-gold-gradient mb-0">Đơn Hàng Mới Nhất Toàn Chuỗi</h5>
+                <h5 class="font-serif fw-bold text-primary mb-0">Đơn Hàng Mới Nhất Toàn Chuỗi</h5>
                 <small class="text-secondary">Cập nhật thời gian thực qua hệ thống điều phối OMO</small>
             </div>
             <div class="d-flex gap-2">

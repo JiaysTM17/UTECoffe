@@ -8,10 +8,10 @@
     <!-- Editorial Story Hero -->
     <section class="py-5 bg-espresso border-bottom border-gold text-center position-relative overflow-hidden">
         <div class="container py-lg-4 position-relative" style="z-index: 2;">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;" data-i18n="story.badge">
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-2 small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;" data-i18n="story.badge">
                 <i class="fa-solid fa-gem me-1"></i> KHỞI NGUỒN TỪ ĐAM MÊ NGUYÊN BẢN
             </span>
-            <h1 class="font-serif display-3 fw-bold text-gold-gradient mb-3" data-i18n="nav.story">
+            <h1 class="font-serif display-3 fw-bold text-primary mb-3" data-i18n="nav.story">
                 Hành Trình Di Sản Cà Phê
             </h1>
             <p class="lead text-secondary mx-auto" style="max-width: 760px; font-weight: 300; line-height: 1.8;" data-i18n="story.desc">
@@ -68,14 +68,14 @@
                     <div class="position-relative">
                         <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" 
                              alt="Cầu Đất Terroir" class="img-fluid rounded-4 shadow-lg border border-gold">
-                        <span class="badge bg-gold text-obsidian fw-bold font-monospace position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
+                        <span class="badge bg-gold text-obsidian fw-bold font-monospace position-absolute top-0 start-0 m-3 px-3 py-2 rounded-2">
                             TERROIR 1.600M
                         </span>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.15em;" data-i18n="story.ch1_badge">Chương I • Thổ Nhưỡng</span>
-                    <h2 class="font-serif fw-bold text-gold-gradient mb-3" data-i18n="story.ch1_title">Độ Cao 1.600m &amp; Sương Mù Cao Nguyên</h2>
+                    <h2 class="font-serif fw-bold text-primary mb-3" data-i18n="story.ch1_title">Độ Cao 1.600m &amp; Sương Mù Cao Nguyên</h2>
                     <p class="text-secondary leading-relaxed" data-i18n="story.ch1_p1">
                         Cầu Đất - Đà Lạt được mệnh danh là thiên đường của cà phê Arabica hảo hạng tại Việt Nam. Độ cao 1.600m so với mực nước biển cùng biên độ nhiệt ngày đêm lớn giúp hạt cà phê phát triển chậm rãi, cô đọng lượng đường tự nhiên và axit hữu cơ thanh nhã.
                     </p>
@@ -95,14 +95,14 @@
                     <div class="position-relative">
                         <img src="https://images.unsplash.com/photo-1518832553480-cd0e625ed3e6?auto=format&fit=crop&w=800&q=80" 
                              alt="Artisanal Roasting" class="img-fluid rounded-4 shadow-lg border border-gold">
-                        <span class="badge bg-gold text-obsidian fw-bold font-monospace position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill">
+                        <span class="badge bg-gold text-obsidian fw-bold font-monospace position-absolute top-0 end-0 m-3 px-3 py-2 rounded-2">
                             GIESEN ROASTER
                         </span>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.15em;" data-i18n="story.ch2_badge">Chương II • Kỹ Nghệ Rang</span>
-                    <h2 class="font-serif fw-bold text-gold-gradient mb-3" data-i18n="story.ch2_title">Nghệ Thuật Đánh Thức Dải Hương Bản Độc</h2>
+                    <h2 class="font-serif fw-bold text-primary mb-3" data-i18n="story.ch2_title">Nghệ Thuật Đánh Thức Dải Hương Bản Độc</h2>
                     <p class="text-secondary leading-relaxed" data-i18n="story.ch2_p1">
                         Rang cà phê không đơn thuần là xử lý nhiệt; đó là cuộc đối thoại giữa nghệ nhân và hạt mầm tự nhiên. Bằng công nghệ trống rang hiện đại kiểm soát luồng khí và nhiệt độ chuẩn xác từng giây, chúng tôi phát triển tối đa dải hương hoa nhài, cam bergamot, mật ong rừng và socola đen đặc trưng.
                     </p>
@@ -122,14 +122,14 @@
                     <div class="position-relative">
                         <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" 
                              alt="Slow Bar Extraction" class="img-fluid rounded-4 shadow-lg border border-gold">
-                        <span class="badge bg-gold text-obsidian fw-bold font-monospace position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
+                        <span class="badge bg-gold text-obsidian fw-bold font-monospace position-absolute top-0 start-0 m-3 px-3 py-2 rounded-2">
                             SLOW BAR V60 &amp; ESPRESSO
                         </span>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.15em;" data-i18n="story.ch3_badge">Chương III • Nghệ Thuật Chiết Xuất</span>
-                    <h2 class="font-serif fw-bold text-gold-gradient mb-3" data-i18n="story.ch3_title">Tỷ Lệ Vàng Trong Từng Giọt Cà Phê</h2>
+                    <h2 class="font-serif fw-bold text-primary mb-3" data-i18n="story.ch3_title">Tỷ Lệ Vàng Trong Từng Giọt Cà Phê</h2>
                     <p class="text-secondary leading-relaxed" data-i18n="story.ch3_p1">
                         Từ dòng máy Espresso La Marzocco thủ công đến các bình chiết xuất V60 Hario gốm sứ Nhật Bản, mỗi giọt cà phê chiết xuất tại UTECoffe đều tuân thủ biểu đồ TDS chuẩn mực quốc tế.
                     </p>
@@ -144,10 +144,10 @@
     <!-- Chapter 4: Flavor Wheel & Sustainability -->
     <section class="py-5 bg-dark-roast border-top border-gold">
         <div class="container py-4 text-center">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase" style="letter-spacing: 0.15em;" data-i18n="story.ch4_badge">
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-2 small font-accent mb-2 text-uppercase" style="letter-spacing: 0.15em;" data-i18n="story.ch4_badge">
                 PHỔ HƯƠNG VỊ ĐẶC SẢN
             </span>
-            <h2 class="font-serif display-5 fw-bold text-gold-gradient mb-4" data-i18n="story.ch4_title">
+            <h2 class="font-serif display-5 fw-bold text-primary mb-4" data-i18n="story.ch4_title">
                 Dải Hương Độc Bản Của UTECoffe
             </h2>
             <p class="text-secondary mx-auto mb-5" style="max-width: 650px;" data-i18n="story.ch4_desc">
@@ -188,10 +188,10 @@
             <!-- Call to Action -->
             <div class="mt-5 pt-4">
                 <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-3 rounded-pill font-accent fw-bold">
+                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-3 rounded-2 font-accent fw-bold">
                         <i class="fa-solid fa-mug-hot me-2"></i> <span data-i18n="story.btn_menu">Khám Phá Toàn Bộ Thực Đơn</span>
                     </a>
-                    <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold px-4 py-3 rounded-pill font-accent">
+                    <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold px-4 py-3 rounded-2 font-accent">
                         <i class="fa-solid fa-calendar-check me-2"></i> <span data-i18n="story.btn_reserve">Đặt Bàn Thưởng Thức Tại Quán</span>
                     </a>
                 </div>

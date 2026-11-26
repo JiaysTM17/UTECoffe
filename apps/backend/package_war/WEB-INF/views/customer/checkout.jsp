@@ -9,10 +9,10 @@
     <!-- Header Banner: Compact & Balanced -->
     <div class="py-3 bg-espresso border-bottom border-gold text-center">
         <div class="container py-1">
-            <span class="badge bg-gold-subtle text-gold px-2.5 py-0.5 rounded-pill small font-accent mb-1 text-uppercase" style="letter-spacing: 0.1em; font-size: 0.72rem;" data-i18n="checkout.badge">
-                <i class="fa-solid fa-lock me-1"></i> BẢO MẬT &amp; CHÍNH XÁC
+            <span class="badge bg-gold-subtle text-gold px-2.5 py-0.5 rounded-2 small mb-1 fw-medium" style="font-size: 0.72rem;" data-i18n="checkout.badge">
+                <i class="fa-solid fa-lock me-1"></i> Bảo Mật &amp; Chính Xác
             </span>
-            <h1 class="font-serif fs-4 fw-bold text-gold-gradient mb-1" data-i18n="checkout.title">
+            <h1 class="font-serif fs-4 fw-bold text-primary mb-1" data-i18n="checkout.title">
                 Xác Nhận Đơn Hàng
             </h1>
             <p class="text-secondary mx-auto small mb-0" style="max-width: 540px; font-size: 0.82rem;" data-i18n="checkout.desc">
@@ -31,7 +31,7 @@
                 <div class="col-lg-7">
                     <!-- Method Selector -->
                     <div class="card-luxury p-3 p-md-3.5 mb-3">
-                        <h6 class="font-serif fw-bold text-gold-gradient mb-2.5 border-bottom border-gold pb-2" style="font-size: 0.98rem;">
+                        <h6 class="font-serif fw-bold text-primary mb-2.5 border-bottom border-gold pb-2" style="font-size: 0.98rem;">
                             <i class="fa-solid fa-truck-fast me-1.5"></i><span data-i18n="checkout.step1">1. Phương Thức Nhận Thức Uống</span>
                         </h6>
 
@@ -104,10 +104,10 @@
                     <!-- Payment Gateways Selection: Spacious & High-End -->
                     <div class="card-luxury p-3.5 p-md-4">
                         <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold">
-                            <h6 class="font-serif fw-bold text-gold-gradient mb-0" style="font-size: 1.05rem;">
+                            <h6 class="font-serif fw-bold text-primary mb-0" style="font-size: 1.05rem;">
                                 <i class="fa-solid fa-shield-halved me-2 text-gold"></i><span data-i18n="checkout.step2">2. Cổng Thanh Toán Bảo Mật</span>
                             </h6>
-                            <span class="badge bg-gold-subtle text-gold small font-accent px-2.5 py-1 rounded-pill" style="font-size: 0.72rem;">
+                            <span class="badge bg-gold-subtle text-gold small px-2.5 py-1 rounded-2" style="font-size: 0.72rem;">
                                 Mã hóa SSL 256-bit
                             </span>
                         </div>
@@ -125,7 +125,7 @@
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
                                         <span class="font-serif fw-bold text-light fs-6">Chuyển Khoản Ngân Hàng (VietQR Động)</span>
-                                        <span class="badge bg-gold text-obsidian small px-2 py-0.5 rounded-pill font-accent fw-bold" style="font-size: 0.68rem;">Khuyên dùng</span>
+                                        <span class="badge bg-gold text-dark small px-2 py-0.5 rounded-2 fw-semibold" style="font-size: 0.68rem;">Khuyên dùng</span>
                                     </div>
                                     <div class="text-secondary small" style="font-size: 0.8rem; line-height: 1.4;">
                                         Hệ thống tự động sinh mã QR đúng số tiền và nội dung đơn. Xác thực giao dịch tự động trong 3 giây.
@@ -197,7 +197,7 @@
                 <!-- Right Column: Order Review & Submit (Balanced Height & Content) -->
                 <div class="col-lg-5">
                     <div class="card-luxury p-3 p-md-3.5 sticky-top" style="top: 85px;">
-                        <h6 class="font-serif fw-bold text-gold-gradient mb-2.5 border-bottom border-gold pb-2" style="font-size: 0.98rem;">
+                        <h6 class="font-serif fw-bold text-primary mb-2.5 border-bottom border-gold pb-2" style="font-size: 0.98rem;">
                             <i class="fa-solid fa-bag-shopping me-1.5"></i>Đơn Hàng Thưởng Thức <c:if test="${not empty cart and not empty cart.items}">(${cart.items.size()} món)</c:if>
                         </h6>
 
@@ -265,7 +265,7 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <button type="submit" class="btn btn-gold w-100 py-2.5 fw-bold fs-6 rounded-pill shadow-gold" id="submitOrderBtn">
+                        <button type="submit" class="btn btn-gold w-100 py-2.5 fw-semibold fs-6" id="submitOrderBtn">
                             <i class="fa-solid fa-lock me-1.5"></i> Xác Nhận &amp; Đặt Hàng
                         </button>
 

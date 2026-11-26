@@ -7,7 +7,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Chương Trình Khuyến Mãi &amp; Mã Ưu Đãi</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Chương Trình Khuyến Mãi &amp; Mã Ưu Đãi</h4>
             <small class="text-secondary">Thiết lập chính sách voucher, ưu đãi hội viên UTEClub và chiến dịch kích cầu</small>
         </div>
         <div class="d-flex gap-2">
@@ -124,7 +124,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-luxury border-gold bg-espresso text-light shadow-lg">
                 <div class="modal-header border-gold pb-3">
-                    <h5 class="modal-title font-serif text-gold-gradient fw-bold">
+                    <h5 class="modal-title font-serif text-primary fw-bold">
                         <i class="fa-solid fa-tags me-2"></i>Tạo Mã Khuyến Mãi Mới
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>

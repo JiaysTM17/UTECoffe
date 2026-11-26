@@ -7,7 +7,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Hộp Thư Đánh Giá &amp; Trải Nghiệm Khách Hàng (CX)</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Hộp Thư Đánh Giá &amp; Trải Nghiệm Khách Hàng (CX)</h4>
             <small class="text-secondary">Lắng nghe ý kiến thực tế của khách hàng về hương vị, thái độ phục vụ và chất lượng không gian</small>
         </div>
         <div class="d-flex gap-2">

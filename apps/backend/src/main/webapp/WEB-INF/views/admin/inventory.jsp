@@ -7,7 +7,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Quản Lý Tồn Kho &amp; Định Mức BOM</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Quản Lý Tồn Kho &amp; Định Mức BOM</h4>
             <small class="text-secondary">Tự động trừ kho nguyên liệu theo định lượng công thức pha chế của từng ly nước bán ra</small>
         </div>
         <div class="d-flex gap-2">
@@ -132,7 +132,7 @@
     <!-- Recent Logs -->
     <c:if test="${not empty logs}">
         <div class="card-luxury p-4 border-gold shadow-lg mb-4">
-            <h6 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold-subtle pb-2">
+            <h6 class="font-serif fw-bold text-primary mb-3 border-bottom border-gold-subtle pb-2">
                 <i class="fa-solid fa-clock-rotate-left me-1"></i> Lịch Sử Xuất Nhập Kho Gần Nhất
             </h6>
             <div class="table-responsive">
@@ -165,7 +165,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content bg-card-dark border border-gold text-light">
                 <div class="modal-header border-gold bg-espresso">
-                    <h5 class="modal-title font-serif text-gold-gradient" id="eoqModalLabel">
+                    <h5 class="modal-title font-serif text-primary" id="eoqModalLabel">
                         <i class="fa-solid fa-chart-line me-2 text-gold"></i>Mô Hình Kinh Tế Tối Ưu Tồn Kho EOQ &amp; Điểm Đặt Hàng ROP
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>

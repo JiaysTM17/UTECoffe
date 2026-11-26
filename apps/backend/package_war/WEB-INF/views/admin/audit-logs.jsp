@@ -6,7 +6,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Nhật Ký Truy Vết Hệ Thống AOP (Audit Logs)</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Nhật Ký Truy Vết Hệ Thống AOP (Audit Logs)</h4>
             <small class="text-secondary">Giám sát bảo mật, ghi nhận mọi hành vi thay đổi dữ liệu theo thời gian thực</small>
         </div>
         <div class="d-flex gap-2">

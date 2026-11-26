@@ -7,7 +7,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Chuỗi Cung Ứng &amp; Đặt Hàng Nhập Kho (PO)</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Chuỗi Cung Ứng &amp; Đặt Hàng Nhập Kho (PO)</h4>
             <small class="text-secondary">Quản trị đối tác nông trại cao nguyên Cầu Đất, Mộc Châu và điều phối nhập hàng PO</small>
         </div>
         <div class="d-flex gap-2">
@@ -19,7 +19,7 @@
 
     <!-- Suppliers Grid -->
     <div class="card-luxury p-4 border-gold shadow-lg mb-4">
-        <h5 class="font-serif fw-bold text-gold-gradient mb-3 border-bottom border-gold-subtle pb-2">
+        <h5 class="font-serif fw-bold text-primary mb-3 border-bottom border-gold-subtle pb-2">
             <i class="fa-solid fa-handshake me-2"></i>Đối Tác Nông Trại &amp; Nhà Cung Ứng Chiến Lược
         </h5>
         <div class="row g-3">
@@ -56,7 +56,7 @@
     <div class="card-luxury p-4 border-gold shadow-lg mb-4">
         <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-gold">
             <div>
-                <h5 class="font-serif fw-bold text-gold-gradient mb-0">
+                <h5 class="font-serif fw-bold text-primary mb-0">
                     <i class="fa-solid fa-truck-ramp-box me-2"></i>Sổ Theo Dõi Đơn Nhập Kho (Purchase Orders)
                 </h5>
                 <small class="text-secondary">Theo dõi tiến độ giao hàng, kiểm đếm chất lượng và đối soát công nợ nguyên liệu</small>
@@ -114,7 +114,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-luxury border-gold bg-espresso text-light shadow-lg">
                 <div class="modal-header border-gold pb-3">
-                    <h5 class="modal-title font-serif text-gold-gradient fw-bold">
+                    <h5 class="modal-title font-serif text-primary fw-bold">
                         <i class="fa-solid fa-file-invoice me-2"></i>Tạo Phiếu Đặt Hàng Nhập Kho (PO)
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>

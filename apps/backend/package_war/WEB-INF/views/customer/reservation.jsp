@@ -8,10 +8,10 @@
     <!-- Header Banner -->
     <div class="py-5 bg-espresso border-bottom border-gold text-center position-relative overflow-hidden">
         <div class="container py-3 position-relative" style="z-index: 2;">
-            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-pill small font-accent mb-3 text-uppercase" style="letter-spacing: 0.15em;" data-i18n="res.badge">
-                <i class="fa-solid fa-bell-concierge me-1"></i> DỊCH VỤ TIẾP ĐÓN CHU ĐÁO
+            <span class="badge bg-gold-subtle text-gold px-3 py-1 rounded-2 small mb-3 fw-medium" data-i18n="res.badge">
+                <i class="fa-solid fa-bell-concierge me-1"></i> Dịch Vụ Tiếp Đón Chu Đáo
             </span>
-            <h1 class="font-serif display-4 fw-bold text-gold-gradient mb-3" data-i18n="nav.reservation">
+            <h1 class="font-serif display-4 fw-bold text-primary mb-3" data-i18n="nav.reservation">
                 Đặt Bàn Thưởng Thức
             </h1>
             <p class="text-secondary mx-auto fs-6 mb-0" style="max-width: 680px; line-height: 1.7;" data-i18n="res.desc">
@@ -29,10 +29,10 @@
                         <i class="fa-solid fa-champagne-glasses text-gold fs-2"></i>
                     </div>
 
-                    <span class="badge bg-gold text-obsidian px-3 py-1 rounded-pill small font-accent mb-2 text-uppercase fw-bold" style="letter-spacing: 0.12em; font-size: 0.76rem;">
-                        <i class="fa-solid fa-circle-check me-1"></i> XÁC NHẬN GIỮ CHỖ THÀNH CÔNG
+                    <span class="badge bg-gold text-dark px-3 py-1 rounded-2 small mb-2 fw-semibold" style="font-size: 0.76rem;">
+                        <i class="fa-solid fa-circle-check me-1"></i> Xác Nhận Giữ Chỗ Thành Công
                     </span>
-                    <h2 class="font-serif fs-3 fw-bold text-gold-gradient mb-2">
+                    <h2 class="font-serif fs-3 fw-bold text-primary mb-2">
                         Chào Mừng ${not empty customerName ? customerName : 'Quý Khách'} Đến Với UTECoffe
                     </h2>
                     <p class="text-secondary small mx-auto mb-4" style="max-width: 580px; font-size: 0.85rem;">
@@ -94,10 +94,10 @@
 
                     <!-- Actions -->
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-2.5 rounded-pill font-accent fw-bold shadow-gold">
+                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-2 fw-semibold">
                             <i class="fa-solid fa-mug-saucer me-1.5"></i> Khám Phá Menu &amp; Đặt Món Trước
                         </a>
-                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold px-4 py-2.5 rounded-pill font-accent">
+                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold px-4 py-2">
                             <i class="fa-solid fa-plus me-1.5"></i> Đặt Thêm Lượt Khác
                         </a>
                     </div>
@@ -212,7 +212,7 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-gold w-100 py-3 fw-bold fs-6 rounded-pill shadow-gold">
+                                <button type="submit" class="btn btn-gold w-100 py-2.5 fw-semibold fs-6">
                                     <i class="fa-solid fa-calendar-check me-2"></i> <span data-i18n="res.submit_btn">Xác Nhận Giữ Chỗ Trực Tuyến</span>
                                 </button>
                             </form>

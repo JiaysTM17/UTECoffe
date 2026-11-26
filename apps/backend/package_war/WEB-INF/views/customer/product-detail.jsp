@@ -161,7 +161,7 @@
                         <span class="badge bg-success-subtle text-success small ms-2"><i class="fa-solid fa-circle-check me-1"></i>Sẵn Sàng Phục Vụ</span>
                     </div>
 
-                    <h1 class="display-5 fw-bold font-serif text-gold-gradient mb-2 product-title-text" data-slug="${product.slug}">${product.name}</h1>
+                    <h1 class="display-5 fw-bold font-serif text-primary mb-2 product-title-text" data-slug="${product.slug}">${product.name}</h1>
                     <p class="text-secondary mb-4 leading-relaxed product-desc-text" data-slug="${product.slug}">${product.description}</p>
 
                     <!-- Price Box -->
@@ -494,7 +494,7 @@
 
                     <!-- Quantity & Action Buttons -->
                     <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
-                        <div class="d-flex align-items-center border border-gold rounded-pill bg-espresso p-1">
+                        <div class="d-flex align-items-center border border-gold rounded-2 bg-espresso p-1">
                             <button class="btn btn-sm text-gold border-0 px-3 fw-bold" type="button" onclick="changeQty(-1)">
                                 <i class="fa-solid fa-minus"></i>
                             </button>
@@ -547,7 +547,7 @@
                         <span class="text-secondary small">&bull; Tuyệt Phẩm Chế Tác Độc Bản</span>
                     </div>
 
-                    <h3 class="font-serif fw-bold text-gold-gradient mb-3">
+                    <h3 class="font-serif fw-bold text-primary mb-3">
                         Câu Chuyện Nghệ Nhân &amp; Nguồn Cảm Hứng
                     </h3>
 
@@ -727,10 +727,10 @@
             <div class="card-luxury p-4 p-lg-5 mb-5 border-gold">
                 <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
                     <div>
-                        <span class="badge bg-gold-gradient text-obsidian px-3 py-1 rounded-pill small font-accent fw-bold text-uppercase mb-2">
+                        <span class="badge bg-gold text-dark px-3 py-1 rounded-2 small fw-semibold mb-2">
                             <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Nghệ Thuật Ghép Vị Thượng Hạng
                         </span>
-                        <h4 class="font-serif fw-bold text-gold-gradient mb-1">
+                        <h4 class="font-serif fw-bold text-primary mb-1">
                             Gợi Ý Kết Hợp Hoàn Hảo (Artisanal Flavor Pairing)
                         </h4>
                         <p class="text-secondary small mb-0">Các chuyên gia pha chế UTECoffe đề xuất món dùng kèm tối ưu nhất để bùng nổ trọn vẹn tầng hương Terroir.</p>
@@ -745,7 +745,7 @@
                                     <img src="${not empty pair.recommendedProduct.imageUrl ? pair.recommendedProduct.imageUrl : 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80'}" 
                                          alt="${pair.recommendedProduct.name}" 
                                          class="w-100 h-100 object-fit-cover">
-                                    <span class="badge bg-gold-gradient text-obsidian position-absolute top-0 end-0 m-2 px-2 py-1 rounded-pill small fw-bold">
+                                    <span class="badge bg-gold text-dark position-absolute top-0 end-0 m-2 px-2 py-1 rounded-2 small fw-bold">
                                         <fmt:formatNumber value="${pair.pairingScore * 100}" pattern="#0"/>% Hòa Hợp
                                     </span>
                                 </div>
@@ -762,7 +762,7 @@
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center pt-2 border-top border-gold-subtle">
                                     <span class="price-gold fw-bold"><fmt:formatNumber value="${pair.recommendedProduct.basePrice}" pattern="#,##0"/> VNĐ</span>
-                                    <a href="${pageContext.request.contextPath}/menu/${pair.recommendedProduct.slug}" class="btn btn-outline-gold btn-sm rounded-pill px-3 py-1 font-accent">
+                                    <a href="${pageContext.request.contextPath}/menu/${pair.recommendedProduct.slug}" class="btn btn-outline-gold btn-sm rounded-2 px-3 py-1">
                                         <i class="fa-solid fa-plus me-1"></i> Xem Món
                                     </a>
                                 </div>
@@ -775,7 +775,7 @@
 
         <!-- Customer Reviews & Tasting Notes Section -->
         <div class="card-luxury p-4 p-lg-5 mb-5">
-            <h4 class="font-serif fw-bold text-gold-gradient mb-4">
+            <h4 class="font-serif fw-bold text-primary mb-4">
                 <i class="fa-regular fa-comments text-gold me-2"></i>Cảm Nhận Từ Khách Hàng Thưởng Thức
             </h4>
 
@@ -799,11 +799,11 @@
                             <div class="col-sm-4">
                                 <label class="form-label small text-gold">Điểm đánh giá:</label>
                                 <select class="form-select form-control-luxury" id="reviewRating">
-                                    <option value="5">⭐⭐⭐⭐⭐ 5/5 Tuyệt Hảo</option>
-                                    <option value="4">⭐⭐⭐⭐ 4/5 Rất Ngon</option>
-                                    <option value="3">⭐⭐⭐ 3/5 Tạm Ổn</option>
-                                    <option value="2">⭐⭐ 2/5 Cần Cải Thiện</option>
-                                    <option value="1">⭐ 1/5 Không Thích</option>
+                                    <option value="5">5 / 5 — Tuyệt hảo</option>
+                                    <option value="4">4 / 5 — Hài lòng</option>
+                                    <option value="3">3 / 5 — Bình thường</option>
+                                    <option value="2">2 / 5 — Chưa hài lòng</option>
+                                    <option value="1">1 / 5 — Không đạt yêu cầu</option>
                                 </select>
                             </div>
                             <div class="col-sm-8">

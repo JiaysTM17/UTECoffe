@@ -7,7 +7,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Quản Lý Thực Đơn &amp; Danh Mục Món</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Quản Lý Thực Đơn &amp; Danh Mục Món</h4>
             <small class="text-secondary">Giám sát danh mục 36 món đặc sản, điều chỉnh giá bán và trạng thái sẵn sàng phục vụ</small>
         </div>
         <div class="d-flex gap-2">

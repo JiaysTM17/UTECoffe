@@ -7,7 +7,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="font-serif fw-bold text-gold-gradient mb-0">Chuẩn Hóa Công Thức Pha Chế (Master Recipes &amp; SOP)</h4>
+            <h4 class="font-serif fw-bold text-primary mb-0">Chuẩn Hóa Công Thức Pha Chế (Master Recipes &amp; SOP)</h4>
             <small class="text-secondary">Quy định định mức gram/ml nguyên liệu tiêu hao cho từng món nước, đảm bảo tính đồng nhất 100% hương vị toàn chuỗi</small>
         </div>
         <div class="d-flex gap-2">

@@ -18,7 +18,7 @@
         vi: {
             // Top Announcement Bar
             'topbar.location': 'Flagship: 01 Võ Văn Ngân, TP. Thủ Đức, TP.HCM',
-            'topbar.promo': 'ƯU ĐÃI 20% ĐƠN ĐẦU TIÊN • FREESHIP TOÀN QUỐC TỪ 150.000₫',
+            'topbar.promo': 'Ưu đãi 20% đơn đầu tiên • Freeship toàn quốc từ 150.000₫',
             'topbar.hours': '07:00 - 22:30',
             'topbar.hotline': 'Hotline: 1900 2026',
 
@@ -461,7 +461,7 @@
         en: {
             // Top Announcement Bar
             'topbar.location': 'Flagship: 01 Vo Van Ngan, Thu Duc City, HCMC',
-            'topbar.promo': '20% OFF FIRST ORDER • FREE SHIPPING NATIONWIDE OVER 150,000₫',
+            'topbar.promo': '20% off first order • Free shipping nationwide over 150,000₫',
             'topbar.hours': '07:00 AM - 10:30 PM',
             'topbar.hotline': 'Hotline: 1900 2026',
 
