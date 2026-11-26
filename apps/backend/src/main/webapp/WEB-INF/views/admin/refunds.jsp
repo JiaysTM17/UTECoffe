@@ -5,27 +5,29 @@
     <title>Xử Lý Khiếu Nại & Hoàn Tiền - UTECoffe Admin</title>
 </head>
 <body>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h4 class="font-serif fw-bold text-primary mb-0">Xử Lý Khiếu Nại, Đơn Lỗi &amp; Hoàn Tiền (Disputes &amp; Refunds)</h4>
-            <small class="text-secondary">Chính sách bảo vệ quyền lợi khách hàng, giải quyết sự cố giao hàng đổ vỡ hoặc chậm trễ</small>
+            <h5 class="fw-semibold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.05rem;">Xử lý khiếu nại &amp; hoàn tiền (Disputes &amp; Refunds)</h5>
+            <small class="text-secondary" style="font-size: 0.75rem;">Chính sách bảo vệ quyền lợi khách hàng, giải quyết sự cố giao hàng đổ vỡ hoặc chậm trễ</small>
         </div>
         <div class="d-flex gap-2">
-            <span class="badge bg-dark-roast border border-gold text-gold px-3 py-2 font-accent">
-                Tổng: <strong>${refunds.size()}</strong> Hồ Sơ Đền Bù
+            <span class="badge bg-dark-roast border border-gold-subtle text-gold px-2.5 py-1.5 font-sans rounded-2" style="font-size: 0.75rem;">
+                Tổng: <strong>${refunds.size()}</strong> hồ sơ đền bù
             </span>
         </div>
     </div>
 
     <!-- Quick Stats Cards -->
-    <div class="row g-3 mb-4">
+    <div class="row g-2.5 mb-3">
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Hồ Sơ Đã Xử Lý</span>
-                    <h4 class="font-serif fw-bold text-success mb-0">100% Hoàn Tất</h4>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Hồ sơ đã xử lý</span>
+                    <div class="fw-bold text-success mb-0" style="font-family: var(--font-sans); font-size: 1.35rem; font-variant-numeric: tabular-nums;">100% Hoàn Tất</div>
                 </div>
-                <div class="p-2 rounded-circle bg-dark-roast border border-success text-success"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(25, 135, 84, 0.12); color: #198754;">
+                    <i class="fa-solid fa-circle-check" style="font-size: 0.88rem;"></i>
+                </div>
             </div>
         </div>
         <div class="col-md-4">

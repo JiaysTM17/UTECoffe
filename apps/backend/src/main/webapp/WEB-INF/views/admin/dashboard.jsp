@@ -6,92 +6,115 @@
 </head>
 <body>
     <!-- Top Stat Metric Cards -->
-    <div class="row g-4 mb-4">
+    <div class="row g-3 mb-3">
         <!-- Metric 1: Total Revenue -->
         <div class="col-xl-3 col-sm-6">
-            <div class="card-luxury p-4 h-100 border-gold shadow-lg" style="background: linear-gradient(145deg, rgba(30,25,20,0.95) 0%, rgba(15,13,10,0.98) 100%);">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.1em;">Tổng Doanh Thu</span>
-                    <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-coins fs-5"></i></div>
+            <div class="card-luxury p-3 p-md-3.5 h-100 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-secondary fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase;">Tổng doanh thu</span>
+                    <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(222, 183, 106, 0.12); color: var(--gold-primary);">
+                        <i class="fa-solid fa-coins" style="font-size: 0.88rem;"></i>
+                    </div>
                 </div>
-                <h3 class="font-serif fw-bold text-primary mb-1">
+                <div class="fw-bold text-primary my-1" style="font-family: var(--font-sans); font-size: 1.45rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.25;">
                     <fmt:formatNumber value="${totalRevenue}" pattern="#,##0"/> VNĐ
-                </h3>
-                <small class="text-success"><i class="fa-solid fa-arrow-trend-up me-1"></i> ${completedOrdersCount} đơn hoàn tất trọn vẹn</small>
+                </div>
+                <div class="text-success small d-flex align-items-center gap-1" style="font-size: 0.75rem;">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                    <span>${completedOrdersCount} đơn hoàn tất</span>
+                </div>
             </div>
         </div>
 
         <!-- Metric 2: Total Orders -->
         <div class="col-xl-3 col-sm-6">
-            <div class="card-luxury p-4 h-100 border-gold shadow-lg">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.1em;">Tổng Đơn Hàng</span>
-                    <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-receipt fs-5"></i></div>
+            <div class="card-luxury p-3 p-md-3.5 h-100 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-secondary fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase;">Tổng đơn hàng</span>
+                    <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(222, 183, 106, 0.12); color: var(--gold-primary);">
+                        <i class="fa-solid fa-receipt" style="font-size: 0.88rem;"></i>
+                    </div>
                 </div>
-                <h3 class="font-serif fw-bold text-primary mb-1">${totalOrders} Đơn</h3>
-                <small class="text-warning"><i class="fa-solid fa-clock me-1"></i> ${pendingOrdersCount} đơn đang xử lý / pha chế</small>
+                <div class="fw-bold text-primary my-1" style="font-family: var(--font-sans); font-size: 1.45rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.25;">
+                    ${totalOrders} đơn
+                </div>
+                <div class="text-warning small d-flex align-items-center gap-1" style="font-size: 0.75rem;">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>${pendingOrdersCount} đơn đang xử lý</span>
+                </div>
             </div>
         </div>
 
         <!-- Metric 3: Active Products -->
         <div class="col-xl-3 col-sm-6">
-            <div class="card-luxury p-4 h-100 border-gold shadow-lg">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.1em;">Thực Đơn Đặc Sản</span>
-                    <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-mug-hot fs-5"></i></div>
+            <div class="card-luxury p-3 p-md-3.5 h-100 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-secondary fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase;">Thực đơn đặc sản</span>
+                    <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(222, 183, 106, 0.12); color: var(--gold-primary);">
+                        <i class="fa-solid fa-mug-hot" style="font-size: 0.88rem;"></i>
+                    </div>
                 </div>
-                <h3 class="font-serif fw-bold text-primary mb-1">${totalProducts} Sản Phẩm</h3>
-                <small class="text-secondary font-accent">5 danh mục: Cà phê, Trà, Bánh &amp; Đá xay</small>
+                <div class="fw-bold text-primary my-1" style="font-family: var(--font-sans); font-size: 1.45rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.25;">
+                    ${totalProducts} sản phẩm
+                </div>
+                <div class="text-secondary small" style="font-size: 0.75rem;">
+                    5 danh mục đang phục vụ
+                </div>
             </div>
         </div>
 
         <!-- Metric 4: Members -->
         <div class="col-xl-3 col-sm-6">
-            <div class="card-luxury p-4 h-100 border-gold shadow-lg">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.1em;">Thành Viên UTEClub</span>
-                    <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-award fs-5"></i></div>
+            <div class="card-luxury p-3 p-md-3.5 h-100 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-secondary fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase;">Thành viên UTEClub</span>
+                    <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(222, 183, 106, 0.12); color: var(--gold-primary);">
+                        <i class="fa-solid fa-award" style="font-size: 0.88rem;"></i>
+                    </div>
                 </div>
-                <h3 class="font-serif fw-bold text-primary mb-1">${totalUsers} Tài Khoản</h3>
-                <small class="text-success"><i class="fa-solid fa-crown me-1"></i> Đồng, Bạc, Vàng, Kim Cương</small>
+                <div class="fw-bold text-primary my-1" style="font-family: var(--font-sans); font-size: 1.45rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.25;">
+                    ${totalUsers} tài khoản
+                </div>
+                <div class="text-success small d-flex align-items-center gap-1" style="font-size: 0.75rem;">
+                    <i class="fa-solid fa-crown"></i>
+                    <span>Hội viên 4 hạng thẻ</span>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Store Performance Row: 3 Branches -->
-    <div class="row g-4 mb-4">
+    <div class="row g-3 mb-3">
         <div class="col-12">
-            <div class="card-luxury p-4 border-gold shadow-lg">
-                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold-subtle">
-                    <div>
-                        <h5 class="font-serif fw-bold text-primary mb-0">
-                            <i class="fa-solid fa-store me-2"></i>Hiệu Suất Vận Hành 3 Chi Nhánh
-                        </h5>
-                        <small class="text-secondary">Thống kê đơn hàng và doanh thu theo từng cơ sở</small>
+            <div class="card-luxury p-3 p-md-3.5 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-2.5 pb-2 border-bottom border-gold-subtle">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-store text-gold" style="font-size: 0.92rem;"></i>
+                        <span class="fw-semibold text-primary" style="font-size: 0.92rem;">Hiệu suất vận hành 3 chi nhánh</span>
                     </div>
-                    <span class="badge bg-dark-roast border border-gold text-gold px-3 py-1 font-accent">
-                        3 Chi Nhánh Đang Hoạt Động
+                    <span class="badge bg-dark-roast border border-gold-subtle text-gold py-1 px-2.5 font-sans" style="font-size: 0.72rem; border-radius: 9999px;">
+                        3 chi nhánh đang hoạt động
                     </span>
                 </div>
 
-                <div class="row g-3">
+                <div class="row g-2.5">
                     <c:forEach var="st" items="${stores}">
                         <div class="col-md-4">
-                            <div class="p-3 rounded-3 bg-dark-roast border border-secondary border-opacity-50 h-100 d-flex flex-column justify-content-between">
+                            <div class="p-2.5 rounded-2 h-100 d-flex flex-column justify-content-between" style="background: var(--bg-secondary); border: 1px solid var(--border-gold-subtle);">
                                 <div>
-                                    <div class="d-flex justify-content-between align-items-start mb-2">
-                                        <div class="fw-bold text-gold font-accent text-truncate" title="${st.name}">${st.name}</div>
-                                        <span class="badge bg-success-subtle text-success small">Hoạt Động</span>
+                                    <div class="d-flex justify-content-between align-items-start mb-1">
+                                        <div class="fw-semibold text-primary text-truncate" style="font-size: 0.85rem;" title="${st.name}">${st.name}</div>
+                                        <span class="badge bg-success-subtle text-success" style="font-size: 0.68rem; padding: 2px 6px;">Hoạt động</span>
                                     </div>
-                                    <div class="text-secondary small mb-3 text-truncate" title="${st.address}">
+                                    <div class="text-secondary small mb-2 text-truncate" style="font-size: 0.75rem;" title="${st.address}">
                                         <i class="fa-solid fa-location-dot me-1 text-gold"></i> ${st.address}
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary border-opacity-25">
-                                    <span class="text-primary small">
-                                        Đơn hàng: <strong>${storeOrderCounts[st.id] != null ? storeOrderCounts[st.id] : 0}</strong>
+                                <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary border-opacity-25" style="font-size: 0.78rem;">
+                                    <span class="text-secondary">
+                                        Đơn hàng: <strong class="text-primary">${storeOrderCounts[st.id] != null ? storeOrderCounts[st.id] : 0}</strong>
                                     </span>
-                                    <span class="text-gold fw-bold small">
+                                    <span class="text-gold fw-bold" style="font-variant-numeric: tabular-nums;">
                                         <fmt:formatNumber value="${storeRevenues[st.id] != null ? storeRevenues[st.id] : 0}" pattern="#,##0"/> VNĐ
                                     </span>
                                 </div>
@@ -104,39 +127,40 @@
     </div>
 
     <!-- Sales Analytics & Channel Distribution -->
-    <div class="row g-4 mb-4">
+    <div class="row g-3 mb-3">
         <!-- Channel Breakdown -->
         <div class="col-lg-6">
-            <div class="card-luxury p-4 border-gold shadow-lg h-100">
-                <h5 class="font-serif fw-bold text-primary mb-3 border-bottom border-gold-subtle pb-2">
-                    <i class="fa-solid fa-chart-pie me-2"></i>Phân Bổ Kênh Phục Vụ
-                </h5>
-                <div class="d-flex flex-column gap-3">
+            <div class="card-luxury p-3 p-md-3.5 shadow-sm h-100">
+                <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom border-gold-subtle">
+                    <i class="fa-solid fa-chart-pie text-gold" style="font-size: 0.9rem;"></i>
+                    <span class="fw-semibold text-primary" style="font-size: 0.92rem;">Phân bổ kênh phục vụ</span>
+                </div>
+                <div class="d-flex flex-column gap-2.5">
                     <div>
-                        <div class="d-flex justify-content-between small mb-1">
-                            <span class="text-primary"><i class="fa-solid fa-chair text-gold me-2"></i>Tại Quán (Dine-in)</span>
-                            <span class="text-gold fw-bold">${dineInCount} đơn</span>
+                        <div class="d-flex justify-content-between small mb-1" style="font-size: 0.8rem;">
+                            <span class="text-primary"><i class="fa-solid fa-utensils text-gold me-2"></i>Tại quán (Dine-in)</span>
+                            <span class="text-gold fw-bold" style="font-variant-numeric: tabular-nums;">${dineInCount} đơn</span>
                         </div>
-                        <div class="progress bg-dark" style="height: 8px;">
-                            <div class="progress-bar bg-warning" style="width: ${totalOrders > 0 ? (dineInCount * 100 / totalOrders) : 0}%;"></div>
+                        <div class="progress" style="height: 6px; background: rgba(0,0,0,0.08); border-radius: 9999px;">
+                            <div class="progress-bar bg-warning" style="width: ${totalOrders > 0 ? (dineInCount * 100 / totalOrders) : 0}%; border-radius: 9999px;"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="d-flex justify-content-between small mb-1">
-                            <span class="text-primary"><i class="fa-solid fa-mug-saucer text-warning me-2"></i>Mang Đi (Take-away)</span>
-                            <span class="text-warning fw-bold">${takeAwayCount} đơn</span>
+                        <div class="d-flex justify-content-between small mb-1" style="font-size: 0.8rem;">
+                            <span class="text-primary"><i class="fa-solid fa-cup-straw text-warning me-2"></i>Mang đi (Take-away)</span>
+                            <span class="text-warning fw-bold" style="font-variant-numeric: tabular-nums;">${takeAwayCount} đơn</span>
                         </div>
-                        <div class="progress bg-dark" style="height: 8px;">
-                            <div class="progress-bar bg-warning" style="width: ${totalOrders > 0 ? (takeAwayCount * 100 / totalOrders) : 0}%;"></div>
+                        <div class="progress" style="height: 6px; background: rgba(0,0,0,0.08); border-radius: 9999px;">
+                            <div class="progress-bar bg-warning" style="width: ${totalOrders > 0 ? (takeAwayCount * 100 / totalOrders) : 0}%; border-radius: 9999px;"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="d-flex justify-content-between small mb-1">
-                            <span class="text-primary"><i class="fa-solid fa-motorcycle text-info me-2"></i>Giao Hàng (Delivery)</span>
-                            <span class="text-info fw-bold">${deliveryCount} đơn</span>
+                        <div class="d-flex justify-content-between small mb-1" style="font-size: 0.8rem;">
+                            <span class="text-primary"><i class="fa-solid fa-motorcycle text-info me-2"></i>Giao hàng (Delivery)</span>
+                            <span class="text-info fw-bold" style="font-variant-numeric: tabular-nums;">${deliveryCount} đơn</span>
                         </div>
-                        <div class="progress bg-dark" style="height: 8px;">
-                            <div class="progress-bar bg-info" style="width: ${totalOrders > 0 ? (deliveryCount * 100 / totalOrders) : 0}%;"></div>
+                        <div class="progress" style="height: 6px; background: rgba(0,0,0,0.08); border-radius: 9999px;">
+                            <div class="progress-bar bg-info" style="width: ${totalOrders > 0 ? (deliveryCount * 100 / totalOrders) : 0}%; border-radius: 9999px;"></div>
                         </div>
                     </div>
                 </div>
@@ -145,26 +169,27 @@
 
         <!-- Top Selling Products -->
         <div class="col-lg-6">
-            <div class="card-luxury p-4 border-gold shadow-lg h-100">
-                <h5 class="font-serif fw-bold text-primary mb-3 border-bottom border-gold-subtle pb-2">
-                    <i class="fa-solid fa-fire-flame-curved me-2"></i>Top 5 Thức Uống Bán Chạy Nhất
-                </h5>
+            <div class="card-luxury p-3 p-md-3.5 shadow-sm h-100">
+                <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom border-gold-subtle">
+                    <i class="fa-solid fa-fire text-gold" style="font-size: 0.9rem;"></i>
+                    <span class="fw-semibold text-primary" style="font-size: 0.92rem;">Top 5 thức uống bán chạy nhất</span>
+                </div>
                 <c:choose>
                     <c:when test="${not empty topProducts}">
                         <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
                             <c:forEach var="tp" items="${topProducts}" varStatus="status">
-                                <li class="p-2 rounded-3 bg-dark-roast border border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
+                                <li class="py-1.5 px-2.5 rounded-2 d-flex justify-content-between align-items-center" style="background: var(--bg-secondary); border: 1px solid var(--border-gold-subtle);">
                                     <div class="d-flex align-items-center gap-2">
-                                        <span class="badge ${status.index == 0 ? 'bg-warning text-dark' : 'bg-dark text-gold'} font-accent">${status.index + 1}</span>
-                                        <span class="text-primary small fw-bold">${tp.key}</span>
+                                        <span class="badge ${status.index == 0 ? 'bg-warning text-dark' : 'bg-dark-roast text-gold'} font-sans rounded-circle p-0 d-inline-flex align-items-center justify-content-center" style="width: 20px; height: 20px; font-size: 0.7rem;">${status.index + 1}</span>
+                                        <span class="text-primary small fw-medium" style="font-size: 0.82rem;">${tp.key}</span>
                                     </div>
-                                    <span class="badge bg-espresso border border-gold-subtle text-gold small">${tp.value} phần</span>
+                                    <span class="badge font-sans" style="font-size: 0.75rem; background: var(--bg-card); border: 1px solid var(--border-gold-subtle); color: var(--text-gold); font-variant-numeric: tabular-nums;">${tp.value} phần</span>
                                 </li>
                             </c:forEach>
                         </ul>
                     </c:when>
                     <c:otherwise>
-                        <p class="text-secondary small mb-0">Đang cập nhật số liệu sản phẩm bán chạy theo đơn hàng thực tế...</p>
+                        <p class="text-secondary small mb-0" style="font-size: 0.8rem;">Đang cập nhật số liệu sản phẩm bán chạy theo đơn hàng thực tế...</p>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -172,96 +197,92 @@
     </div>
 
     <!-- Quick Actions Panel -->
-    <div class="row g-4 mb-4">
-        <div class="col-12">
-            <div class="card-luxury p-3 border-gold shadow-sm bg-espresso">
-                <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
-                    <span class="text-gold font-accent fw-bold small text-uppercase">
-                        <i class="fa-solid fa-bolt me-1"></i> Thao Tác Quản Trị Nhanh:
-                    </span>
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="${pageContext.request.contextPath}/admin/products" class="btn btn-gold btn-sm rounded-pill px-3 font-accent">
-                            <i class="fa-solid fa-plus me-1"></i> Quản Lý Thực Đơn
-                        </a>
-                        <a href="${pageContext.request.contextPath}/barista/kds" class="btn btn-outline-warning btn-sm rounded-pill px-3 font-accent">
-                            <i class="fa-solid fa-display me-1"></i> Màn Hình KDS Pha Chế
-                        </a>
-                        <a href="${pageContext.request.contextPath}/admin/stores" class="btn btn-outline-info btn-sm rounded-pill px-3 font-accent">
-                            <i class="fa-solid fa-chair me-1"></i> Quản Lý Đặt Bàn
-                        </a>
-                        <a href="${pageContext.request.contextPath}/admin/inventory" class="btn btn-outline-gold btn-sm rounded-pill px-3 font-accent">
-                            <i class="fa-solid fa-warehouse me-1"></i> Kiểm Kho Nguyên Liệu
-                        </a>
-                        <a href="${pageContext.request.contextPath}/admin/orders/export" class="btn btn-outline-success btn-sm rounded-pill px-3 font-accent">
-                            <i class="fa-solid fa-file-excel me-1"></i> Xuất Excel Đơn Hàng
-                        </a>
-                    </div>
-                </div>
+    <div class="card-luxury p-2.5 p-md-3 mb-3 shadow-sm">
+        <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
+            <span class="text-secondary fw-semibold small" style="font-size: 0.8rem;">
+                <i class="fa-solid fa-bolt text-gold me-1"></i> Thao tác quản trị nhanh:
+            </span>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="${pageContext.request.contextPath}/admin/products" class="btn btn-gold btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
+                    <i class="fa-solid fa-plus me-1"></i> Quản lý thực đơn
+                </a>
+                <a href="${pageContext.request.contextPath}/barista/kds" class="btn btn-outline-warning btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
+                    <i class="fa-solid fa-display me-1"></i> KDS pha chế
+                </a>
+                <a href="${pageContext.request.contextPath}/admin/stores" class="btn btn-outline-info btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
+                    <i class="fa-solid fa-chair me-1"></i> Quản lý đặt bàn
+                </a>
+                <a href="${pageContext.request.contextPath}/admin/inventory" class="btn btn-outline-gold btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
+                    <i class="fa-solid fa-warehouse me-1"></i> Kiểm kho BOM
+                </a>
+                <a href="${pageContext.request.contextPath}/admin/orders/export" class="btn btn-outline-success btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
+                    <i class="fa-solid fa-file-excel me-1"></i> Xuất Excel đơn
+                </a>
             </div>
         </div>
     </div>
 
     <!-- Recent Orders Table -->
-    <div class="card-luxury p-4 border-gold shadow-lg">
-        <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-gold">
-            <div>
-                <h5 class="font-serif fw-bold text-primary mb-0">Đơn Hàng Mới Nhất Toàn Chuỗi</h5>
-                <small class="text-secondary">Cập nhật thời gian thực qua hệ thống điều phối OMO</small>
+    <div class="card-luxury p-3 p-md-3.5 shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-gold-subtle">
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-receipt text-gold" style="font-size: 0.9rem;"></i>
+                <span class="fw-semibold text-primary" style="font-size: 0.92rem;">Đơn hàng mới nhất toàn chuỗi</span>
             </div>
             <div class="d-flex gap-2">
-                <a href="${pageContext.request.contextPath}/admin/orders/export" class="btn btn-gold btn-sm rounded-pill px-3 font-accent">
+                <a href="${pageContext.request.contextPath}/admin/orders/export" class="btn btn-outline-gold btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
                     <i class="fa-solid fa-file-excel me-1"></i> Xuất Excel
                 </a>
-                <a href="${pageContext.request.contextPath}/admin/orders" class="btn btn-outline-gold btn-sm rounded-pill px-3 font-accent">
-                    Xem Tất Cả
+                <a href="${pageContext.request.contextPath}/admin/orders" class="btn btn-gold btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
+                    Xem tất cả
                 </a>
             </div>
         </div>
 
         <div class="table-responsive">
-            <table class="table table-luxury align-middle">
+            <table class="table table-luxury table-sm align-middle mb-0">
                 <thead>
-                    <tr>
-                        <th>Mã Đơn</th>
-                        <th>Khách Hàng</th>
-                        <th>Chi Nhánh</th>
-                        <th>Hình Thức</th>
-                        <th>Tổng Tiền</th>
-                        <th>Trạng Thái</th>
+                    <tr style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-secondary);">
+                        <th class="py-2">Mã đơn</th>
+                        <th class="py-2">Khách hàng</th>
+                        <th class="py-2">Chi nhánh</th>
+                        <th class="py-2">Hình thức</th>
+                        <th class="py-2">Tổng tiền</th>
+                        <th class="py-2">Trạng thái</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="font-size: 0.82rem;">
                     <c:forEach var="ord" items="${recentOrders}">
                         <tr>
-                            <td class="fw-bold font-accent">
+                            <td class="fw-semibold">
                                 <a href="${pageContext.request.contextPath}/orders/tracking/${ord.orderCode}" class="text-gold text-decoration-none">
                                     #${ord.orderCode}
                                 </a>
                             </td>
                             <td>
-                                <div class="fw-bold text-primary">${ord.recipientName}</div>
-                                <small class="text-secondary">${ord.recipientPhone}</small>
+                                <div class="fw-medium text-primary">${ord.recipientName}</div>
+                                <small class="text-secondary" style="font-size: 0.75rem;">${ord.recipientPhone}</small>
                             </td>
                             <td><span class="text-primary">${ord.store.name}</span></td>
                             <td>
-                                <span class="badge bg-espresso border border-secondary text-primary">
+                                <span class="badge font-sans" style="font-size: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-gold-subtle); color: var(--text-primary);">
                                     <c:choose>
-                                        <c:when test="${ord.orderType == 'DINE_IN'}">🍽️ Tại Quán</c:when>
-                                        <c:when test="${ord.orderType == 'TAKE_AWAY'}">🥤 Mang Đi</c:when>
-                                        <c:otherwise>🛵 Giao Hàng</c:otherwise>
+                                        <c:when test="${ord.orderType == 'DINE_IN'}"><i class="fa-solid fa-utensils text-gold me-1"></i>Tại quán</c:when>
+                                        <c:when test="${ord.orderType == 'TAKE_AWAY'}"><i class="fa-solid fa-cup-straw text-warning me-1"></i>Mang đi</c:when>
+                                        <c:otherwise><i class="fa-solid fa-motorcycle text-info me-1"></i>Giao hàng</c:otherwise>
                                     </c:choose>
                                 </span>
                             </td>
-                            <td class="text-gold fw-bold">
+                            <td class="text-gold fw-bold" style="font-variant-numeric: tabular-nums;">
                                 <fmt:formatNumber value="${ord.finalAmount}" pattern="#,##0"/> VNĐ
                             </td>
                             <td>
-                                <span class="badge ${ord.status == 'COMPLETED' ? 'bg-success' : (ord.status == 'CANCELLED' ? 'bg-danger' : (ord.status == 'PREPARING' ? 'bg-warning text-dark' : 'bg-secondary text-primary'))} px-2 py-1">
+                                <span class="badge ${ord.status == 'COMPLETED' ? 'bg-success-subtle text-success border border-success-subtle' : (ord.status == 'CANCELLED' ? 'bg-danger-subtle text-danger border border-danger-subtle' : (ord.status == 'PREPARING' ? 'bg-warning-subtle text-warning border border-warning-subtle' : 'bg-secondary text-primary'))} px-2 py-1" style="font-size: 0.75rem;">
                                     <c:choose>
-                                        <c:when test="${ord.status == 'COMPLETED'}">Hoàn Tất</c:when>
-                                        <c:when test="${ord.status == 'PREPARING'}">Đang Pha</c:when>
-                                        <c:when test="${ord.status == 'PENDING'}">Chờ Xử Lý</c:when>
-                                        <c:when test="${ord.status == 'CANCELLED'}">Đã Hủy</c:when>
+                                        <c:when test="${ord.status == 'COMPLETED'}">Hoàn tất</c:when>
+                                        <c:when test="${ord.status == 'PREPARING'}">Đang pha</c:when>
+                                        <c:when test="${ord.status == 'PENDING'}">Chờ xử lý</c:when>
+                                        <c:when test="${ord.status == 'CANCELLED'}">Đã hủy</c:when>
                                         <c:otherwise>${ord.status}</c:otherwise>
                                     </c:choose>
                                 </span>
@@ -272,4 +293,5 @@
             </table>
         </div>
     </div>
+</body>
 </body>

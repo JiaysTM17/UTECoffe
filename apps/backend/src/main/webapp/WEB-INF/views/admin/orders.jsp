@@ -5,23 +5,23 @@
     <title>Sổ Cái Đơn Hàng - UTECoffe Admin</title>
 </head>
 <body>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h4 class="font-serif fw-bold text-primary mb-0">Quản Lý Đơn Hàng Toàn Hệ Thống</h4>
-            <small class="text-secondary">Theo dõi, điều phối và đối soát giao dịch thời gian thực OMO</small>
+            <h5 class="fw-semibold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.05rem;">Quản lý đơn hàng toàn hệ thống</h5>
+            <small class="text-secondary" style="font-size: 0.75rem;">Theo dõi, điều phối và đối soát giao dịch thời gian thực OMO</small>
         </div>
         <div class="d-flex gap-2">
-            <a href="${pageContext.request.contextPath}/admin/orders/export" class="btn btn-gold btn-sm rounded-pill px-3">
-                <i class="fa-solid fa-file-excel me-1"></i> Xuất File Excel (.xlsx)
+            <a href="${pageContext.request.contextPath}/admin/orders/export" class="btn btn-gold btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
+                <i class="fa-solid fa-file-excel me-1"></i> Xuất File Excel
             </a>
-            <a href="${pageContext.request.contextPath}/barista/kds" class="btn btn-outline-warning btn-sm rounded-pill px-3">
+            <a href="${pageContext.request.contextPath}/barista/kds" class="btn btn-outline-warning btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
                 <i class="fa-solid fa-display me-1"></i> KDS Barista
             </a>
         </div>
     </div>
 
     <!-- Filter & Search Toolbar (2-Tier Immune to Overflow) -->
-    <div class="card-luxury p-3 border-gold shadow-sm mb-3 bg-espresso">
+    <div class="card-luxury p-2.5 p-md-3 border-gold shadow-sm mb-3">
         <!-- Row 1: Search & Branch Selector -->
         <div class="row g-2 align-items-center mb-2 pb-2 border-bottom border-gold-subtle">
             <div class="col-md-7">
@@ -42,71 +42,71 @@
 
         <!-- Row 2: Status Filter Pills with Full Width (Never Overflows) -->
         <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-1 small text-secondary">
-                <i class="fa-solid fa-filter text-gold me-1"></i> <span class="font-accent">Trạng thái:</span>
+            <div class="d-flex align-items-center gap-1 small text-secondary" style="font-size: 0.78rem;">
+                <i class="fa-solid fa-filter text-gold me-1"></i> <span>Trạng thái:</span>
             </div>
             <div class="d-flex flex-wrap gap-1">
-                <button type="button" class="btn btn-sm btn-gold status-filter-btn active rounded-pill px-3 py-1 font-accent" data-status="ALL" onclick="setStatusFilter('ALL', this)">
+                <button type="button" class="btn btn-sm btn-gold status-filter-btn active rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" data-status="ALL" onclick="setStatusFilter('ALL', this)">
                     Tất Cả (${orders.size()})
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-3 py-1 font-accent" data-status="PENDING" onclick="setStatusFilter('PENDING', this)">
-                    ⏳ Chờ Xử Lý
+                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" data-status="PENDING" onclick="setStatusFilter('PENDING', this)">
+                    <i class="fa-regular fa-clock me-1"></i> Chờ Xử Lý
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-3 py-1 font-accent" data-status="PREPARING" onclick="setStatusFilter('PREPARING', this)">
-                    ☕ Đang Pha
+                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" data-status="PREPARING" onclick="setStatusFilter('PREPARING', this)">
+                    <i class="fa-solid fa-mug-hot me-1"></i> Đang Pha
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-3 py-1 font-accent" data-status="COMPLETED" onclick="setStatusFilter('COMPLETED', this)">
-                    ✅ Hoàn Tất
+                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" data-status="COMPLETED" onclick="setStatusFilter('COMPLETED', this)">
+                    <i class="fa-solid fa-check me-1"></i> Hoàn Tất
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-pill px-3 py-1 font-accent" data-status="CANCELLED" onclick="setStatusFilter('CANCELLED', this)">
-                    ❌ Đã Hủy
+                <button type="button" class="btn btn-sm btn-outline-gold status-filter-btn rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" data-status="CANCELLED" onclick="setStatusFilter('CANCELLED', this)">
+                    <i class="fa-solid fa-ban me-1"></i> Đã Hủy
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Orders Table -->
-    <div class="card-luxury p-4 border-gold shadow-lg">
+    <div class="card-luxury p-3 p-md-3.5 border-gold shadow-sm">
         <div class="table-responsive">
-            <table class="table table-luxury align-middle" id="adminOrdersTable">
+            <table class="table table-luxury table-sm align-middle" id="adminOrdersTable">
                 <thead>
-                    <tr>
-                        <th>Mã Đơn</th>
-                        <th>Khách Hàng</th>
-                        <th>Chi Nhánh</th>
-                        <th>Hình Thức</th>
-                        <th>Tổng Tiền</th>
-                        <th>Trạng Thái</th>
-                        <th class="text-end">Thao Tác</th>
+                    <tr style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-secondary);">
+                        <th class="py-2">Mã Đơn</th>
+                        <th class="py-2">Khách Hàng</th>
+                        <th class="py-2">Chi Nhánh</th>
+                        <th class="py-2">Hình Thức</th>
+                        <th class="py-2">Tổng Tiền</th>
+                        <th class="py-2">Trạng Thái</th>
+                        <th class="text-end py-2">Thao Tác</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="font-size: 0.82rem;">
                     <c:forEach var="ord" items="${orders}">
                         <tr class="order-row" data-status="${ord.status}" data-store="${ord.store.name}" id="order-row-${ord.id}">
-                            <td class="fw-bold font-accent">
+                            <td class="fw-semibold">
                                 <a href="${pageContext.request.contextPath}/orders/tracking/${ord.orderCode}" class="text-gold text-decoration-none">
                                     #${ord.orderCode}
                                 </a>
                             </td>
                             <td>
-                                <div class="fw-bold text-primary">${ord.recipientName}</div>
-                                <small class="text-secondary">${ord.recipientPhone}</small>
+                                <div class="fw-medium text-primary">${ord.recipientName}</div>
+                                <small class="text-secondary" style="font-size: 0.75rem;">${ord.recipientPhone}</small>
                             </td>
-                            <td><span class="badge bg-dark-roast border border-secondary text-primary">${ord.store.name}</span></td>
+                            <td><span class="badge font-sans" style="font-size: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-gold-subtle); color: var(--text-primary);">${ord.store.name}</span></td>
                             <td>
-                                <span class="badge bg-espresso border border-secondary text-primary">
+                                <span class="badge font-sans" style="font-size: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-gold-subtle); color: var(--text-primary);">
                                     <c:choose>
-                                        <c:when test="${ord.orderType == 'DINE_IN'}">🍽️ Tại Quán</c:when>
-                                        <c:when test="${ord.orderType == 'TAKE_AWAY'}">🥤 Mang Đi</c:when>
-                                        <c:otherwise>🛵 Giao Hàng</c:otherwise>
+                                        <c:when test="${ord.orderType == 'DINE_IN'}"><i class="fa-solid fa-utensils text-gold me-1"></i>Tại Quán</c:when>
+                                        <c:when test="${ord.orderType == 'TAKE_AWAY'}"><i class="fa-solid fa-cup-straw text-warning me-1"></i>Mang Đi</c:when>
+                                        <c:otherwise><i class="fa-solid fa-motorcycle text-info me-1"></i>Giao Hàng</c:otherwise>
                                     </c:choose>
                                 </span>
                             </td>
-                            <td class="text-gold fw-bold">
+                            <td class="text-gold fw-bold" style="font-variant-numeric: tabular-nums;">
                                 <fmt:formatNumber value="${ord.finalAmount}" pattern="#,##0"/> VNĐ
                             </td>
                             <td>
-                                <span class="badge ${ord.status == 'COMPLETED' ? 'bg-success' : (ord.status == 'CANCELLED' ? 'bg-danger' : (ord.status == 'PREPARING' ? 'bg-warning text-dark' : 'bg-secondary text-primary'))} px-2 py-1 row-status-badge-${ord.id}">
+                                <span class="badge ${ord.status == 'COMPLETED' ? 'bg-success-subtle text-success border border-success-subtle' : (ord.status == 'CANCELLED' ? 'bg-danger-subtle text-danger border border-danger-subtle' : (ord.status == 'PREPARING' ? 'bg-warning-subtle text-warning border border-warning-subtle' : 'bg-secondary text-primary'))} px-2 py-1 row-status-badge-${ord.id}" style="font-size: 0.75rem;">
                                     <c:choose>
                                         <c:when test="${ord.status == 'COMPLETED'}">Hoàn Tất</c:when>
                                         <c:when test="${ord.status == 'PREPARING'}">Đang Pha</c:when>

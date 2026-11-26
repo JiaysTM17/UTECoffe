@@ -5,54 +5,61 @@
     <title>Chuẩn Hóa Công Thức SOP - UTECoffe Admin</title>
 </head>
 <body>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h4 class="font-serif fw-bold text-primary mb-0">Chuẩn Hóa Công Thức Pha Chế (Master Recipes &amp; SOP)</h4>
-            <small class="text-secondary">Quy định định mức gram/ml nguyên liệu tiêu hao cho từng món nước, đảm bảo tính đồng nhất 100% hương vị toàn chuỗi</small>
+            <h5 class="fw-semibold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.05rem;">Chuẩn hóa công thức pha chế (Master Recipes &amp; SOP)</h5>
+            <small class="text-secondary" style="font-size: 0.75rem;">Quy định định mức gram/ml nguyên liệu tiêu hao cho từng món nước, đảm bảo tính đồng nhất 100% hương vị toàn chuỗi</small>
         </div>
         <div class="d-flex gap-2">
-            <span class="badge bg-dark-roast border border-gold text-gold px-3 py-2 font-accent">
-                <i class="fa-solid fa-flask me-1"></i> Định Lượng Chuẩn SOP F&B
+            <span class="badge bg-dark-roast border border-gold-subtle text-gold px-2.5 py-1.5 font-sans rounded-2" style="font-size: 0.75rem;">
+                <i class="fa-solid fa-flask me-1"></i> Định lượng chuẩn SOP F&B
             </span>
         </div>
     </div>
 
     <!-- SOP Standards Cards -->
-    <div class="row g-3 mb-4">
+    <div class="row g-2.5 mb-3">
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Tỷ Lệ Chiết Xuất Cà Phê</span>
-                    <h4 class="font-serif fw-bold text-gold mb-0">1:2 Espresso / 1:10 Cold Brew</h4>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Tỷ lệ chiết xuất cà phê</span>
+                    <div class="fw-bold text-gold mb-0" style="font-family: var(--font-sans); font-size: 1.15rem;">1:2 Espresso / 1:10 Cold Brew</div>
                 </div>
-                <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-mortar-pestle"></i></div>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(222, 183, 106, 0.12); color: var(--gold-primary);">
+                    <i class="fa-solid fa-mortar-pestle" style="font-size: 0.88rem;"></i>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Nhiệt Độ Nước Pha Chuẩn</span>
-                    <h4 class="font-serif fw-bold text-primary mb-0">92°C - 94°C</h4>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Nhiệt độ nước pha chuẩn</span>
+                    <div class="fw-bold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.15rem;">92°C - 94°C</div>
                 </div>
-                <div class="p-2 rounded-circle bg-dark-roast border border-secondary text-secondary"><i class="fa-solid fa-temperature-half"></i></div>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(255, 255, 255, 0.08); color: var(--text-secondary);">
+                    <i class="fa-solid fa-temperature-half" style="font-size: 0.88rem;"></i>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Thời Gian Ủ Lạnh (Cold Brew)</span>
-                    <h4 class="font-serif fw-bold text-success mb-0">18 - 24 Tiếng</h4>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Thời gian ủ lạnh (Cold Brew)</span>
+                    <div class="fw-bold text-success mb-0" style="font-family: var(--font-sans); font-size: 1.15rem;">18 - 24 Tiếng</div>
                 </div>
-                <div class="p-2 rounded-circle bg-dark-roast border border-success text-success"><i class="fa-solid fa-hourglass-half"></i></div>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(25, 135, 84, 0.12); color: #198754;">
+                    <i class="fa-solid fa-hourglass-half" style="font-size: 0.88rem;"></i>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Recipes Table -->
-    <div class="card-luxury p-4 border-gold shadow-lg mb-4">
+    <div class="card-luxury p-3 p-md-3.5 border-gold shadow-sm mb-3">
         <div class="table-responsive">
-            <table class="table table-luxury align-middle">
+            <table class="table table-luxury table-sm align-middle">
                 <thead>
+                    <tr style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-secondary);">
                     <tr>
                         <th>Món Nước Đặc Sản</th>
                         <th>Nguyên Liệu Cấu Thành</th>

@@ -5,23 +5,24 @@
     <title>Chuỗi Cung Ứng & PO - UTECoffe Admin</title>
 </head>
 <body>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h4 class="font-serif fw-bold text-primary mb-0">Chuỗi Cung Ứng &amp; Đặt Hàng Nhập Kho (PO)</h4>
-            <small class="text-secondary">Quản trị đối tác nông trại cao nguyên Cầu Đất, Mộc Châu và điều phối nhập hàng PO</small>
+            <h5 class="fw-semibold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.05rem;">Chuỗi cung ứng &amp; đặt hàng nhập kho (PO)</h5>
+            <small class="text-secondary" style="font-size: 0.75rem;">Quản trị đối tác nông trại cao nguyên Cầu Đất, Mộc Châu và điều phối nhập hàng PO</small>
         </div>
         <div class="d-flex gap-2">
-            <button class="btn btn-gold btn-sm rounded-pill px-3 font-accent fw-bold" data-bs-toggle="modal" data-bs-target="#createPoModal">
+            <button class="btn btn-gold btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" data-bs-toggle="modal" data-bs-target="#createPoModal">
                 <i class="fa-solid fa-plus me-1"></i> Tạo Đơn Đặt Hàng PO
             </button>
         </div>
     </div>
 
     <!-- Suppliers Grid -->
-    <div class="card-luxury p-4 border-gold shadow-lg mb-4">
-        <h5 class="font-serif fw-bold text-primary mb-3 border-bottom border-gold-subtle pb-2">
-            <i class="fa-solid fa-handshake me-2"></i>Đối Tác Nông Trại &amp; Nhà Cung Ứng Chiến Lược
-        </h5>
+    <div class="card-luxury p-3 p-md-3.5 border-gold shadow-sm mb-3">
+        <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom border-gold-subtle">
+            <i class="fa-solid fa-handshake text-gold" style="font-size: 0.9rem;"></i>
+            <span class="fw-semibold text-primary" style="font-size: 0.92rem;">Đối tác nông trại &amp; nhà cung ứng chiến lược</span>
+        </div>
         <div class="row g-3">
             <c:forEach var="sup" items="${suppliers}">
                 <div class="col-md-6 col-xl-3">

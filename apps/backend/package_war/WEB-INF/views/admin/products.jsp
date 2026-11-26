@@ -5,20 +5,20 @@
     <title>Quản Lý Thực Đơn & Món - UTECoffe Admin</title>
 </head>
 <body>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h4 class="font-serif fw-bold text-primary mb-0">Quản Lý Thực Đơn &amp; Danh Mục Món</h4>
-            <small class="text-secondary">Giám sát danh mục 36 món đặc sản, điều chỉnh giá bán và trạng thái sẵn sàng phục vụ</small>
+            <h5 class="fw-semibold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.05rem;">Quản lý thực đơn &amp; danh mục món</h5>
+            <small class="text-secondary" style="font-size: 0.75rem;">Giám sát danh mục 36 món đặc sản, điều chỉnh giá bán và trạng thái sẵn sàng phục vụ</small>
         </div>
         <div class="d-flex gap-2">
-            <span class="badge bg-dark-roast border border-gold text-gold px-3 py-2 font-accent">
-                Tổng: <strong>${products.size()}</strong> Sản Phẩm
+            <span class="badge bg-dark-roast border border-gold-subtle text-gold px-2.5 py-1.5 font-sans rounded-2" style="font-size: 0.75rem;">
+                Tổng: <strong>${products.size()}</strong> sản phẩm
             </span>
         </div>
     </div>
 
     <!-- Filter & Search Toolbar -->
-    <div class="card-luxury p-3 border-gold shadow-sm mb-3 bg-espresso">
+    <div class="card-luxury p-2.5 p-md-3 border-gold shadow-sm mb-3">
         <div class="row g-2 align-items-center">
             <div class="col-md-5">
                 <div class="input-group input-group-sm">
@@ -28,9 +28,9 @@
             </div>
             <div class="col-md-7 text-md-end text-start">
                 <div class="d-flex flex-wrap gap-1 justify-content-md-end">
-                    <button type="button" class="btn btn-sm btn-gold cat-filter-btn active" data-cat="ALL" onclick="filterByCategory('ALL', this)">Tất Cả</button>
+                    <button type="button" class="btn btn-sm btn-gold cat-filter-btn active rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" data-cat="ALL" onclick="filterByCategory('ALL', this)">Tất Cả</button>
                     <c:forEach var="cat" items="${categories}">
-                        <button type="button" class="btn btn-sm btn-outline-gold cat-filter-btn" data-cat="${cat.name}" onclick="filterByCategory('${cat.name}', this)">
+                        <button type="button" class="btn btn-sm btn-outline-gold cat-filter-btn rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" data-cat="${cat.name}" onclick="filterByCategory('${cat.name}', this)">
                             ${cat.name}
                         </button>
                     </c:forEach>
@@ -40,14 +40,14 @@
     </div>
 
     <!-- Products Table -->
-    <div class="card-luxury p-4 border-gold shadow-lg mb-4">
+    <div class="card-luxury p-3 p-md-3.5 border-gold shadow-sm mb-3">
         <div class="table-responsive">
-            <table class="table table-luxury align-middle" id="productsTable">
+            <table class="table table-luxury table-sm align-middle" id="productsTable">
                 <thead>
-                    <tr>
-                        <th style="width: 70px;">Ảnh</th>
-                        <th>Tên Món Đặc Sản</th>
-                        <th>Danh Mục</th>
+                    <tr style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-secondary);">
+                        <th class="py-2" style="width: 60px;">Ảnh</th>
+                        <th class="py-2">Tên Món Đặc Sản</th>
+                        <th class="py-2">Danh Mục</th>
                         <th>Giá Niêm Yết</th>
                         <th>Đặc Tính</th>
                         <th>Trạng Thái</th>

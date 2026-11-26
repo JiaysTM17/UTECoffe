@@ -5,45 +5,51 @@
     <title>Quản Lý Khuyến Mãi & Voucher - UTECoffe Admin</title>
 </head>
 <body>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h4 class="font-serif fw-bold text-primary mb-0">Chương Trình Khuyến Mãi &amp; Mã Ưu Đãi</h4>
-            <small class="text-secondary">Thiết lập chính sách voucher, ưu đãi hội viên UTEClub và chiến dịch kích cầu</small>
+            <h5 class="fw-semibold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.05rem;">Chương trình khuyến mãi &amp; mã ưu đãi</h5>
+            <small class="text-secondary" style="font-size: 0.75rem;">Thiết lập chính sách voucher, ưu đãi hội viên UTEClub và chiến dịch kích cầu</small>
         </div>
         <div class="d-flex gap-2">
-            <button class="btn btn-gold btn-sm rounded-pill px-3 font-accent fw-bold" data-bs-toggle="modal" data-bs-target="#createCouponModal">
+            <button class="btn btn-gold btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" data-bs-toggle="modal" data-bs-target="#createCouponModal">
                 <i class="fa-solid fa-plus me-1"></i> Tạo Mã Mới
             </button>
         </div>
     </div>
 
     <!-- Quick Stats Strip -->
-    <div class="row g-3 mb-4">
+    <div class="row g-2.5 mb-3">
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Tổng Mã Phát Hành</span>
-                    <h4 class="font-serif fw-bold text-primary mb-0">${coupons.size()} Mã</h4>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Tổng mã phát hành</span>
+                    <div class="fw-bold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.35rem; font-variant-numeric: tabular-nums;">${coupons.size()} mã</div>
                 </div>
-                <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-tags"></i></div>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(222, 183, 106, 0.12); color: var(--gold-primary);">
+                    <i class="fa-solid fa-tags" style="font-size: 0.88rem;"></i>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Đang Áp Dụng</span>
-                    <h4 class="font-serif fw-bold text-success mb-0">100% Hoạt Động</h4>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Đang áp dụng</span>
+                    <div class="fw-bold text-success mb-0" style="font-family: var(--font-sans); font-size: 1.35rem; font-variant-numeric: tabular-nums;">100% Hoạt Động</div>
                 </div>
-                <div class="p-2 rounded-circle bg-dark-roast border border-success text-success"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(25, 135, 84, 0.12); color: #198754;">
+                    <i class="fa-solid fa-circle-check" style="font-size: 0.88rem;"></i>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Phân Hạng Áp Dụng</span>
-                    <h4 class="font-serif fw-bold text-gold mb-0">Đồng, Bạc, Kim Cương</h4>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Phân hạng áp dụng</span>
+                    <div class="fw-bold text-gold mb-0" style="font-family: var(--font-sans); font-size: 1.35rem;">Đồng, Bạc, Vàng, KC</div>
                 </div>
-                <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-crown"></i></div>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(222, 183, 106, 0.12); color: var(--gold-primary);">
+                    <i class="fa-solid fa-crown" style="font-size: 0.88rem;"></i>
+                </div>
             </div>
         </div>
     </div>

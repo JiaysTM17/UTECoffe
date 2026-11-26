@@ -5,27 +5,29 @@
     <title>Quản Lý Đánh Giá & CSKH - UTECoffe Admin</title>
 </head>
 <body>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h4 class="font-serif fw-bold text-primary mb-0">Hộp Thư Đánh Giá &amp; Trải Nghiệm Khách Hàng (CX)</h4>
-            <small class="text-secondary">Lắng nghe ý kiến thực tế của khách hàng về hương vị, thái độ phục vụ và chất lượng không gian</small>
+            <h5 class="fw-semibold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.05rem;">Đánh giá &amp; trải nghiệm khách hàng (CX)</h5>
+            <small class="text-secondary" style="font-size: 0.75rem;">Lắng nghe ý kiến thực tế của khách hàng về hương vị, thái độ phục vụ và chất lượng không gian</small>
         </div>
         <div class="d-flex gap-2">
-            <span class="badge bg-dark-roast border border-gold text-gold px-3 py-2 font-accent">
-                Tổng: <strong>${reviews.size()}</strong> Nhận Xét Đã Nhận
+            <span class="badge bg-dark-roast border border-gold-subtle text-gold px-2.5 py-1.5 font-sans rounded-2" style="font-size: 0.75rem;">
+                Tổng: <strong>${reviews.size()}</strong> nhận xét
             </span>
         </div>
     </div>
 
     <!-- Quick Stats Cards -->
-    <div class="row g-3 mb-4">
+    <div class="row g-2.5 mb-3">
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Điểm Đánh Giá Trung Bình</span>
-                    <h4 class="font-serif fw-bold text-gold mb-0">4.9 / 5.0 ⭐</h4>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Điểm đánh giá trung bình</span>
+                    <div class="fw-bold text-gold mb-0" style="font-family: var(--font-sans); font-size: 1.35rem; font-variant-numeric: tabular-nums;">4.9 / 5.0</div>
                 </div>
-                <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-star"></i></div>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(222, 183, 106, 0.12); color: var(--gold-primary);">
+                    <i class="fa-solid fa-star" style="font-size: 0.88rem;"></i>
+                </div>
             </div>
         </div>
         <div class="col-md-4">

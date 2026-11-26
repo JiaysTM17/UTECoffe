@@ -1418,3 +1418,71 @@ body {
     background-color: #F3EFE8 !important;
     color: var(--text-primary) !important;
 }
+
+/* ==========================================================================
+   Admin Executive Suite Layout & Typography (Compact & Refined)
+   ========================================================================== */
+.admin-sidebar {
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+    background-color: #110F0D;
+    border-right: 1px solid var(--border-gold-subtle);
+}
+
+.admin-sidebar-heading {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #787268;
+    padding: 0.75rem 0.9rem 0.25rem 0.9rem;
+}
+
+/* Admin Dashboard & Executive Typography Override */
+.admin-sidebar .admin-nav-link {
+    font-family: var(--font-sans) !important;
+    font-size: 0.8125rem !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    padding: 0.5rem 0.85rem !important;
+    margin: 1px 8px !important;
+    border-radius: 6px !important;
+}
+
+.table-luxury.table-sm thead th {
+    padding: 0.55rem 0.75rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.03em !important;
+}
+
+.table-luxury.table-sm tbody td {
+    padding: 0.55rem 0.75rem !important;
+    font-size: 0.82rem !important;
+}
+
+/* Light Theme Admin Enhancements */
+[data-theme="light"] header.bg-espresso {
+    background-color: #FFFFFF !important;
+    border-bottom: 1px solid rgba(24, 21, 19, 0.08) !important;
+}
+
+[data-theme="light"] .admin-sidebar {
+    background-color: #110F0D !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="light"] .card-luxury {
+    background: #FFFFFF !important;
+    border-color: rgba(24, 21, 19, 0.08) !important;
+    box-shadow: 0 1px 3px rgba(40, 30, 20, 0.04), 0 1px 2px rgba(40, 30, 20, 0.02) !important;
+}
+
+[data-theme="light"] .card-luxury:hover {
+    background: #FFFFFF !important;
+    border-color: rgba(179, 140, 64, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(40, 30, 20, 0.06) !important;
+}
+

@@ -5,44 +5,44 @@
     <title>Quản Lý Chi Nhánh & Đặt Bàn - UTECoffe Admin</title>
 </head>
 <body>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h4 class="font-serif fw-bold text-primary mb-0">Hệ Thống 3 Chi Nhánh &amp; Sơ Đồ Bàn</h4>
-            <small class="text-secondary">Quản trị vận hành thực tế cơ sở, quản lý bàn phục vụ và tiếp nhận đặt chỗ trực tuyến</small>
+            <h5 class="fw-semibold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.05rem;">Hệ thống 3 chi nhánh &amp; sơ đồ bàn</h5>
+            <small class="text-secondary" style="font-size: 0.75rem;">Quản trị vận hành thực tế cơ sở, quản lý bàn phục vụ và tiếp nhận đặt chỗ trực tuyến</small>
         </div>
         <div class="d-flex gap-2">
-            <span class="badge bg-dark-roast border border-gold text-gold px-3 py-2 font-accent">
-                <i class="fa-solid fa-store me-1"></i> 3 Cơ Sở Đang Hoạt Động
+            <span class="badge bg-dark-roast border border-gold-subtle text-gold px-2.5 py-1.5 font-sans rounded-2" style="font-size: 0.75rem;">
+                <i class="fa-solid fa-store me-1"></i> 3 Cơ sở đang hoạt động
             </span>
         </div>
     </div>
 
     <!-- 3 Store Cards -->
-    <div class="row g-4 mb-5">
+    <div class="row g-3 mb-4">
         <c:forEach var="store" items="${stores}">
             <div class="col-lg-4 col-md-6">
-                <div class="card-luxury p-4 h-100 border-gold shadow-lg d-flex flex-column justify-content-between" style="min-height: 290px;">
+                <div class="card-luxury p-3 p-md-3.5 h-100 border-gold shadow-sm d-flex flex-column justify-content-between">
                     <div>
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <h5 class="font-serif fw-bold text-primary mb-0 text-truncate" title="${store.name}">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="fw-semibold text-primary mb-0 text-truncate" style="font-family: var(--font-sans); font-size: 0.92rem;" title="${store.name}">
                                 ${store.name}
-                            </h5>
-                            <span class="badge ${store.isActive ? 'bg-success-subtle text-success border border-success' : 'bg-secondary text-primary'} small font-accent flex-shrink-0 ms-2">
+                            </h6>
+                            <span class="badge ${store.isActive ? 'bg-success-subtle text-success border border-success-subtle' : 'bg-secondary text-primary'} small font-sans flex-shrink-0 ms-2" style="font-size: 0.68rem; padding: 2px 6px;">
                                 ${store.isActive ? 'Hoạt Động' : 'Tạm Đóng'}
                             </span>
                         </div>
-                        <p class="small text-secondary mb-2 text-truncate" title="${store.address}">
-                            <i class="fa-solid fa-location-dot me-2 text-gold"></i>${store.address}
+                        <p class="small text-secondary mb-1.5 text-truncate" style="font-size: 0.75rem;" title="${store.address}">
+                            <i class="fa-solid fa-location-dot me-1.5 text-gold"></i>${store.address}
                         </p>
-                        <p class="small text-secondary mb-2">
-                            <i class="fa-solid fa-phone me-2 text-gold"></i>${store.phoneNumber}
+                        <p class="small text-secondary mb-1.5" style="font-size: 0.75rem;">
+                            <i class="fa-solid fa-phone me-1.5 text-gold"></i>${store.phoneNumber}
                         </p>
-                        <p class="small text-secondary mb-3">
-                            <i class="fa-regular fa-clock me-2 text-gold"></i>${store.openingTime} - ${store.closingTime}
+                        <p class="small text-secondary mb-2" style="font-size: 0.75rem;">
+                            <i class="fa-regular fa-clock me-1.5 text-gold"></i>${store.openingTime} - ${store.closingTime}
                         </p>
                     </div>
-                    <div class="pt-3 border-top border-gold-subtle mt-auto d-flex gap-2">
-                        <a href="${pageContext.request.contextPath}/barista/kds?storeId=${store.id}" target="_blank" class="btn btn-sm btn-outline-warning w-100 font-accent fw-bold rounded-pill">
+                    <div class="pt-2.5 border-top border-gold-subtle mt-auto d-flex gap-2">
+                        <a href="${pageContext.request.contextPath}/barista/kds?storeId=${store.id}" target="_blank" class="btn btn-sm btn-outline-warning w-100 font-sans rounded-2 py-1" style="font-size: 0.78rem;">
                             <i class="fa-solid fa-mug-saucer me-1"></i> Mở KDS Quầy
                         </a>
                     </div>

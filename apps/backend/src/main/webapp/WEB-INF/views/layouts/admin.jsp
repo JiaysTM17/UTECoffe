@@ -29,12 +29,12 @@
     
     <style>
         .admin-sidebar {
-            width: 270px;
-            min-width: 270px;
-            max-width: 270px;
+            width: 240px;
+            min-width: 240px;
+            max-width: 240px;
             flex-shrink: 0;
-            background-color: #0E0D0B;
-            border-right: 1px solid var(--border-gold);
+            background-color: #110F0D;
+            border-right: 1px solid var(--border-gold-subtle);
             height: 100vh;
             position: sticky;
             top: 0;
@@ -44,50 +44,44 @@
             position: relative;
             display: flex;
             align-items: center;
-            gap: 0.85rem;
-            padding: 0.85rem 1.4rem;
+            gap: 0.75rem;
+            padding: 0.5rem 0.85rem;
+            margin: 1px 8px;
+            border-radius: 6px;
             color: #9e9a91;
-            font-family: var(--font-accent);
-            font-size: 0.82rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            font-family: var(--font-sans);
+            font-size: 0.8125rem;
+            font-weight: 500;
             text-decoration: none;
-            border-left: 4px solid transparent;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.2s ease;
         }
         .admin-nav-link i {
-            width: 18px;
+            width: 16px;
+            font-size: 0.85rem;
             text-align: center;
-            transition: transform 0.2s ease, filter 0.2s ease;
+            opacity: 0.85;
+            transition: transform 0.2s ease;
         }
         .admin-nav-link:hover {
             color: #DEB76A;
-            background: rgba(222, 183, 106, 0.06);
-            border-left-color: rgba(222, 183, 106, 0.5);
+            background: rgba(222, 183, 106, 0.08);
         }
         .admin-nav-link.active {
             color: #DEB76A !important;
-            font-weight: 700 !important;
-            background: linear-gradient(90deg, rgba(222, 183, 106, 0.16) 0%, rgba(222, 183, 106, 0.02) 100%) !important;
-            border-left: 4px solid #DEB76A !important;
+            font-weight: 600 !important;
+            background: rgba(222, 183, 106, 0.14) !important;
         }
         .admin-nav-link.active i {
+            opacity: 1;
             color: #DEB76A !important;
-            filter: drop-shadow(0 0 6px rgba(222, 183, 106, 0.7));
-            transform: scale(1.12);
         }
-        .admin-nav-link.active::after {
-            content: '';
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #DEB76A;
-            box-shadow: 0 0 8px #DEB76A;
+        .admin-sidebar-heading {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #787268;
+            padding: 0.75rem 1rem 0.25rem 1rem;
         }
     </style>
     <sitemesh:write property='head'/>
@@ -96,73 +90,73 @@
     <div class="d-flex">
         <!-- Sidebar -->
         <aside class="admin-sidebar d-flex flex-column p-0">
-            <div class="p-4 border-bottom border-secondary opacity-75 text-center">
+            <div class="p-3 border-bottom border-secondary border-opacity-25 text-center">
                 <a href="${pageContext.request.contextPath}/admin/dashboard">
-                    <img src="${pageContext.request.contextPath}/assets/images/logo_dark.svg" alt="UTECOFFE Admin" height="42">
+                    <img src="${pageContext.request.contextPath}/assets/images/logo_dark.svg" alt="UTECOFFE Admin" height="34">
                 </a>
-                <div class="badge bg-dark-roast border border-gold text-gold mt-2 py-1 px-2 small font-accent">EXECUTIVE SUITE</div>
+                <div class="badge bg-dark-roast border border-gold-subtle text-gold mt-2 py-1 px-2 font-sans" style="font-size: 0.65rem; letter-spacing: 0.04em;">EXECUTIVE SUITE</div>
             </div>
 
             <nav class="flex-grow-1 overflow-auto py-2" id="adminSidebarNav">
                 <!-- Group 1: BÁO CÁO & ĐIỀU HÀNH -->
-                <div class="px-3 pt-2 pb-1 text-gold-subtle text-uppercase font-accent fw-bold" style="font-size: 0.68rem; letter-spacing: 0.1em; opacity: 0.85;">
-                    Báo Cáo &amp; Điều Hành
+                <div class="admin-sidebar-heading">
+                    Báo cáo &amp; Điều hành
                 </div>
                 <a href="${pageContext.request.contextPath}/admin/dashboard" class="admin-nav-link ${pageContext.request.requestURI.endsWith('/admin/dashboard') ? 'active' : ''}">
-                    <i class="fa-solid fa-chart-line text-gold"></i> Tổng Quan
+                    <i class="fa-solid fa-chart-line text-gold"></i> Tổng quan
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/orders" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/orders') ? 'active' : ''}">
-                    <i class="fa-solid fa-receipt text-gold"></i> Quản Lý Đơn Hàng
+                    <i class="fa-solid fa-receipt text-gold"></i> Quản lý đơn hàng
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/refunds" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/refunds') ? 'active' : ''}">
-                    <i class="fa-solid fa-hand-holding-dollar text-gold"></i> Khiếu Nại &amp; Hoàn Tiền
+                    <i class="fa-solid fa-hand-holding-dollar text-gold"></i> Khiếu nại &amp; Hoàn tiền
                 </a>
                 <a href="${pageContext.request.contextPath}/barista/kds" class="admin-nav-link text-warning">
-                    <i class="fa-solid fa-display text-warning"></i> Điều Phối KDS Barista
+                    <i class="fa-solid fa-display text-warning"></i> Điều phối KDS Barista
                 </a>
 
                 <!-- Group 2: THỰC ĐƠN & KHÁCH HÀNG -->
-                <div class="px-3 pt-3 pb-1 text-gold-subtle text-uppercase font-accent fw-bold border-top border-secondary border-opacity-25 mt-2" style="font-size: 0.68rem; letter-spacing: 0.1em; opacity: 0.85;">
-                    Thực Đơn &amp; Khách Hàng
+                <div class="admin-sidebar-heading border-top border-secondary border-opacity-25 mt-2 pt-2">
+                    Thực đơn &amp; Khách hàng
                 </div>
                 <a href="${pageContext.request.contextPath}/admin/products" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/products') ? 'active' : ''}">
-                    <i class="fa-solid fa-mug-saucer text-gold"></i> Danh Mục &amp; Món
+                    <i class="fa-solid fa-mug-saucer text-gold"></i> Danh mục &amp; Món
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/recipes" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/recipes') ? 'active' : ''}">
-                    <i class="fa-solid fa-flask text-gold"></i> Công Thức Chuẩn SOP
+                    <i class="fa-solid fa-flask text-gold"></i> Công thức chuẩn SOP
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/coupons" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/coupons') ? 'active' : ''}">
-                    <i class="fa-solid fa-tags text-gold"></i> Khuyến Mãi &amp; Voucher
+                    <i class="fa-solid fa-tags text-gold"></i> Khuyến mãi &amp; Voucher
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/reviews" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/reviews') ? 'active' : ''}">
-                    <i class="fa-solid fa-star text-gold"></i> Đánh Giá &amp; CSKH
+                    <i class="fa-solid fa-star text-gold"></i> Đánh giá &amp; CSKH
                 </a>
 
                 <!-- Group 3: CƠ SỞ & CUNG ỨNG -->
-                <div class="px-3 pt-3 pb-1 text-gold-subtle text-uppercase font-accent fw-bold border-top border-secondary border-opacity-25 mt-2" style="font-size: 0.68rem; letter-spacing: 0.1em; opacity: 0.85;">
-                    Cơ Sở &amp; Cung Ứng
+                <div class="admin-sidebar-heading border-top border-secondary border-opacity-25 mt-2 pt-2">
+                    Cơ sở &amp; Cung ứng
                 </div>
                 <a href="${pageContext.request.contextPath}/admin/stores" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/stores') ? 'active' : ''}">
-                    <i class="fa-solid fa-store text-gold"></i> 3 Chi Nhánh &amp; Đặt Bàn
+                    <i class="fa-solid fa-store text-gold"></i> 3 Chi nhánh &amp; Đặt bàn
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/inventory" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/inventory') ? 'active' : ''}">
-                    <i class="fa-solid fa-warehouse text-gold"></i> Kho Nguyên Liệu BOM
+                    <i class="fa-solid fa-warehouse text-gold"></i> Kho nguyên liệu BOM
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/suppliers" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/suppliers') ? 'active' : ''}">
-                    <i class="fa-solid fa-truck-ramp-box text-gold"></i> Nhà Cung Cấp &amp; PO
+                    <i class="fa-solid fa-truck-ramp-box text-gold"></i> Nhà cung cấp &amp; PO
                 </a>
 
                 <!-- Group 4: HỆ THỐNG & NHÂN SỰ -->
-                <div class="px-3 pt-3 pb-1 text-gold-subtle text-uppercase font-accent fw-bold border-top border-secondary border-opacity-25 mt-2" style="font-size: 0.68rem; letter-spacing: 0.1em; opacity: 0.85;">
-                    Hệ Thống &amp; Nhân Sự
+                <div class="admin-sidebar-heading border-top border-secondary border-opacity-25 mt-2 pt-2">
+                    Hệ thống &amp; Nhân sự
                 </div>
                 <a href="${pageContext.request.contextPath}/admin/users" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/users') ? 'active' : ''}">
-                    <i class="fa-solid fa-users-gear text-gold"></i> Người Dùng &amp; Quyền
+                    <i class="fa-solid fa-users-gear text-gold"></i> Người dùng &amp; Quyền
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/audit-logs" class="admin-nav-link ${pageContext.request.requestURI.contains('/admin/audit-logs') ? 'active' : ''}">
-                    <i class="fa-solid fa-shield-halved text-gold"></i> Nhật Ký Kiểm Toán AOP
+                    <i class="fa-solid fa-shield-halved text-gold"></i> Nhật ký kiểm toán AOP
                 </a>
-                <div class="border-top border-secondary opacity-25 my-2"></div>
+                <div class="border-top border-secondary border-opacity-25 my-2"></div>
                 <a href="${pageContext.request.contextPath}/swagger-ui.html" target="_blank" class="admin-nav-link text-info">
                     <i class="fa-solid fa-code text-info"></i> OpenAPI Swagger UI
                 </a>
@@ -170,18 +164,18 @@
                     <i class="fa-solid fa-heart-pulse text-success"></i> Health Probes
                 </a>
                 <a href="${pageContext.request.contextPath}/barista/kds" target="_blank" class="admin-nav-link text-warning">
-                    <i class="fa-solid fa-display text-warning"></i> Chuyển Sang KDS
+                    <i class="fa-solid fa-display text-warning"></i> Chuyển sang KDS
                 </a>
             </nav>
 
-            <div class="p-3 border-top border-secondary opacity-75">
-                <a href="${pageContext.request.contextPath}/" class="btn btn-outline-gold btn-sm w-100 mb-2 font-accent">
-                    <i class="fa-solid fa-store me-1"></i> Về Cửa Hàng
+            <div class="p-2.5 border-top border-secondary border-opacity-25">
+                <a href="${pageContext.request.contextPath}/" class="btn btn-outline-gold btn-sm w-100 mb-1.5 font-sans" style="font-size: 0.78rem; padding: 0.35rem 0.5rem;">
+                    <i class="fa-solid fa-store me-1"></i> Về cửa hàng
                 </a>
                 <form action="${pageContext.request.contextPath}/auth/logout" method="post" class="m-0">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <button type="submit" class="btn btn-outline-danger btn-sm w-100 font-accent">
-                        <i class="fa-solid fa-right-from-bracket me-1"></i> Đăng Xuất
+                    <button type="submit" class="btn btn-outline-danger btn-sm w-100 font-sans" style="font-size: 0.78rem; padding: 0.35rem 0.5rem;">
+                        <i class="fa-solid fa-right-from-bracket me-1"></i> Đăng xuất
                     </button>
                 </form>
             </div>
@@ -190,23 +184,23 @@
         <!-- Main Workspace -->
         <div class="flex-grow-1 d-flex flex-column min-vh-100" style="min-width: 0; max-width: 100%; overflow-x: hidden;">
             <!-- Top Sticky Header -->
-            <header class="py-3 px-4 border-bottom border-gold d-flex justify-content-between align-items-center bg-espresso sticky-top" style="z-index: 1020;">
+            <header class="py-2.5 px-3 px-lg-4 border-bottom border-gold d-flex justify-content-between align-items-center bg-espresso sticky-top" style="z-index: 1020;">
                 <div>
-                    <h5 class="mb-0 font-serif text-gold-gradient fw-bold"><sitemesh:write property='title'/></h5>
-                    <small class="text-secondary">Hệ Thống Quản Trị Chuỗi Cà Phê Đặc Sản UTECoffe</small>
+                    <h5 class="mb-0 fw-semibold text-primary" style="font-family: var(--font-sans); font-size: 1.05rem; letter-spacing: -0.01em;"><sitemesh:write property='title'/></h5>
+                    <small class="text-secondary" style="font-size: 0.75rem;">Hệ thống quản trị chuỗi cà phê đặc sản UTECoffe</small>
                 </div>
-                <div class="d-flex align-items-center gap-3 flex-shrink-0">
-                    <span class="badge bg-dark-roast border border-gold text-gold py-2 px-3 text-nowrap font-accent">
-                        <i class="fa-solid fa-circle-dot me-1 text-success"></i> Hệ Thống Trực Tuyến
+                <div class="d-flex align-items-center gap-2.5 flex-shrink-0">
+                    <span class="badge bg-dark-roast border border-gold-subtle text-gold py-1.5 px-2.5 text-nowrap font-sans" style="font-size: 0.75rem; border-radius: 9999px;">
+                        <i class="fa-solid fa-circle-dot me-1 text-success"></i> Hệ thống trực tuyến
                     </span>
-                    <span class="text-secondary small text-nowrap">
+                    <span class="text-secondary small text-nowrap" style="font-size: 0.78rem;">
                         <i class="fa-solid fa-user-shield text-gold me-1"></i> <sec:authentication property="name"/>
                     </span>
                 </div>
             </header>
 
             <!-- Admin Page Content -->
-            <main class="p-4 p-xl-5 flex-grow-1 bg-obsidian">
+            <main class="p-3 p-lg-4 flex-grow-1 bg-obsidian">
                 <sitemesh:write property='body'/>
             </main>
         </div>

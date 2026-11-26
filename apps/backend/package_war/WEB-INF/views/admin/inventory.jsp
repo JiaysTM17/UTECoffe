@@ -5,49 +5,51 @@
     <title>Kho Nguyên Liệu BOM - UTECoffe Admin</title>
 </head>
 <body>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h4 class="font-serif fw-bold text-primary mb-0">Quản Lý Tồn Kho &amp; Định Mức BOM</h4>
-            <small class="text-secondary">Tự động trừ kho nguyên liệu theo định lượng công thức pha chế của từng ly nước bán ra</small>
+            <h5 class="fw-semibold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.05rem;">Quản lý tồn kho &amp; định mức BOM</h5>
+            <small class="text-secondary" style="font-size: 0.75rem;">Tự động trừ kho nguyên liệu theo định lượng công thức pha chế của từng ly nước bán ra</small>
         </div>
         <div class="d-flex gap-2">
-            <button type="button" class="btn btn-gold btn-sm px-3 rounded-pill font-accent fw-bold" onclick="openEoqOptimizationModal()">
-                <i class="fa-solid fa-chart-pie me-1"></i> Tối Ưu EOQ &amp; ROP Chuỗi Cung Ứng
+            <button type="button" class="btn btn-gold btn-sm px-2.5 py-1 rounded-2 font-sans" style="font-size: 0.78rem;" onclick="openEoqOptimizationModal()">
+                <i class="fa-solid fa-chart-pie me-1"></i> Tối ưu EOQ &amp; ROP
             </button>
-            <span class="badge bg-dark-roast border border-gold text-gold px-3 py-2 font-accent">
-                Tổng: <strong>${inventories.size()}</strong> Mặt Hàng Định Lượng
+            <span class="badge bg-dark-roast border border-gold-subtle text-gold px-2.5 py-1.5 font-sans rounded-2" style="font-size: 0.75rem;">
+                Tổng: <strong>${inventories.size()}</strong> mặt hàng
             </span>
         </div>
     </div>
 
     <!-- Quick Stats Cards -->
-    <div class="row g-3 mb-4">
+    <div class="row g-2.5 mb-3">
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Tồn Kho Khả Dụng</span>
-                    <h4 class="font-serif fw-bold text-primary mb-0">${inventories.size()} Mặt Hàng</h4>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Tồn kho khả dụng</span>
+                    <div class="fw-bold text-primary mb-0" style="font-family: var(--font-sans); font-size: 1.35rem; font-variant-numeric: tabular-nums;">${inventories.size()} mặt hàng</div>
                 </div>
-                <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-warehouse"></i></div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
-                <div>
-                    <span class="small text-secondary font-accent text-uppercase">Cảnh Báo Tồn Thấp</span>
-                    <h4 class="font-serif fw-bold ${lowStockCount > 0 ? 'text-danger' : 'text-success'} mb-0">
-                        ${lowStockCount} Mặt Hàng
-                    </h4>
-                </div>
-                <div class="p-2 rounded-circle bg-dark-roast border ${lowStockCount > 0 ? 'border-danger text-danger' : 'border-success text-success'}">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: rgba(222, 183, 106, 0.12); color: var(--gold-primary);">
+                    <i class="fa-solid fa-warehouse" style="font-size: 0.88rem;"></i>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="small text-secondary font-accent text-uppercase">Trừ Kho Tự Động (BOM)</span>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Cảnh báo tồn thấp</span>
+                    <div class="fw-bold ${lowStockCount > 0 ? 'text-danger' : 'text-success'} mb-0" style="font-family: var(--font-sans); font-size: 1.35rem; font-variant-numeric: tabular-nums;">
+                        ${lowStockCount} mặt hàng
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center rounded-2" style="width: 32px; height: 32px; background: ${lowStockCount > 0 ? 'rgba(220, 53, 69, 0.12)' : 'rgba(25, 135, 84, 0.12)'}; color: ${lowStockCount > 0 ? '#dc3545' : '#198754'};">
+                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 0.88rem;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
+                <div>
+                    <span class="text-secondary fw-semibold small" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;">Trừ kho tự động (BOM)</span>
                     <h4 class="font-serif fw-bold text-success mb-0">100% Hoàn Hảo</h4>
                 </div>
                 <div class="p-2 rounded-circle bg-dark-roast border border-success text-success"><i class="fa-solid fa-bolt"></i></div>
