@@ -9,4 +9,5 @@ public interface StoreService {
     Store getStoreById(Long id);
     List<Store> findNearestStores(double lat, double lng);
     List<StoreDistanceDto> findNearestStoresWithDistance(double lat, double lng);
+    com.utecoffe.dto.response.StoreOperatingStatusDto getStoreOperatingStatus(Long storeId);
 }

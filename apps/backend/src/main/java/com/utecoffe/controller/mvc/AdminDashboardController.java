@@ -460,6 +460,12 @@ public class AdminDashboardController {
         return ResponseEntity.ok(tableReservationService.getTableUtilization(storeId));
     }
 
+    @GetMapping("/api/analytics/store/{storeId}")
+    @ResponseBody
+    public ResponseEntity<com.utecoffe.dto.response.StoreSalesPerformanceDto> getStoreSalesPerformanceApi(@PathVariable Long storeId) {
+        return ResponseEntity.ok(analyticsService.getStoreProductSalesAnalytics(storeId));
+    }
+
     @GetMapping("/audit-logs")
     public String auditLogs(Model model) {
         model.addAttribute("logs", auditLogRepository.findTop50ByOrderByTimestampDesc());

@@ -138,4 +138,37 @@ class InventoryServiceTest {
                 log.getTransactionType() == InventoryTransactionType.ADJUSTMENT &&
                 log.getQuantityChange().compareTo(BigDecimal.valueOf(40.00)) == 0));
     }
+
+    @Test
+    void testGetStoreInventoryHealth_CalculatesHealthScoreAndUrgentItems() {
+        StoreInventory normalInv = StoreInventory.builder()
+                .id(1L)
+                .ingredient(coffeeBean)
+                .currentStock(BigDecimal.valueOf(5000))
+                .safetyStock(BigDecimal.valueOf(500))
+                .build();
+
+        Ingredient milk = Ingredient.builder().id(21L).name("Sữa tươi Barista").sku("ING-MILK").unit("ml").minThreshold(BigDecimal.valueOf(1000)).build();
+        StoreInventory criticalInv = StoreInventory.builder()
+                .id(2L)
+                .ingredient(milk)
+                .currentStock(BigDecimal.valueOf(100))
+                .safetyStock(BigDecimal.valueOf(500))
+                .build();
+
+        when(storeInventoryRepository.findByStoreId(1L)).thenReturn(List.of(normalInv, criticalInv));
+
+        com.utecoffe.dto.response.InventoryHealthDto healthDto = inventoryService.getStoreInventoryHealth(1L);
+
+        assertNotNull(healthDto);
+        assertEquals(2, healthDto.getTotalIngredientsTracked());
+        assertEquals(1, healthDto.getHealthyStockCount());
+        assertEquals(1, healthDto.getCriticalStockCount());
+        assertEquals(50.0, healthDto.getHealthScorePercent());
+        assertFalse(healthDto.getUrgentRestockItems().isEmpty());
+
+        var urgent = healthDto.getUrgentRestockItems().get(0);
+        assertEquals("Sữa tươi Barista", urgent.getIngredientName());
+        assertEquals("CRITICAL", urgent.getUrgencyLevel());
+    }
 }

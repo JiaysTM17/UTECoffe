@@ -26,6 +26,9 @@ public class InventoryServiceImpl implements InventoryService {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
+    @Autowired(required = false)
+    private StoreRepository storeRepository;
+
     @Override
     public boolean verifyStockForOrder(Order order) {
         List<OrderItem> items = orderItemRepository.findByOrderId(order.getId());
@@ -145,5 +148,108 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public List<StoreInventory> getLowStockAlerts(Long storeId) {
         return storeInventoryRepository.findLowStockAlerts(storeId);
+    }
+
+    @Override
+    public com.utecoffe.dto.response.InventoryHealthDto getStoreInventoryHealth(Long storeId) {
+        String storeName = "Toàn Hệ Thống UTECoffe";
+        if (storeId != null && storeId > 0 && storeRepository != null) {
+            var storeOpt = storeRepository.findById(storeId);
+            if (storeOpt.isPresent()) storeName = storeOpt.get().getName();
+        }
+
+        List<StoreInventory> inventories = (storeId != null && storeId > 0)
+                ? storeInventoryRepository.findByStoreId(storeId)
+                : storeInventoryRepository.findAll();
+
+        int total = inventories.size();
+        int healthy = 0;
+        int low = 0;
+        int critical = 0;
+        int outOfStock = 0;
+
+        List<com.utecoffe.dto.response.InventoryHealthDto.UrgentRestockItemDto> urgentItems = new java.util.ArrayList<>();
+
+        for (StoreInventory inv : inventories) {
+            BigDecimal cur = (inv.getCurrentStock() != null) ? inv.getCurrentStock() : BigDecimal.ZERO;
+            BigDecimal safe = (inv.getSafetyStock() != null) ? inv.getSafetyStock() : BigDecimal.valueOf(100);
+            BigDecimal minThresh = (inv.getIngredient() != null && inv.getIngredient().getMinThreshold() != null)
+                    ? inv.getIngredient().getMinThreshold()
+                    : safe.multiply(BigDecimal.valueOf(1.5));
+
+            Ingredient ing = inv.getIngredient();
+            String ingName = (ing != null) ? ing.getName() : "Nguyên liệu #" + inv.getId();
+            String sku = (ing != null) ? ing.getSku() : "SKU-" + inv.getId();
+            String unit = (ing != null && ing.getUnit() != null) ? ing.getUnit() : "đơn vị";
+
+            if (cur.compareTo(BigDecimal.ZERO) <= 0) {
+                outOfStock++;
+                BigDecimal suggested = safe.multiply(BigDecimal.valueOf(3));
+                urgentItems.add(com.utecoffe.dto.response.InventoryHealthDto.UrgentRestockItemDto.builder()
+                        .ingredientId(ing != null ? ing.getId() : null)
+                        .ingredientName(ingName)
+                        .sku(sku)
+                        .unit(unit)
+                        .currentStock(cur)
+                        .safetyStock(safe)
+                        .suggestedOrderQuantity(suggested)
+                        .urgencyLevel("OUT_OF_STOCK")
+                        .build());
+            } else if (cur.compareTo(safe) <= 0) {
+                critical++;
+                BigDecimal suggested = safe.multiply(BigDecimal.valueOf(2.5)).subtract(cur);
+                urgentItems.add(com.utecoffe.dto.response.InventoryHealthDto.UrgentRestockItemDto.builder()
+                        .ingredientId(ing != null ? ing.getId() : null)
+                        .ingredientName(ingName)
+                        .sku(sku)
+                        .unit(unit)
+                        .currentStock(cur)
+                        .safetyStock(safe)
+                        .suggestedOrderQuantity(suggested)
+                        .urgencyLevel("CRITICAL")
+                        .build());
+            } else if (cur.compareTo(minThresh) <= 0) {
+                low++;
+                BigDecimal suggested = minThresh.multiply(BigDecimal.valueOf(2)).subtract(cur);
+                urgentItems.add(com.utecoffe.dto.response.InventoryHealthDto.UrgentRestockItemDto.builder()
+                        .ingredientId(ing != null ? ing.getId() : null)
+                        .ingredientName(ingName)
+                        .sku(sku)
+                        .unit(unit)
+                        .currentStock(cur)
+                        .safetyStock(safe)
+                        .suggestedOrderQuantity(suggested)
+                        .urgencyLevel("LOW")
+                        .build());
+            } else {
+                healthy++;
+            }
+        }
+
+        double healthScore = (total > 0)
+                ? Math.round(((double) healthy / total) * 1000.0) / 10.0
+                : 100.0;
+
+        String verdict;
+        if (healthScore >= 85.0) {
+            verdict = "KHO HÀNG AN TOÀN: Chuỗi cung ứng vận hành tối ưu, nguồn nguyên liệu dồi dào sẵn sàng cho giờ cao điểm.";
+        } else if (healthScore >= 60.0) {
+            verdict = "CẢNH BÁO TỒN KHO: Một số nguyên liệu hạt hoặc sữa tươi chạm ngưỡng đặt hàng lại, cần tạo đơn mua PO sớm.";
+        } else {
+            verdict = "NGUY CƠ ĐỨT GÃY: Tồn kho chạm đáy an toàn, khuyến nghị cấp bách phát lệnh nhập nguyên liệu hỏa tốc.";
+        }
+
+        return com.utecoffe.dto.response.InventoryHealthDto.builder()
+                .storeId(storeId)
+                .storeName(storeName)
+                .totalIngredientsTracked(total)
+                .healthyStockCount(healthy)
+                .lowStockCount(low)
+                .criticalStockCount(critical)
+                .outOfStockCount(outOfStock)
+                .healthScorePercent(healthScore)
+                .healthVerdict(verdict)
+                .urgentRestockItems(urgentItems)
+                .build();
     }
 }

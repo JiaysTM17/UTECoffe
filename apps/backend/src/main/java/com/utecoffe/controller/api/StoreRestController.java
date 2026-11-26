@@ -26,4 +26,10 @@ public class StoreRestController {
     public ResponseEntity<ApiResponse<List<StoreDistanceDto>>> getNearest(@RequestParam double lat, @RequestParam double lng) {
         return ResponseEntity.ok(ApiResponse.success(storeService.findNearestStoresWithDistance(lat, lng), "Danh sách chi nhánh gần bạn nhất"));
     }
+
+    @GetMapping("/{storeId}/operating-status")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.StoreOperatingStatusDto>> getOperatingStatus(@PathVariable Long storeId) {
+        com.utecoffe.dto.response.StoreOperatingStatusDto status = storeService.getStoreOperatingStatus(storeId);
+        return ResponseEntity.ok(ApiResponse.success(status, "Hiện trạng giờ mở cửa và năng lực phục vụ chi nhánh"));
+    }
 }

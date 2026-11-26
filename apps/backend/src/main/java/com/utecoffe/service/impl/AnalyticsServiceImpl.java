@@ -27,6 +27,12 @@ public class AnalyticsServiceImpl implements AnalyticsService {
     @Autowired
     private StoreRepository storeRepository;
 
+    @Autowired(required = false)
+    private com.utecoffe.repository.OrderItemRepository orderItemRepository;
+
+    @Autowired(required = false)
+    private com.utecoffe.repository.PaymentRepository paymentRepository;
+
     @Override
     public ExecutiveAnalyticsDto getExecutiveAnalytics() {
         List<Order> allOrders = orderRepository.findAll();
@@ -168,6 +174,101 @@ public class AnalyticsServiceImpl implements AnalyticsService {
                 .takeAwayCount(takeAwayCount)
                 .deliveryCount(deliveryCount)
                 .storePerformances(storePerformances)
+                .build();
+    }
+
+    @Override
+    public com.utecoffe.dto.response.StoreSalesPerformanceDto getStoreProductSalesAnalytics(Long storeId) {
+        Store store = (storeRepository != null) ? storeRepository.findById(storeId).orElse(null) : null;
+        String storeName = (store != null) ? store.getName() : "Chi nhánh #" + storeId;
+        String address = (store != null) ? store.getAddress() : "TP. Hồ Chí Minh";
+
+        List<Order> allOrders = orderRepository.findAll();
+        List<Order> storeOrders = allOrders.stream()
+                .filter(o -> o.getStore() != null && o.getStore().getId().equals(storeId))
+                .toList();
+
+        long totalOrders = storeOrders.size();
+        long completed = 0;
+        long cancelled = 0;
+        BigDecimal revenue = BigDecimal.ZERO;
+
+        Map<String, Long> paymentMap = new LinkedHashMap<>();
+        paymentMap.put("VIETQR", 0L);
+        paymentMap.put("VNPAY", 0L);
+        paymentMap.put("MOMO", 0L);
+        paymentMap.put("TIỀN MẶT", 0L);
+
+        Map<Long, com.utecoffe.dto.response.StoreSalesPerformanceDto.ProductSalesMetricDto> productMetrics = new HashMap<>();
+
+        for (Order o : storeOrders) {
+            if (o.getStatus() == OrderStatus.COMPLETED) {
+                completed++;
+                BigDecimal amt = o.getFinalAmount() != null ? o.getFinalAmount() : BigDecimal.ZERO;
+                revenue = revenue.add(amt);
+
+                // Payment method detection
+                String method = "VIETQR";
+                if (paymentRepository != null) {
+                    var payOpt = paymentRepository.findByOrderId(o.getId());
+                    if (payOpt.isPresent() && payOpt.get().getPaymentMethod() != null) {
+                        method = payOpt.get().getPaymentMethod().name();
+                    }
+                }
+                paymentMap.put(method, paymentMap.getOrDefault(method, 0L) + 1);
+
+                // Aggregate item sales
+                if (orderItemRepository != null) {
+                    var items = orderItemRepository.findByOrderId(o.getId());
+                    for (var item : items) {
+                        if (item.getProduct() != null) {
+                            Long pId = item.getProduct().getId();
+                            String pName = item.getProduct().getName();
+                            int qty = item.getQuantity() != null ? item.getQuantity() : 1;
+                            BigDecimal lineSubtotal = item.getSubtotal() != null ? item.getSubtotal() : BigDecimal.ZERO;
+
+                            productMetrics.compute(pId, (k, v) -> {
+                                if (v == null) {
+                                    return com.utecoffe.dto.response.StoreSalesPerformanceDto.ProductSalesMetricDto.builder()
+                                            .productId(pId)
+                                            .productName(pName)
+                                            .quantitySold(qty)
+                                            .totalRevenue(lineSubtotal)
+                                            .build();
+                                } else {
+                                    v.setQuantitySold(v.getQuantitySold() + qty);
+                                    v.setTotalRevenue(v.getTotalRevenue().add(lineSubtotal));
+                                    return v;
+                                }
+                            });
+                        }
+                    }
+                }
+            } else if (o.getStatus() == OrderStatus.CANCELLED) {
+                cancelled++;
+            }
+        }
+
+        BigDecimal aov = (completed > 0)
+                ? revenue.divide(BigDecimal.valueOf(completed), 2, RoundingMode.HALF_UP)
+                : BigDecimal.ZERO;
+
+        List<com.utecoffe.dto.response.StoreSalesPerformanceDto.ProductSalesMetricDto> topProducts = productMetrics.values().stream()
+                .sorted(Comparator.comparingLong(com.utecoffe.dto.response.StoreSalesPerformanceDto.ProductSalesMetricDto::getQuantitySold).reversed())
+                .limit(5)
+                .toList();
+
+        return com.utecoffe.dto.response.StoreSalesPerformanceDto.builder()
+                .storeId(storeId)
+                .storeName(storeName)
+                .address(address)
+                .totalRevenue(revenue)
+                .totalOrders(totalOrders)
+                .completedOrders(completed)
+                .cancelledOrders(cancelled)
+                .averageOrderValue(aov)
+                .paymentMethodBreakdown(paymentMap)
+                .topSellingProducts(topProducts)
                 .build();
     }
 }

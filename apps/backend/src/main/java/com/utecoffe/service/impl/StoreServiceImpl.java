@@ -20,6 +20,12 @@ public class StoreServiceImpl implements StoreService {
     @Autowired
     private StoreRepository storeRepository;
 
+    @Autowired
+    private com.utecoffe.repository.StoreTableRepository storeTableRepository;
+
+    @Autowired
+    private com.utecoffe.repository.OrderRepository orderRepository;
+
     @Override
     public List<Store> getAllActiveStores() {
         return storeRepository.findByIsActiveTrue();
@@ -82,6 +88,96 @@ public class StoreServiceImpl implements StoreService {
 
         double c = 2.0 * Math.atan2(Math.sqrt(a), Math.sqrt(1.0 - a));
         return EARTH_RADIUS_KM * c;
+    }
+
+    @Override
+    public com.utecoffe.dto.response.StoreOperatingStatusDto getStoreOperatingStatus(Long storeId) {
+        Store store = getStoreById(storeId);
+
+        String openStr = (store.getOpeningTime() != null && !store.getOpeningTime().isBlank()) ? store.getOpeningTime() : "07:00";
+        String closeStr = (store.getClosingTime() != null && !store.getClosingTime().isBlank()) ? store.getClosingTime() : "22:30";
+
+        java.time.LocalTime now = java.time.LocalTime.now();
+        java.time.LocalTime openTime;
+        java.time.LocalTime closeTime;
+        try {
+            openTime = java.time.LocalTime.parse(openStr);
+            closeTime = java.time.LocalTime.parse(closeStr);
+        } catch (Exception e) {
+            openTime = java.time.LocalTime.of(7, 0);
+            closeTime = java.time.LocalTime.of(22, 30);
+        }
+
+        boolean isOpen;
+        if (closeTime.isAfter(openTime)) {
+            isOpen = !now.isBefore(openTime) && !now.isAfter(closeTime);
+        } else {
+            isOpen = !now.isBefore(openTime) || !now.isAfter(closeTime);
+        }
+
+        String statusBadge;
+        String statusMessage;
+        if (isOpen) {
+            long minutesUntilClosing = java.time.Duration.between(now, closeTime).toMinutes();
+            if (minutesUntilClosing > 0 && minutesUntilClosing <= 45) {
+                statusBadge = "CLOSING_SOON";
+                statusMessage = "Sắp đóng cửa (còn " + minutesUntilClosing + " phút) - Nhận đơn mang đi";
+            } else {
+                statusBadge = "OPEN";
+                statusMessage = "Đang mở cửa phục vụ tại chỗ & giao hàng";
+            }
+        } else {
+            statusBadge = "CLOSED";
+            statusMessage = "Tạm đóng cửa - Giờ mở cửa: " + openStr + " đến " + closeStr;
+        }
+
+        List<com.utecoffe.enums.OrderStatus> activeStatuses = List.of(
+                com.utecoffe.enums.OrderStatus.PENDING,
+                com.utecoffe.enums.OrderStatus.CONFIRMED,
+                com.utecoffe.enums.OrderStatus.PREPARING
+        );
+        var activeOrders = orderRepository.findByStoreIdAndStatusInOrderByCreatedAtAsc(store.getId(), activeStatuses);
+        int activeQueueCount = (activeOrders != null) ? activeOrders.size() : 0;
+
+        String rushLevel;
+        String rushDesc;
+        if (activeQueueCount >= 8) {
+            rushLevel = "HIGH";
+            rushDesc = "Đông khách (Hàng đợi " + activeQueueCount + " đơn) - Dự kiến phục vụ 12-15 phút";
+        } else if (activeQueueCount >= 3) {
+            rushLevel = "MODERATE";
+            rushDesc = "Nhộn nhịp (Hàng đợi " + activeQueueCount + " đơn) - Dự kiến phục vụ 5-8 phút";
+        } else {
+            rushLevel = "LOW";
+            rushDesc = "Không gian thoáng đãng - Chiết xuất & phục vụ ngay trong 3-5 phút";
+        }
+
+        var tables = storeTableRepository.findByStoreIdAndIsActiveTrue(store.getId());
+        int totalTables = (tables != null) ? tables.size() : 0;
+        int occupiedTables = (tables != null)
+                ? (int) tables.stream().filter(t -> Boolean.TRUE.equals(t.getIsOccupied())).count()
+                : 0;
+        double occPercent = (totalTables > 0)
+                ? Math.round(((double) occupiedTables / totalTables) * 1000.0) / 10.0
+                : 0.0;
+
+        return com.utecoffe.dto.response.StoreOperatingStatusDto.builder()
+                .storeId(store.getId())
+                .storeName(store.getName())
+                .address(store.getAddress())
+                .phoneNumber(store.getPhoneNumber())
+                .openingTime(openStr)
+                .closingTime(closeStr)
+                .isOpenNow(isOpen)
+                .statusBadge(statusBadge)
+                .statusMessage(statusMessage)
+                .rushLevel(rushLevel)
+                .rushDescription(rushDesc)
+                .activeKdsQueueCount(activeQueueCount)
+                .occupiedTablesCount(occupiedTables)
+                .totalTablesCount(totalTables)
+                .tableOccupancyPercent(occPercent)
+                .build();
     }
 }
 

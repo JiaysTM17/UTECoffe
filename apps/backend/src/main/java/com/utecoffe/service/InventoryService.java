@@ -10,5 +10,6 @@ public interface InventoryService {
     void deductStockForOrder(Order order);
     void restoreStockForOrder(Order order);
     List<StoreInventory> getLowStockAlerts(Long storeId);
+    com.utecoffe.dto.response.InventoryHealthDto getStoreInventoryHealth(Long storeId);
 }
 
