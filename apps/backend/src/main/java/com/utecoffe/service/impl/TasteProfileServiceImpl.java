@@ -166,6 +166,31 @@ public class TasteProfileServiceImpl implements TasteProfileService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<TasteMatchResultDto> filterByRoastAndNotes(String roastLevel, String flavorKeyword, int limit) {
+        String roastQuery = (roastLevel != null) ? roastLevel.trim().toLowerCase() : "";
+        String noteQuery = (flavorKeyword != null) ? flavorKeyword.trim().toLowerCase() : "";
+
+        List<TasteMatchResultDto> allMatches = matchPalate(3.0, 3.0, 3.0, 3.0, 3.0, 50);
+
+        return allMatches.stream()
+                .filter(dto -> {
+                    if (!roastQuery.isEmpty()) {
+                        String roast = dto.getRoastLevel() != null ? dto.getRoastLevel().toLowerCase() : "";
+                        if (!roast.contains(roastQuery)) return false;
+                    }
+                    if (!noteQuery.isEmpty()) {
+                        boolean matchNote = dto.getTastingNotes() != null && dto.getTastingNotes().stream()
+                                .anyMatch(note -> note.toLowerCase().contains(noteQuery));
+                        String verdict = dto.getSensoryVerdict() != null ? dto.getSensoryVerdict().toLowerCase() : "";
+                        if (!matchNote && !verdict.contains(noteQuery)) return false;
+                    }
+                    return true;
+                })
+                .limit(Math.max(1, limit))
+                .collect(Collectors.toList());
+    }
+
     private double dotProduct(double[] a, double[] b) {
         double sum = 0.0;
         for (int i = 0; i < a.length; i++) {

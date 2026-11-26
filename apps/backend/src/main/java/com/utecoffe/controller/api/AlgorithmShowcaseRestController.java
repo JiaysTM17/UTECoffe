@@ -4,10 +4,12 @@ import com.utecoffe.dto.response.ApiResponse;
 import com.utecoffe.dto.response.CouponKnapsackResultDto;
 import com.utecoffe.dto.response.CrossSellRecommendationDto;
 import com.utecoffe.dto.response.DynamicPricingResultDto;
+import com.utecoffe.dto.response.TasteMatchResultDto;
 import com.utecoffe.service.CouponOptimizationService;
 import com.utecoffe.service.DynamicPricingService;
 import com.utecoffe.service.IdempotencyService;
 import com.utecoffe.service.MarketBasketAnalysisService;
+import com.utecoffe.service.TasteProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -19,22 +21,25 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/algorithms")
-@Tag(name = "Advanced Enterprise Algorithms", description = "Showcase of mathematical & computer science algorithms: Dynamic Pricing, Apriori, 0/1 Knapsack, Idempotency & Token Bucket")
+@Tag(name = "Advanced Enterprise Algorithms", description = "Showcase of mathematical & computer science algorithms: Dynamic Pricing, Apriori, 0/1 Knapsack, Idempotency, Token Bucket & Cosine Taste Matching")
 public class AlgorithmShowcaseRestController {
 
     private final DynamicPricingService dynamicPricingService;
     private final MarketBasketAnalysisService marketBasketAnalysisService;
     private final CouponOptimizationService couponOptimizationService;
     private final IdempotencyService idempotencyService;
+    private final TasteProfileService tasteProfileService;
 
     public AlgorithmShowcaseRestController(DynamicPricingService dynamicPricingService,
                                            MarketBasketAnalysisService marketBasketAnalysisService,
                                            CouponOptimizationService couponOptimizationService,
-                                           IdempotencyService idempotencyService) {
+                                           IdempotencyService idempotencyService,
+                                           TasteProfileService tasteProfileService) {
         this.dynamicPricingService = dynamicPricingService;
         this.marketBasketAnalysisService = marketBasketAnalysisService;
         this.couponOptimizationService = couponOptimizationService;
         this.idempotencyService = idempotencyService;
+        this.tasteProfileService = tasteProfileService;
     }
 
     @Operation(summary = "Calculate Dynamic Price for all products (Yield Management)")
@@ -71,6 +76,29 @@ public class AlgorithmShowcaseRestController {
         CouponKnapsackResultDto result = couponOptimizationService.findOptimalCouponCombination(
                 request.getSubtotal(), request.getCouponCodes());
         return ResponseEntity.ok(ApiResponse.success(result, "Tối ưu hóa mã giảm giá thành công"));
+    }
+
+    @Operation(summary = "Specialty Coffee Palate Matching (5D Vector Cosine Similarity)")
+    @GetMapping("/palate-match")
+    public ResponseEntity<ApiResponse<List<TasteMatchResultDto>>> matchPalate(
+            @RequestParam(defaultValue = "3.5") double acidity,
+            @RequestParam(defaultValue = "3.5") double body,
+            @RequestParam(defaultValue = "4.0") double sweetness,
+            @RequestParam(defaultValue = "2.5") double bitterness,
+            @RequestParam(defaultValue = "4.5") double aroma,
+            @RequestParam(defaultValue = "5") int limit) {
+        List<TasteMatchResultDto> matches = tasteProfileService.matchPalate(acidity, body, sweetness, bitterness, aroma, limit);
+        return ResponseEntity.ok(ApiResponse.success(matches, "Khớp vị giác cà phê đặc sản thành công"));
+    }
+
+    @Operation(summary = "Filter Specialty Coffees by Roast Degree & Tasting Notes")
+    @GetMapping("/flavor-filter")
+    public ResponseEntity<ApiResponse<List<TasteMatchResultDto>>> filterFlavors(
+            @RequestParam(required = false) String roastLevel,
+            @RequestParam(required = false) String flavor,
+            @RequestParam(defaultValue = "6") int limit) {
+        List<TasteMatchResultDto> results = tasteProfileService.filterByRoastAndNotes(roastLevel, flavor, limit);
+        return ResponseEntity.ok(ApiResponse.success(results, "Lọc hương vị & độ rang thành công"));
     }
 
     @Operation(summary = "Verify Rate Limit Status (Token Bucket Algorithm)")

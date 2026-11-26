@@ -157,4 +157,88 @@ public class KdsDispatchServiceImpl implements KdsDispatchService {
 
         return priorityList;
     }
+
+    @Override
+    public com.utecoffe.dto.response.StationWorkloadSummaryDto getStationWorkloadSummary(Long storeId) {
+        List<KdsPriorityOrderDto> queue = getOptimizedQueue(storeId);
+
+        Map<String, com.utecoffe.dto.response.StationWorkloadSummaryDto.StationDetail> stationMap = new LinkedHashMap<>();
+        stationMap.put("ESPRESSO_BAR", com.utecoffe.dto.response.StationWorkloadSummaryDto.StationDetail.builder()
+                .stationName("Quầy Espresso & Cà Phê Pha Máy")
+                .ticketCount(0)
+                .estimatedSeconds(0)
+                .activeBaristas(2)
+                .status("OPTIMAL")
+                .build());
+
+        stationMap.put("POUR_OVER_BAR", com.utecoffe.dto.response.StationWorkloadSummaryDto.StationDetail.builder()
+                .stationName("Quầy Pour-Over & Cà Phê Di Sản")
+                .ticketCount(0)
+                .estimatedSeconds(0)
+                .activeBaristas(1)
+                .status("OPTIMAL")
+                .build());
+
+        stationMap.put("PASTRIES", com.utecoffe.dto.response.StationWorkloadSummaryDto.StationDetail.builder()
+                .stationName("Quầy Bánh Nướng & Tráng Miệng")
+                .ticketCount(0)
+                .estimatedSeconds(0)
+                .activeBaristas(1)
+                .status("OPTIMAL")
+                .build());
+
+        int totalSeconds = 0;
+        for (KdsPriorityOrderDto item : queue) {
+            String stationKey = item.getRecommendedStation();
+            if (!stationMap.containsKey(stationKey)) {
+                stationKey = "ESPRESSO_BAR";
+            }
+            var detail = stationMap.get(stationKey);
+            detail.setTicketCount(detail.getTicketCount() + 1);
+            detail.setEstimatedSeconds(detail.getEstimatedSeconds() + item.getEstimatedPrepSeconds());
+            totalSeconds += item.getEstimatedPrepSeconds();
+        }
+
+        String bottleneck = "ESPRESSO_BAR";
+        int maxSeconds = -1;
+
+        for (Map.Entry<String, com.utecoffe.dto.response.StationWorkloadSummaryDto.StationDetail> entry : stationMap.entrySet()) {
+            var detail = entry.getValue();
+            int secs = detail.getEstimatedSeconds();
+            if (secs > 900) {
+                detail.setStatus("CONGESTED");
+            } else if (secs > 480) {
+                detail.setStatus("BUSY");
+            } else {
+                detail.setStatus("OPTIMAL");
+            }
+
+            if (secs > maxSeconds) {
+                maxSeconds = secs;
+                bottleneck = entry.getKey();
+            }
+        }
+
+        String recommendation;
+        if (queue.isEmpty()) {
+            recommendation = "Toàn bộ quầy đang ở trạng thái sẵn sàng đón khách mới.";
+        } else if (maxSeconds > 900) {
+            var bottleDetail = stationMap.get(bottleneck);
+            recommendation = "CẢNH BÁO TẢI CAO: " + bottleDetail.getStationName() + " đang có hàng đợi kéo dài (~" + (maxSeconds / 60) + " phút). Đề xuất điều phối thêm 1 Barista sang hỗ trợ.";
+        } else if (maxSeconds > 480) {
+            var bottleDetail = stationMap.get(bottleneck);
+            recommendation = "LƯỢNG KHÁCH ĐÔNG: " + bottleDetail.getStationName() + " nhịp độ pha chế đang tăng nhanh. Barista giữ vững quy chuẩn SOP.";
+        } else {
+            recommendation = "Tốc độ phục vụ chuẩn mực, thời gian chờ bình quân dưới 5 phút.";
+        }
+
+        return com.utecoffe.dto.response.StationWorkloadSummaryDto.builder()
+                .storeId(storeId)
+                .totalActiveOrders(queue.size())
+                .totalPendingSeconds(totalSeconds)
+                .stationBreakdown(stationMap)
+                .bottleneckStation(bottleneck)
+                .dispatchRecommendation(recommendation)
+                .build();
+    }
 }

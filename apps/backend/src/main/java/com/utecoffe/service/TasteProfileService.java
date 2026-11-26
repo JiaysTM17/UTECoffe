@@ -15,4 +15,13 @@ public interface TasteProfileService {
      * @return List of ranked specialty coffee recommendations sorted by cosine similarity desc
      */
     List<TasteMatchResultDto> matchPalate(double acidity, double body, double sweetness, double bitterness, double aroma, int limit);
+
+    /**
+     * Filter and rank specialty coffees by roast degree (Light, Medium, Dark) and flavor notes.
+     * @param roastLevel Target roast level (e.g. "Light", "Medium", "Dark") or empty for all
+     * @param flavorKeyword Flavor note query (e.g. "Hoa", "Cam", "Socola", "Sen", "Caramel")
+     * @param limit Maximum results
+     * @return Filtered and scored specialty coffees
+     */
+    List<TasteMatchResultDto> filterByRoastAndNotes(String roastLevel, String flavorKeyword, int limit);
 }

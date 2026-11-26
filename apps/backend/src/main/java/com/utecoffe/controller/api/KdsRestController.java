@@ -38,6 +38,13 @@ public class KdsRestController {
                 "Hang doi phuc vu toi uu hoa theo thuat toan Weighted Fair Queuing"));
     }
 
+    @GetMapping("/workload/{storeId}")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.StationWorkloadSummaryDto>> getStationWorkload(@PathVariable("storeId") Long storeId) {
+        return ResponseEntity.ok(ApiResponse.success(
+                kdsDispatchService.getStationWorkloadSummary(storeId),
+                "Thong ke tai lam viec va dieu phoi cac quay Barista"));
+    }
+
     @PostMapping("/orders/{orderId}/status")
     public ResponseEntity<ApiResponse<Void>> updateStatus(@PathVariable("orderId") Long orderId,
                                                           @RequestParam("status") OrderStatus status,
