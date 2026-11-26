@@ -30,14 +30,14 @@
     --text-muted: #B8AFA5;
     --text-gold: #DEB76A;
 
-    --border-gold: rgba(222, 183, 106, 0.28);
-    --border-gold-hover: rgba(222, 183, 106, 0.65);
-    --border-dark: rgba(255, 255, 255, 0.10);
+    --border-gold: rgba(222, 183, 106, 0.16);
+    --border-gold-hover: rgba(222, 183, 106, 0.38);
+    --border-dark: rgba(255, 255, 255, 0.08);
 
-    --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.45);
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.65);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.85);
-    --shadow-gold: 0 8px 32px rgba(222, 183, 106, 0.25);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.60);
+    --shadow-gold: 0 4px 16px rgba(0, 0, 0, 0.25);
 
     --font-heading: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
     --font-subheading: 'Cormorant Garamond', Georgia, serif;
@@ -77,14 +77,14 @@
     --text-muted: #6B6258;
     --text-gold: #9E7A35;
 
-    --border-gold: rgba(179, 140, 64, 0.32);
-    --border-gold-hover: rgba(179, 140, 64, 0.70);
-    --border-dark: rgba(24, 21, 19, 0.10);
+    --border-gold: rgba(179, 140, 64, 0.18);
+    --border-gold-hover: rgba(179, 140, 64, 0.40);
+    --border-dark: rgba(24, 21, 19, 0.08);
 
-    --shadow-sm: 0 4px 16px rgba(40, 30, 20, 0.06);
-    --shadow-md: 0 10px 30px rgba(40, 30, 20, 0.10);
-    --shadow-lg: 0 20px 50px rgba(40, 30, 20, 0.14);
-    --shadow-gold: 0 8px 24px rgba(179, 140, 64, 0.22);
+    --shadow-sm: 0 2px 8px rgba(40, 30, 20, 0.04);
+    --shadow-md: 0 6px 20px rgba(40, 30, 20, 0.07);
+    --shadow-lg: 0 12px 36px rgba(40, 30, 20, 0.10);
+    --shadow-gold: 0 4px 14px rgba(179, 140, 64, 0.12);
 }
 
 /* Base Reset & Typography */
@@ -126,10 +126,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 .text-gold-gradient {
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--gold-300);
 }
 
 .bg-obsidian {
@@ -243,11 +240,11 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 .nav-link-luxury {
-    font-family: var(--font-accent);
-    font-size: 0.84rem !important;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    font-family: var(--font-body);
+    font-size: 0.92rem !important;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--text-secondary);
     padding: 0.45rem 0.8rem !important;
     position: relative;
@@ -264,7 +261,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 /* Persistent Active State on Current Page */
 .nav-link-luxury.active {
     color: var(--text-gold) !important;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .nav-link-luxury::after {
@@ -353,18 +350,18 @@ h1, h2, h3, h4, h5, h6, .font-serif {
    Luxury Buttons
    ========================================================================== */
 .btn-gold {
-    background: var(--gold-gradient);
+    background: var(--gold-300);
     color: #12100E !important;
-    font-family: var(--font-accent);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
     border: none;
-    border-radius: var(--radius-pill);
-    padding: 0.75rem 1.85rem;
-    box-shadow: var(--shadow-gold);
-    transition: var(--transition-smooth);
+    border-radius: 8px;
+    padding: 0.65rem 1.45rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: var(--transition-fast);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -376,23 +373,23 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 .btn-gold:hover {
-    background: var(--gold-gradient-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(222, 183, 106, 0.35);
+    background: var(--gold-200);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .btn-outline-gold {
     background: transparent;
     color: var(--text-gold) !important;
-    font-family: var(--font-accent);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: 1.5px solid var(--border-gold);
-    border-radius: var(--radius-pill);
-    padding: 0.7rem 1.85rem;
-    transition: var(--transition-smooth);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 0.6rem 1.45rem;
+    transition: var(--transition-fast);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -400,15 +397,16 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 .btn-outline-gold:hover {
-    background: var(--gold-gradient);
-    color: #12100E !important;
-    border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-gold);
+    background: rgba(222, 183, 106, 0.08);
+    color: var(--text-primary) !important;
+    border-color: var(--border-gold-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="light"] .btn-outline-gold:hover {
-    color: #FFFFFF !important;
+    background: rgba(179, 140, 64, 0.08);
+    color: var(--text-primary) !important;
 }
 
 /* ==========================================================================
@@ -428,8 +426,8 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 .card-luxury:hover {
     background: var(--bg-card-hover);
     border-color: var(--border-gold-hover);
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md), 0 0 25px rgba(222, 183, 106, 0.12);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 /* Product Card Elements */
@@ -445,11 +443,11 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.4s ease-out;
 }
 
 .card-luxury:hover .product-image-container img {
-    transform: scale(1.08);
+    transform: scale(1.02);
 }
 
 .badge-luxury-tag {
@@ -612,6 +610,94 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     background-color: var(--gold-subtle);
 }
 
+/* Compact Cart & Checkout Enhancements */
+.table-cart-compact thead th {
+    padding: 0.6rem 0.75rem !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.08em;
+}
+
+.table-cart-compact tbody td {
+    padding: 0.7rem 0.75rem !important;
+}
+
+.cart-container-compact {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.cart-product-title {
+    font-family: var(--font-serif) !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #fbf8f2 !important;
+    line-height: 1.35 !important;
+    letter-spacing: -0.01em;
+}
+
+.cart-product-meta {
+    font-size: 0.75rem;
+}
+
+.cart-rec-shelf {
+    background: rgba(26, 21, 18, 0.75);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 12px;
+}
+
+.cart-rec-item {
+    background: rgba(11, 9, 8, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.cart-rec-item:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(26, 21, 18, 0.95);
+}
+
+/* QR & Invoice Slate Luxury Styling */
+.transfer-slate {
+    background: rgba(18, 14, 11, 0.95) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+}
+.transfer-line {
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12) !important;
+}
+.qr-token-card {
+    border-radius: 16px !important;
+    border: 2px solid rgba(212, 175, 55, 0.35) !important;
+    background: #ffffff !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+.bank-segment-wrap {
+    background: rgba(14, 11, 9, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 50rem;
+    padding: 4px;
+    display: inline-flex;
+}
+.bank-segment-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 0.4rem 1.15rem;
+    border-radius: 50rem;
+    font-size: 0.78rem;
+    font-family: var(--font-accent);
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+.bank-segment-btn.active {
+    background: var(--gold-gradient) !important;
+    color: #0b0908 !important;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
+}
+
 /* ==========================================================================
    Footer Luxury
    ========================================================================== */
@@ -662,15 +748,9 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     color: var(--text-gold) !important;
 }
 
-/* Animations & Transitions */
-@keyframes goldPulse {
-    0% { box-shadow: 0 0 0 0 rgba(222, 183, 106, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(222, 183, 106, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(222, 183, 106, 0); }
-}
-
+/* Calm Transitions */
 .pulse-gold {
-    animation: goldPulse 2s infinite;
+    transition: var(--transition-fast);
 }
 
 /* Scrollbar */
@@ -691,9 +771,117 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 /* Explicit Navbar Button Sizing & Zero-Wrapping Guarantee */
-.btn-gold,
-.btn-outline-gold {
+.navbar-luxury .btn-gold,
+.navbar-luxury .btn-outline-gold {
     white-space: nowrap !important;
+}
+
+/* Universal Overflow Protections */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+body {
+    overflow-x: hidden;
+}
+
+/* Delivery & Takeaway Option Cards */
+.delivery-option-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    padding: 1.15rem 0.75rem !important;
+    border: 1.5px solid var(--border-gold) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: var(--text-gold) !important;
+    transition: var(--transition-smooth) !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    user-select: none;
+}
+.delivery-option-btn:hover {
+    background: rgba(212, 175, 55, 0.08) !important;
+    border-color: var(--text-gold) !important;
+    transform: translateY(-2px);
+}
+.btn-check:checked + .delivery-option-btn {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(26, 21, 16, 0.95) 100%) !important;
+    border-color: var(--text-gold) !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25) !important;
+}
+[data-theme="light"] .btn-check:checked + .delivery-option-btn {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, #faf8f5 100%) !important;
+}
+
+/* Payment Option Cards - Spacious, Luxury & High End */
+.payment-option-card {
+    transition: var(--transition-smooth);
+    background: rgba(22, 17, 14, 0.75) !important;
+    border: 1.5px solid rgba(212, 175, 55, 0.22) !important;
+    border-radius: 14px !important;
+    padding: 1.15rem 1.25rem !important;
+    cursor: pointer;
+    white-space: normal !important;
+    word-break: break-word;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    margin-bottom: 0.85rem !important;
+}
+.payment-option-card:hover {
+    border-color: var(--text-gold) !important;
+    background: rgba(212, 175, 55, 0.08) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+.payment-option-card:has(input:checked) {
+    border-color: var(--text-gold) !important;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(26, 21, 16, 0.98) 100%) !important;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25) !important;
+}
+.payment-icon-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.payment-radio-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    background: rgba(11, 9, 8, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    transition: all 0.25s ease;
+}
+.payment-option-card:has(input:checked) .payment-radio-circle {
+    border-color: var(--text-gold);
+    background: var(--gold-gradient);
+    color: #0b0908 !important;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+.payment-option-card:has(input:checked) .payment-icon-wrap {
+    background: var(--gold-gradient);
+    border-color: var(--text-gold);
+}
+.payment-option-card:has(input:checked) .payment-icon-wrap i {
+    color: #0b0908 !important;
+}
+[data-theme="light"] .payment-option-card:has(input:checked) {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, #faf8f5 100%) !important;
 }
 
 .btn-gold.btn-sm,
@@ -931,3 +1119,370 @@ h1, h2, h3, h4, h5, h6, .font-serif {
     transform: scale(1.1);
     transition: transform 0.2s ease;
 }
+
+/* ==========================================================================
+   Comprehensive Light Theme Overrides (High-Contrast & Zero Text Blending)
+   ========================================================================== */
+[data-theme="light"] {
+    color-scheme: light;
+}
+
+[data-theme="light"] body {
+    background-color: var(--bg-obsidian);
+    color: var(--text-primary);
+}
+
+/* Universal Text Contrast Enforcement */
+[data-theme="light"] .text-light {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .text-white:not(.badge):not(.btn) {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .bg-dark {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .bg-card-dark {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .card-luxury {
+    background: var(--bg-card) !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .card-luxury:hover {
+    background: var(--bg-card-hover) !important;
+    border-color: var(--border-gold-hover) !important;
+}
+
+/* Navbar in Light Theme */
+[data-theme="light"] .navbar-luxury {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid var(--border-gold) !important;
+}
+
+[data-theme="light"] .navbar-luxury .nav-link-luxury {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .navbar-luxury .nav-link-luxury:hover,
+[data-theme="light"] .navbar-luxury .nav-link-luxury.active {
+    color: var(--text-gold) !important;
+}
+
+[data-theme="light"] .navbar-luxury .nav-link-luxury.active::after {
+    background: var(--gold-400) !important;
+}
+
+[data-theme="light"] .top-bar-luxury {
+    background: #F3EFE8 !important;
+    border-bottom: 1px solid var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Inputs, Selects and Search in Light Mode */
+[data-theme="light"] .form-control,
+[data-theme="light"] .form-select,
+[data-theme="light"] .form-control-luxury {
+    background-color: #FFFFFF !important;
+    border: 1px solid var(--border-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .form-control:focus,
+[data-theme="light"] .form-select:focus,
+[data-theme="light"] .form-control-luxury:focus {
+    background-color: #FFFFFF !important;
+    border-color: var(--text-gold) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 0 0 3px rgba(179, 140, 64, 0.18) !important;
+}
+
+[data-theme="light"] .form-control::placeholder,
+[data-theme="light"] .form-control-luxury::placeholder {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="light"] .input-group-text {
+    background-color: #F3EFE8 !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-gold) !important;
+}
+
+[data-theme="light"] #fuzzySuggestionsBox {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Tables in Light Theme */
+[data-theme="light"] .table,
+[data-theme="light"] .table-luxury {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .table-luxury thead th {
+    background-color: #EFEAE1 !important;
+    color: var(--text-gold) !important;
+    border-bottom-color: var(--border-gold) !important;
+}
+
+[data-theme="light"] .table-luxury tbody td {
+    border-bottom-color: rgba(24, 21, 19, 0.08) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .table-luxury tbody tr:hover td {
+    background-color: rgba(179, 140, 64, 0.08) !important;
+}
+
+/* Modals & Dialogs in Light Theme */
+[data-theme="light"] .modal-content {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+[data-theme="light"] .modal-header {
+    background: #F3EFE8 !important;
+    border-bottom-color: var(--border-gold) !important;
+}
+
+[data-theme="light"] .modal-footer {
+    background: #F7F5F0 !important;
+    border-top-color: var(--border-gold) !important;
+}
+
+[data-theme="light"] .btn-close-white {
+    filter: none !important;
+}
+
+/* Accordions in Light Theme */
+[data-theme="light"] .accordion-item {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+}
+
+[data-theme="light"] .accordion-button {
+    background-color: #F3EFE8 !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .accordion-button:not(.collapsed) {
+    background-color: #E8E2D6 !important;
+    color: var(--text-gold) !important;
+    box-shadow: none !important;
+}
+
+[data-theme="light"] .accordion-body {
+    background-color: #FFFFFF !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Dropdown Menus in Light Theme */
+[data-theme="light"] .dropdown-menu {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+[data-theme="light"] .dropdown-item {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .dropdown-item:hover,
+[data-theme="light"] .dropdown-item:focus {
+    background-color: rgba(179, 140, 64, 0.12) !important;
+    color: var(--text-gold) !important;
+}
+
+/* Delivery & Payment Option Cards in Light Theme */
+[data-theme="light"] .delivery-option-btn {
+    background: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .delivery-option-btn:hover {
+    background: #FAF7F2 !important;
+    border-color: var(--text-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .payment-option-card {
+    background: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .payment-option-card:hover {
+    background: #FAF7F2 !important;
+    border-color: var(--text-gold) !important;
+}
+
+[data-theme="light"] .payment-radio-circle {
+    background: #FFFFFF !important;
+    border-color: rgba(179, 140, 64, 0.4) !important;
+}
+
+/* Taste Matcher, Customizer & Pills in Light Theme */
+[data-theme="light"] #tasteMatcherCollapse .card-luxury {
+    background: #FFFFFF !important;
+}
+
+[data-theme="light"] .btn-option-pill {
+    background: #F3EFE8 !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="light"] .btn-option-pill:hover {
+    background: #E8E2D6 !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .btn-option-pill.active {
+    background: var(--gold-300) !important;
+    border-color: var(--gold-400) !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+[data-theme="light"] .topping-pill-check {
+    background: #F3EFE8 !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="light"] .topping-pill-check:hover {
+    background: #E8E2D6 !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .topping-pill-check.active {
+    background: rgba(179, 140, 64, 0.15) !important;
+    border-color: var(--text-gold) !important;
+    color: var(--text-gold) !important;
+}
+
+/* Zone Options in Reservation */
+[data-theme="light"] .zone-option-card {
+    background: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .zone-option-card:hover {
+    background: #FAF7F2 !important;
+    border-color: var(--text-gold) !important;
+}
+
+/* Footer in Light Theme */
+[data-theme="light"] footer {
+    background-color: #EFEAE1 !important;
+    border-top-color: var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .footer-link {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .footer-link:hover {
+    color: var(--text-gold) !important;
+}
+
+/* Badges in Light Theme */
+[data-theme="light"] .bg-espresso {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .badge.bg-espresso {
+    background-color: #E8E2D6 !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .badge.bg-dark-roast {
+    background-color: #F3EFE8 !important;
+    color: var(--text-primary) !important;
+}
+
+/* ==========================================================================
+   Admin Executive Suite Layout & Typography (Compact & Refined)
+   ========================================================================== */
+.admin-sidebar {
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+    background-color: #110F0D;
+    border-right: 1px solid var(--border-gold-subtle);
+}
+
+.admin-sidebar-heading {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #787268;
+    padding: 0.75rem 0.9rem 0.25rem 0.9rem;
+}
+
+/* Admin Dashboard & Executive Typography Override */
+.admin-sidebar .admin-nav-link {
+    font-family: var(--font-sans) !important;
+    font-size: 0.8125rem !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    padding: 0.5rem 0.85rem !important;
+    margin: 1px 8px !important;
+    border-radius: 6px !important;
+}
+
+.table-luxury.table-sm thead th {
+    padding: 0.55rem 0.75rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.03em !important;
+}
+
+.table-luxury.table-sm tbody td {
+    padding: 0.55rem 0.75rem !important;
+    font-size: 0.82rem !important;
+}
+
+/* Light Theme Admin Enhancements */
+[data-theme="light"] header.bg-espresso {
+    background-color: #FFFFFF !important;
+    border-bottom: 1px solid rgba(24, 21, 19, 0.08) !important;
+}
+
+[data-theme="light"] .admin-sidebar {
+    background-color: #110F0D !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="light"] .card-luxury {
+    background: #FFFFFF !important;
+    border-color: rgba(24, 21, 19, 0.08) !important;
+    box-shadow: 0 1px 3px rgba(40, 30, 20, 0.04), 0 1px 2px rgba(40, 30, 20, 0.02) !important;
+}
+
+[data-theme="light"] .card-luxury:hover {
+    background: #FFFFFF !important;
+    border-color: rgba(179, 140, 64, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(40, 30, 20, 0.06) !important;
+}
+
