@@ -1119,3 +1119,302 @@ body {
     transform: scale(1.1);
     transition: transform 0.2s ease;
 }
+
+/* ==========================================================================
+   Comprehensive Light Theme Overrides (High-Contrast & Zero Text Blending)
+   ========================================================================== */
+[data-theme="light"] {
+    color-scheme: light;
+}
+
+[data-theme="light"] body {
+    background-color: var(--bg-obsidian);
+    color: var(--text-primary);
+}
+
+/* Universal Text Contrast Enforcement */
+[data-theme="light"] .text-light {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .text-white:not(.badge):not(.btn) {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .bg-dark {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .bg-card-dark {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .card-luxury {
+    background: var(--bg-card) !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .card-luxury:hover {
+    background: var(--bg-card-hover) !important;
+    border-color: var(--border-gold-hover) !important;
+}
+
+/* Navbar in Light Theme */
+[data-theme="light"] .navbar-luxury {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid var(--border-gold) !important;
+}
+
+[data-theme="light"] .navbar-luxury .nav-link-luxury {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .navbar-luxury .nav-link-luxury:hover,
+[data-theme="light"] .navbar-luxury .nav-link-luxury.active {
+    color: var(--text-gold) !important;
+}
+
+[data-theme="light"] .navbar-luxury .nav-link-luxury.active::after {
+    background: var(--gold-400) !important;
+}
+
+[data-theme="light"] .top-bar-luxury {
+    background: #F3EFE8 !important;
+    border-bottom: 1px solid var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Inputs, Selects and Search in Light Mode */
+[data-theme="light"] .form-control,
+[data-theme="light"] .form-select,
+[data-theme="light"] .form-control-luxury {
+    background-color: #FFFFFF !important;
+    border: 1px solid var(--border-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .form-control:focus,
+[data-theme="light"] .form-select:focus,
+[data-theme="light"] .form-control-luxury:focus {
+    background-color: #FFFFFF !important;
+    border-color: var(--text-gold) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 0 0 3px rgba(179, 140, 64, 0.18) !important;
+}
+
+[data-theme="light"] .form-control::placeholder,
+[data-theme="light"] .form-control-luxury::placeholder {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="light"] .input-group-text {
+    background-color: #F3EFE8 !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-gold) !important;
+}
+
+[data-theme="light"] #fuzzySuggestionsBox {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Tables in Light Theme */
+[data-theme="light"] .table,
+[data-theme="light"] .table-luxury {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .table-luxury thead th {
+    background-color: #EFEAE1 !important;
+    color: var(--text-gold) !important;
+    border-bottom-color: var(--border-gold) !important;
+}
+
+[data-theme="light"] .table-luxury tbody td {
+    border-bottom-color: rgba(24, 21, 19, 0.08) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .table-luxury tbody tr:hover td {
+    background-color: rgba(179, 140, 64, 0.08) !important;
+}
+
+/* Modals & Dialogs in Light Theme */
+[data-theme="light"] .modal-content {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+[data-theme="light"] .modal-header {
+    background: #F3EFE8 !important;
+    border-bottom-color: var(--border-gold) !important;
+}
+
+[data-theme="light"] .modal-footer {
+    background: #F7F5F0 !important;
+    border-top-color: var(--border-gold) !important;
+}
+
+[data-theme="light"] .btn-close-white {
+    filter: none !important;
+}
+
+/* Accordions in Light Theme */
+[data-theme="light"] .accordion-item {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+}
+
+[data-theme="light"] .accordion-button {
+    background-color: #F3EFE8 !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .accordion-button:not(.collapsed) {
+    background-color: #E8E2D6 !important;
+    color: var(--text-gold) !important;
+    box-shadow: none !important;
+}
+
+[data-theme="light"] .accordion-body {
+    background-color: #FFFFFF !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Dropdown Menus in Light Theme */
+[data-theme="light"] .dropdown-menu {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+[data-theme="light"] .dropdown-item {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .dropdown-item:hover,
+[data-theme="light"] .dropdown-item:focus {
+    background-color: rgba(179, 140, 64, 0.12) !important;
+    color: var(--text-gold) !important;
+}
+
+/* Delivery & Payment Option Cards in Light Theme */
+[data-theme="light"] .delivery-option-btn {
+    background: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .delivery-option-btn:hover {
+    background: #FAF7F2 !important;
+    border-color: var(--text-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .payment-option-card {
+    background: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .payment-option-card:hover {
+    background: #FAF7F2 !important;
+    border-color: var(--text-gold) !important;
+}
+
+[data-theme="light"] .payment-radio-circle {
+    background: #FFFFFF !important;
+    border-color: rgba(179, 140, 64, 0.4) !important;
+}
+
+/* Taste Matcher, Customizer & Pills in Light Theme */
+[data-theme="light"] #tasteMatcherCollapse .card-luxury {
+    background: #FFFFFF !important;
+}
+
+[data-theme="light"] .btn-option-pill {
+    background: #F3EFE8 !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="light"] .btn-option-pill:hover {
+    background: #E8E2D6 !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .btn-option-pill.active {
+    background: var(--gold-300) !important;
+    border-color: var(--gold-400) !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+[data-theme="light"] .topping-pill-check {
+    background: #F3EFE8 !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="light"] .topping-pill-check:hover {
+    background: #E8E2D6 !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .topping-pill-check.active {
+    background: rgba(179, 140, 64, 0.15) !important;
+    border-color: var(--text-gold) !important;
+    color: var(--text-gold) !important;
+}
+
+/* Zone Options in Reservation */
+[data-theme="light"] .zone-option-card {
+    background: #FFFFFF !important;
+    border-color: var(--border-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .zone-option-card:hover {
+    background: #FAF7F2 !important;
+    border-color: var(--text-gold) !important;
+}
+
+/* Footer in Light Theme */
+[data-theme="light"] footer {
+    background-color: #EFEAE1 !important;
+    border-top-color: var(--border-gold) !important;
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .footer-link {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .footer-link:hover {
+    color: var(--text-gold) !important;
+}
+
+/* Badges in Light Theme */
+[data-theme="light"] .bg-espresso {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .badge.bg-espresso {
+    background-color: #E8E2D6 !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .badge.bg-dark-roast {
+    background-color: #F3EFE8 !important;
+    color: var(--text-primary) !important;
+}

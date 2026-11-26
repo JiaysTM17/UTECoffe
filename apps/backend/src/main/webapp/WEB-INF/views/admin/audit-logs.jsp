@@ -34,8 +34,8 @@
                         <tr>
                             <td class="small text-secondary font-monospace">${l.timestamp}</td>
                             <td><span class="badge bg-espresso border border-gold text-gold font-accent">${l.action}</span></td>
-                            <td class="text-light">${l.entityName} #${l.entityId}</td>
-                            <td class="fw-bold text-light">${l.user != null ? l.user.fullName : 'Hệ thống tự động'}</td>
+                            <td class="text-primary">${l.entityName} #${l.entityId}</td>
+                            <td class="fw-bold text-primary">${l.user != null ? l.user.fullName : 'Hệ thống tự động'}</td>
                             <td><code class="text-warning">${l.ipAddress}</code></td>
                             <td class="small text-secondary">${l.details}</td>
                         </tr>

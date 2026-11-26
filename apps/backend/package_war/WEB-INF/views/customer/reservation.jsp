@@ -49,7 +49,7 @@
                         </div>
                         <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
                             <span class="text-secondary small">Vị Trí Phân Bổ:</span>
-                            <strong class="text-light" style="font-size: 0.92rem;">
+                            <strong class="text-primary" style="font-size: 0.92rem;">
                                 <c:choose>
                                     <c:when test="${not empty tableNumber}">
                                         Bàn ${tableNumber} • ${not empty assignedZoneName ? assignedZoneName : 'Khu Vực Quán'}
@@ -71,7 +71,7 @@
                         </div>
                         <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
                             <span class="text-secondary small">Chi Nhánh:</span>
-                            <strong class="text-light text-end" style="font-size: 0.86rem;">
+                            <strong class="text-primary text-end" style="font-size: 0.86rem;">
                                 ${not empty storeName ? storeName : (not empty confirmedReservation.store ? confirmedReservation.store.name : 'UTECoffe Flagship Thủ Đức')}
                             </strong>
                         </div>
@@ -143,7 +143,7 @@
                                             <input type="radio" class="btn-check" name="zonePreference" id="zoneBar" value="BAR" checked>
                                             <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneBar">
                                                 <i class="fa-solid fa-mug-saucer fs-3 mb-2 text-gold"></i>
-                                                <span class="zone-name fw-bold text-light mb-1" data-i18n="res.zone_bar_title">Quầy Barista</span>
+                                                <span class="zone-name fw-bold text-primary mb-1" data-i18n="res.zone_bar_title">Quầy Barista</span>
                                                 <span class="zone-desc text-secondary" data-i18n="res.zone_bar_desc">Trải nghiệm pha chế</span>
                                             </label>
                                         </div>
@@ -151,7 +151,7 @@
                                             <input type="radio" class="btn-check" name="zonePreference" id="zoneLounge" value="LOUNGE">
                                             <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneLounge">
                                                 <i class="fa-solid fa-couch fs-3 mb-2 text-gold"></i>
-                                                <span class="zone-name fw-bold text-light mb-1" data-i18n="res.zone_lounge_title">Sofa VIP Lounge</span>
+                                                <span class="zone-name fw-bold text-primary mb-1" data-i18n="res.zone_lounge_title">Sofa VIP Lounge</span>
                                                 <span class="zone-desc text-secondary" data-i18n="res.zone_lounge_desc">Yên tĩnh, sang trọng</span>
                                             </label>
                                         </div>
@@ -159,7 +159,7 @@
                                             <input type="radio" class="btn-check" name="zonePreference" id="zoneGarden" value="GARDEN">
                                             <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneGarden">
                                                 <i class="fa-solid fa-tree fs-3 mb-2 text-gold"></i>
-                                                <span class="zone-name fw-bold text-light mb-1" data-i18n="res.zone_garden_title">Sân Vườn Xanh</span>
+                                                <span class="zone-name fw-bold text-primary mb-1" data-i18n="res.zone_garden_title">Sân Vườn Xanh</span>
                                                 <span class="zone-desc text-secondary" data-i18n="res.zone_garden_desc">Thoáng đãng tự nhiên</span>
                                             </label>
                                         </div>
@@ -167,7 +167,7 @@
                                             <input type="radio" class="btn-check" name="zonePreference" id="zoneWork" value="WORK">
                                             <label class="zone-option-card d-flex flex-column align-items-center justify-content-center p-3 text-center rounded-3 h-100" for="zoneWork">
                                                 <i class="fa-solid fa-laptop fs-3 mb-2 text-gold"></i>
-                                                <span class="zone-name fw-bold text-light mb-1" data-i18n="res.zone_work_title">Bàn Co-Working</span>
+                                                <span class="zone-name fw-bold text-primary mb-1" data-i18n="res.zone_work_title">Bàn Co-Working</span>
                                                 <span class="zone-desc text-secondary" data-i18n="res.zone_work_desc">Ổ điện &amp; WiFi mạnh</span>
                                             </label>
                                         </div>

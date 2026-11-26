@@ -23,7 +23,7 @@
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
                     <span class="small text-secondary font-accent text-uppercase">Tổng Mã Phát Hành</span>
-                    <h4 class="font-serif fw-bold text-light mb-0">${coupons.size()} Mã</h4>
+                    <h4 class="font-serif fw-bold text-primary mb-0">${coupons.size()} Mã</h4>
                 </div>
                 <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-tags"></i></div>
             </div>
@@ -73,7 +73,7 @@
                                 </span>
                             </td>
                             <td>
-                                <div class="fw-bold text-light">${c.title}</div>
+                                <div class="fw-bold text-primary">${c.title}</div>
                                 <small class="text-secondary">${not empty c.description ? c.description : 'Ưu đãi dành cho thành viên'}</small>
                             </td>
                             <td>
@@ -93,7 +93,7 @@
                                     </c:choose>
                                 </span>
                             </td>
-                            <td class="text-light small">
+                            <td class="text-primary small">
                                 <fmt:formatNumber value="${c.minOrderValue}" pattern="#,##0"/> VNĐ
                             </td>
                             <td>
@@ -103,7 +103,7 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="badge ${c.isActive ? 'bg-success-subtle text-success border border-success' : 'bg-secondary text-light'} px-2 py-1">
+                                <span class="badge ${c.isActive ? 'bg-success-subtle text-success border border-success' : 'bg-secondary text-primary'} px-2 py-1">
                                     ${c.isActive ? 'Đang Chạy' : 'Tạm Dừng'}
                                 </span>
                             </td>
@@ -122,7 +122,7 @@
     <!-- Modal Create Coupon -->
     <div class="modal fade" id="createCouponModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content card-luxury border-gold bg-espresso text-light shadow-lg">
+            <div class="modal-content card-luxury border-gold bg-espresso text-primary shadow-lg">
                 <div class="modal-header border-gold pb-3">
                     <h5 class="modal-title font-serif text-primary fw-bold">
                         <i class="fa-solid fa-tags me-2"></i>Tạo Mã Khuyến Mãi Mới

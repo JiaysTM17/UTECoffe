@@ -24,7 +24,7 @@
     
     <sitemesh:write property='head'/>
 </head>
-<body class="bg-obsidian text-light min-vh-100 d-flex flex-column">
+<body class="bg-obsidian text-primary min-vh-100 d-flex flex-column">
     <!-- Barista KDS Top Header -->
     <header class="py-2 px-4 border-bottom border-gold bg-espresso d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center gap-3">

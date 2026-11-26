@@ -27,7 +27,7 @@
                             <h5 class="font-serif fw-bold text-primary mb-0 text-truncate" title="${store.name}">
                                 ${store.name}
                             </h5>
-                            <span class="badge ${store.isActive ? 'bg-success-subtle text-success border border-success' : 'bg-secondary text-light'} small font-accent flex-shrink-0 ms-2">
+                            <span class="badge ${store.isActive ? 'bg-success-subtle text-success border border-success' : 'bg-secondary text-primary'} small font-accent flex-shrink-0 ms-2">
                                 ${store.isActive ? 'Hoạt Động' : 'Tạm Đóng'}
                             </span>
                         </div>
@@ -61,7 +61,7 @@
                 <small class="text-secondary">Khách hàng đặt bàn từ website theo từng khung giờ và khu vực ưa thích</small>
             </div>
             <div class="d-flex gap-2 mt-2 mt-md-0">
-                <span class="badge bg-dark-roast border border-secondary text-light px-3 py-2 font-accent">
+                <span class="badge bg-dark-roast border border-secondary text-primary px-3 py-2 font-accent">
                     Tổng: <strong>${reservations.size()}</strong> lượt đặt
                 </span>
             </div>
@@ -88,13 +88,13 @@
                                 <tr id="res-row-${res.id}">
                                     <td class="font-accent fw-bold text-gold">#RES-${res.id}</td>
                                     <td>
-                                        <div class="fw-bold text-light">${res.user != null ? res.user.fullName : 'Khách vãng lai'}</div>
+                                        <div class="fw-bold text-primary">${res.user != null ? res.user.fullName : 'Khách vãng lai'}</div>
                                         <small class="text-secondary">${res.user != null ? res.user.phoneNumber : ''}</small>
                                     </td>
-                                    <td><span class="badge bg-dark-roast border border-secondary text-light">${res.store.name}</span></td>
+                                    <td><span class="badge bg-dark-roast border border-secondary text-primary">${res.store.name}</span></td>
                                     <td><span class="fw-bold text-gold">${res.guestCount} Khách</span></td>
                                     <td>
-                                        <div class="small text-light">${res.reservationTime}</div>
+                                        <div class="small text-primary">${res.reservationTime}</div>
                                     </td>
                                     <td>
                                         <small class="text-secondary">${not empty res.note ? res.note : 'Tiêu chuẩn quầy'}</small>

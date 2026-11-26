@@ -46,7 +46,7 @@
         }
     </style>
 </head>
-<body class="bg-obsidian text-light">
+<body class="bg-obsidian text-primary">
     <!-- Top Filter & Controls Strip -->
     <div class="p-3 bg-espresso border border-gold rounded-3 mb-3 shadow-lg">
         <div class="row align-items-center g-3">
@@ -67,7 +67,7 @@
                         <ul class="dropdown-menu dropdown-menu-dark border-gold bg-espresso">
                             <c:forEach var="st" items="${allStores}">
                                 <li>
-                                    <a class="dropdown-item ${st.id == store.id ? 'active text-gold' : 'text-light'}" 
+                                    <a class="dropdown-item ${st.id == store.id ? 'active text-gold' : 'text-primary'}" 
                                        href="${pageContext.request.contextPath}/barista/kds?storeId=${st.id}">
                                         <i class="fa-solid fa-location-dot me-1 text-gold"></i> ${st.name}
                                     </a>
@@ -82,15 +82,15 @@
             <div class="col-lg-5 col-md-6">
                 <div class="d-flex flex-wrap gap-2 justify-content-md-center">
                     <span class="badge bg-dark-roast border border-gold text-gold px-2 py-2 font-accent">
-                        <i class="fa-solid fa-clock-rotate-left me-1"></i> Chờ pha: <strong class="text-light" id="statPending">${pendingCount}</strong>
+                        <i class="fa-solid fa-clock-rotate-left me-1"></i> Chờ pha: <strong class="text-primary" id="statPending">${pendingCount}</strong>
                     </span>
                     <span class="badge bg-dark-roast border border-warning text-warning px-2 py-2 font-accent">
-                        <i class="fa-solid fa-fire me-1"></i> Đang pha: <strong class="text-light" id="statPreparing">${preparingCount}</strong>
+                        <i class="fa-solid fa-fire me-1"></i> Đang pha: <strong class="text-primary" id="statPreparing">${preparingCount}</strong>
                     </span>
-                    <span class="badge bg-dark-roast border border-secondary text-light px-2 py-2 font-accent">
+                    <span class="badge bg-dark-roast border border-secondary text-primary px-2 py-2 font-accent">
                         🍽️ Tại bàn: <strong>${dineInCount}</strong>
                     </span>
-                    <span class="badge bg-dark-roast border border-secondary text-light px-2 py-2 font-accent">
+                    <span class="badge bg-dark-roast border border-secondary text-primary px-2 py-2 font-accent">
                         🥤 Mang đi: <strong>${takeAwayCount}</strong>
                     </span>
                 </div>
@@ -149,7 +149,7 @@
                             <div class="card-header bg-dark-roast border-bottom border-gold d-flex justify-content-between align-items-center py-2 px-3">
                                 <div>
                                     <span class="font-accent fw-bold text-gold fs-5">#${ord.orderCode}</span>
-                                    <span class="badge ${ord.status == 'PREPARING' ? 'bg-warning text-dark' : 'bg-secondary text-light'} ms-1 small status-badge-${ord.id}">
+                                    <span class="badge ${ord.status == 'PREPARING' ? 'bg-warning text-dark' : 'bg-secondary text-primary'} ms-1 small status-badge-${ord.id}">
                                         ${ord.status == 'PREPARING' ? 'Đang Pha' : 'Chờ Pha'}
                                     </span>
                                 </div>
@@ -172,7 +172,7 @@
                             <div class="card-body p-3 d-flex flex-column justify-content-between">
                                 <div>
                                     <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <div class="small text-light">
+                                        <div class="small text-primary">
                                             <i class="fa-solid fa-user me-1 text-gold"></i><strong>${ord.recipientName}</strong> 
                                             <span class="text-secondary">(${ord.recipientPhone})</span>
                                         </div>
@@ -194,7 +194,7 @@
                                         <c:forEach var="item" items="${ord.items}">
                                             <li class="py-2 border-bottom border-secondary border-opacity-25">
                                                 <div class="d-flex justify-content-between align-items-start">
-                                                    <span class="fw-bold text-light">${item.quantity}x ${item.product.name}</span>
+                                                    <span class="fw-bold text-primary">${item.quantity}x ${item.product.name}</span>
                                                     <span class="badge bg-espresso border border-gold-subtle text-gold small">${item.productSize.name}</span>
                                                 </div>
                                                 <div class="text-secondary small mt-1 d-flex flex-wrap gap-1">

@@ -108,7 +108,7 @@
                             <span class="badge px-3 py-1.5 text-white fw-bold font-accent" style="background: #cd7f32;" data-i18n="modal.tier_bronze_badge">HẠNG ĐỒNG</span>
                             <span class="text-secondary small font-monospace text-nowrap" data-i18n="modal.tier_bronze_pts">0 - 499 pts</span>
                         </div>
-                        <h4 class="font-serif fw-bold text-light mb-2" data-i18n="modal.tier_bronze_name">Thành Viên Khởi Đầu</h4>
+                        <h4 class="font-serif fw-bold text-primary mb-2" data-i18n="modal.tier_bronze_name">Thành Viên Khởi Đầu</h4>
                         <p class="text-secondary small mb-4" data-i18n="modal.tier_bronze_desc">Kích hoạt ngay khi tạo tài khoản miễn phí tại UTECoffe.</p>
                         
                         <h6 class="font-accent fw-bold text-gold small text-uppercase mb-2" data-i18n="ute.benefits_label">Đặc Quyền Bao Gồm:</h6>
@@ -127,7 +127,7 @@
                             <span class="badge px-3 py-1.5 text-dark fw-bold font-accent" style="background: #c0c0c0;" data-i18n="modal.tier_silver_badge">HẠNG BẠC</span>
                             <span class="text-secondary small font-monospace text-nowrap" data-i18n="modal.tier_silver_pts">500 - 1.499 pts</span>
                         </div>
-                        <h4 class="font-serif fw-bold text-light mb-2" data-i18n="modal.tier_silver_name">Hội Viên Bạc</h4>
+                        <h4 class="font-serif fw-bold text-primary mb-2" data-i18n="modal.tier_silver_name">Hội Viên Bạc</h4>
                         <p class="text-secondary small mb-4" data-i18n="modal.tier_silver_desc">Dành cho khách hàng thân thiết thường xuyên ghé thăm.</p>
                         
                         <h6 class="font-accent fw-bold text-gold small text-uppercase mb-2" data-i18n="ute.benefits_label">Đặc Quyền Bao Gồm:</h6>
@@ -167,7 +167,7 @@
                             <span class="badge px-3 py-1.5 text-dark fw-bold font-accent" style="background: #b9f2ff;" data-i18n="modal.tier_diamond_badge">KIM CƯƠNG</span>
                             <span class="text-info small font-monospace fw-bold text-nowrap" data-i18n="modal.tier_diamond_pts">3.000+ pts</span>
                         </div>
-                        <h4 class="font-serif fw-bold text-light mb-2" data-i18n="modal.tier_diamond_name">Thượng Khách Kim Cương</h4>
+                        <h4 class="font-serif fw-bold text-primary mb-2" data-i18n="modal.tier_diamond_name">Thượng Khách Kim Cương</h4>
                         <p class="text-secondary small mb-4" data-i18n="modal.tier_diamond_desc">Đỉnh cao đặc quyền cá nhân hóa và trải nghiệm roastery độc bản.</p>
                         
                         <h6 class="font-accent fw-bold text-gold small text-uppercase mb-2" data-i18n="ute.benefits_label">Đặc Quyền Bao Gồm:</h6>
@@ -282,28 +282,28 @@
                 <div class="col-md-3 col-6">
                     <div class="p-3">
                         <div class="rounded-circle border border-gold d-inline-flex align-items-center justify-content-center text-gold fs-4 fw-bold mb-3" style="width: 50px; height: 50px;">1</div>
-                        <h6 class="font-serif fw-bold text-light mb-1" data-i18n="ute.step1_title">Đăng Ký Miễn Phí</h6>
+                        <h6 class="font-serif fw-bold text-primary mb-1" data-i18n="ute.step1_title">Đăng Ký Miễn Phí</h6>
                         <p class="text-secondary small mb-0" data-i18n="ute.step1_desc">Tạo tài khoản trực tuyến chỉ với Email hoặc Số điện thoại trong 30 giây.</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="p-3">
                         <div class="rounded-circle border border-gold d-inline-flex align-items-center justify-content-center text-gold fs-4 fw-bold mb-3" style="width: 50px; height: 50px;">2</div>
-                        <h6 class="font-serif fw-bold text-light mb-1" data-i18n="ute.step2_title">Thưởng Thức Đồ Uống</h6>
+                        <h6 class="font-serif fw-bold text-primary mb-1" data-i18n="ute.step2_title">Thưởng Thức Đồ Uống</h6>
                         <p class="text-secondary small mb-0" data-i18n="ute.step2_desc">Đặt món trực tuyến hoặc đến trực tiếp chuỗi 3 chi nhánh Flagship.</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="p-3">
                         <div class="rounded-circle border border-gold d-inline-flex align-items-center justify-content-center text-gold fs-4 fw-bold mb-3" style="width: 50px; height: 50px;">3</div>
-                        <h6 class="font-serif fw-bold text-light mb-1" data-i18n="ute.step3_title">Tích Điểm Tự Động</h6>
+                        <h6 class="font-serif fw-bold text-primary mb-1" data-i18n="ute.step3_title">Tích Điểm Tự Động</h6>
                         <p class="text-secondary small mb-0" data-i18n="ute.step3_desc">Mỗi hóa đơn được hệ thống ghi nhận và tích lũy 10% giá trị ngay lập tức.</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="p-3">
                         <div class="rounded-circle border border-gold d-inline-flex align-items-center justify-content-center text-gold fs-4 fw-bold mb-3" style="width: 50px; height: 50px;">4</div>
-                        <h6 class="font-serif fw-bold text-light mb-1" data-i18n="ute.step4_title">Tận Hưởng Đặc Quyền</h6>
+                        <h6 class="font-serif fw-bold text-primary mb-1" data-i18n="ute.step4_title">Tận Hưởng Đặc Quyền</h6>
                         <p class="text-secondary small mb-0" data-i18n="ute.step4_desc">Thăng hạng thẻ, nhận voucher giảm giá và tận hưởng trọn vẹn đặc quyền.</p>
                     </div>
                 </div>
@@ -322,7 +322,7 @@
             <div class="accordion accordion-flush" id="uteClubFaqAccordion">
                 <div class="accordion-item bg-espresso border border-gold-subtle mb-3 rounded-3 overflow-hidden">
                     <h2 class="accordion-header" id="faqHeading1">
-                        <button class="accordion-button collapsed bg-espresso text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1">
+                        <button class="accordion-button collapsed bg-espresso text-primary fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1">
                             <i class="fa-solid fa-circle-question text-gold me-2"></i> <span data-i18n="ute.faq1_q">Điểm UTEClub được tính như thế nào?</span>
                         </button>
                     </h2>
@@ -335,7 +335,7 @@
 
                 <div class="accordion-item bg-espresso border border-gold-subtle mb-3 rounded-3 overflow-hidden">
                     <h2 class="accordion-header" id="faqHeading2">
-                        <button class="accordion-button collapsed bg-espresso text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2">
+                        <button class="accordion-button collapsed bg-espresso text-primary fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2">
                             <i class="fa-solid fa-circle-question text-gold me-2"></i> <span data-i18n="ute.faq2_q">Hạng thẻ hội viên có thời hạn sử dụng hay bị hạ hạng không?</span>
                         </button>
                     </h2>
@@ -348,7 +348,7 @@
 
                 <div class="accordion-item bg-espresso border border-gold-subtle mb-3 rounded-3 overflow-hidden">
                     <h2 class="accordion-header" id="faqHeading3">
-                        <button class="accordion-button collapsed bg-espresso text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3">
+                        <button class="accordion-button collapsed bg-espresso text-primary fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3">
                             <i class="fa-solid fa-circle-question text-gold me-2"></i> <span data-i18n="ute.faq3_q">Làm thế nào để nhận quà tặng sinh nhật?</span>
                         </button>
                     </h2>

@@ -18,7 +18,7 @@
             <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap text-secondary" style="font-size: 0.82rem;">
                 <span><span data-i18n="track.code_label">Mã Đơn Hàng:</span> <strong class="text-gold font-monospace">#${order.orderCode}</strong></span>
                 <span>•</span>
-                <span><span data-i18n="track.time_label">Đặt lúc:</span> <strong class="text-light">${not empty order.formattedCreatedAt ? order.formattedCreatedAt : order.createdAt}</strong></span>
+                <span><span data-i18n="track.time_label">Đặt lúc:</span> <strong class="text-primary">${not empty order.formattedCreatedAt ? order.formattedCreatedAt : order.createdAt}</strong></span>
             </div>
         </div>
     </div>
@@ -94,7 +94,7 @@
                     <i class="fa-solid fa-circle-info"></i>
                 </div>
                 <div class="flex-grow-1">
-                    <div class="fw-bold text-light" style="font-size: 0.82rem;" id="statusMessageHeader" data-i18n="track.barista_note">Thông điệp từ quầy Barista:</div>
+                    <div class="fw-bold text-primary" style="font-size: 0.82rem;" id="statusMessageHeader" data-i18n="track.barista_note">Thông điệp từ quầy Barista:</div>
                     <div class="text-secondary" style="font-size: 0.78rem;" id="statusDescText">
                         Đơn hàng #${order.orderCode} đã được chuyển tới máy in hóa đơn quầy Barista chi nhánh ${order.store.name}.
                     </div>
@@ -125,7 +125,7 @@
                                 <c:forEach var="item" items="${order.items}">
                                     <tr>
                                         <td>
-                                            <div class="fw-bold font-serif text-light" style="font-size: 0.88rem;">${item.product.name}</div>
+                                            <div class="fw-bold font-serif text-primary" style="font-size: 0.88rem;">${item.product.name}</div>
                                             <small class="text-gold d-block" style="font-size: 0.72rem;">
                                                 Size: ${not empty item.productSize ? item.productSize.name : 'M'} • ${not empty item.sugarLevel ? item.sugarLevel : 100}% Đường • ${not empty item.iceLevel ? item.iceLevel : 100}% Đá
                                             </small>
@@ -156,13 +156,13 @@
 
                     <div class="mb-2">
                         <span class="text-secondary d-block" style="font-size: 0.75rem;" data-i18n="track.recipient">Người nhận:</span>
-                        <div class="fw-bold text-light" style="font-size: 0.86rem;">${order.recipientName}</div>
+                        <div class="fw-bold text-primary" style="font-size: 0.86rem;">${order.recipientName}</div>
                         <div class="text-gold font-monospace" style="font-size: 0.82rem;"><i class="fa-solid fa-phone me-1"></i>${order.recipientPhone}</div>
                     </div>
 
                     <div class="mb-2">
                         <span class="text-secondary d-block" style="font-size: 0.75rem;" data-i18n="track.address">Địa chỉ giao:</span>
-                        <div class="text-light" style="font-size: 0.82rem;">
+                        <div class="text-primary" style="font-size: 0.82rem;">
                             <i class="fa-solid fa-house-chimney text-gold me-1"></i>
                             ${not empty order.deliveryAddress ? order.deliveryAddress : 'Nhận trực tiếp tại quầy UTECoffe Roastery'}
                         </div>
@@ -170,7 +170,7 @@
 
                     <div class="mb-2">
                         <span class="text-secondary d-block" style="font-size: 0.75rem;" data-i18n="track.store">Chi nhánh chế biến:</span>
-                        <div class="text-light fw-bold" style="font-size: 0.84rem;">${order.store.name}</div>
+                        <div class="text-primary fw-bold" style="font-size: 0.84rem;">${order.store.name}</div>
                         <div class="text-secondary" style="font-size: 0.76rem;">${order.store.address}</div>
                     </div>
 
@@ -231,7 +231,7 @@
                                 <div class="transfer-slate p-3 mb-3 text-start">
                                     <div class="d-flex justify-content-between align-items-center py-1.5 transfer-line">
                                         <span class="text-secondary small">Ngân Hàng Thụ Hưởng:</span>
-                                        <strong class="text-light" id="qrBankName" style="font-size: 0.88rem;">VietinBank (Chi nhánh Thủ Đức)</strong>
+                                        <strong class="text-primary" id="qrBankName" style="font-size: 0.88rem;">VietinBank (Chi nhánh Thủ Đức)</strong>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
                                         <span class="text-secondary small">Số Tài Khoản:</span>
@@ -244,7 +244,7 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center py-1.5 transfer-line">
                                         <span class="text-secondary small">Chủ Tài Khoản:</span>
-                                        <strong class="text-light text-uppercase font-serif" style="font-size: 0.85rem; letter-spacing: 0.03em;">CONG TY CP CA PHE UTE COFFE</strong>
+                                        <strong class="text-primary text-uppercase font-serif" style="font-size: 0.85rem; letter-spacing: 0.03em;">CONG TY CP CA PHE UTE COFFE</strong>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
                                         <span class="text-secondary small">Số Tiền Cần Chuyển:</span>
@@ -370,7 +370,7 @@
                                                 <i class="fa-solid fa-circle-check text-success display-4"></i>
                                             </div>
                                             <h5 class="font-serif fw-bold text-gold mb-2">Thanh Toán Thành Công!</h5>
-                                            <p class="small text-light mb-3">Khoản thanh toán đã được ghi nhận. Lệnh pha chế đã được chuyển tới quầy Barista.</p>
+                                            <p class="small text-primary mb-3">Khoản thanh toán đã được ghi nhận. Lệnh pha chế đã được chuyển tới quầy Barista.</p>
                                             <span class="badge bg-espresso border border-gold text-gold font-monospace px-3 py-1.5 rounded-pill">
                                                 <i class="fa-solid fa-mug-hot me-1.5 text-warning fa-bounce"></i> Barista đang bắt đầu pha chế
                                             </span>
@@ -408,8 +408,8 @@
                                 <i class="fa-solid fa-circle-check text-success display-4"></i>
                             </div>
                             <h5 class="font-serif fw-bold text-gold mb-2">Đơn Hàng Đang Được Xử Lý</h5>
-                            <p class="text-secondary small mb-3">Phương thức thanh toán: <strong class="text-light">${order.paymentMethod}</strong></p>
-                            <p class="text-light small mx-auto" style="max-width: 420px;">
+                            <p class="text-secondary small mb-3">Phương thức thanh toán: <strong class="text-primary">${order.paymentMethod}</strong></p>
+                            <p class="text-primary small mx-auto" style="max-width: 420px;">
                                 Nhân viên sẽ gọi điện xác nhận và giao hàng tận tay cho quý khách trong thời gian sớm nhất.
                             </p>
                         </div>

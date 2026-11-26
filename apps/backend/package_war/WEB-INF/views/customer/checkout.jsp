@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
-                                        <span class="font-serif fw-bold text-light fs-6">Chuyển Khoản Ngân Hàng (VietQR Động)</span>
+                                        <span class="font-serif fw-bold text-primary fs-6">Chuyển Khoản Ngân Hàng (VietQR Động)</span>
                                         <span class="badge bg-gold text-dark small px-2 py-0.5 rounded-2 fw-semibold" style="font-size: 0.68rem;">Khuyên dùng</span>
                                     </div>
                                     <div class="text-secondary small" style="font-size: 0.8rem; line-height: 1.4;">
@@ -144,7 +144,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
-                                        <span class="font-serif fw-bold text-light fs-6">Cổng VNPay-QR Trực Tiếp</span>
+                                        <span class="font-serif fw-bold text-primary fs-6">Cổng VNPay-QR Trực Tiếp</span>
                                         <span class="badge bg-espresso border border-gold-subtle text-gold small px-2 py-0.5 rounded-pill font-accent" style="font-size: 0.68rem;">Không chuyển hướng</span>
                                     </div>
                                     <div class="text-secondary small" style="font-size: 0.8rem; line-height: 1.4;">
@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
-                                        <span class="font-serif fw-bold text-light fs-6">Ví Điện Tử MoMo QR</span>
+                                        <span class="font-serif fw-bold text-primary fs-6">Ví Điện Tử MoMo QR</span>
                                     </div>
                                     <div class="text-secondary small" style="font-size: 0.8rem; line-height: 1.4;">
                                         Quét mã QR động qua ứng dụng MoMo, thanh toán tức thì và tích lũy điểm thưởng.
@@ -183,7 +183,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
-                                        <span class="font-serif fw-bold text-light fs-6">Tiền Mặt Khi Nhận Hàng (COD)</span>
+                                        <span class="font-serif fw-bold text-primary fs-6">Tiền Mặt Khi Nhận Hàng (COD)</span>
                                     </div>
                                     <div class="text-secondary small" style="font-size: 0.8rem; line-height: 1.4;">
                                         Thanh toán tiền mặt trực tiếp cho nhân viên giao hàng khi nhận thức uống tận tay.
@@ -212,7 +212,7 @@
                                                  style="width: 44px; height: 44px;" 
                                                  alt="${item.product.name}">
                                             <div class="text-truncate">
-                                                <div class="text-light fw-bold text-truncate" style="font-size: 0.86rem;">${item.product.name}</div>
+                                                <div class="text-primary fw-bold text-truncate" style="font-size: 0.86rem;">${item.product.name}</div>
                                                 <small class="text-gold d-block" style="font-size: 0.72rem;">
                                                     Size: ${item.productSize.name} • SL: ${item.quantity}
                                                 </small>
@@ -230,7 +230,7 @@
                         <div class="mb-2.5">
                             <div class="d-flex justify-content-between small text-secondary mb-1.5" style="font-size: 0.82rem;">
                                 <span>Tạm tính thức uống:</span>
-                                <span class="text-light fw-bold font-monospace">
+                                <span class="text-primary fw-bold font-monospace">
                                     <fmt:formatNumber value="${not empty cart ? cart.totalAmount : 125000}" pattern="#,##0"/> VNĐ
                                 </span>
                             </div>
@@ -241,7 +241,7 @@
                                         <span class="text-success fw-bold">Miễn Phí</span>
                                     </c:when>
                                     <c:otherwise>
-                                        <span class="text-light fw-bold font-monospace">
+                                        <span class="text-primary fw-bold font-monospace">
                                             <fmt:formatNumber value="${not empty cart ? cart.shippingFee : 15000}" pattern="#,##0"/> VNĐ
                                         </span>
                                     </c:otherwise>
@@ -280,7 +280,7 @@
                     <div class="card-luxury p-3 mt-3 bg-espresso border-gold-subtle">
                         <div class="d-flex align-items-center gap-2 mb-2 pb-1.5 border-bottom border-gold border-opacity-25">
                             <i class="fa-solid fa-medal text-gold"></i>
-                            <span class="font-serif fw-bold text-light" style="font-size: 0.88rem;">Cam Kết Hương Vị Nghệ Nhân</span>
+                            <span class="font-serif fw-bold text-primary" style="font-size: 0.88rem;">Cam Kết Hương Vị Nghệ Nhân</span>
                         </div>
                         <ul class="list-unstyled mb-0 small text-secondary d-flex flex-column gap-1.5" style="font-size: 0.78rem;">
                             <li class="d-flex align-items-start gap-2">

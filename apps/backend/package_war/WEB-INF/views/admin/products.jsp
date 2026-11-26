@@ -61,7 +61,7 @@
                                 <img src="${p.imageUrl}" alt="${p.name}" style="width: 50px; height: 50px; object-fit: cover;" class="rounded-3 border border-gold-subtle shadow-sm">
                             </td>
                             <td>
-                                <div class="fw-bold text-light product-name">${p.name}</div>
+                                <div class="fw-bold text-primary product-name">${p.name}</div>
                                 <small class="text-secondary font-accent">${p.slug}</small>
                             </td>
                             <td>

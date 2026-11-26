@@ -89,12 +89,12 @@
                                 </a>
                             </td>
                             <td>
-                                <div class="fw-bold text-light">${ord.recipientName}</div>
+                                <div class="fw-bold text-primary">${ord.recipientName}</div>
                                 <small class="text-secondary">${ord.recipientPhone}</small>
                             </td>
-                            <td><span class="badge bg-dark-roast border border-secondary text-light">${ord.store.name}</span></td>
+                            <td><span class="badge bg-dark-roast border border-secondary text-primary">${ord.store.name}</span></td>
                             <td>
-                                <span class="badge bg-espresso border border-secondary text-light">
+                                <span class="badge bg-espresso border border-secondary text-primary">
                                     <c:choose>
                                         <c:when test="${ord.orderType == 'DINE_IN'}">🍽️ Tại Quán</c:when>
                                         <c:when test="${ord.orderType == 'TAKE_AWAY'}">🥤 Mang Đi</c:when>
@@ -106,7 +106,7 @@
                                 <fmt:formatNumber value="${ord.finalAmount}" pattern="#,##0"/> VNĐ
                             </td>
                             <td>
-                                <span class="badge ${ord.status == 'COMPLETED' ? 'bg-success' : (ord.status == 'CANCELLED' ? 'bg-danger' : (ord.status == 'PREPARING' ? 'bg-warning text-dark' : 'bg-secondary text-light'))} px-2 py-1 row-status-badge-${ord.id}">
+                                <span class="badge ${ord.status == 'COMPLETED' ? 'bg-success' : (ord.status == 'CANCELLED' ? 'bg-danger' : (ord.status == 'PREPARING' ? 'bg-warning text-dark' : 'bg-secondary text-primary'))} px-2 py-1 row-status-badge-${ord.id}">
                                     <c:choose>
                                         <c:when test="${ord.status == 'COMPLETED'}">Hoàn Tất</c:when>
                                         <c:when test="${ord.status == 'PREPARING'}">Đang Pha</c:when>

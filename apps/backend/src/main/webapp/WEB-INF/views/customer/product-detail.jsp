@@ -752,8 +752,8 @@
                                 <span class="badge bg-dark-roast text-gold border border-gold-subtle mb-2 align-self-start small font-accent" style="font-size: 0.7rem;">
                                     ${pair.pairingTag}
                                 </span>
-                                <h6 class="font-serif fw-bold text-light mb-1">
-                                    <a href="${pageContext.request.contextPath}/menu/${pair.recommendedProduct.slug}" class="text-light text-decoration-none hover-gold">
+                                <h6 class="font-serif fw-bold text-primary mb-1">
+                                    <a href="${pageContext.request.contextPath}/menu/${pair.recommendedProduct.slug}" class="text-primary text-decoration-none hover-gold">
                                         ${pair.recommendedProduct.name}
                                     </a>
                                 </h6>

@@ -28,7 +28,7 @@
                 <!-- Free Shipping Progress Tracker: Compact & Neat -->
                 <div class="card-luxury p-3 mb-3 bg-espresso border-gold-subtle">
                     <div class="d-flex justify-content-between align-items-center mb-1.5 flex-wrap gap-2">
-                        <span class="small fw-bold text-light" id="freeShippingNotice" style="font-size: 0.82rem;">
+                        <span class="small fw-bold text-primary" id="freeShippingNotice" style="font-size: 0.82rem;">
                             <i class="fa-solid fa-truck-fast text-gold me-2"></i>
                             <span data-i18n="cart.freeship_notice">Đơn hàng từ <strong>150.000₫</strong> được <strong>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC</strong></span>
                         </span>
@@ -76,7 +76,7 @@
                                                                  alt="${item.product.name}">
                                                         </div>
                                                         <div class="flex-grow-1 min-w-0">
-                                                            <div class="cart-product-title font-serif fw-bold text-light mb-1" style="font-size: 1.05rem; letter-spacing: -0.01em; word-break: break-word;">${item.product.name}</div>
+                                                            <div class="cart-product-title font-serif fw-bold text-primary mb-1" style="font-size: 1.05rem; letter-spacing: -0.01em; word-break: break-word;">${item.product.name}</div>
                                                             <div class="cart-product-meta d-flex align-items-center flex-wrap gap-1">
                                                                 <span class="badge bg-espresso border border-gold-subtle px-2 py-0.5 text-gold" style="font-size: 0.72rem; letter-spacing: 0.04em;">
                                                                     <c:choose>
@@ -104,7 +104,7 @@
                                                 <td class="text-center">
                                                     <div class="input-group input-group-sm mx-auto" style="width: 96px;">
                                                         <button class="btn btn-outline-gold px-1.5 btn-qty-minus" type="button"><i class="fa-solid fa-minus fa-2xs"></i></button>
-                                                        <input type="text" class="form-control text-center font-monospace fw-bold bg-dark text-light border-gold item-qty-input px-1" style="font-size: 0.85rem;" value="${item.quantity}" readonly>
+                                                        <input type="text" class="form-control form-control-luxury text-center font-monospace fw-bold item-qty-input px-1" style="font-size: 0.85rem;" value="${item.quantity}" readonly>
                                                         <button class="btn btn-outline-gold px-1.5 btn-qty-plus" type="button"><i class="fa-solid fa-plus fa-2xs"></i></button>
                                                     </div>
                                                 </td>
@@ -147,7 +147,7 @@
                                                          style="width: 44px; height: 44px;" 
                                                          alt="${rec.targetProductName}">
                                                     <div class="min-w-0 flex-grow-1">
-                                                        <div class="text-light fw-bold lh-sm" title="${rec.targetProductName}" style="font-size: 0.84rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.1em;">
+                                                        <div class="text-primary fw-bold lh-sm" title="${rec.targetProductName}" style="font-size: 0.84rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.1em;">
                                                             ${rec.targetProductName}
                                                         </div>
                                                         <div class="price-gold font-monospace fw-bold mt-1" style="font-size: 0.8rem;">
@@ -198,7 +198,7 @@
                             <!-- Cost Breakdown -->
                             <div class="d-flex justify-content-between mb-1.5 small text-secondary" style="font-size: 0.82rem;">
                                 <span data-i18n="cart.subtotal_label">Tổng tiền món:</span>
-                                <span class="text-light fw-bold font-monospace product-price-val" id="cartSubtotalText" data-raw-price="${cart.totalAmount}" data-vnd="${cart.totalAmount}">
+                                <span class="text-primary fw-bold font-monospace product-price-val" id="cartSubtotalText" data-raw-price="${cart.totalAmount}" data-vnd="${cart.totalAmount}">
                                     <fmt:formatNumber value="${cart.totalAmount}" pattern="#,##0"/> VNĐ
                                 </span>
                             </div>
@@ -281,7 +281,7 @@
                     if (subtotal >= threshold) {
                         freeShippingNotice.innerHTML = '<i class="fa-solid fa-circle-check text-success me-2"></i>Đơn hàng đã đủ điều kiện <strong>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC!</strong>';
                         if (shippingStatusBadge) {
-                            shippingStatusBadge.className = 'badge bg-success text-light fw-bold font-monospace px-2.5 py-0.5 rounded-pill';
+                            shippingStatusBadge.className = 'badge bg-success text-primary fw-bold font-monospace px-2.5 py-0.5 rounded-pill';
                             shippingStatusBadge.textContent = 'FREESHIP ĐẠT';
                         }
                         if (shippingText) shippingText.textContent = 'Miễn Phí';

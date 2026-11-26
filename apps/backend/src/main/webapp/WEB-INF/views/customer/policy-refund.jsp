@@ -4,7 +4,7 @@
 <head>
     <title>Chính Sách Đổi Trả & Bồi Hoàn Điểm - UTECoffe</title>
 </head>
-<body class="bg-obsidian text-light">
+<body class="bg-obsidian text-primary">
     <div class="container py-5 my-3" style="max-width: 900px;">
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb small font-accent">
@@ -45,7 +45,7 @@
 
                 <h5 class="text-gold font-accent fw-bold mb-2">4. Kênh Tiếp Nhận Khiếu Nại</h5>
                 <p class="mb-0">
-                    Quý khách chỉ cần thông báo cho Barista tại quầy hoặc chụp ảnh gửi về Hotline CSKH: <strong class="text-light">1900 2026</strong> hoặc Email: <strong class="text-light">cskh@utecoffe.vn</strong>. Đội ngũ quản lý sẽ xử lý thỏa đáng ngay lập tức.
+                    Quý khách chỉ cần thông báo cho Barista tại quầy hoặc chụp ảnh gửi về Hotline CSKH: <strong class="text-primary">1900 2026</strong> hoặc Email: <strong class="text-primary">cskh@utecoffe.vn</strong>. Đội ngũ quản lý sẽ xử lý thỏa đáng ngay lập tức.
                 </p>
             </div>
 

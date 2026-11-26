@@ -162,7 +162,7 @@
                                         <div class="p-3 bg-espresso rounded-3 border border-gold-subtle d-flex align-items-center justify-content-between h-100">
                                             <div class="pe-2">
                                                 <span class="badge bg-gold text-obsidian fw-bold font-monospace mb-1">${uc.coupon.code}</span>
-                                                <div class="fw-bold text-light small mb-1">${uc.coupon.title}</div>
+                                                <div class="fw-bold text-primary small mb-1">${uc.coupon.title}</div>
                                                 <small class="text-secondary d-block" style="font-size: 0.75rem;">${uc.coupon.description}</small>
                                                 <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">HSD: 31/12/2026</small>
                                             </div>
@@ -223,8 +223,8 @@
                                                                 #${ord.orderCode}
                                                             </a>
                                                         </td>
-                                                        <td class="small text-light">${ord.store.name}</td>
-                                                        <td><span class="badge bg-espresso border border-secondary text-light small">${ord.orderType}</span></td>
+                                                        <td class="small text-primary">${ord.store.name}</td>
+                                                        <td><span class="badge bg-espresso border border-secondary text-primary small">${ord.orderType}</span></td>
                                                         <td class="text-gold fw-bold font-monospace">
                                                             <fmt:formatNumber value="${ord.finalAmount}" pattern="#,##0"/> VNĐ
                                                         </td>
@@ -276,7 +276,7 @@
                                                 <c:forEach var="tx" items="${pointsHistory}">
                                                     <tr>
                                                         <td class="small text-muted font-monospace">${tx.createdAt}</td>
-                                                        <td class="small text-light">${tx.description}</td>
+                                                        <td class="small text-primary">${tx.description}</td>
                                                         <td>
                                                             <span class="badge bg-espresso border border-gold-subtle text-gold small">${tx.transactionType}</span>
                                                         </td>

@@ -26,7 +26,7 @@
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
                     <span class="small text-secondary font-accent text-uppercase">Tồn Kho Khả Dụng</span>
-                    <h4 class="font-serif fw-bold text-light mb-0">${inventories.size()} Mặt Hàng</h4>
+                    <h4 class="font-serif fw-bold text-primary mb-0">${inventories.size()} Mặt Hàng</h4>
                 </div>
                 <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-warehouse"></i></div>
             </div>
@@ -89,10 +89,10 @@
                     <c:forEach var="inv" items="${inventories}">
                         <tr class="inv-row" data-store="${inv.store.name}">
                             <td>
-                                <span class="badge bg-dark-roast border border-secondary text-light">${inv.store.name}</span>
+                                <span class="badge bg-dark-roast border border-secondary text-primary">${inv.store.name}</span>
                             </td>
                             <td>
-                                <div class="fw-bold text-light">${inv.ingredient.name}</div>
+                                <div class="fw-bold text-primary">${inv.ingredient.name}</div>
                                 <small class="text-secondary">Đơn vị: ${inv.ingredient.unit}</small>
                             </td>
                             <td>
@@ -150,7 +150,7 @@
                             <tr>
                                 <td class="text-secondary">${l.createdAt}</td>
                                 <td><span class="badge bg-dark-roast border border-gold text-gold">${l.actionType}</span></td>
-                                <td class="text-light fw-bold">${l.quantity}</td>
+                                <td class="text-primary fw-bold">${l.quantity}</td>
                                 <td class="text-secondary">${l.reason}</td>
                             </tr>
                         </c:forEach>
@@ -163,7 +163,7 @@
     <!-- EOQ & ROP Supply Chain Optimization Modal -->
     <div class="modal fade" id="eoqModal" tabindex="-1" aria-labelledby="eoqModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content bg-card-dark border border-gold text-light">
+            <div class="modal-content bg-card-dark border border-gold text-primary">
                 <div class="modal-header border-gold bg-espresso">
                     <h5 class="modal-title font-serif text-primary" id="eoqModalLabel">
                         <i class="fa-solid fa-chart-line me-2 text-gold"></i>Mô Hình Kinh Tế Tối Ưu Tồn Kho EOQ &amp; Điểm Đặt Hàng ROP
@@ -228,17 +228,17 @@
                     if (res.success && res.data && res.data.length > 0) {
                         tbody.innerHTML = '';
                         res.data.forEach(item => {
-                            let badgeClass = 'bg-success text-light';
-                            if (item.stockStatus === 'CRITICAL_REORDER') badgeClass = 'bg-danger text-light';
+                            let badgeClass = 'bg-success text-primary';
+                            if (item.stockStatus === 'CRITICAL_REORDER') badgeClass = 'bg-danger text-primary';
                             else if (item.stockStatus === 'WARNING_LOW') badgeClass = 'bg-warning text-dark';
 
                             const tr = document.createElement('tr');
                             tr.innerHTML = `
                                 <td>
-                                    <strong class="text-light">${item.ingredientName}</strong>
+                                    <strong class="text-primary">${item.ingredientName}</strong>
                                     <small class="text-secondary d-block font-monospace">${item.sku}</small>
                                 </td>
-                                <td><span class="fw-bold text-light">${item.currentStock} ${item.unit}</span></td>
+                                <td><span class="fw-bold text-primary">${item.currentStock} ${item.unit}</span></td>
                                 <td><span class="badge bg-gold text-dark font-accent fw-bold fs-6">${item.eoqOptimalBatch} ${item.unit}</span></td>
                                 <td><span class="text-gold fw-bold">${item.reorderPoint} ${item.unit}</span></td>
                                 <td><span class="text-secondary">${item.safetyStock} ${item.unit}</span></td>

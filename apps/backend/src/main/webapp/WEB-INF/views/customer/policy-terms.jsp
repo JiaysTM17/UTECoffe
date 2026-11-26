@@ -4,7 +4,7 @@
 <head>
     <title>Điều Khoản Dịch Vụ & Bảo Mật Khách Hàng - UTECoffe</title>
 </head>
-<body class="bg-obsidian text-light">
+<body class="bg-obsidian text-primary">
     <div class="container py-5 my-3" style="max-width: 900px;">
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb small font-accent">

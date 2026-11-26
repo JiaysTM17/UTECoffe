@@ -32,7 +32,7 @@
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
                     <span class="small text-secondary font-accent text-uppercase">Nhiệt Độ Nước Pha Chuẩn</span>
-                    <h4 class="font-serif fw-bold text-light mb-0">92°C - 94°C</h4>
+                    <h4 class="font-serif fw-bold text-primary mb-0">92°C - 94°C</h4>
                 </div>
                 <div class="p-2 rounded-circle bg-dark-roast border border-secondary text-secondary"><i class="fa-solid fa-temperature-half"></i></div>
             </div>
@@ -66,7 +66,7 @@
                         <tr>
                             <td class="fw-bold text-gold font-accent">${rec.product.name}</td>
                             <td>
-                                <div class="fw-bold text-light">${rec.ingredient.name}</div>
+                                <div class="fw-bold text-primary">${rec.ingredient.name}</div>
                             </td>
                             <td>
                                 <span class="badge bg-espresso border border-gold text-gold fs-6 font-monospace">

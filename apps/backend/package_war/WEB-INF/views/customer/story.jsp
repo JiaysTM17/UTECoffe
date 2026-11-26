@@ -158,28 +158,28 @@
                 <div class="col-lg-3 col-6">
                     <div class="card-luxury p-4 h-100">
                         <i class="fa-solid fa-lemon text-gold display-5 mb-3"></i>
-                        <h5 class="font-serif fw-bold text-light mb-2" data-i18n="story.wheel_citrus_title">Cam Quýt &amp; Bergamot</h5>
+                        <h5 class="font-serif fw-bold text-primary mb-2" data-i18n="story.wheel_citrus_title">Cam Quýt &amp; Bergamot</h5>
                         <p class="text-secondary small mb-0" data-i18n="story.wheel_citrus_desc">Axit citric tự nhiên sáng ngời, gợi nhớ hương cam sành và vỏ chanh vàng thanh nhã.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="card-luxury p-4 h-100">
                         <i class="fa-solid fa-spa text-gold display-5 mb-3"></i>
-                        <h5 class="font-serif fw-bold text-light mb-2" data-i18n="story.wheel_floral_title">Hoa Nhài &amp; Bạch Cúc</h5>
+                        <h5 class="font-serif fw-bold text-primary mb-2" data-i18n="story.wheel_floral_title">Hoa Nhài &amp; Bạch Cúc</h5>
                         <p class="text-secondary small mb-0" data-i18n="story.wheel_floral_desc">Hương hoa trắng thoang thoảng nở rộ khi pha Pour-over nóng bốc khói nhẹ nhàng.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="card-luxury p-4 h-100">
                         <i class="fa-solid fa-jar text-gold display-5 mb-3"></i>
-                        <h5 class="font-serif fw-bold text-light mb-2" data-i18n="story.wheel_honey_title">Mật Ong Hoa Cà Phê</h5>
+                        <h5 class="font-serif fw-bold text-primary mb-2" data-i18n="story.wheel_honey_title">Mật Ong Hoa Cà Phê</h5>
                         <p class="text-secondary small mb-0" data-i18n="story.wheel_honey_desc">Hậu vị ngọt sâu kéo dài nơi cuống họng, êm dịu và tròn trịa sau từng ngụm thưởng thức.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="card-luxury p-4 h-100">
                         <i class="fa-solid fa-cookie text-gold display-5 mb-3"></i>
-                        <h5 class="font-serif fw-bold text-light mb-2" data-i18n="story.wheel_choco_title">Chocolate Đen &amp; Hạt Nướng</h5>
+                        <h5 class="font-serif fw-bold text-primary mb-2" data-i18n="story.wheel_choco_title">Chocolate Đen &amp; Hạt Nướng</h5>
                         <p class="text-secondary small mb-0" data-i18n="story.wheel_choco_desc">Vị đắng êm dịu của cacao nguyên chất hòa quyện nốt hạnh nhân nướng thơm bùi.</p>
                     </div>
                 </div>

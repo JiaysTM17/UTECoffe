@@ -242,10 +242,10 @@
                     <div class="pt-2">
                         <span class="text-muted small d-block mb-1" data-i18n="footer.payment_partners">Đối tác thanh toán bảo mật:</span>
                         <div class="d-flex gap-2 align-items-center flex-wrap">
-                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-qrcode me-1 text-gold"></i> VietQR</span>
-                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-regular fa-credit-card me-1 text-gold"></i> VNPay</span>
-                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-wallet me-1 text-gold"></i> MoMo</span>
-                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-money-bill-1 me-1 text-gold"></i> <span data-i18n="footer.pay_cash">Tiền mặt</span></span>
+                            <span class="badge bg-secondary text-primary px-2 py-1"><i class="fa-solid fa-qrcode me-1 text-gold"></i> VietQR</span>
+                            <span class="badge bg-secondary text-primary px-2 py-1"><i class="fa-regular fa-credit-card me-1 text-gold"></i> VNPay</span>
+                            <span class="badge bg-secondary text-primary px-2 py-1"><i class="fa-solid fa-wallet me-1 text-gold"></i> MoMo</span>
+                            <span class="badge bg-secondary text-primary px-2 py-1"><i class="fa-solid fa-money-bill-1 me-1 text-gold"></i> <span data-i18n="footer.pay_cash">Tiền mặt</span></span>
                         </div>
                     </div>
                 </div>
@@ -262,7 +262,7 @@
     <!-- Luxury In-Development Modal -->
     <div class="modal fade" id="inDevelopmentModal" tabindex="-1" aria-labelledby="inDevelopmentModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content card-luxury border-gold shadow-lg bg-espresso text-light p-3" style="border-radius: 24px;">
+            <div class="modal-content card-luxury border-gold shadow-lg bg-espresso text-primary p-3" style="border-radius: 24px;">
                 <div class="modal-header border-0 pb-0">
                     <div class="d-flex align-items-center gap-2">
                         <span class="badge bg-gold-gradient text-obsidian rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
@@ -278,7 +278,7 @@
                             <i class="fa-solid fa-compass-drafting text-gold fs-2"></i>
                         </div>
                     </div>
-                    <h5 class="font-serif fw-bold text-light mb-2" id="inDevFeatureTitle" data-i18n="in_dev.default_feature">Kênh Truyền Thông Đang Nâng Cấp</h5>
+                    <h5 class="font-serif fw-bold text-primary mb-2" id="inDevFeatureTitle" data-i18n="in_dev.default_feature">Kênh Truyền Thông Đang Nâng Cấp</h5>
                     <p class="text-secondary small px-3 mb-0" id="inDevFeatureDesc" style="line-height: 1.8;" data-i18n="in_dev.desc">
                         UTECOFFE Official đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền trên nền tảng này nhằm mang đến trải nghiệm tinh tế và trọn vẹn nhất cho bạn. Xin vui lòng đón chờ trong thời gian sớm nhất!
                     </p>

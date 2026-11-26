@@ -41,7 +41,7 @@
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
                     <span class="small text-secondary font-accent text-uppercase">Thời Gian Xử Lý Trung Bình</span>
-                    <h4 class="font-serif fw-bold text-light mb-0">&lt; 15 Phút</h4>
+                    <h4 class="font-serif fw-bold text-primary mb-0">&lt; 15 Phút</h4>
                 </div>
                 <div class="p-2 rounded-circle bg-dark-roast border border-secondary text-secondary"><i class="fa-solid fa-bolt"></i></div>
             </div>
@@ -67,7 +67,7 @@
                         <tr id="refund-row-${ref.id}">
                             <td class="font-accent fw-bold text-gold">${ref.refundCode}</td>
                             <td>
-                                <div class="text-light small font-monospace">${ref.payment != null ? ref.payment.transactionId : 'TXN-DIRECT'}</div>
+                                <div class="text-primary small font-monospace">${ref.payment != null ? ref.payment.transactionId : 'TXN-DIRECT'}</div>
                                 <small class="text-secondary">Phương thức: ${ref.payment != null ? ref.payment.paymentMethod : 'VIETQR'}</small>
                             </td>
                             <td>
@@ -76,7 +76,7 @@
                                 </span>
                             </td>
                             <td>
-                                <div class="text-light small" style="max-width: 400px;">${ref.reason}</div>
+                                <div class="text-primary small" style="max-width: 400px;">${ref.reason}</div>
                             </td>
                             <td>
                                 <span class="badge ${ref.status == 'REFUNDED' ? 'bg-success-subtle text-success border border-success' : 'bg-warning-subtle text-warning border border-warning'} px-2 py-1">

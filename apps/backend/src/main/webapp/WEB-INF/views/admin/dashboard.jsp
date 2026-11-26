@@ -28,7 +28,7 @@
                     <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.1em;">Tổng Đơn Hàng</span>
                     <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-receipt fs-5"></i></div>
                 </div>
-                <h3 class="font-serif fw-bold text-light mb-1">${totalOrders} Đơn</h3>
+                <h3 class="font-serif fw-bold text-primary mb-1">${totalOrders} Đơn</h3>
                 <small class="text-warning"><i class="fa-solid fa-clock me-1"></i> ${pendingOrdersCount} đơn đang xử lý / pha chế</small>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.1em;">Thực Đơn Đặc Sản</span>
                     <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-mug-hot fs-5"></i></div>
                 </div>
-                <h3 class="font-serif fw-bold text-light mb-1">${totalProducts} Sản Phẩm</h3>
+                <h3 class="font-serif fw-bold text-primary mb-1">${totalProducts} Sản Phẩm</h3>
                 <small class="text-secondary font-accent">5 danh mục: Cà phê, Trà, Bánh &amp; Đá xay</small>
             </div>
         </div>
@@ -52,7 +52,7 @@
                     <span class="text-gold font-accent fw-bold text-uppercase small" style="letter-spacing: 0.1em;">Thành Viên UTEClub</span>
                     <div class="p-2 rounded-circle bg-dark-roast border border-gold text-gold"><i class="fa-solid fa-award fs-5"></i></div>
                 </div>
-                <h3 class="font-serif fw-bold text-light mb-1">${totalUsers} Tài Khoản</h3>
+                <h3 class="font-serif fw-bold text-primary mb-1">${totalUsers} Tài Khoản</h3>
                 <small class="text-success"><i class="fa-solid fa-crown me-1"></i> Đồng, Bạc, Vàng, Kim Cương</small>
             </div>
         </div>
@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary border-opacity-25">
-                                    <span class="text-light small">
+                                    <span class="text-primary small">
                                         Đơn hàng: <strong>${storeOrderCounts[st.id] != null ? storeOrderCounts[st.id] : 0}</strong>
                                     </span>
                                     <span class="text-gold fw-bold small">
@@ -114,7 +114,7 @@
                 <div class="d-flex flex-column gap-3">
                     <div>
                         <div class="d-flex justify-content-between small mb-1">
-                            <span class="text-light"><i class="fa-solid fa-chair text-gold me-2"></i>Tại Quán (Dine-in)</span>
+                            <span class="text-primary"><i class="fa-solid fa-chair text-gold me-2"></i>Tại Quán (Dine-in)</span>
                             <span class="text-gold fw-bold">${dineInCount} đơn</span>
                         </div>
                         <div class="progress bg-dark" style="height: 8px;">
@@ -123,7 +123,7 @@
                     </div>
                     <div>
                         <div class="d-flex justify-content-between small mb-1">
-                            <span class="text-light"><i class="fa-solid fa-mug-saucer text-warning me-2"></i>Mang Đi (Take-away)</span>
+                            <span class="text-primary"><i class="fa-solid fa-mug-saucer text-warning me-2"></i>Mang Đi (Take-away)</span>
                             <span class="text-warning fw-bold">${takeAwayCount} đơn</span>
                         </div>
                         <div class="progress bg-dark" style="height: 8px;">
@@ -132,7 +132,7 @@
                     </div>
                     <div>
                         <div class="d-flex justify-content-between small mb-1">
-                            <span class="text-light"><i class="fa-solid fa-motorcycle text-info me-2"></i>Giao Hàng (Delivery)</span>
+                            <span class="text-primary"><i class="fa-solid fa-motorcycle text-info me-2"></i>Giao Hàng (Delivery)</span>
                             <span class="text-info fw-bold">${deliveryCount} đơn</span>
                         </div>
                         <div class="progress bg-dark" style="height: 8px;">
@@ -156,7 +156,7 @@
                                 <li class="p-2 rounded-3 bg-dark-roast border border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="badge ${status.index == 0 ? 'bg-warning text-dark' : 'bg-dark text-gold'} font-accent">${status.index + 1}</span>
-                                        <span class="text-light small fw-bold">${tp.key}</span>
+                                        <span class="text-primary small fw-bold">${tp.key}</span>
                                     </div>
                                     <span class="badge bg-espresso border border-gold-subtle text-gold small">${tp.value} phần</span>
                                 </li>
@@ -239,12 +239,12 @@
                                 </a>
                             </td>
                             <td>
-                                <div class="fw-bold text-light">${ord.recipientName}</div>
+                                <div class="fw-bold text-primary">${ord.recipientName}</div>
                                 <small class="text-secondary">${ord.recipientPhone}</small>
                             </td>
-                            <td><span class="text-light">${ord.store.name}</span></td>
+                            <td><span class="text-primary">${ord.store.name}</span></td>
                             <td>
-                                <span class="badge bg-espresso border border-secondary text-light">
+                                <span class="badge bg-espresso border border-secondary text-primary">
                                     <c:choose>
                                         <c:when test="${ord.orderType == 'DINE_IN'}">🍽️ Tại Quán</c:when>
                                         <c:when test="${ord.orderType == 'TAKE_AWAY'}">🥤 Mang Đi</c:when>
@@ -256,7 +256,7 @@
                                 <fmt:formatNumber value="${ord.finalAmount}" pattern="#,##0"/> VNĐ
                             </td>
                             <td>
-                                <span class="badge ${ord.status == 'COMPLETED' ? 'bg-success' : (ord.status == 'CANCELLED' ? 'bg-danger' : (ord.status == 'PREPARING' ? 'bg-warning text-dark' : 'bg-secondary text-light'))} px-2 py-1">
+                                <span class="badge ${ord.status == 'COMPLETED' ? 'bg-success' : (ord.status == 'CANCELLED' ? 'bg-danger' : (ord.status == 'PREPARING' ? 'bg-warning text-dark' : 'bg-secondary text-primary'))} px-2 py-1">
                                     <c:choose>
                                         <c:when test="${ord.status == 'COMPLETED'}">Hoàn Tất</c:when>
                                         <c:when test="${ord.status == 'PREPARING'}">Đang Pha</c:when>

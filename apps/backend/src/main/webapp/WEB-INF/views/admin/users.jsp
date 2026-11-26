@@ -35,7 +35,7 @@
                         <tr>
                             <td class="font-monospace text-secondary">#${u.id}</td>
                             <td>
-                                <div class="fw-bold text-light">${u.fullName}</div>
+                                <div class="fw-bold text-primary">${u.fullName}</div>
                             </td>
                             <td>
                                 <span class="font-monospace text-gold small">${u.email}</span>

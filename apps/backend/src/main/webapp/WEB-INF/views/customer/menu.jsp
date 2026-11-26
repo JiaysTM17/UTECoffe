@@ -210,7 +210,7 @@
 
                         <!-- Card Body -->
                         <div class="p-3 d-flex flex-column flex-grow-1">
-                            <h5 class="font-serif fw-bold text-light mb-1 line-clamp-1 product-title-text" title="${p.name}" data-slug="${p.slug}">
+                            <h5 class="font-serif fw-bold text-primary mb-1 line-clamp-1 product-title-text" title="${p.name}" data-slug="${p.slug}">
                                 ${p.name}
                             </h5>
                             <p class="text-secondary small mb-3 flex-grow-1 line-clamp-2 product-desc-text" data-slug="${p.slug}" style="font-size: 0.825rem; line-height: 1.5;">
@@ -358,7 +358,7 @@
                                     div.className = 'fuzzy-suggestion-item p-2 rounded d-flex justify-content-between align-items-center';
                                     div.innerHTML = `
                                         <div>
-                                            <span class="text-light fw-bold">${item.productName}</span>
+                                            <span class="text-primary fw-bold">${item.productName}</span>
                                             <small class="text-secondary d-block" style="font-size:0.75rem;">${item.matchHighlight}</small>
                                         </div>
                                         <div class="text-end">
@@ -466,7 +466,7 @@
                                                 <span class="badge bg-gold-subtle text-gold font-accent" style="font-size:0.7rem;">${item.scaCuppingScore}</span>
                                             </div>
                                             <img src="${item.productImageUrl || 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800'}" class="w-100 rounded mb-2 object-fit-cover" style="height:120px;" alt="${item.productName}">
-                                            <h6 class="font-serif fw-bold text-light mb-1">${item.productName}</h6>
+                                            <h6 class="font-serif fw-bold text-primary mb-1">${item.productName}</h6>
                                             <small class="text-gold font-accent d-block mb-1" style="font-size:0.75rem;"><i class="fa-solid fa-mountain me-1"></i>${item.terroir || 'Cầu Đất, Lâm Đồng'}</small>
                                             <p class="text-secondary small mb-2 flex-grow-1" style="font-size:0.78rem; line-height:1.4;">${item.sensoryVerdict}</p>
                                             <div class="mb-2">${notesHtml}</div>

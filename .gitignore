@@ -72,3 +72,6 @@ node_modules/
 apps/frontend/.next/
 apps/frontend/node_modules/
 
+
+backups/
+

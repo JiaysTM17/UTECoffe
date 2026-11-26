@@ -282,7 +282,7 @@
                                     <span class="badge px-2 py-1 text-white fw-bold font-accent" style="background: #cd7f32;" data-i18n="modal.tier_bronze_badge">HẠNG ĐỒNG</span>
                                     <span class="text-secondary small text-nowrap font-monospace" data-i18n="modal.tier_bronze_pts">0 - 499 pts</span>
                                 </div>
-                                <h5 class="font-serif fw-bold text-light mb-2" data-i18n="modal.tier_bronze_name">Thành Viên Khởi Đầu</h5>
+                                <h5 class="font-serif fw-bold text-primary mb-2" data-i18n="modal.tier_bronze_name">Thành Viên Khởi Đầu</h5>
                                 <p class="text-secondary small mb-3" data-i18n="modal.tier_bronze_desc">Kích hoạt ngay khi tạo tài khoản miễn phí tại UTECoffe.</p>
                                 <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-0">
                                     <li><i class="fa-solid fa-check text-gold me-2"></i> <span data-i18n="modal.tier_bronze_b1">Tặng Voucher 20% đơn hàng đầu tiên</span></li>
@@ -299,7 +299,7 @@
                                     <span class="badge px-2 py-1 text-dark fw-bold font-accent" style="background: #c0c0c0;" data-i18n="modal.tier_silver_badge">HẠNG BẠC</span>
                                     <span class="text-secondary small text-nowrap font-monospace" data-i18n="modal.tier_silver_pts">500 - 1.499 pts</span>
                                 </div>
-                                <h5 class="font-serif fw-bold text-light mb-2" data-i18n="modal.tier_silver_name">Hội Viên Bạc</h5>
+                                <h5 class="font-serif fw-bold text-primary mb-2" data-i18n="modal.tier_silver_name">Hội Viên Bạc</h5>
                                 <p class="text-secondary small mb-3" data-i18n="modal.tier_silver_desc">Dành cho khách hàng thân thiết thường xuyên ghé thăm.</p>
                                 <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-0">
                                     <li><i class="fa-solid fa-check text-gold me-2"></i> <span data-i18n="modal.tier_silver_b1">Tất cả quyền lợi Hạng Đồng</span></li>
@@ -335,7 +335,7 @@
                                     <span class="badge px-2 py-1 text-dark fw-bold font-accent" style="background: #b9f2ff;" data-i18n="modal.tier_diamond_badge">KIM CƯƠNG</span>
                                     <span class="text-info small fw-bold text-nowrap font-monospace" data-i18n="modal.tier_diamond_pts">3.000+ pts</span>
                                 </div>
-                                <h5 class="font-serif fw-bold text-light mb-2" data-i18n="modal.tier_diamond_name">Thượng Khách Kim Cương</h5>
+                                <h5 class="font-serif fw-bold text-primary mb-2" data-i18n="modal.tier_diamond_name">Thượng Khách Kim Cương</h5>
                                 <p class="text-secondary small mb-3" data-i18n="modal.tier_diamond_desc">Đỉnh cao đặc quyền cá nhân hóa và trải nghiệm roastery độc bản.</p>
                                 <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-0">
                                     <li><i class="fa-solid fa-check text-gold me-2"></i> <span data-i18n="modal.tier_diamond_b1">Giảm trực tiếp 15% trọn đời mọi đơn hàng</span></li>

@@ -41,7 +41,7 @@
             <div class="card-luxury p-3 border-gold shadow-sm d-flex align-items-center justify-content-between">
                 <div>
                     <span class="small text-secondary font-accent text-uppercase">Phản Hồi CSKH</span>
-                    <h4 class="font-serif fw-bold text-light mb-0">100% Đã Phản Hồi</h4>
+                    <h4 class="font-serif fw-bold text-primary mb-0">100% Đã Phản Hồi</h4>
                 </div>
                 <div class="p-2 rounded-circle bg-dark-roast border border-secondary text-secondary"><i class="fa-solid fa-comment-dots"></i></div>
             </div>
@@ -65,7 +65,7 @@
                     <c:forEach var="r" items="${reviews}">
                         <tr id="review-row-${r.id}">
                             <td>
-                                <div class="fw-bold text-light">${r.user != null ? r.user.fullName : 'Hội viên ẩn danh'}</div>
+                                <div class="fw-bold text-primary">${r.user != null ? r.user.fullName : 'Hội viên ẩn danh'}</div>
                                 <small class="text-secondary">${r.user != null ? r.user.email : ''}</small>
                             </td>
                             <td>
@@ -80,7 +80,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="text-light small" style="max-width: 480px;">"${r.comment}"</div>
+                                <div class="text-primary small" style="max-width: 480px;">"${r.comment}"</div>
                             </td>
                             <td class="text-end">
                                 <button type="button" class="btn btn-outline-gold btn-sm rounded-pill px-3 font-accent" onclick="replyReviewPrompt(${r.id}, '${r.user != null ? r.user.fullName : 'Quý khách'}')">

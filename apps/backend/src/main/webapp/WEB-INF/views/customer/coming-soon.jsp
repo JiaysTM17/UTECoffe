@@ -4,7 +4,7 @@
 <head>
     <title>${title} - UTECoffe Specialty</title>
 </head>
-<body class="bg-obsidian text-light">
+<body class="bg-obsidian text-primary">
     <div class="container py-5 text-center my-5">
         <div class="card-luxury p-5 mx-auto border-gold shadow-lg" style="max-width: 650px; border-radius: 24px;">
             <div class="mb-4">
@@ -27,9 +27,9 @@
                 <div class="d-flex align-items-center gap-2 mb-1 text-gold fw-bold">
                     <i class="fa-solid fa-circle-info"></i> Thông tin hỗ trợ trực tiếp 24/7:
                 </div>
-                <div>• Hotline Tổng đài Chăm sóc Khách hàng: <strong class="text-light">1900 2026</strong></div>
-                <div>• Email tiếp nhận yêu cầu: <strong class="text-light">contact@utecoffe.vn</strong></div>
-                <div>• Chi nhánh Flagship Thủ Đức: <strong class="text-light">01 Võ Văn Ngân, TP. Thủ Đức</strong></div>
+                <div>• Hotline Tổng đài Chăm sóc Khách hàng: <strong class="text-primary">1900 2026</strong></div>
+                <div>• Email tiếp nhận yêu cầu: <strong class="text-primary">contact@utecoffe.vn</strong></div>
+                <div>• Chi nhánh Flagship Thủ Đức: <strong class="text-primary">01 Võ Văn Ngân, TP. Thủ Đức</strong></div>
             </div>
 
             <div class="d-flex justify-content-center gap-3 flex-wrap">

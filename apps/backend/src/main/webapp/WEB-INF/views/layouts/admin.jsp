@@ -92,7 +92,7 @@
     </style>
     <sitemesh:write property='head'/>
 </head>
-<body class="bg-obsidian text-light">
+<body class="bg-obsidian text-primary">
     <div class="d-flex">
         <!-- Sidebar -->
         <aside class="admin-sidebar d-flex flex-column p-0">

@@ -64,7 +64,7 @@
                         <div class="d-flex align-items-center gap-2 overflow-hidden">
                             <span class="badge text-white px-2 py-1 small fw-bold text-nowrap" style="background: #cd7f32; min-width: 80px; text-align: center;">ĐỒNG</span>
                             <div class="text-truncate">
-                                <div class="text-light small fw-bold text-truncate mb-0">Nguyễn Thị Mai Phương</div>
+                                <div class="text-primary small fw-bold text-truncate mb-0">Nguyễn Thị Mai Phương</div>
                                 <div class="text-secondary text-truncate" style="font-size: 0.72rem;">120 điểm • Khách Mới (Voucher 20%)</div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                         <div class="d-flex align-items-center gap-2 overflow-hidden">
                             <span class="badge text-dark px-2 py-1 small fw-bold text-nowrap" style="background: #c0c0c0; min-width: 80px; text-align: center;">BẠC</span>
                             <div class="text-truncate">
-                                <div class="text-light small fw-bold text-truncate mb-0">Trần Quốc Bảo</div>
+                                <div class="text-primary small fw-bold text-truncate mb-0">Trần Quốc Bảo</div>
                                 <div class="text-secondary text-truncate" style="font-size: 0.72rem;">850 điểm • Thân Thiết (Free Up-size T5)</div>
                             </div>
                         </div>

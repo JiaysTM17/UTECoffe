@@ -61,7 +61,7 @@
                 </h5>
                 <small class="text-secondary">Theo dõi tiến độ giao hàng, kiểm đếm chất lượng và đối soát công nợ nguyên liệu</small>
             </div>
-            <span class="badge bg-dark-roast border border-secondary text-light px-3 py-2 font-accent">
+            <span class="badge bg-dark-roast border border-secondary text-primary px-3 py-2 font-accent">
                 Tổng: <strong>${purchaseOrders.size()}</strong> Phiếu Đặt Hàng
             </span>
         </div>
@@ -82,8 +82,8 @@
                     <c:forEach var="po" items="${purchaseOrders}">
                         <tr id="po-row-${po.id}">
                             <td class="font-accent fw-bold text-gold">${po.orderCode}</td>
-                            <td><span class="badge bg-dark-roast border border-secondary text-light">${po.store.name}</span></td>
-                            <td class="fw-bold text-light">${po.supplier.name}</td>
+                            <td><span class="badge bg-dark-roast border border-secondary text-primary">${po.store.name}</span></td>
+                            <td class="fw-bold text-primary">${po.supplier.name}</td>
                             <td class="text-gold fw-bold">
                                 <fmt:formatNumber value="${po.totalAmount}" pattern="#,##0"/> VNĐ
                             </td>
@@ -112,7 +112,7 @@
     <!-- Modal Create PO -->
     <div class="modal fade" id="createPoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content card-luxury border-gold bg-espresso text-light shadow-lg">
+            <div class="modal-content card-luxury border-gold bg-espresso text-primary shadow-lg">
                 <div class="modal-header border-gold pb-3">
                     <h5 class="modal-title font-serif text-primary fw-bold">
                         <i class="fa-solid fa-file-invoice me-2"></i>Tạo Phiếu Đặt Hàng Nhập Kho (PO)
