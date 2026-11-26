@@ -27,7 +27,7 @@ public class DiagController {
 
     @GetMapping("/ping")
     public String ping() {
-        return "PONG - UTECoffe Platform Online (Build 2026-11-26.01)";
+        return "PONG - UTECoffe Platform Online (Build 2026-11-26.03)";
     }
 
     @GetMapping("/sync-catalog")

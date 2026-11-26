@@ -157,4 +157,32 @@ class TableReservationServiceTest {
             reservationService.cancelReservation(1L, 999L, "Reason");
         });
     }
+
+    @Test
+    void testAutoExpireOverdueReservations_CancelsOverdueAndFreesTable() {
+        StoreTable table = StoreTable.builder().id(200L).tableNumber("T-01").isOccupied(true).build();
+        TableReservation overdue = TableReservation.builder()
+                .id(99L)
+                .status(ReservationStatus.CONFIRMED)
+                .reservationTime(LocalDateTime.now().minusMinutes(45)) // 45 mins ago -> overdue
+                .storeTable(table)
+                .build();
+
+        TableReservation future = TableReservation.builder()
+                .id(100L)
+                .status(ReservationStatus.CONFIRMED)
+                .reservationTime(LocalDateTime.now().plusHours(1))
+                .build();
+
+        when(reservationRepository.findAll()).thenReturn(List.of(overdue, future));
+        when(reservationRepository.save(any(TableReservation.class))).thenAnswer(i -> i.getArgument(0));
+
+        int expiredCount = reservationService.autoExpireOverdueReservations();
+
+        assertEquals(1, expiredCount);
+        assertEquals(ReservationStatus.CANCELLED, overdue.getStatus());
+        assertTrue(overdue.getNote().contains("No-show"));
+        assertFalse(table.getIsOccupied());
+        verify(tableRepository, times(1)).save(table);
+    }
 }

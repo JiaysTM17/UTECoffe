@@ -83,6 +83,46 @@
         </div>
     </div>
 
+    <!-- Executive Performance Metrics Strip -->
+    <div class="row g-3 mb-3">
+        <div class="col-xl-3 col-sm-6">
+            <div class="card-luxury p-2.5 p-md-3 h-100 shadow-sm" style="border-left: 3px solid var(--gold-primary);">
+                <div class="text-secondary small fw-semibold mb-1" style="font-size: 0.72rem; text-transform: uppercase;">Giá trị trung bình đơn (AOV)</div>
+                <div class="fw-bold text-gold" style="font-size: 1.15rem; font-variant-numeric: tabular-nums;">
+                    <fmt:formatNumber value="${analytics.averageOrderValue}" pattern="#,##0"/> VNĐ
+                </div>
+                <small class="text-secondary" style="font-size: 0.7rem;">Mức chi tiêu trung bình / đơn hoàn tất</small>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+            <div class="card-luxury p-2.5 p-md-3 h-100 shadow-sm" style="border-left: 3px solid #10b981;">
+                <div class="text-secondary small fw-semibold mb-1" style="font-size: 0.72rem; text-transform: uppercase;">Tăng trưởng doanh thu tuần (WoW)</div>
+                <div class="fw-bold ${analytics.weekOverWeekGrowth >= 0 ? 'text-success' : 'text-danger'}" style="font-size: 1.15rem; font-variant-numeric: tabular-nums;">
+                    ${analytics.weekOverWeekGrowth >= 0 ? '+' : ''}${analytics.weekOverWeekGrowth}%
+                </div>
+                <small class="text-secondary" style="font-size: 0.7rem;">So với chu kỳ 7 ngày liền trước</small>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+            <div class="card-luxury p-2.5 p-md-3 h-100 shadow-sm" style="border-left: 3px solid #f59e0b;">
+                <div class="text-secondary small fw-semibold mb-1" style="font-size: 0.72rem; text-transform: uppercase;">Giờ cao điểm phục vụ</div>
+                <div class="fw-bold text-warning" style="font-size: 1.15rem; font-variant-numeric: tabular-nums;">
+                    ${analytics.peakHour}:00 - ${analytics.peakHour + 1}:00
+                </div>
+                <small class="text-secondary" style="font-size: 0.7rem;">Thời điểm tập trung lượng khách lớn nhất</small>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+            <div class="card-luxury p-2.5 p-md-3 h-100 shadow-sm" style="border-left: 3px solid #64748b;">
+                <div class="text-secondary small fw-semibold mb-1" style="font-size: 0.72rem; text-transform: uppercase;">Tỷ lệ đơn hủy toàn hệ thống</div>
+                <div class="fw-bold text-primary" style="font-size: 1.15rem; font-variant-numeric: tabular-nums;">
+                    ${analytics.cancellationRate}%
+                </div>
+                <small class="text-secondary" style="font-size: 0.7rem;">Kiểm soát chất lượng phục vụ & tồn kho</small>
+            </div>
+        </div>
+    </div>
+
     <!-- Store Performance Row: 3 Branches -->
     <div class="row g-3 mb-3">
         <div class="col-12">
@@ -218,9 +258,31 @@
                 <a href="${pageContext.request.contextPath}/admin/orders/export" class="btn btn-outline-success btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;">
                     <i class="fa-solid fa-file-excel me-1"></i> Xuất Excel đơn
                 </a>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-2 px-2.5 py-1 font-sans" style="font-size: 0.78rem;" onclick="triggerAutoExpireReservations()">
+                    <i class="fa-solid fa-clock-rotate-left me-1"></i> Quét bàn quá giờ
+                </button>
             </div>
         </div>
     </div>
+
+    <script>
+        function triggerAutoExpireReservations() {
+            if (!confirm('Hệ thống sẽ tự động quét và thu hồi các bàn đã quá giờ hẹn 30 phút mà khách chưa đến (No-show). Tiếp tục?')) return;
+            fetch('${pageContext.request.contextPath}/admin/reservations/auto-expire', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message || 'Đã xử lý quét bàn quá giờ');
+                location.reload();
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Có lỗi khi thực hiện thao tác');
+            });
+        }
+    </script>
 
     <!-- Recent Orders Table -->
     <div class="card-luxury p-3 p-md-3.5 shadow-sm">

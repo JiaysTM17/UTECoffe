@@ -10,5 +10,8 @@ import java.util.Optional;
 @Repository
 public interface UserCouponRepository extends JpaRepository<UserCoupon, Long> {
     List<UserCoupon> findByUserIdAndIsUsedFalse(Long userId);
+    List<UserCoupon> findByUserId(Long userId);
     Optional<UserCoupon> findByUserIdAndCouponId(Long userId, Long couponId);
+    boolean existsByUserIdAndCouponIdAndIsUsedTrue(Long userId, Long couponId);
+    long countByUserIdAndCouponIdAndIsUsedTrue(Long userId, Long couponId);
 }

@@ -7,6 +7,8 @@ import com.utecoffe.enums.OrderType;
 import com.utecoffe.enums.ReservationStatus;
 import com.utecoffe.repository.*;
 import com.utecoffe.service.ExcelExportService;
+import com.utecoffe.service.AnalyticsService;
+import com.utecoffe.service.TableReservationService;
 import com.utecoffe.service.OrderService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +70,12 @@ public class AdminDashboardController {
 
     @Autowired
     private ExcelExportService excelExportService;
+
+    @Autowired
+    private AnalyticsService analyticsService;
+
+    @Autowired
+    private TableReservationService tableReservationService;
 
     @Autowired
     private OrderService orderService;
@@ -158,6 +166,7 @@ public class AdminDashboardController {
                 .sorted(Comparator.comparing(Order::getId).reversed())
                 .limit(10)
                 .toList());
+        model.addAttribute("analytics", analyticsService.getExecutiveAnalytics());
 
         return "admin/dashboard";
     }
@@ -426,6 +435,23 @@ public class AdminDashboardController {
             return ResponseEntity.ok(Map.of("success", true, "status", status));
         }
         return ResponseEntity.badRequest().body(Map.of("success", false));
+    }
+
+    @PostMapping("/reservations/auto-expire")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> autoExpireReservations() {
+        int expiredCount = tableReservationService.autoExpireOverdueReservations();
+        return ResponseEntity.ok(Map.of(
+                "success", true,
+                "expiredCount", expiredCount,
+                "message", "Đã tự động thu hồi " + expiredCount + " lịch đặt bàn quá giờ hẹn 30 phút"
+        ));
+    }
+
+    @GetMapping("/api/analytics/executive")
+    @ResponseBody
+    public ResponseEntity<com.utecoffe.dto.response.ExecutiveAnalyticsDto> getExecutiveAnalyticsApi() {
+        return ResponseEntity.ok(analyticsService.getExecutiveAnalytics());
     }
 
     @GetMapping("/audit-logs")

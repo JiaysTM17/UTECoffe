@@ -13,5 +13,6 @@ public interface TableReservationService {
     TableReservation getReservationById(Long id);
     TableReservation updateStatus(Long id, com.utecoffe.enums.ReservationStatus status);
     TableReservation cancelReservation(Long id, Long userId, String reason);
+    int autoExpireOverdueReservations();
 }
 

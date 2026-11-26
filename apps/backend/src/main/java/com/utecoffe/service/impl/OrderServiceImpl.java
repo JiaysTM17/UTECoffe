@@ -56,6 +56,9 @@ public class OrderServiceImpl implements OrderService {
     private CouponRepository couponRepository;
 
     @Autowired
+    private UserCouponRepository userCouponRepository;
+
+    @Autowired
     private InventoryService inventoryService;
 
     @Autowired
@@ -152,7 +155,7 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal discount = BigDecimal.ZERO;
         if (request.getCouponCode() != null && !request.getCouponCode().isBlank()) {
             Coupon coupon = couponRepository.findByCodeAndIsActiveTrue(request.getCouponCode().trim()).orElse(null);
-            if (isCouponEligible(coupon, subtotal, LocalDateTime.now())) {
+            if (isCouponEligible(coupon, subtotal, LocalDateTime.now(), user != null ? user.getId() : null)) {
                 if (coupon.getDiscountType() == com.utecoffe.enums.DiscountType.PERCENTAGE) {
                     discount = subtotal.multiply(coupon.getDiscountValue()).divide(BigDecimal.valueOf(100));
                     if (coupon.getMaxDiscountAmount() != null && discount.compareTo(coupon.getMaxDiscountAmount()) > 0) {
@@ -163,6 +166,17 @@ public class OrderServiceImpl implements OrderService {
                 }
                 coupon.setUsedCount((coupon.getUsedCount() != null ? coupon.getUsedCount() : 0) + 1);
                 couponRepository.save(coupon);
+
+                if (user != null) {
+                    UserCoupon userCoupon = UserCoupon.builder()
+                            .user(user)
+                            .coupon(coupon)
+                            .order(savedOrder)
+                            .isUsed(true)
+                            .usedAt(LocalDateTime.now())
+                            .build();
+                    userCouponRepository.save(userCoupon);
+                }
             }
         }
 
@@ -237,7 +251,7 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findByStoreIdAndStatusInOrderByCreatedAtAsc(storeId, kdsStatuses);
     }
 
-    private boolean isCouponEligible(Coupon coupon, BigDecimal subtotal, LocalDateTime now) {
+    private boolean isCouponEligible(Coupon coupon, BigDecimal subtotal, LocalDateTime now, Long userId) {
         if (coupon == null || !Boolean.TRUE.equals(coupon.getIsActive())) {
             return false;
         }
@@ -253,6 +267,13 @@ public class OrderServiceImpl implements OrderService {
         }
         if (coupon.getMinOrderValue() != null && subtotal.compareTo(coupon.getMinOrderValue()) < 0) {
             return false;
+        }
+        // Per-user limit enforcement (default: 1 use per customer account)
+        if (userId != null && coupon.getId() != null) {
+            long usedByUser = userCouponRepository.countByUserIdAndCouponIdAndIsUsedTrue(userId, coupon.getId());
+            if (usedByUser >= 1) {
+                return false;
+            }
         }
         return true;
     }
@@ -286,10 +307,27 @@ public class OrderServiceImpl implements OrderService {
             loyaltyService.accumulatePointsForOrder(order);
         }
 
-        // If order is CANCELLED, restore ingredients and reverse any points
+        // If order is CANCELLED, restore ingredients, reverse loyalty points, and restore coupon
         if (newStatus == OrderStatus.CANCELLED) {
             inventoryService.restoreStockForOrder(order);
             loyaltyService.reversePointsForOrder(order);
+
+            if (order.getUser() != null) {
+                List<UserCoupon> userCoupons = userCouponRepository.findByUserId(order.getUser().getId());
+                for (UserCoupon uc : userCoupons) {
+                    if (uc.getOrder() != null && uc.getOrder().getId().equals(order.getId()) && Boolean.TRUE.equals(uc.getIsUsed())) {
+                        uc.setIsUsed(false);
+                        uc.setUsedAt(null);
+                        userCouponRepository.save(uc);
+
+                        Coupon c = uc.getCoupon();
+                        if (c != null && c.getUsedCount() != null && c.getUsedCount() > 0) {
+                            c.setUsedCount(c.getUsedCount() - 1);
+                            couponRepository.save(c);
+                        }
+                    }
+                }
+            }
         }
 
         String defaultMsg = switch (newStatus) {

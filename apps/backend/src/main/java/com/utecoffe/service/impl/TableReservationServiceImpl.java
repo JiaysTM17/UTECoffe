@@ -210,4 +210,28 @@ public class TableReservationServiceImpl implements TableReservationService {
 
         return reservationRepository.save(res);
     }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public int autoExpireOverdueReservations() {
+        LocalDateTime cutoff = LocalDateTime.now().minusMinutes(30);
+        List<TableReservation> overdueList = reservationRepository.findAll().stream()
+                .filter(r -> r.getStatus() == ReservationStatus.CONFIRMED)
+                .filter(r -> r.getReservationTime() != null && r.getReservationTime().isBefore(cutoff))
+                .toList();
+
+        int count = 0;
+        for (TableReservation res : overdueList) {
+            res.setStatus(ReservationStatus.CANCELLED);
+            String existingNote = res.getNote() != null ? res.getNote() + " | " : "";
+            res.setNote(existingNote + "Tự động hủy do quá giờ hẹn 30 phút (No-show)");
+            if (res.getStoreTable() != null) {
+                res.getStoreTable().setIsOccupied(false);
+                tableRepository.save(res.getStoreTable());
+            }
+            reservationRepository.save(res);
+            count++;
+        }
+        return count;
+    }
 }
