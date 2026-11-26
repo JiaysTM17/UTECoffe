@@ -799,11 +799,11 @@
                             <div class="col-sm-4">
                                 <label class="form-label small text-gold">Điểm đánh giá:</label>
                                 <select class="form-select form-control-luxury" id="reviewRating">
-                                    <option value="5">⭐⭐⭐⭐⭐ 5/5 Tuyệt Hảo</option>
-                                    <option value="4">⭐⭐⭐⭐ 4/5 Rất Ngon</option>
-                                    <option value="3">⭐⭐⭐ 3/5 Tạm Ổn</option>
-                                    <option value="2">⭐⭐ 2/5 Cần Cải Thiện</option>
-                                    <option value="1">⭐ 1/5 Không Thích</option>
+                                    <option value="5">5 / 5 — Tuyệt hảo</option>
+                                    <option value="4">4 / 5 — Hài lòng</option>
+                                    <option value="3">3 / 5 — Bình thường</option>
+                                    <option value="2">2 / 5 — Chưa hài lòng</option>
+                                    <option value="1">1 / 5 — Không đạt yêu cầu</option>
                                 </select>
                             </div>
                             <div class="col-sm-8">

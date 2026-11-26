@@ -64,7 +64,7 @@
             </div>
             <div class="mx-auto text-center top-bar-promo text-nowrap px-2">
                 <i class="fa-solid fa-gem text-gold me-1"></i>
-                <span class="top-bar-promo-text" data-i18n="topbar.promo">ƯU ĐÃI 20% ĐƠN ĐẦU TIÊN • FREESHIP TOÀN QUỐC TỪ 150.000₫</span>
+                <span class="top-bar-promo-text" data-i18n="topbar.promo">Ưu đãi 20% đơn đầu tiên • Freeship toàn quốc từ 150.000₫</span>
             </div>
             <div class="d-none d-md-flex align-items-center gap-3 top-bar-right flex-shrink-0 text-nowrap">
                 <span class="text-secondary"><i class="fa-regular fa-clock text-gold me-1"></i><span data-i18n="topbar.hours">07:00 - 22:30</span></span>
@@ -209,7 +209,7 @@
 
                 <!-- Col 2: Navigation -->
                 <div class="col-lg-2 col-md-6 col-6">
-                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;" data-i18n="footer.explore">Khám Phá</h6>
+                    <h6 class="text-gold font-serif fw-bold mb-3" data-i18n="footer.explore">Khám Phá</h6>
                     <ul class="list-unstyled">
                         <li><a href="${pageContext.request.contextPath}/menu" class="footer-link" data-i18n="footer.link_coffee">Cà Phê Đặc Sản</a></li>
                         <li><a href="${pageContext.request.contextPath}/menu" class="footer-link" data-i18n="footer.link_tea">Trà Thủ Công</a></li>
@@ -221,7 +221,7 @@
 
                 <!-- Col 3: Customer Care -->
                 <div class="col-lg-2 col-md-6 col-6">
-                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;" data-i18n="footer.policy">Dịch Vụ</h6>
+                    <h6 class="text-gold font-serif fw-bold mb-3" data-i18n="footer.policy">Dịch Vụ</h6>
                     <ul class="list-unstyled">
                         <li><a href="${pageContext.request.contextPath}/uteclub" class="footer-link" data-i18n="footer.link_uteclub">Đặc Quyền UTEClub</a></li>
                         <li><a href="${pageContext.request.contextPath}/stores" class="footer-link" data-i18n="footer.link_stores">Tìm Cửa Hàng Gần Nhất</a></li>
@@ -233,7 +233,7 @@
 
                 <!-- Col 4: Roastery Contact -->
                 <div class="col-lg-4 col-md-6">
-                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;" data-i18n="footer.contact_title">Xưởng Rang &amp; Trụ Sở</h6>
+                    <h6 class="text-gold font-serif fw-bold mb-3" data-i18n="footer.contact_title">Xưởng Rang &amp; Trụ Sở</h6>
                     <p class="text-secondary small mb-2"><i class="fa-solid fa-location-dot text-gold me-2"></i> <span data-i18n="footer.contact_addr">01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</span></p>
                     <p class="text-secondary small mb-2"><i class="fa-solid fa-clock text-gold me-2"></i> <span data-i18n="footer.contact_hours">Giờ hoạt động: 06:30 - 23:00 (Thứ 2 - Chủ Nhật)</span></p>
                     <p class="text-secondary small mb-2"><i class="fa-solid fa-envelope text-gold me-2"></i> contact@utecoffe.vn | cskh@utecoffe.vn</p>
