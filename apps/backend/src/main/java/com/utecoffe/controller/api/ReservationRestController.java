@@ -62,4 +62,10 @@ public class ReservationRestController {
         java.util.List<TableReservation> list = reservationService.getStoreReservations(storeId);
         return ResponseEntity.ok(ApiResponse.success(list, "Danh sách đặt bàn tại chi nhánh"));
     }
+
+    @GetMapping("/utilization/{storeId}")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.TableUtilizationDto>> getTableUtilization(@PathVariable Long storeId) {
+        com.utecoffe.dto.response.TableUtilizationDto dto = reservationService.getTableUtilization(storeId);
+        return ResponseEntity.ok(ApiResponse.success(dto, "Báo cáo công suất và hiện trạng bàn chi nhánh"));
+    }
 }

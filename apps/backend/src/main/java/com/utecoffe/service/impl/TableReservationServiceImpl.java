@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -233,5 +231,154 @@ public class TableReservationServiceImpl implements TableReservationService {
             count++;
         }
         return count;
+    }
+
+    @Override
+    public com.utecoffe.dto.response.TableUtilizationDto getTableUtilization(Long storeId) {
+        Store store = (storeId != null) ? storeRepository.findById(storeId).orElse(null) : null;
+        String storeName = (store != null) ? store.getName() : "Toàn Chuỗi UTECoffe";
+
+        List<StoreTable> tables;
+        if (storeId != null && storeId > 0) {
+            tables = tableRepository.findByStoreIdAndIsActiveTrue(storeId);
+        } else {
+            tables = tableRepository.findAll().stream()
+                    .filter(t -> Boolean.TRUE.equals(t.getIsActive()))
+                    .toList();
+        }
+
+        int totalTables = tables.size();
+        int occupiedTables = (int) tables.stream()
+                .filter(t -> Boolean.TRUE.equals(t.getIsOccupied()))
+                .count();
+        int availableTables = Math.max(0, totalTables - occupiedTables);
+        double occupancyRate = (totalTables > 0) 
+                ? Math.round(((double) occupiedTables / totalTables) * 1000.0) / 10.0 
+                : 0.0;
+
+        List<TableReservation> allReservations;
+        if (storeId != null && storeId > 0) {
+            allReservations = reservationRepository.findByStoreId(storeId);
+        } else {
+            allReservations = reservationRepository.findAll();
+        }
+
+        java.time.LocalDate today = java.time.LocalDate.now();
+        List<TableReservation> todayReservations = allReservations.stream()
+                .filter(r -> r.getReservationTime() != null && r.getReservationTime().toLocalDate().equals(today))
+                .toList();
+
+        int todayCount = todayReservations.size();
+        int seatedCount = (int) todayReservations.stream().filter(r -> r.getStatus() == ReservationStatus.SEATED).count();
+        int completedCount = (int) todayReservations.stream().filter(r -> r.getStatus() == ReservationStatus.COMPLETED).count();
+        int cancelledCount = (int) todayReservations.stream().filter(r -> r.getStatus() == ReservationStatus.CANCELLED).count();
+
+        double avgParty = todayReservations.stream()
+                .mapToInt(r -> (r.getGuestCount() != null ? r.getGuestCount() : 2))
+                .average()
+                .orElse(2.0);
+        avgParty = Math.round(avgParty * 10.0) / 10.0;
+
+        Map<Integer, Integer> hourlySlots = new HashMap<>();
+        for (TableReservation res : todayReservations) {
+            int hour = res.getReservationTime().getHour();
+            hourlySlots.put(hour, hourlySlots.getOrDefault(hour, 0) + 1);
+        }
+
+        int peakHour = 19;
+        int maxBookings = 0;
+        for (Map.Entry<Integer, Integer> entry : hourlySlots.entrySet()) {
+            if (entry.getValue() > maxBookings) {
+                maxBookings = entry.getValue();
+                peakHour = entry.getKey();
+            }
+        }
+        String peakHourSlot = String.format("%02d:00 - %02d:00 (%d lượt đặt)", peakHour, (peakHour + 2) % 24, maxBookings);
+
+        // Zone Breakdown
+        Map<String, com.utecoffe.dto.response.TableUtilizationDto.ZoneUtilizationDetail> zoneMap = new LinkedHashMap<>();
+        String[] standardZones = {
+                "Quầy Barista Nghệ Nhân",
+                "Sofa VIP Lounge Sang Trọng",
+                "Sân Vườn Xanh Thoáng Mát",
+                "Bàn Co-Working Hiện Đại",
+                "Không Gian Tiêu Chuẩn"
+        };
+        for (String zName : standardZones) {
+            zoneMap.put(zName, com.utecoffe.dto.response.TableUtilizationDto.ZoneUtilizationDetail.builder()
+                    .zoneName(zName)
+                    .totalTables(0)
+                    .occupiedTables(0)
+                    .availableTables(0)
+                    .occupancyPercent(0.0)
+                    .build());
+        }
+
+        for (StoreTable table : tables) {
+            String zName = "Không Gian Tiêu Chuẩn";
+            if (table.getTableNumber() != null) {
+                String num = table.getTableNumber().toUpperCase();
+                if (num.contains("BAR") || num.startsWith("B") || num.equals("T-01") || num.equals("Q1-01") || num.equals("BT-01")) {
+                    zName = "Quầy Barista Nghệ Nhân";
+                } else if (num.contains("VIP") || num.contains("LOUNGE") || num.startsWith("L")) {
+                    zName = "Sofa VIP Lounge Sang Trọng";
+                } else if (num.contains("GARDEN") || num.startsWith("G") || num.startsWith("V")) {
+                    zName = "Sân Vườn Xanh Thoáng Mát";
+                } else if (num.contains("WORK") || num.startsWith("W") || num.startsWith("CW")) {
+                    zName = "Bàn Co-Working Hiện Đại";
+                }
+            }
+
+            var detail = zoneMap.get(zName);
+            if (detail != null) {
+                detail.setTotalTables(detail.getTotalTables() + 1);
+                if (Boolean.TRUE.equals(table.getIsOccupied())) {
+                    detail.setOccupiedTables(detail.getOccupiedTables() + 1);
+                }
+            }
+        }
+
+        for (var detail : zoneMap.values()) {
+            int avail = Math.max(0, detail.getTotalTables() - detail.getOccupiedTables());
+            detail.setAvailableTables(avail);
+            double rate = (detail.getTotalTables() > 0)
+                    ? Math.round(((double) detail.getOccupiedTables() / detail.getTotalTables()) * 1000.0) / 10.0
+                    : 0.0;
+            detail.setOccupancyPercent(rate);
+        }
+
+        String status;
+        String advice;
+        if (occupancyRate >= 85.0) {
+            status = "MAX_CAPACITY";
+            advice = "CẢNH BÁO: Bàn gần như kín hoàn toàn. Khuyến nghị kích hoạt danh sách chờ (Waitlist) và hỗ trợ khách chuyển sang chi nhánh lân cận.";
+        } else if (occupancyRate >= 60.0) {
+            status = "PEAK_RUSH";
+            advice = "LƯỢNG KHÁCH CAO: Khung giờ cao điểm. Ưu tiên giải phóng bàn đã hoàn thành và chuẩn bị đón các đơn đặt lịch trong 30 phút tới.";
+        } else if (occupancyRate >= 25.0) {
+            status = "BALANCED";
+            advice = "LƯU LƯỢNG ỔN ĐỊNH: Vận hành cân bằng, sẵn sàng đón tiếp cả khách vãng lai và khách đã đặt bàn trước.";
+        } else {
+            status = "LOW_TRAFFIC";
+            advice = "KHÔNG GIAN THOÁNG ĐÃNG: Nhiều bàn trống phù hợp cho nhóm bạn bè, đối tác làm việc và workshop cà phê.";
+        }
+
+        return com.utecoffe.dto.response.TableUtilizationDto.builder()
+                .storeId(storeId)
+                .storeName(storeName)
+                .totalTables(totalTables)
+                .occupiedTables(occupiedTables)
+                .availableTables(availableTables)
+                .occupancyRatePercent(occupancyRate)
+                .todayReservationsCount(todayCount)
+                .seatedTodayCount(seatedCount)
+                .completedTodayCount(completedCount)
+                .cancelledTodayCount(cancelledCount)
+                .averagePartySize(avgParty)
+                .peakHourSlot(peakHourSlot)
+                .zoneBreakdown(zoneMap)
+                .utilizationStatus(status)
+                .floorManagerAdvice(advice)
+                .build();
     }
 }

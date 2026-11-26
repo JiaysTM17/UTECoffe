@@ -185,4 +185,37 @@ class TableReservationServiceTest {
         assertFalse(table.getIsOccupied());
         verify(tableRepository, times(1)).save(table);
     }
+
+    @Test
+    void testGetTableUtilization_Success() {
+        tableLounge.setIsOccupied(true);
+        tableBar.setIsOccupied(false);
+
+        TableReservation todayRes = TableReservation.builder()
+                .id(201L)
+                .store(store)
+                .storeTable(tableLounge)
+                .reservationTime(LocalDateTime.now().withHour(18).withMinute(0))
+                .guestCount(4)
+                .status(ReservationStatus.SEATED)
+                .build();
+
+        when(storeRepository.findById(1L)).thenReturn(Optional.of(store));
+        when(tableRepository.findByStoreIdAndIsActiveTrue(1L)).thenReturn(List.of(tableLounge, tableBar));
+        when(reservationRepository.findByStoreId(1L)).thenReturn(List.of(todayRes));
+
+        com.utecoffe.dto.response.TableUtilizationDto dto = reservationService.getTableUtilization(1L);
+
+        assertNotNull(dto);
+        assertEquals(1L, dto.getStoreId());
+        assertEquals(2, dto.getTotalTables());
+        assertEquals(1, dto.getOccupiedTables());
+        assertEquals(1, dto.getAvailableTables());
+        assertEquals(50.0, dto.getOccupancyRatePercent());
+        assertEquals(1, dto.getTodayReservationsCount());
+        assertEquals(1, dto.getSeatedTodayCount());
+        assertEquals(4.0, dto.getAveragePartySize());
+        assertNotNull(dto.getZoneBreakdown());
+        assertNotNull(dto.getFloorManagerAdvice());
+    }
 }

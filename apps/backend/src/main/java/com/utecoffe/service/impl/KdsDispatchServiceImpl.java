@@ -241,4 +241,76 @@ public class KdsDispatchServiceImpl implements KdsDispatchService {
                 .dispatchRecommendation(recommendation)
                 .build();
     }
+
+    @Override
+    public com.utecoffe.dto.response.KdsSlaEscalationDto getKdsSlaStatus(Long storeId) {
+        List<KdsPriorityOrderDto> queue = getOptimizedQueue(storeId);
+
+        int total = queue.size();
+        int normalCount = 0;
+        int warningCount = 0;
+        int breachedCount = 0;
+
+        List<com.utecoffe.dto.response.KdsSlaEscalationDto.KdsTicketSlaDetail> ticketDetails = new ArrayList<>();
+
+        for (KdsPriorityOrderDto item : queue) {
+            int threshold = 12; // default dine-in
+            if (item.getOrderType() == OrderType.TAKE_AWAY) {
+                threshold = 8;
+            } else if (item.getOrderType() == OrderType.DELIVERY) {
+                threshold = 10;
+            }
+
+            if ("DIAMOND".equals(item.getCustomerTier()) || "GOLD".equals(item.getCustomerTier())) {
+                threshold = Math.min(threshold, 8);
+            }
+
+            long wait = item.getWaitingMinutes();
+            boolean breached = (wait >= threshold);
+            String urgency;
+            String action;
+
+            if (breached) {
+                breachedCount++;
+                urgency = "CRITICAL_RUSH";
+                action = "LỆNH HỎA TỐC: Đã vượt ngưỡng SLA (" + wait + "/" + threshold + "p). Dừng chuẩn bị đơn thường, dồn Barista ưu tiên ra món này ngay!";
+            } else if (wait >= (threshold * 0.7)) {
+                warningCount++;
+                urgency = "SLA_WARNING";
+                action = "CẢNH BÁO TIẾN ĐỘ: Sắp chạm trần thời gian phục vụ (" + wait + "/" + threshold + "p). Barista chuẩn bị ly & chiết xuất.";
+            } else {
+                normalCount++;
+                urgency = "NORMAL";
+                action = "Tiến độ phục vụ trong ngưỡng tiêu chuẩn (" + wait + "/" + threshold + "p).";
+            }
+
+            ticketDetails.add(com.utecoffe.dto.response.KdsSlaEscalationDto.KdsTicketSlaDetail.builder()
+                    .orderId(item.getOrderId())
+                    .orderCode(item.getOrderCode())
+                    .customerName(item.getCustomerName())
+                    .customerTier(item.getCustomerTier())
+                    .orderType(item.getOrderType())
+                    .totalItems(item.getItemCount())
+                    .waitingMinutes(wait)
+                    .slaThresholdMinutes(threshold)
+                    .isSlaBreached(breached)
+                    .urgencyStatus(urgency)
+                    .expediteAction(action)
+                    .build());
+        }
+
+        double adherence = (total > 0)
+                ? Math.round(((double) (total - breachedCount) / total) * 1000.0) / 10.0
+                : 100.0;
+
+        return com.utecoffe.dto.response.KdsSlaEscalationDto.builder()
+                .storeId(storeId)
+                .totalActiveTickets(total)
+                .normalTicketsCount(normalCount)
+                .warningTicketsCount(warningCount)
+                .breachedTicketsCount(breachedCount)
+                .slaAdherenceRatePercent(adherence)
+                .tickets(ticketDetails)
+                .build();
+    }
 }

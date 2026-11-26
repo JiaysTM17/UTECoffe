@@ -105,4 +105,22 @@ class KdsDispatchServiceTest {
         assertNotNull(summary.getBottleneckStation());
         assertNotNull(summary.getDispatchRecommendation());
     }
+
+    @Test
+    void testGetKdsSlaStatus_IdentifiesBreachedAndWarningTickets() {
+        when(orderService.getKdsOrdersForStore(1L)).thenReturn(List.of(espressoOrder, pourOverOrder));
+
+        com.utecoffe.dto.response.KdsSlaEscalationDto slaDto = kdsDispatchService.getKdsSlaStatus(1L);
+
+        assertNotNull(slaDto);
+        assertEquals(1L, slaDto.getStoreId());
+        assertEquals(2, slaDto.getTotalActiveTickets());
+        // pourOverOrder waited 12 mins with TAKE_AWAY threshold 8 mins -> breached!
+        assertEquals(1, slaDto.getBreachedTicketsCount());
+        assertTrue(slaDto.getSlaAdherenceRatePercent() < 100.0);
+
+        var tickets = slaDto.getTickets();
+        assertEquals(2, tickets.size());
+        assertTrue(tickets.stream().anyMatch(t -> t.isSlaBreached() && "CRITICAL_RUSH".equals(t.getUrgencyStatus())));
+    }
 }

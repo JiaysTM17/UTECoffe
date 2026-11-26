@@ -40,6 +40,12 @@ public class ReviewRestController {
         return ResponseEntity.ok(ApiResponse.success(data, "Lay danh gia mon thanh cong"));
     }
 
+    @GetMapping("/summary/{productId}")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.ProductReviewSummaryDto>> getProductReviewSummary(@PathVariable Long productId) {
+        com.utecoffe.dto.response.ProductReviewSummaryDto summary = reviewService.getProductReviewSummary(productId);
+        return ResponseEntity.ok(ApiResponse.success(summary, "Tổng hợp phân tích đánh giá hương vị món"));
+    }
+
     @PostMapping
     public ResponseEntity<ApiResponse<Review>> addReview(
             @Valid @RequestBody ReviewRequest request,

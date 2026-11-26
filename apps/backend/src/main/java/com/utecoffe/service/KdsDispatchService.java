@@ -20,4 +20,13 @@ public interface KdsDispatchService {
      * @return Workload summary and dispatch recommendation
      */
     StationWorkloadSummaryDto getStationWorkloadSummary(Long storeId);
+
+    /**
+     * Monitor active ticket preparation times against strict SLA thresholds
+     * (e.g. 8 mins for Takeaway, 12 mins for Dine-In).
+     * Automatically escalates tickets at risk of breaching SLA.
+     * @param storeId Store identifier
+     * @return SLA monitoring and ticket escalation status
+     */
+    com.utecoffe.dto.response.KdsSlaEscalationDto getKdsSlaStatus(Long storeId);
 }

@@ -9,4 +9,5 @@ public interface ReviewService {
     Review addReview(ReviewRequest request, Long userId);
     List<Review> getApprovedReviewsByProduct(Long productId);
     Double getProductAverageRating(Long productId);
+    com.utecoffe.dto.response.ProductReviewSummaryDto getProductReviewSummary(Long productId);
 }

@@ -45,6 +45,13 @@ public class KdsRestController {
                 "Thong ke tai lam viec va dieu phoi cac quay Barista"));
     }
 
+    @GetMapping("/sla/{storeId}")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.KdsSlaEscalationDto>> getKdsSlaStatus(@PathVariable("storeId") Long storeId) {
+        return ResponseEntity.ok(ApiResponse.success(
+                kdsDispatchService.getKdsSlaStatus(storeId),
+                "Giam sat thoi gian cho chuan SLA va dieu phoi hoa toc Barista"));
+    }
+
     @PostMapping("/orders/{orderId}/status")
     public ResponseEntity<ApiResponse<Void>> updateStatus(@PathVariable("orderId") Long orderId,
                                                           @RequestParam("status") OrderStatus status,
