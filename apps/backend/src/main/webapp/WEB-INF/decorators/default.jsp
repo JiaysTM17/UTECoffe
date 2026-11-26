@@ -8,6 +8,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><sitemesh:write property='title'/> - UTECoffe Specialty Tea &amp; Coffee Roastery</title>
     
+    <!-- Primary Domain & SEO Meta Tags -->
+    <meta name="title" content="UTECOFFE - Nghệ Thuật Cà Phê &amp; Trà Đặc Sản Cầu Đất 1.600m">
+    <meta name="description" content="Thương hiệu Cà phê rang mộc thủ công &amp; Trà hoa cao cấp UTECoffe. Trải nghiệm OMO Omnichannel, Đặt bàn trực tuyến, Tích điểm UTEClub tại utecoffe.io.vn">
+    <meta name="keywords" content="utecoffe, utecoffe.io.vn, cà phê đặc sản, trà thủ công, specialty coffee, cà phê cầu đất, cold brew, đặt bàn cà phê">
+    <link rel="canonical" href="https://utecoffe.io.vn">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://utecoffe.io.vn">
+    <meta property="og:title" content="UTECOFFE - Nghệ Thuật Cà Phê &amp; Trà Đặc Sản Cầu Đất">
+    <meta property="og:description" content="Thương hiệu Cà phê rang mộc thủ công &amp; Trà hoa cao cấp UTECoffe. Khám phá menu và đặt bàn tại utecoffe.io.vn">
+    <meta property="og:image" content="https://utecoffe.io.vn/assets/images/logo_dark.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://utecoffe.io.vn">
+    <meta property="twitter:title" content="UTECOFFE - Specialty Coffee &amp; Tea Roastery">
+    <meta property="twitter:description" content="Trải nghiệm cà phê đặc sản Cầu Đất 1.600m tại utecoffe.io.vn">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/favicon.png">
     
@@ -45,7 +64,7 @@
             </div>
             <div class="mx-auto text-center top-bar-promo text-nowrap px-2">
                 <i class="fa-solid fa-gem text-gold me-1"></i>
-                <span class="top-bar-promo-text" data-i18n="topbar.promo">ƯU ĐÃI 20% ĐƠN ĐẦU TIÊN • FREESHIP TOÀN QUỐC TỪ 150.000₫</span>
+                <span class="top-bar-promo-text" data-i18n="topbar.promo">Ưu đãi 20% đơn đầu tiên • Freeship toàn quốc từ 150.000₫</span>
             </div>
             <div class="d-none d-md-flex align-items-center gap-3 top-bar-right flex-shrink-0 text-nowrap">
                 <span class="text-secondary"><i class="fa-regular fa-clock text-gold me-1"></i><span data-i18n="topbar.hours">07:00 - 22:30</span></span>
@@ -111,8 +130,30 @@
                     <sec:authorize access="isAuthenticated()">
                         <div class="dropdown">
                             <button class="btn btn-dark-roast btn-sm border-gold text-gold dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
-                                <i class="fa-solid fa-circle-user fa-lg"></i>
-                                <span class="d-none d-sm-inline"><sec:authentication property="name"/></span>
+                                <c:choose>
+                                    <c:when test="${currentUser != null && currentUser.role.name == 'ROLE_ADMIN'}">
+                                        <span class="badge bg-danger text-white px-2 py-0.5 rounded-pill small fw-bold font-accent">ADMIN</span>
+                                    </c:when>
+                                    <c:when test="${currentUser != null && currentUser.role.name == 'ROLE_BARISTA'}">
+                                        <span class="badge bg-warning text-dark px-2 py-0.5 rounded-pill small fw-bold font-accent">BARISTA</span>
+                                    </c:when>
+                                    <c:when test="${currentLoyaltyCard != null && currentLoyaltyCard.tier == 'DIAMOND'}">
+                                        <span class="badge px-2 py-0.5 rounded-pill small fw-bold font-accent text-dark" style="background: #b9f2ff;"><i class="fa-solid fa-crown me-1"></i>KIM CƯƠNG</span>
+                                    </c:when>
+                                    <c:when test="${currentLoyaltyCard != null && currentLoyaltyCard.tier == 'GOLD'}">
+                                        <span class="badge px-2 py-0.5 rounded-pill small fw-bold font-accent text-dark" style="background: #ffd700;"><i class="fa-solid fa-gem me-1"></i>VÀNG</span>
+                                    </c:when>
+                                    <c:when test="${currentLoyaltyCard != null && currentLoyaltyCard.tier == 'SILVER'}">
+                                        <span class="badge px-2 py-0.5 rounded-pill small fw-bold font-accent text-dark" style="background: #c0c0c0;"><i class="fa-solid fa-medal me-1"></i>BẠC</span>
+                                    </c:when>
+                                    <c:when test="${currentLoyaltyCard != null && currentLoyaltyCard.tier == 'BRONZE'}">
+                                        <span class="badge px-2 py-0.5 rounded-pill small fw-bold font-accent text-white" style="background: #cd7f32;"><i class="fa-solid fa-award me-1"></i>ĐỒNG</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <i class="fa-solid fa-circle-user fa-lg"></i>
+                                    </c:otherwise>
+                                </c:choose>
+                                <span class="d-none d-sm-inline fw-semibold">${currentUser != null ? currentUser.fullName : pageContext.request.userPrincipal.name}</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end bg-espresso border-gold shadow-lg">
                                 <li><a class="dropdown-item py-2" href="${pageContext.request.contextPath}/profile"><i class="fa-solid fa-award me-2 text-gold"></i><span data-i18n="nav.profile">Hồ sơ &amp; Điểm UTEClub</span></a></li>
@@ -168,43 +209,43 @@
 
                 <!-- Col 2: Navigation -->
                 <div class="col-lg-2 col-md-6 col-6">
-                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;" data-i18n="footer.explore">Khám Phá</h6>
+                    <h6 class="text-gold font-serif fw-bold mb-3" data-i18n="footer.explore">Khám Phá</h6>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link">Cà Phê Đặc Sản</a></li>
-                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link">Trà Thủ Công</a></li>
-                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link">Cold Brew Ủ Lạnh</a></li>
-                        <li><a href="${pageContext.request.contextPath}/story" class="footer-link">Nghệ Thuật Rang Mộc</a></li>
-                        <li><a href="${pageContext.request.contextPath}/reservation" class="footer-link">Đặt Bàn Thưởng Thức</a></li>
+                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link" data-i18n="footer.link_coffee">Cà Phê Đặc Sản</a></li>
+                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link" data-i18n="footer.link_tea">Trà Thủ Công</a></li>
+                        <li><a href="${pageContext.request.contextPath}/menu" class="footer-link" data-i18n="footer.link_coldbrew">Cold Brew Ủ Lạnh</a></li>
+                        <li><a href="${pageContext.request.contextPath}/story" class="footer-link" data-i18n="footer.link_roast">Nghệ Thuật Rang Mộc</a></li>
+                        <li><a href="${pageContext.request.contextPath}/reservation" class="footer-link" data-i18n="footer.link_reserve">Đặt Bàn Thưởng Thức</a></li>
                     </ul>
                 </div>
 
                 <!-- Col 3: Customer Care -->
                 <div class="col-lg-2 col-md-6 col-6">
-                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;" data-i18n="footer.policy">Dịch Vụ</h6>
+                    <h6 class="text-gold font-serif fw-bold mb-3" data-i18n="footer.policy">Dịch Vụ</h6>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/profile" class="footer-link">Đặc Quyền UTEClub</a></li>
-                        <li><a href="${pageContext.request.contextPath}/stores" class="footer-link">Tìm Cửa Hàng Gần Nhất</a></li>
-                        <li><a href="${pageContext.request.contextPath}/cart" class="footer-link">Giao Hàng Siêu Tốc 30'</a></li>
-                        <li><a href="${pageContext.request.contextPath}/policy/refund" class="footer-link">Chính Sách Hoàn Tiền</a></li>
-                        <li><a href="${pageContext.request.contextPath}/policy/terms" class="footer-link">Điều Khoản &amp; Bảo Mật</a></li>
+                        <li><a href="${pageContext.request.contextPath}/uteclub" class="footer-link" data-i18n="footer.link_uteclub">Đặc Quyền UTEClub</a></li>
+                        <li><a href="${pageContext.request.contextPath}/stores" class="footer-link" data-i18n="footer.link_stores">Tìm Cửa Hàng Gần Nhất</a></li>
+                        <li><a href="${pageContext.request.contextPath}/cart" class="footer-link" data-i18n="footer.link_delivery">Giao Hàng Siêu Tốc 30'</a></li>
+                        <li><a href="${pageContext.request.contextPath}/policy/refund" class="footer-link" data-i18n="footer.link_refund">Chính Sách Hoàn Tiền</a></li>
+                        <li><a href="${pageContext.request.contextPath}/policy/terms" class="footer-link" data-i18n="footer.link_terms">Điều Khoản &amp; Bảo Mật</a></li>
                     </ul>
                 </div>
 
                 <!-- Col 4: Roastery Contact -->
                 <div class="col-lg-4 col-md-6">
-                    <h6 class="text-gold font-accent fw-bold text-uppercase mb-3" style="letter-spacing: 0.12em;">Xưởng Rang &amp; Trụ Sở</h6>
-                    <p class="text-secondary small mb-2"><i class="fa-solid fa-location-dot text-gold me-2"></i> 01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</p>
-                    <p class="text-secondary small mb-2"><i class="fa-solid fa-clock text-gold me-2"></i> Giờ hoạt động: 06:30 - 23:00 (Thứ 2 - Chủ Nhật)</p>
+                    <h6 class="text-gold font-serif fw-bold mb-3" data-i18n="footer.contact_title">Xưởng Rang &amp; Trụ Sở</h6>
+                    <p class="text-secondary small mb-2"><i class="fa-solid fa-location-dot text-gold me-2"></i> <span data-i18n="footer.contact_addr">01 Võ Văn Ngân, P. Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</span></p>
+                    <p class="text-secondary small mb-2"><i class="fa-solid fa-clock text-gold me-2"></i> <span data-i18n="footer.contact_hours">Giờ hoạt động: 06:30 - 23:00 (Thứ 2 - Chủ Nhật)</span></p>
                     <p class="text-secondary small mb-2"><i class="fa-solid fa-envelope text-gold me-2"></i> contact@utecoffe.vn | cskh@utecoffe.vn</p>
-                    <p class="text-secondary small mb-3"><i class="fa-solid fa-phone text-gold me-2"></i> Tổng đài đặt món: 1900 2026</p>
+                    <p class="text-secondary small mb-3"><i class="fa-solid fa-phone text-gold me-2"></i> <span data-i18n="footer.contact_hotline">Tổng đài đặt món: 1900 2026</span></p>
                     
                     <div class="pt-2">
-                        <span class="text-muted small d-block mb-1">Đối tác thanh toán bảo mật:</span>
+                        <span class="text-muted small d-block mb-1" data-i18n="footer.payment_partners">Đối tác thanh toán bảo mật:</span>
                         <div class="d-flex gap-2 align-items-center flex-wrap">
-                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-qrcode me-1 text-gold"></i> VietQR</span>
-                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-regular fa-credit-card me-1 text-gold"></i> VNPay</span>
-                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-wallet me-1 text-gold"></i> MoMo</span>
-                            <span class="badge bg-secondary text-light px-2 py-1"><i class="fa-solid fa-money-bill-1 me-1 text-gold"></i> Tiền mặt</span>
+                            <span class="badge bg-secondary text-primary px-2 py-1"><i class="fa-solid fa-qrcode me-1 text-gold"></i> VietQR</span>
+                            <span class="badge bg-secondary text-primary px-2 py-1"><i class="fa-regular fa-credit-card me-1 text-gold"></i> VNPay</span>
+                            <span class="badge bg-secondary text-primary px-2 py-1"><i class="fa-solid fa-wallet me-1 text-gold"></i> MoMo</span>
+                            <span class="badge bg-secondary text-primary px-2 py-1"><i class="fa-solid fa-money-bill-1 me-1 text-gold"></i> <span data-i18n="footer.pay_cash">Tiền mặt</span></span>
                         </div>
                     </div>
                 </div>
@@ -218,89 +259,37 @@
         </div>
     </footer>
 
-    <!-- Floating Speed-Dial Actions (Back to Top & Taste Quiz Assistant) -->
-    <div class="floating-speed-dial" style="position: fixed; bottom: 25px; right: 25px; z-index: 1050; display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
-        <!-- Taste Quiz Assistant Button -->
-        <button type="button" class="btn btn-gold rounded-pill px-3 py-2 shadow-gold d-flex align-items-center gap-2 font-accent fw-bold" data-bs-toggle="modal" data-bs-target="#tasteQuizModal" title="Trợ lý chọn cà phê theo gu">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span class="d-none d-sm-inline">Trợ Lý Vị Giác</span>
-        </button>
-
-        <!-- Direct Hotline Dial -->
-        <a href="tel:19002026" class="btn btn-outline-gold rounded-circle p-0 shadow-sm d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: var(--bg-card);" title="Tổng đài CSKH 1900 2026">
-            <i class="fa-solid fa-phone text-gold"></i>
-        </a>
-
-        <!-- Back to Top Button -->
-        <button type="button" id="backToTopBtn" class="btn btn-outline-gold rounded-circle p-0 shadow-sm d-none align-items-center justify-content-center" style="width: 44px; height: 44px; background: var(--bg-card);" title="Cuộn lên đầu trang">
-            <i class="fa-solid fa-arrow-up text-gold"></i>
-        </button>
-    </div>
-
-    <!-- Taste Quiz Modal -->
-    <div class="modal fade" id="tasteQuizModal" tabindex="-1" aria-labelledby="tasteQuizModalLabel" aria-hidden="true">
+    <!-- Luxury In-Development Modal -->
+    <div class="modal fade" id="inDevelopmentModal" tabindex="-1" aria-labelledby="inDevelopmentModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content card-luxury border-gold p-2">
+            <div class="modal-content card-luxury border-gold shadow-lg bg-espresso text-primary p-3" style="border-radius: 24px;">
                 <div class="modal-header border-0 pb-0">
-                    <div>
-                        <span class="badge bg-gold-subtle text-gold small font-accent mb-1">
-                            <i class="fa-solid fa-gem me-1"></i> UTECOFFE TASTE FINDER
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-gold-gradient text-obsidian rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                            <i class="fa-solid fa-sparkles"></i>
                         </span>
-                        <h5 class="modal-title font-serif fw-bold text-gold-gradient" id="tasteQuizModalLabel">Trợ Lý Khám Phá Gu Vị Giác</h5>
+                        <h5 class="modal-title font-serif text-gold-gradient fw-bold mb-0" id="inDevelopmentModalLabel" data-i18n="in_dev.title">Thông Báo Trải Nghiệm</h5>
                     </div>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body p-4">
-                    <!-- Step 1 -->
-                    <div id="quizStep1">
-                        <p class="small text-secondary mb-3">1. Bạn đang mong muốn tìm kiếm trải nghiệm hương vị nào hôm nay?</p>
-                        <div class="d-flex flex-column gap-2 mb-3">
-                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-option-btn" data-type="strong">
-                                <i class="fa-solid fa-fire-flame-curved me-2 text-gold"></i> Đậm đà, đánh thức năng lượng (Espresso &amp; Phin Mộc)
-                            </button>
-                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-option-btn" data-type="coldbrew">
-                                <i class="fa-solid fa-snowflake me-2 text-gold"></i> Thanh mát, thơm nốt cam quýt ủ lạnh (Specialty Cold Brew)
-                            </button>
-                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-option-btn" data-type="tea">
-                                <i class="fa-solid fa-leaf me-2 text-gold"></i> Tĩnh lặng, thư thái cùng trà hoa thượng hạng (Camellia Tea)
-                            </button>
+                <div class="modal-body py-4 text-center">
+                    <div class="mb-3">
+                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle border border-gold p-4" style="background: radial-gradient(circle, rgba(222,183,106,0.18) 0%, rgba(14,13,11,0) 70%); width: 85px; height: 85px;">
+                            <i class="fa-solid fa-compass-drafting text-gold fs-2"></i>
                         </div>
                     </div>
-
-                    <!-- Step 2 -->
-                    <div id="quizStep2" class="d-none">
-                        <p class="small text-secondary mb-3">2. Bạn có thích kết hợp cùng sữa tươi nguyên bản không?</p>
-                        <div class="d-flex flex-column gap-2 mb-3">
-                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-answer-btn" data-milk="black">
-                                <i class="fa-solid fa-droplet me-2 text-gold"></i> Cà phê/Trà đen nguyên bản (Không sữa)
-                            </button>
-                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-answer-btn" data-milk="milk">
-                                <i class="fa-solid fa-cow me-2 text-gold"></i> Béo ngậy cùng Sữa Tươi Thanh Trùng Đà Lạt
-                            </button>
-                            <button type="button" class="btn btn-outline-gold text-start py-2 px-3 rounded-3 quiz-answer-btn" data-milk="oat">
-                                <i class="fa-solid fa-wheat-awn me-2 text-gold"></i> Thanh tao cùng Sữa Yến Mạch Oatly Thuần Chay
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Recommendation Result -->
-                    <div id="quizResult" class="d-none text-center py-3">
-                        <div class="mb-3">
-                            <i class="fa-solid fa-champagne-glasses text-gold display-4 mb-2"></i>
-                            <h5 class="font-serif fw-bold text-gold-gradient mb-1" id="quizRecommendedTitle">Cold Brew Cam Vàng Hảo Hạng</h5>
-                            <p class="small text-secondary mx-auto" style="max-width: 320px;" id="quizRecommendedDesc">
-                                Tuyệt phẩm ủ lạnh 24 giờ với hương thơm cam vàng thanh mát, hậu vị ngọt sâu dịu nhẹ rất hợp với gu thưởng thức của bạn!
-                            </p>
-                        </div>
-                        <div class="d-flex justify-content-center gap-2">
-                            <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold btn-sm px-4 rounded-pill" id="quizActionLink">
-                                <i class="fa-solid fa-sliders me-1"></i> Tùy Chỉnh &amp; Thưởng Thức
-                            </a>
-                            <button type="button" class="btn btn-outline-gold btn-sm px-3 rounded-pill" id="quizRestartBtn">
-                                <i class="fa-solid fa-rotate-left"></i> Chọn Lại
-                            </button>
-                        </div>
-                    </div>
+                    <h5 class="font-serif fw-bold text-primary mb-2" id="inDevFeatureTitle" data-i18n="in_dev.default_feature">Kênh Truyền Thông Đang Nâng Cấp</h5>
+                    <p class="text-secondary small px-3 mb-0" id="inDevFeatureDesc" style="line-height: 1.8;" data-i18n="in_dev.desc">
+                        UTECOFFE Official đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền trên nền tảng này nhằm mang đến trải nghiệm tinh tế và trọn vẹn nhất cho bạn. Xin vui lòng đón chờ trong thời gian sớm nhất!
+                    </p>
+                </div>
+                <div class="modal-footer border-0 pt-0 justify-content-center gap-2">
+                    <button type="button" class="btn btn-gold btn-sm px-4 rounded-pill font-accent" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-check me-1"></i> <span data-i18n="in_dev.btn_understand">Đã Hiểu &amp; Đón Chờ</span>
+                    </button>
+                    <a href="${pageContext.request.contextPath}/menu" class="btn btn-outline-gold btn-sm px-3 rounded-pill font-accent" data-i18n="in_dev.btn_explore">
+                        Khám Phá Menu
+                    </a>
                 </div>
             </div>
         </div>
@@ -309,85 +298,40 @@
     <!-- Bootstrap 5 JS Bundle & UTECoffe Luxury Interaction Engine -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/luxury.js"></script>
-
-    <!-- Floating Actions & Quiz Interaction Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Back to Top Scroll Behavior
-            const backToTopBtn = document.getElementById('backToTopBtn');
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 300) {
-                    if (backToTopBtn) {
-                        backToTopBtn.classList.remove('d-none');
-                        backToTopBtn.classList.add('d-flex');
-                    }
+        function showUnderDevelopment(featureName, customMessage) {
+            const isEn = (localStorage.getItem('utecoffe_lang') === 'en');
+            const titleEl = document.getElementById('inDevFeatureTitle');
+            const descEl = document.getElementById('inDevFeatureDesc');
+            
+            const channelNamesEn = {
+                'Kênh Facebook Official': 'Official Facebook Channel',
+                'Kênh Instagram Official': 'Official Instagram Channel',
+                'Kênh TikTok Official': 'Official TikTok Channel',
+                'Kênh YouTube Roastery': 'Roastery YouTube Channel'
+            };
+            const displayFeature = (isEn && channelNamesEn[featureName]) ? channelNamesEn[featureName] : featureName;
+
+            if (titleEl && featureName) {
+                titleEl.textContent = displayFeature + (isEn ? ' - Under Active Development' : ' - Đang Hoàn Thiện');
+            }
+            if (descEl && customMessage) {
+                descEl.textContent = customMessage;
+            } else if (descEl) {
+                if (isEn) {
+                    descEl.innerHTML = 'This official communication channel & feature of <strong>UTECOFFE Artisanal Roasters</strong> is currently under active curation and will debut exclusively soon. We are committed to delivering the highest standard of elegance for you. Thank you for your continued patronage!';
                 } else {
-                    if (backToTopBtn) {
-                        backToTopBtn.classList.add('d-none');
-                        backToTopBtn.classList.remove('d-flex');
-                    }
+                    descEl.innerHTML = 'Kênh truyền thông & tính năng này của <strong>UTECOFFE Artisanal Roasters</strong> đang trong quá trình hoàn thiện nội dung và chuẩn bị ra mắt độc quyền. Chúng tôi cam kết mang tới tiêu chuẩn phục vụ tinh tế và trọn vẹn nhất cho bạn. Xin chân thành cảm ơn sự đồng hành của quý khách!';
                 }
-            });
-            if (backToTopBtn) {
-                backToTopBtn.addEventListener('click', function () {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
             }
-
-            // Taste Quiz Logic
-            let chosenType = 'coldbrew';
-            const step1 = document.getElementById('quizStep1');
-            const step2 = document.getElementById('quizStep2');
-            const result = document.getElementById('quizResult');
-            const titleEl = document.getElementById('quizRecommendedTitle');
-            const descEl = document.getElementById('quizRecommendedDesc');
-            const linkEl = document.getElementById('quizActionLink');
-            const restartBtn = document.getElementById('quizRestartBtn');
-
-            document.querySelectorAll('.quiz-option-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    chosenType = this.getAttribute('data-type');
-                    if (step1) step1.classList.add('d-none');
-                    if (step2) step2.classList.remove('d-none');
-                });
-            });
-
-            document.querySelectorAll('.quiz-answer-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const milk = this.getAttribute('data-milk');
-                    if (step2) step2.classList.add('d-none');
-                    if (result) result.classList.remove('d-none');
-
-                    if (chosenType === 'strong') {
-                        if (milk === 'milk') {
-                            titleEl.textContent = 'Espresso Tonic Signature';
-                            descEl.textContent = 'Double shot Espresso Cầu Đất trên nền Tonic cao cấp và lát chanh vàng bùng nổ năng lượng.';
-                            linkEl.href = '${pageContext.request.contextPath}/menu/espresso-tonic-signature';
-                        } else {
-                            titleEl.textContent = 'Espresso Cầu Đất Vàng Đượm';
-                            descEl.textContent = 'Chiết xuất áp suất cao từ 100% hạt Arabica Bourbon Cầu Đất, lớp crema vàng óng ánh với hương chocolate đen.';
-                            linkEl.href = '${pageContext.request.contextPath}/menu/espresso-tonic-signature';
-                        }
-                    } else if (chosenType === 'tea') {
-                        titleEl.textContent = 'Trà Oolong Kem Phomai Vàng';
-                        descEl.textContent = 'Trà Oolong nướng Mộc Châu kết hợp lớp macchiato cheese béo ngậy hảo hạng.';
-                        linkEl.href = '${pageContext.request.contextPath}/menu/tra-oolong-kem-phomai-vang';
-                    } else {
-                        titleEl.textContent = 'Specialty Cold Brew Cam Vàng';
-                        descEl.textContent = 'Ủ lạnh chậm suốt 18 giờ giữ trọn vị ngọt tự nhiên, hòa quyện nước cam vàng Sunkist mọng nước thanh mát.';
-                        linkEl.href = '${pageContext.request.contextPath}/menu/cold-brew-cam-vang-specialty';
-                    }
-                });
-            });
-
-            if (restartBtn) {
-                restartBtn.addEventListener('click', function () {
-                    if (result) result.classList.add('d-none');
-                    if (step2) step2.classList.add('d-none');
-                    if (step1) step1.classList.remove('d-none');
-                });
+            const modalEl = document.getElementById('inDevelopmentModal');
+            if (modalEl && typeof bootstrap !== 'undefined') {
+                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            } else {
+                alert(displayFeature + (isEn ? ': Feature is under active curation. Please stay tuned!' : ': Tính năng đang được hoàn thiện. Vui lòng đón chờ!'));
             }
-        });
+        }
     </script>
 </body>
 </html>

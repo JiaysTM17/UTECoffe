@@ -1,0 +1,25 @@
+<sitemesh>
+    <!-- Exclude API REST endpoints, WebSocket, and static assets from decoration -->
+    <mapping path="/ping" excl="true"/>
+    <mapping path="/ping/*" excl="true"/>
+    <mapping path="/diag" excl="true"/>
+    <mapping path="/diag/*" excl="true"/>
+    <mapping path="/threads" excl="true"/>
+    <mapping path="/threads/*" excl="true"/>
+    <mapping path="/favicon.ico" excl="true"/>
+    <mapping path="/WEB-INF/*" excl="true"/>
+    <mapping path="/api/*" excl="true"/>
+    <mapping path="/ws-utecoffe/*" excl="true"/>
+    <mapping path="/static/*" excl="true"/>
+    <mapping path="/assets/*" excl="true"/>
+    <mapping path="/css/*" excl="true"/>
+    <mapping path="/js/*" excl="true"/>
+    <mapping path="/images/*" excl="true"/>
+
+    <!-- Admin & Barista Layouts -->
+    <mapping path="/admin/*" decorator="/WEB-INF/views/layouts/admin.jsp"/>
+    <mapping path="/barista/*" decorator="/WEB-INF/views/layouts/barista.jsp"/>
+
+    <!-- Default Customer Storefront Layout -->
+    <mapping path="/*" decorator="/WEB-INF/views/layouts/default.jsp"/>
+</sitemesh>
