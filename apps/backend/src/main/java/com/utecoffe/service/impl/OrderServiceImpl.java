@@ -152,7 +152,7 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal discount = BigDecimal.ZERO;
         if (request.getCouponCode() != null && !request.getCouponCode().isBlank()) {
             Coupon coupon = couponRepository.findByCodeAndIsActiveTrue(request.getCouponCode().trim()).orElse(null);
-            if (coupon != null && (coupon.getMinOrderValue() == null || subtotal.compareTo(coupon.getMinOrderValue()) >= 0)) {
+            if (isCouponEligible(coupon, subtotal, LocalDateTime.now())) {
                 if (coupon.getDiscountType() == com.utecoffe.enums.DiscountType.PERCENTAGE) {
                     discount = subtotal.multiply(coupon.getDiscountValue()).divide(BigDecimal.valueOf(100));
                     if (coupon.getMaxDiscountAmount() != null && discount.compareTo(coupon.getMaxDiscountAmount()) > 0) {
@@ -161,7 +161,7 @@ public class OrderServiceImpl implements OrderService {
                 } else {
                     discount = coupon.getDiscountValue();
                 }
-                coupon.setUsedCount(coupon.getUsedCount() + 1);
+                coupon.setUsedCount((coupon.getUsedCount() != null ? coupon.getUsedCount() : 0) + 1);
                 couponRepository.save(coupon);
             }
         }
@@ -237,11 +237,42 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findByStoreIdAndStatusInOrderByCreatedAtAsc(storeId, kdsStatuses);
     }
 
+    private boolean isCouponEligible(Coupon coupon, BigDecimal subtotal, LocalDateTime now) {
+        if (coupon == null || !Boolean.TRUE.equals(coupon.getIsActive())) {
+            return false;
+        }
+        if (coupon.getStartDate() != null && now.isBefore(coupon.getStartDate())) {
+            return false;
+        }
+        if (coupon.getEndDate() != null && now.isAfter(coupon.getEndDate())) {
+            return false;
+        }
+        if (coupon.getUsageLimit() != null && coupon.getUsedCount() != null
+                && coupon.getUsedCount() >= coupon.getUsageLimit()) {
+            return false;
+        }
+        if (coupon.getMinOrderValue() != null && subtotal.compareTo(coupon.getMinOrderValue()) < 0) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     @Transactional
     @Auditable(action = "UPDATE_ORDER_STATUS", entityName = "Order")
     public Order updateOrderStatus(Long orderId, OrderStatus newStatus, String note) {
         Order order = getOrderById(orderId);
+        OrderStatus currentStatus = order.getStatus();
+
+        if (currentStatus == newStatus) {
+            return order; // No-op if status is unchanged
+        }
+
+        // Validate state transitions
+        if (!isValidStatusTransition(currentStatus, newStatus)) {
+            throw new IllegalStateException("Không thể chuyển trạng thái đơn hàng từ " + currentStatus + " sang " + newStatus);
+        }
+
         order.setStatus(newStatus);
         Order updated = orderRepository.save(order);
 
@@ -255,9 +286,16 @@ public class OrderServiceImpl implements OrderService {
             loyaltyService.accumulatePointsForOrder(order);
         }
 
+        // If order is CANCELLED, restore ingredients and reverse any points
+        if (newStatus == OrderStatus.CANCELLED) {
+            inventoryService.restoreStockForOrder(order);
+            loyaltyService.reversePointsForOrder(order);
+        }
+
         String defaultMsg = switch (newStatus) {
             case CONFIRMED -> "Barista đã xác nhận đơn hàng và chuẩn bị nguyên liệu";
             case PREPARING -> "Thức uống đang được nghệ nhân Barista tỉ mỉ pha chế";
+            case READY -> "Thức uống đã sẵn sàng tại quầy đón khách";
             case DELIVERING -> "Shipper đang giao thức uống đến tận tay bạn";
             case COMPLETED -> "Đơn hàng đã hoàn thành. Chúc bạn thưởng thức trọn vẹn hương vị UTECoffe!";
             case CANCELLED -> "Đơn hàng đã được hủy thành công";
@@ -272,5 +310,38 @@ public class OrderServiceImpl implements OrderService {
         orderTrackingRepository.save(tracking);
 
         return updated;
+    }
+
+    @Override
+    @Transactional
+    @Auditable(action = "CANCEL_ORDER", entityName = "Order")
+    public Order cancelOrder(Long orderId, Long userId, String reason) {
+        Order order = getOrderById(orderId);
+
+        // Verify ownership if requested by user
+        if (userId != null && (order.getUser() == null || !order.getUser().getId().equals(userId))) {
+            throw new IllegalArgumentException("Bạn không có quyền hủy đơn hàng này");
+        }
+
+        // Customer can only cancel when order is still in PENDING status
+        if (order.getStatus() != OrderStatus.PENDING) {
+            throw new IllegalStateException("Đơn hàng đã được xác nhận hoặc đang pha chế, không thể tự hủy. Vui lòng liên hệ hotline 1900 2026.");
+        }
+
+        String cancelReason = (reason != null && !reason.isBlank()) ? reason : "Khách hàng yêu cầu hủy đơn hàng";
+        return updateOrderStatus(orderId, OrderStatus.CANCELLED, cancelReason);
+    }
+
+    private boolean isValidStatusTransition(OrderStatus from, OrderStatus to) {
+        if (from == null || to == null) return false;
+
+        return switch (from) {
+            case PENDING -> (to == OrderStatus.CONFIRMED || to == OrderStatus.PREPARING || to == OrderStatus.CANCELLED);
+            case CONFIRMED -> (to == OrderStatus.PREPARING || to == OrderStatus.CANCELLED);
+            case PREPARING -> (to == OrderStatus.READY || to == OrderStatus.DELIVERING || to == OrderStatus.COMPLETED || to == OrderStatus.CANCELLED);
+            case READY -> (to == OrderStatus.DELIVERING || to == OrderStatus.COMPLETED || to == OrderStatus.CANCELLED);
+            case DELIVERING -> (to == OrderStatus.COMPLETED || to == OrderStatus.CANCELLED);
+            case COMPLETED, CANCELLED -> false; // Terminal states
+        };
     }
 }

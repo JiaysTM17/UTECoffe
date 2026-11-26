@@ -8,5 +8,7 @@ import java.util.List;
 public interface InventoryService {
     boolean verifyStockForOrder(Order order);
     void deductStockForOrder(Order order);
+    void restoreStockForOrder(Order order);
     List<StoreInventory> getLowStockAlerts(Long storeId);
 }
+

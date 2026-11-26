@@ -42,6 +42,21 @@ public class ReservationRestController {
         return ResponseEntity.ok(ApiResponse.success(res, "Chi tiết thông tin đặt bàn"));
     }
 
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<ApiResponse<TableReservation>> cancelReservation(
+            @PathVariable Long id,
+            @RequestBody(required = false) java.util.Map<String, String> body,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        Long userId = null;
+        if (userDetails != null) {
+            User user = authService.getByEmail(userDetails.getUsername());
+            if (user != null) userId = user.getId();
+        }
+        String reason = (body != null) ? body.get("reason") : "Khách hàng yêu cầu hủy đặt bàn";
+        TableReservation res = reservationService.cancelReservation(id, userId, reason);
+        return ResponseEntity.ok(ApiResponse.success(res, "Hủy lịch đặt bàn thành công"));
+    }
+
     @GetMapping("/store/{storeId}")
     public ResponseEntity<ApiResponse<java.util.List<TableReservation>>> getStoreReservations(@PathVariable Long storeId) {
         java.util.List<TableReservation> list = reservationService.getStoreReservations(storeId);

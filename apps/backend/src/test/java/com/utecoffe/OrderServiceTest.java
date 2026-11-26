@@ -86,4 +86,74 @@ class OrderServiceTest {
         assertEquals(BigDecimal.valueOf(100000), order.getFinalAmount());
         verify(paymentRepository, times(1)).save(any(Payment.class));
     }
+
+    @Test
+    void testUpdateOrderStatus_ValidTransition_Success() {
+        Order order = Order.builder()
+                .id(1L)
+                .orderCode("UTE-261126-0001")
+                .status(OrderStatus.PENDING)
+                .build();
+
+        when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+        when(orderRepository.save(any(Order.class))).thenAnswer(i -> i.getArgument(0));
+
+        Order updated = orderService.updateOrderStatus(1L, OrderStatus.PREPARING, "Barista dang pha che");
+
+        assertEquals(OrderStatus.PREPARING, updated.getStatus());
+        verify(inventoryService, times(1)).deductStockForOrder(order);
+        verify(orderTrackingRepository, times(1)).save(any(OrderTracking.class));
+    }
+
+    @Test
+    void testUpdateOrderStatus_InvalidTransition_ThrowsException() {
+        Order order = Order.builder()
+                .id(2L)
+                .orderCode("UTE-261126-0002")
+                .status(OrderStatus.CANCELLED)
+                .build();
+
+        when(orderRepository.findById(2L)).thenReturn(Optional.of(order));
+
+        assertThrows(IllegalStateException.class, () -> {
+            orderService.updateOrderStatus(2L, OrderStatus.COMPLETED, "Note");
+        });
+    }
+
+    @Test
+    void testCancelOrder_WhenPending_Success() {
+        User user = User.builder().id(10L).build();
+        Order order = Order.builder()
+                .id(3L)
+                .orderCode("UTE-261126-0003")
+                .user(user)
+                .status(OrderStatus.PENDING)
+                .build();
+
+        when(orderRepository.findById(3L)).thenReturn(Optional.of(order));
+        when(orderRepository.save(any(Order.class))).thenAnswer(i -> i.getArgument(0));
+
+        Order cancelled = orderService.cancelOrder(3L, 10L, "Thay doi ke hoach");
+
+        assertEquals(OrderStatus.CANCELLED, cancelled.getStatus());
+        verify(inventoryService, times(1)).restoreStockForOrder(order);
+        verify(loyaltyService, times(1)).reversePointsForOrder(order);
+    }
+
+    @Test
+    void testCancelOrder_WhenPreparing_ThrowsException() {
+        User user = User.builder().id(10L).build();
+        Order order = Order.builder()
+                .id(4L)
+                .orderCode("UTE-261126-0004")
+                .user(user)
+                .status(OrderStatus.PREPARING)
+                .build();
+
+        when(orderRepository.findById(4L)).thenReturn(Optional.of(order));
+
+        assertThrows(IllegalStateException.class, () -> {
+            orderService.cancelOrder(4L, 10L, "Khong muon uong nua");
+        });
+    }
 }

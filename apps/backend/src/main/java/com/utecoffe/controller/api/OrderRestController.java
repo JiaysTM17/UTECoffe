@@ -51,6 +51,23 @@ public class OrderRestController {
         return ResponseEntity.ok(ApiResponse.success(orderService.getOrderByCode(orderCode), "Thong tin don hang"));
     }
 
+    @PostMapping("/{orderCode}/cancel")
+    public ResponseEntity<ApiResponse<Order>> cancelOrder(@PathVariable String orderCode,
+                                                         @RequestBody(required = false) java.util.Map<String, String> body,
+                                                         @AuthenticationPrincipal UserDetails userDetails) {
+        Order order = orderService.getOrderByCode(orderCode);
+        Long userId = null;
+        if (userDetails != null) {
+            User user = authService.getByEmail(userDetails.getUsername());
+            if (user != null) userId = user.getId();
+        }
+
+        String reason = (body != null) ? body.get("reason") : "Khách hàng hủy đơn";
+        Order cancelled = orderService.cancelOrder(order.getId(), userId, reason);
+        notificationService.notifyOrderStatusChanged(cancelled, "Đơn hàng #" + orderCode + " đã được hủy.");
+        return ResponseEntity.ok(ApiResponse.success(cancelled, "Hủy đơn hàng thành công"));
+    }
+
     @GetMapping("/my-orders")
     public ResponseEntity<ApiResponse<List<Order>>> getMyOrders(@AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {

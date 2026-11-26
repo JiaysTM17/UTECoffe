@@ -25,10 +25,18 @@ public class LoyaltyServiceImpl implements LoyaltyService {
     @Autowired
     private com.utecoffe.repository.UserRepository userRepository;
 
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LoyaltyServiceImpl.class);
+
     @Override
     @Transactional
     public void accumulatePointsForOrder(Order order) {
-        if (order.getUser() == null || order.getFinalAmount() == null) {
+        if (order == null || order.getId() == null || order.getUser() == null || order.getFinalAmount() == null) {
+            return;
+        }
+
+        // Idempotency check: Do not earn points multiple times for the same order
+        if (transactionRepository.existsByOrderIdAndTransactionType(order.getId(), "EARN")) {
+            log.info("Loyalty points already accumulated for order #{}, skipping duplicate accumulation.", order.getOrderCode());
             return;
         }
 
@@ -47,17 +55,7 @@ public class LoyaltyServiceImpl implements LoyaltyService {
 
         // Auto Tier Upgrade Check matching UTEClub Tier Specification:
         // BRONZE (< 500), SILVER (500 - 1499), GOLD (1500 - 2999), DIAMOND (>= 3000)
-        int lifetime = card.getLifetimePoints();
-        if (lifetime >= 3000) {
-            card.setTier(LoyaltyTier.DIAMOND);
-        } else if (lifetime >= 1500) {
-            card.setTier(LoyaltyTier.GOLD);
-        } else if (lifetime >= 500) {
-            card.setTier(LoyaltyTier.SILVER);
-        } else {
-            card.setTier(LoyaltyTier.BRONZE);
-        }
-
+        updateCardTier(card);
         loyaltyCardRepository.save(card);
 
         // Transaction Audit Record
@@ -69,6 +67,59 @@ public class LoyaltyServiceImpl implements LoyaltyService {
                 .description("Tích lũy hạt vàng từ đơn hàng #" + order.getOrderCode() + " (+" + pointsEarned + " hạt vàng)")
                 .build();
         transactionRepository.save(tx);
+        log.info("Accumulated {} loyalty points for user {} on order #{}", pointsEarned, order.getUser().getId(), order.getOrderCode());
+    }
+
+    @Override
+    @Transactional
+    public void reversePointsForOrder(Order order) {
+        if (order == null || order.getId() == null || order.getUser() == null) {
+            return;
+        }
+
+        var earnTxOpt = transactionRepository.findByOrderIdAndTransactionType(order.getId(), "EARN");
+        if (earnTxOpt.isEmpty()) {
+            return; // Order never earned points, nothing to reverse
+        }
+
+        if (transactionRepository.existsByOrderIdAndTransactionType(order.getId(), "REVERSE")) {
+            log.info("Loyalty points already reversed for order #{}, skipping.", order.getOrderCode());
+            return;
+        }
+
+        LoyaltyCard card = getCardByUserId(order.getUser().getId());
+        if (card == null) {
+            return;
+        }
+
+        int pointsToReverse = earnTxOpt.get().getPointsChange();
+        card.setPointsBalance(Math.max(0, card.getPointsBalance() - pointsToReverse));
+        card.setLifetimePoints(Math.max(0, card.getLifetimePoints() - pointsToReverse));
+        updateCardTier(card);
+        loyaltyCardRepository.save(card);
+
+        LoyaltyTransaction reverseTx = LoyaltyTransaction.builder()
+                .loyaltyCard(card)
+                .order(order)
+                .pointsChange(-pointsToReverse)
+                .transactionType("REVERSE")
+                .description("Thu hồi hạt vàng do đơn hàng #" + order.getOrderCode() + " bị hủy (-" + pointsToReverse + " hạt vàng)")
+                .build();
+        transactionRepository.save(reverseTx);
+        log.info("Reversed {} loyalty points for user {} on cancelled order #{}", pointsToReverse, order.getUser().getId(), order.getOrderCode());
+    }
+
+    private void updateCardTier(LoyaltyCard card) {
+        int lifetime = card.getLifetimePoints();
+        if (lifetime >= 3000) {
+            card.setTier(LoyaltyTier.DIAMOND);
+        } else if (lifetime >= 1500) {
+            card.setTier(LoyaltyTier.GOLD);
+        } else if (lifetime >= 500) {
+            card.setTier(LoyaltyTier.SILVER);
+        } else {
+            card.setTier(LoyaltyTier.BRONZE);
+        }
     }
 
     @Override

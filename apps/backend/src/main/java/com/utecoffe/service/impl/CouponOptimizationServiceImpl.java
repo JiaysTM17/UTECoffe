@@ -43,9 +43,15 @@ public class CouponOptimizationServiceImpl implements CouponOptimizationService 
             );
         }
 
+        java.time.LocalDateTime now = java.time.LocalDateTime.now();
         List<Coupon> eligibleCoupons = new ArrayList<>();
         for (String code : availableCouponCodes) {
             couponRepository.findByCode(code).ifPresent(c -> {
+                if (!Boolean.TRUE.equals(c.getIsActive())) return;
+                if (c.getStartDate() != null && now.isBefore(c.getStartDate())) return;
+                if (c.getEndDate() != null && now.isAfter(c.getEndDate())) return;
+                if (c.getUsageLimit() != null && c.getUsedCount() != null && c.getUsedCount() >= c.getUsageLimit()) return;
+
                 BigDecimal minSpend = c.getMinOrderValue() != null ? c.getMinOrderValue() : BigDecimal.ZERO;
                 if (cartSubtotal.compareTo(minSpend) >= 0) {
                     eligibleCoupons.add(c);

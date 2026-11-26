@@ -58,28 +58,37 @@ public class TableReservationServiceImpl implements TableReservationService {
         }
         int guests = (request.getGuestCount() != null && request.getGuestCount() > 0) ? request.getGuestCount() : 2;
 
+        LocalDateTime windowStart = (reqTime != null) ? reqTime.minusMinutes(89) : LocalDateTime.now().minusMinutes(89);
+        LocalDateTime windowEnd = (reqTime != null) ? reqTime.plusMinutes(89) : LocalDateTime.now().plusMinutes(89);
+
+        List<TableReservation> overlapping = reservationRepository.findByStoreId(store.getId()).stream()
+                .filter(r -> r.getStatus() != ReservationStatus.CANCELLED && r.getStatus() != ReservationStatus.COMPLETED)
+                .filter(r -> r.getReservationTime() != null)
+                .filter(r -> !r.getReservationTime().isBefore(windowStart) && !r.getReservationTime().isAfter(windowEnd))
+                .collect(Collectors.toList());
+
+        Set<Long> busyTableIds = overlapping.stream()
+                .map(TableReservation::getStoreTable)
+                .filter(Objects::nonNull)
+                .map(StoreTable::getId)
+                .collect(Collectors.toSet());
+
         StoreTable table = null;
         if (request.getTableId() != null) {
-            table = tableRepository.findById(request.getTableId()).orElse(null);
+            StoreTable requestedTable = tableRepository.findById(request.getTableId()).orElse(null);
+            if (requestedTable != null) {
+                if (busyTableIds.contains(requestedTable.getId())) {
+                    throw new IllegalStateException("Bàn " + requestedTable.getTableNumber() + " đã có khách đặt trong khung giờ này. Vui lòng chọn bàn khác hoặc để hệ thống tự động sắp xếp.");
+                }
+                if (requestedTable.getCapacity() < guests) {
+                    throw new IllegalArgumentException("Bàn " + requestedTable.getTableNumber() + " chỉ có sức chứa " + requestedTable.getCapacity() + " người, không đủ cho " + guests + " khách.");
+                }
+                table = requestedTable;
+            }
         }
 
         // Interval Scheduling & Multi-Criteria Best-Fit Table Allocation Algorithm
         if (table == null && reqTime != null) {
-            LocalDateTime windowStart = reqTime.minusMinutes(89);
-            LocalDateTime windowEnd = reqTime.plusMinutes(89);
-
-            List<TableReservation> overlapping = reservationRepository.findByStoreId(store.getId()).stream()
-                    .filter(r -> r.getStatus() != ReservationStatus.CANCELLED)
-                    .filter(r -> r.getReservationTime() != null)
-                    .filter(r -> !r.getReservationTime().isBefore(windowStart) && !r.getReservationTime().isAfter(windowEnd))
-                    .collect(Collectors.toList());
-
-            Set<Long> busyTableIds = overlapping.stream()
-                    .map(TableReservation::getStoreTable)
-                    .filter(Objects::nonNull)
-                    .map(StoreTable::getId)
-                    .collect(Collectors.toSet());
-
             List<StoreTable> candidateTables = tableRepository.findByStoreIdAndIsActiveTrue(store.getId()).stream()
                     .filter(t -> !busyTableIds.contains(t.getId()))
                     .filter(t -> t.getCapacity() >= guests)
@@ -120,17 +129,8 @@ public class TableReservationServiceImpl implements TableReservationService {
                     }
                 }
                 table = bestCandidate;
-            }
-        }
-
-        // Safe Fallback Allocation: If preferred zone has no free tables, allocate best available table
-        if (table == null) {
-            List<StoreTable> allTables = tableRepository.findByStoreIdAndIsActiveTrue(store.getId());
-            if (!allTables.isEmpty()) {
-                table = allTables.stream()
-                        .filter(t -> t.getCapacity() >= guests)
-                        .findFirst()
-                        .orElse(allTables.get(0));
+            } else {
+                throw new IllegalStateException("Rất tiếc, tất cả các bàn phù hợp tại chi nhánh trong khung giờ này đã kín chỗ. Quý khách vui lòng chọn khung giờ khác hoặc chi nhánh lân cận.");
             }
         }
 
@@ -177,6 +177,37 @@ public class TableReservationServiceImpl implements TableReservationService {
                 tableRepository.save(res.getStoreTable());
             }
         }
+        return reservationRepository.save(res);
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public TableReservation cancelReservation(Long id, Long userId, String reason) {
+        TableReservation res = getReservationById(id);
+
+        if (userId != null && (res.getUser() == null || !res.getUser().getId().equals(userId))) {
+            throw new IllegalArgumentException("Bạn không có quyền hủy lịch đặt bàn này");
+        }
+
+        if (res.getStatus() == ReservationStatus.CANCELLED) {
+            return res; // Already cancelled
+        }
+
+        if (res.getStatus() == ReservationStatus.COMPLETED || res.getStatus() == ReservationStatus.SEATED) {
+            throw new IllegalStateException("Lịch đặt bàn đã được sử dụng hoặc hoàn thành, không thể hủy.");
+        }
+
+        res.setStatus(ReservationStatus.CANCELLED);
+        if (reason != null && !reason.isBlank()) {
+            String existingNote = res.getNote() != null ? res.getNote() + " | " : "";
+            res.setNote(existingNote + "Lý do hủy: " + reason);
+        }
+
+        if (res.getStoreTable() != null) {
+            res.getStoreTable().setIsOccupied(false);
+            tableRepository.save(res.getStoreTable());
+        }
+
         return reservationRepository.save(res);
     }
 }

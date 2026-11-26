@@ -13,4 +13,6 @@ public interface OrderService {
     List<Order> getUserOrders(Long userId);
     List<Order> getKdsOrdersForStore(Long storeId);
     Order updateOrderStatus(Long orderId, OrderStatus newStatus, String note);
+    Order cancelOrder(Long orderId, Long userId, String reason);
 }
+
