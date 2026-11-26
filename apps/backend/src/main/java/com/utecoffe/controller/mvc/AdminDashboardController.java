@@ -60,6 +60,9 @@ public class AdminDashboardController {
     private CategoryRepository categoryRepository;
 
     @Autowired
+    private ProductSizeRepository productSizeRepository;
+
+    @Autowired
     private CouponRepository couponRepository;
 
     @Autowired
@@ -295,6 +298,148 @@ public class AdminDashboardController {
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
         return "admin/products";
+    }
+
+    @PostMapping("/products/create")
+    public String createProduct(
+            @RequestParam("name") String name,
+            @RequestParam(value = "slug", required = false) String slug,
+            @RequestParam("categoryId") Long categoryId,
+            @RequestParam("basePrice") BigDecimal basePrice,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "imageUrl", required = false) String imageUrl,
+            @RequestParam(value = "isFeatured", defaultValue = "false") Boolean isFeatured,
+            @RequestParam(value = "isAvailable", defaultValue = "true") Boolean isAvailable) {
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Danh mục không tồn tại: " + categoryId));
+
+        String finalSlug = (slug != null && !slug.isBlank()) ? slug.trim().toLowerCase()
+                : name.trim().toLowerCase()
+                        .replaceAll("[àáạảãâầấậẩẫăằắặẳẵ]", "a")
+                        .replaceAll("[èéẹẻẽêềếệểễ]", "e")
+                        .replaceAll("[ìíịỉĩ]", "i")
+                        .replaceAll("[òóọỏõôồốộổỗơờớợởỡ]", "o")
+                        .replaceAll("[ùúụủũưừứựửữ]", "u")
+                        .replaceAll("[ỳýỵỷỹ]", "y")
+                        .replaceAll("[đ]", "d")
+                        .replaceAll("[^a-z0-9]+", "-")
+                        .replaceAll("^-|-$", "") + "-" + (System.currentTimeMillis() % 10000);
+
+        String finalImg = (imageUrl != null && !imageUrl.isBlank()) ? imageUrl.trim()
+                : "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80";
+
+        Product product = Product.builder()
+                .name(name.trim())
+                .slug(finalSlug)
+                .category(category)
+                .basePrice(basePrice)
+                .description(description != null ? description.trim() : "")
+                .imageUrl(finalImg)
+                .isFeatured(isFeatured != null && isFeatured)
+                .isAvailable(isAvailable != null && isAvailable)
+                .build();
+        Product saved = productRepository.save(product);
+
+        if (productSizeRepository != null) {
+            productSizeRepository.save(ProductSize.builder().product(saved).sizeName("S").extraPrice(BigDecimal.ZERO).build());
+            productSizeRepository.save(ProductSize.builder().product(saved).sizeName("M").extraPrice(BigDecimal.valueOf(6000)).build());
+            productSizeRepository.save(ProductSize.builder().product(saved).sizeName("L").extraPrice(BigDecimal.valueOf(12000)).build());
+        }
+
+        return "redirect:/admin/products?success=create";
+    }
+
+    @PostMapping("/products/{id}/update")
+    public String updateProduct(
+            @PathVariable("id") Long id,
+            @RequestParam("name") String name,
+            @RequestParam("categoryId") Long categoryId,
+            @RequestParam("basePrice") BigDecimal basePrice,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "imageUrl", required = false) String imageUrl,
+            @RequestParam(value = "isFeatured", defaultValue = "false") Boolean isFeatured,
+            @RequestParam(value = "isAvailable", defaultValue = "true") Boolean isAvailable) {
+
+        Product p = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Sản phẩm không tồn tại: " + id));
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Danh mục không tồn tại: " + categoryId));
+
+        p.setName(name.trim());
+        p.setCategory(category);
+        p.setBasePrice(basePrice);
+        if (description != null) p.setDescription(description.trim());
+        if (imageUrl != null && !imageUrl.isBlank()) p.setImageUrl(imageUrl.trim());
+        p.setIsFeatured(isFeatured != null && isFeatured);
+        p.setIsAvailable(isAvailable != null && isAvailable);
+        productRepository.save(p);
+
+        return "redirect:/admin/products?success=update";
+    }
+
+    @PostMapping("/products/{id}/delete")
+    public String deleteProduct(@PathVariable("id") Long id) {
+        Optional<Product> opt = productRepository.findById(id);
+        if (opt.isPresent()) {
+            Product p = opt.get();
+            p.setIsAvailable(false);
+            productRepository.save(p);
+        }
+        return "redirect:/admin/products?success=delete";
+    }
+
+    @PostMapping("/categories/create")
+    public String createCategory(
+            @RequestParam("name") String name,
+            @RequestParam(value = "slug", required = false) String slug,
+            @RequestParam(value = "description", required = false) String description) {
+
+        String finalSlug = (slug != null && !slug.isBlank()) ? slug.trim().toLowerCase()
+                : name.trim().toLowerCase()
+                        .replaceAll("[àáạảãâầấậẩẫăằắặẳẵ]", "a")
+                        .replaceAll("[èéẹẻẽêềếệểễ]", "e")
+                        .replaceAll("[ìíịỉĩ]", "i")
+                        .replaceAll("[òóọỏõôồốộổỗơờớợởỡ]", "o")
+                        .replaceAll("[ùúụủũưừứựửữ]", "u")
+                        .replaceAll("[ỳýỵỷỹ]", "y")
+                        .replaceAll("[đ]", "d")
+                        .replaceAll("[^a-z0-9]+", "-")
+                        .replaceAll("^-|-$", "") + "-" + (System.currentTimeMillis() % 1000);
+
+        Category cat = Category.builder()
+                .name(name.trim())
+                .slug(finalSlug)
+                .description(description != null ? description.trim() : "")
+                .isActive(true)
+                .build();
+        categoryRepository.save(cat);
+        return "redirect:/admin/products?success=cat_create";
+    }
+
+    @PostMapping("/categories/{id}/update")
+    public String updateCategory(
+            @PathVariable("id") Long id,
+            @RequestParam("name") String name,
+            @RequestParam(value = "description", required = false) String description) {
+        Category cat = categoryRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Danh mục không tồn tại: " + id));
+        cat.setName(name.trim());
+        if (description != null) cat.setDescription(description.trim());
+        categoryRepository.save(cat);
+        return "redirect:/admin/products?success=cat_update";
+    }
+
+    @PostMapping("/categories/{id}/delete")
+    public String deleteCategory(@PathVariable("id") Long id) {
+        Optional<Category> opt = categoryRepository.findById(id);
+        if (opt.isPresent()) {
+            Category cat = opt.get();
+            cat.setIsActive(false);
+            categoryRepository.save(cat);
+        }
+        return "redirect:/admin/products?success=cat_delete";
     }
 
     @PostMapping("/products/{id}/toggle")

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <head>
     <title>Giỏ Hàng Của Bạn - UTECoffe Specialty Roastery</title>
 </head>
@@ -177,21 +178,40 @@
                             <div class="mb-3">
                                 <label class="form-label small text-gold fw-bold mb-1" style="font-size: 0.78rem;" data-i18n="cart.voucher_label">Mã Ưu Đãi / Voucher:</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="text" id="voucherCodeInput" class="form-control form-control-luxury font-monospace text-uppercase" placeholder="VD: UTE2026, FREESHIP" style="font-size: 0.82rem;">
+                                    <input type="text" id="voucherCodeInput" class="form-control form-control-luxury font-monospace text-uppercase" placeholder="VD: DIAMOND15, FREESHIP" value="${cart.couponCode}" style="font-size: 0.82rem;">
                                     <button class="btn btn-outline-gold px-2.5 font-accent fw-bold" type="button" id="applyVoucherBtn" style="font-size: 0.8rem;">
                                         <span data-i18n="cart.voucher_apply">Áp Dụng</span>
                                     </button>
                                 </div>
                                 <div class="d-flex flex-wrap gap-1 mt-1.5">
-                                    <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" style="font-size: 0.7rem;" onclick="quickApplyVoucher('UTE2026')">
-                                        <i class="fa-solid fa-tag me-1"></i> UTE2026 (-20%)
-                                    </button>
+                                    <c:if test="${isNewUser}">
+                                        <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" style="font-size: 0.7rem;" onclick="quickApplyVoucher('UTE2026')">
+                                            <i class="fa-solid fa-gift me-1"></i> UTE2026 (-20%)
+                                        </button>
+                                    </c:if>
                                     <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" style="font-size: 0.7rem;" onclick="quickApplyVoucher('FREESHIP')">
                                         <i class="fa-solid fa-truck-fast me-1"></i> FREESHIP
                                     </button>
+                                    <c:forEach var="uc" items="${userCoupons}">
+                                        <button type="button" class="badge bg-espresso border border-gold-subtle text-gold py-1 px-2 cursor-pointer voucher-quick-pill" style="font-size: 0.7rem;" onclick="quickApplyVoucher('${uc.coupon.code}')" title="${uc.coupon.title}">
+                                            <i class="fa-solid fa-gem me-1"></i> ${uc.coupon.code} <c:if test="${uc.coupon.discountType == 'PERCENTAGE'}">(-${uc.coupon.discountValue}%)</c:if>
+                                        </button>
+                                    </c:forEach>
                                 </div>
-                                <div id="voucherFeedback" class="small mt-1 text-success d-none" style="font-size: 0.78rem;">
-                                    <i class="fa-solid fa-circle-check me-1"></i> <span id="voucherFeedbackText">Đã áp dụng mã UTE2026 (-20%)</span>
+
+                                <!-- Open Voucher Wallet Modal Button -->
+                                <button type="button" class="btn btn-outline-gold btn-sm w-100 mt-2 d-flex align-items-center justify-content-between py-1 px-2.5" data-bs-toggle="modal" data-bs-target="#userVoucherModal" style="font-size: 0.78rem;">
+                                    <span class="fw-semibold">
+                                        <i class="fa-solid fa-ticket text-gold me-1.5"></i> Ví Voucher Của Bạn
+                                        <c:if test="${not empty userCoupons}">
+                                            <span class="badge bg-gold text-dark ms-1 font-monospace">${fn:length(userCoupons)}</span>
+                                        </c:if>
+                                    </span>
+                                    <span class="text-gold" style="font-size: 0.74rem;">Chọn mã <i class="fa-solid fa-chevron-right ms-1"></i></span>
+                                </button>
+
+                                <div id="voucherFeedback" class="small mt-1 text-success ${not empty cart.couponCode ? '' : 'd-none'}" style="font-size: 0.78rem;">
+                                    <i class="fa-solid fa-circle-check me-1"></i> <span id="voucherFeedbackText">${not empty cart.couponCode ? 'Đã áp dụng mã: '.concat(cart.couponCode) : ''}</span>
                                 </div>
                             </div>
 
@@ -446,6 +466,97 @@
                 }
             })
             .catch(e => console.warn('Quick add error:', e));
+        }
+    </script>
+    <!-- Voucher Wallet Modal -->
+    <div class="modal fade" id="userVoucherModal" tabindex="-1" aria-labelledby="userVoucherModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content card-luxury border-gold shadow-lg" style="background: rgba(18, 14, 11, 0.98);">
+                <div class="modal-header border-bottom border-gold pb-2.5">
+                    <h5 class="modal-title font-serif fw-bold text-gold fs-5" id="userVoucherModalLabel">
+                        <i class="fa-solid fa-wallet me-2"></i>Ví Voucher Ưu Đãi Của Bạn
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-3 p-md-4">
+                    <!-- Search input inside modal -->
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text bg-espresso border-gold text-gold"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="voucherModalSearch" class="form-control form-control-luxury" placeholder="Tìm voucher theo tên, mã hoặc ưu đãi..." onkeyup="filterVoucherModal()">
+                    </div>
+
+                    <div class="row g-2.5" id="voucherModalList">
+                        <c:choose>
+                            <c:when test="${not empty userCoupons}">
+                                <c:forEach var="uc" items="${userCoupons}">
+                                    <div class="col-md-6 voucher-modal-item" data-code="${uc.coupon.code}" data-title="${uc.coupon.title}" data-desc="${uc.coupon.description}">
+                                        <div class="p-3 bg-espresso rounded-3 border border-gold-subtle d-flex flex-column justify-content-between h-100">
+                                            <div>
+                                                <div class="d-flex justify-content-between align-items-center mb-1.5">
+                                                    <span class="badge bg-gold text-dark fw-bold font-monospace px-2.5 py-1" style="font-size: 0.82rem;">${uc.coupon.code}</span>
+                                                    <span class="badge bg-espresso border border-gold-subtle text-gold small" style="font-size: 0.72rem;">HSD: 31/12/2026</span>
+                                                </div>
+                                                <div class="fw-bold text-primary small mb-1" style="font-size: 0.88rem;">${uc.coupon.title}</div>
+                                                <div class="text-secondary small mb-2" style="font-size: 0.78rem; line-height: 1.4;">${uc.coupon.description}</div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary border-opacity-25 mt-2">
+                                                <span class="text-gold fw-bold font-monospace small">
+                                                    <c:choose>
+                                                        <c:when test="${uc.coupon.discountType == 'PERCENTAGE'}">
+                                                            Giảm ${uc.coupon.discountValue}%
+                                                        </c:when>
+                                                        <c:when test="${uc.coupon.discountValue > 0}">
+                                                            Giảm <fmt:formatNumber value="${uc.coupon.discountValue}" pattern="#,##0"/> VNĐ
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Đặc Quyền Hội Viên
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </span>
+                                                <button type="button" class="btn btn-gold btn-sm px-3 fw-semibold" onclick="applyVoucherFromModal('${uc.coupon.code}')">
+                                                    Áp Dụng
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="col-12 text-center py-4 text-secondary small">
+                                    <i class="fa-solid fa-ticket text-gold fs-2 mb-2 d-block opacity-50"></i>
+                                    Bạn chưa có voucher nào trong ví cá nhân. Hãy tham gia tích điểm cùng <strong>UTEClub</strong> để nhận voucher nhé!
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function applyVoucherFromModal(code) {
+            const modalEl = document.getElementById('userVoucherModal');
+            if (modalEl) {
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                if (modal) modal.hide();
+            }
+            quickApplyVoucher(code);
+        }
+
+        function filterVoucherModal() {
+            const query = (document.getElementById('voucherModalSearch')?.value || '').toLowerCase().trim();
+            const items = document.querySelectorAll('.voucher-modal-item');
+            items.forEach(it => {
+                const code = (it.getAttribute('data-code') || '').toLowerCase();
+                const title = (it.getAttribute('data-title') || '').toLowerCase();
+                const desc = (it.getAttribute('data-desc') || '').toLowerCase();
+                if (!query || code.includes(query) || title.includes(query) || desc.includes(query)) {
+                    it.style.display = '';
+                } else {
+                    it.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>

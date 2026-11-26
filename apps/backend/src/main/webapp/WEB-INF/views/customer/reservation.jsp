@@ -24,32 +24,36 @@
         <c:choose>
             <c:when test="${param.success == 'true' or not empty confirmedReservation}">
                 <!-- VIP Digital Reservation Boarding Pass -->
-                <div class="card-luxury p-4 p-md-5 shadow-lg border-gold text-center animate-fade-in mb-4" style="background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.12), rgba(11, 9, 8, 0.98));">
-                    <div class="d-inline-flex p-3 rounded-circle bg-gold bg-opacity-20 border border-gold mb-3 shadow-gold-sm">
-                        <i class="fa-solid fa-champagne-glasses text-gold fs-2"></i>
+                <div class="card-luxury p-4 p-md-5 shadow-lg border-gold text-center animate-fade-in mb-4" style="background: radial-gradient(circle at 50% 15%, rgba(212, 175, 55, 0.15), rgba(11, 9, 8, 0.98)); border-radius: 20px;">
+                    <!-- Centered Status Header -->
+                    <div class="d-flex flex-column align-items-center mb-3">
+                        <div class="d-inline-flex p-3 rounded-circle bg-gold bg-opacity-20 border border-gold mb-3 shadow-gold-sm">
+                            <i class="fa-solid fa-champagne-glasses text-gold fs-2"></i>
+                        </div>
+                        <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill mb-2" style="background: rgba(212, 175, 55, 0.18); border: 1px solid #D4AF37; color: #D4AF37; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.04em;">
+                            <i class="fa-solid fa-circle-check text-gold"></i>
+                            <span>Xác Nhận Giữ Chỗ Thành Công</span>
+                        </div>
                     </div>
 
-                    <span class="badge bg-gold text-dark px-3 py-1 rounded-2 small mb-2 fw-semibold" style="font-size: 0.76rem;">
-                        <i class="fa-solid fa-circle-check me-1"></i> Xác Nhận Giữ Chỗ Thành Công
-                    </span>
                     <h2 class="font-serif fs-3 fw-bold text-primary mb-2">
-                        Chào Mừng ${not empty customerName ? customerName : 'Quý Khách'} Đến Với UTECoffe
+                        Chào Mừng <span class="text-gold">${not empty customerName ? customerName : 'Quý Khách'}</span> Đến Với UTECoffe
                     </h2>
-                    <p class="text-secondary small mx-auto mb-4" style="max-width: 580px; font-size: 0.85rem;">
-                        Vị trí của bạn đã được hệ thống phân bổ tối ưu theo thời gian thực. Barista UTECoffe hân hạnh được đón tiếp bạn.
+                    <p class="text-secondary small mx-auto mb-4" style="max-width: 580px; font-size: 0.88rem; line-height: 1.6;">
+                        Vị trí của bạn đã được hệ thống phân bổ tối ưu theo thời gian thực. Đội ngũ Barista UTECoffe rất hân hạnh được đón tiếp bạn.
                     </p>
 
                     <!-- Pass Metadata Slate -->
-                    <div class="transfer-slate p-3.5 mx-auto mb-4 text-start" style="max-width: 580px;">
-                        <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
+                    <div class="transfer-slate p-3.5 mx-auto mb-4 text-start" style="max-width: 580px; border-radius: 16px;">
+                        <div class="d-flex justify-content-between align-items-center py-2.5 transfer-line">
                             <span class="text-secondary small">Mã Giữ Chỗ (Booking Pass):</span>
-                            <span class="badge bg-espresso border border-gold text-gold font-monospace px-2.5 py-1" style="font-size: 0.88rem;">
+                            <span class="badge bg-espresso border border-gold text-gold font-monospace px-3 py-1" style="font-size: 0.9rem; letter-spacing: 0.05em;">
                                 #${not empty reservationCode ? reservationCode : (not empty confirmedReservation.reservationCode ? confirmedReservation.reservationCode : 'UTE-RES-2026')}
                             </span>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
+                        <div class="d-flex justify-content-between align-items-center py-2.5 transfer-line">
                             <span class="text-secondary small">Vị Trí Phân Bổ:</span>
-                            <strong class="text-primary" style="font-size: 0.92rem;">
+                            <strong class="text-primary" style="font-size: 0.94rem;">
                                 <c:choose>
                                     <c:when test="${not empty tableNumber}">
                                         Bàn ${tableNumber} • ${not empty assignedZoneName ? assignedZoneName : 'Khu Vực Quán'}
@@ -63,42 +67,49 @@
                                 </c:choose>
                             </strong>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
+                        <div class="d-flex justify-content-between align-items-center py-2.5 transfer-line">
                             <span class="text-secondary small">Thời Gian Hẹn:</span>
-                            <strong class="text-gold font-monospace" style="font-size: 0.95rem;">
+                            <strong class="text-gold font-monospace" style="font-size: 0.98rem;">
                                 ${not empty formattedTime ? formattedTime : (not empty confirmedReservation.formattedReservationTime ? confirmedReservation.formattedReservationTime : '14:30')}
                             </strong>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center py-2 transfer-line">
+                        <div class="d-flex justify-content-between align-items-center py-2.5 transfer-line">
                             <span class="text-secondary small">Chi Nhánh:</span>
-                            <strong class="text-primary text-end" style="font-size: 0.86rem;">
+                            <strong class="text-primary text-end" style="font-size: 0.9rem;">
                                 ${not empty storeName ? storeName : (not empty confirmedReservation.store ? confirmedReservation.store.name : 'UTECoffe Flagship Thủ Đức')}
                             </strong>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center py-2">
+                        <div class="d-flex justify-content-between align-items-center py-2.5">
                             <span class="text-secondary small">Đặc Quyền Tặng Kèm:</span>
-                            <span class="badge bg-gold-subtle text-gold small px-2 py-0.5 rounded-pill font-accent">
+                            <span class="badge bg-gold-subtle text-gold small px-2.5 py-1 rounded-pill font-accent">
                                 <i class="fa-solid fa-gift me-1"></i> 01 Shot Cold Brew Cam Vàng Signature
                             </span>
                         </div>
                     </div>
 
-                    <!-- Digital Check-In QR -->
-                    <div class="qr-token-card mx-auto mb-4 p-3 d-inline-block position-relative">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=UTECOFFE-RESERVATION-${not empty reservationCode ? reservationCode : (not empty confirmedReservation.reservationCode ? confirmedReservation.reservationCode : '2026')}" 
-                             class="img-fluid rounded-2 d-block mx-auto" 
-                             style="width: 140px; height: 140px;" 
-                             alt="Check-in QR Code">
-                        <small class="text-dark d-block mt-1 font-monospace fw-bold" style="font-size: 0.72rem;">ĐƯA CHO BARISTA KHI ĐẾN QUÁN</small>
+                    <!-- Digital Check-In QR with Elegant Card Wrapper -->
+                    <div class="d-flex flex-column align-items-center my-4">
+                        <div class="qr-token-card p-3 shadow-lg" style="background: #ffffff; border: 2px solid rgba(212, 175, 55, 0.45); border-radius: 16px; display: inline-block;">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=UTECOFFE-RESERVATION-${not empty reservationCode ? reservationCode : (not empty confirmedReservation.reservationCode ? confirmedReservation.reservationCode : '2026')}" 
+                                 class="img-fluid rounded-2 d-block mx-auto" 
+                                 style="width: 140px; height: 140px;" 
+                                 alt="Check-in QR Code">
+                            <div class="text-dark mt-2 font-monospace fw-bold text-center" style="font-size: 0.72rem; letter-spacing: 0.05em;">
+                                ĐƯA CHO BARISTA KHI ĐẾN QUÁN
+                            </div>
+                        </div>
+                        <small class="text-secondary mt-2" style="font-size: 0.8rem;">
+                            <i class="fa-solid fa-qrcode me-1 text-gold"></i> Quét mã tại quầy để nhận bàn tức thì
+                        </small>
                     </div>
 
                     <!-- Actions -->
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-2 fw-semibold">
+                    <div class="d-flex justify-content-center gap-3 flex-wrap mt-3 pt-2">
+                        <a href="${pageContext.request.contextPath}/menu" class="btn btn-gold px-4 py-2.5 fw-semibold shadow-gold">
                             <i class="fa-solid fa-mug-saucer me-1.5"></i> Khám Phá Menu &amp; Đặt Món Trước
                         </a>
-                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold px-4 py-2">
-                            <i class="fa-solid fa-plus me-1.5"></i> Đặt Thêm Lượt Khác
+                        <a href="${pageContext.request.contextPath}/reservation" class="btn btn-outline-gold px-4 py-2.5">
+                            <i class="fa-solid fa-calendar-plus me-1.5"></i> Đặt Thêm Lượt Khác
                         </a>
                     </div>
                 </div>

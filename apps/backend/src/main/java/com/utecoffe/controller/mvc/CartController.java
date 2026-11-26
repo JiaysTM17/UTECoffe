@@ -11,9 +11,11 @@ import com.utecoffe.enums.DiscountType;
 import com.utecoffe.enums.OrderType;
 import com.utecoffe.enums.PaymentMethod;
 import com.utecoffe.repository.CouponRepository;
+import com.utecoffe.repository.OrderRepository;
 import com.utecoffe.repository.ProductRepository;
 import com.utecoffe.repository.ProductSizeRepository;
 import com.utecoffe.repository.ToppingRepository;
+import com.utecoffe.repository.UserCouponRepository;
 import com.utecoffe.service.*;
 import com.utecoffe.websocket.OrderNotificationService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,7 +47,13 @@ public class CartController {
     private OrderService orderService;
 
     @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
     private CouponRepository couponRepository;
+
+    @Autowired
+    private UserCouponRepository userCouponRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -202,11 +210,29 @@ public class CartController {
     }
 
     @GetMapping("/cart")
-    public String cart(HttpSession session, Model model) {
+    public String cart(
+            @AuthenticationPrincipal UserDetails userDetails,
+            HttpSession session,
+            Model model) {
         CartViewDto cart = getOrCreateCart(session);
         recalculateCart(cart);
         session.setAttribute(CART_SESSION_KEY, cart);
         model.addAttribute("cart", cart);
+
+        boolean isNewUser = true;
+        List<UserCoupon> userCoupons = Collections.emptyList();
+        if (userDetails != null) {
+            User user = authService.getByEmail(userDetails.getUsername());
+            if (user != null) {
+                userCoupons = userCouponRepository.findByUserIdAndIsUsedFalse(user.getId());
+                List<Order> orders = orderRepository.findByUserIdOrderByCreatedAtDesc(user.getId());
+                if (orders != null && !orders.isEmpty()) {
+                    isNewUser = false;
+                }
+            }
+        }
+        model.addAttribute("isNewUser", isNewUser);
+        model.addAttribute("userCoupons", userCoupons);
         return "customer/cart";
     }
 
@@ -358,9 +384,47 @@ public class CartController {
 
     @PostMapping("/cart/apply-voucher")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> applyVoucher(@RequestParam("code") String code, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> applyVoucher(
+            @RequestParam("code") String code,
+            @AuthenticationPrincipal UserDetails userDetails,
+            HttpSession session) {
         CartViewDto cart = getOrCreateCart(session);
-        cart.setCouponCode(code);
+        String cleanCode = code != null ? code.trim().toUpperCase() : "";
+
+        if (cleanCode.isEmpty()) {
+            Map<String, Object> err = new HashMap<>();
+            err.put("success", false);
+            err.put("message", "Vui lòng nhập mã ưu đãi.");
+            return ResponseEntity.ok(err);
+        }
+
+        // Validate UTE2026: only for new customers (0 past orders)
+        if ("UTE2026".equals(cleanCode)) {
+            if (userDetails != null) {
+                User user = authService.getByEmail(userDetails.getUsername());
+                if (user != null) {
+                    List<Order> orders = orderRepository.findByUserIdOrderByCreatedAtDesc(user.getId());
+                    if (orders != null && !orders.isEmpty()) {
+                        Map<String, Object> err = new HashMap<>();
+                        err.put("success", false);
+                        err.put("message", "Mã UTE2026 chỉ áp dụng cho đơn hàng đầu tiên của thành viên mới!");
+                        return ResponseEntity.ok(err);
+                    }
+                }
+            }
+        }
+
+        // Validate coupon existence
+        Optional<Coupon> optCoupon = couponRepository.findByCodeAndIsActiveTrue(cleanCode);
+        boolean isSystemCode = "UTE2026".equals(cleanCode) || "FREESHIP".equals(cleanCode);
+        if (optCoupon.isEmpty() && !isSystemCode) {
+            Map<String, Object> err = new HashMap<>();
+            err.put("success", false);
+            err.put("message", "Mã ưu đãi '" + cleanCode + "' không tồn tại hoặc đã hết hạn.");
+            return ResponseEntity.ok(err);
+        }
+
+        cart.setCouponCode(cleanCode);
         recalculateCart(cart);
         session.setAttribute(CART_SESSION_KEY, cart);
 
@@ -369,16 +433,34 @@ public class CartController {
         resp.put("discountAmount", cart.getDiscountAmount());
         resp.put("finalAmount", cart.getFinalAmount());
         resp.put("shippingFee", cart.getShippingFee());
-        resp.put("message", "Đã áp dụng mã " + code);
+        resp.put("message", "Đã áp dụng thành công mã " + cleanCode);
         return ResponseEntity.ok(resp);
     }
 
     @GetMapping({"/checkout", "/cart/checkout"})
-    public String checkout(HttpSession session, Model model) {
+    public String checkout(
+            @AuthenticationPrincipal UserDetails userDetails,
+            HttpSession session,
+            Model model) {
         CartViewDto cart = getOrCreateCart(session);
         seedDefaultItemIfEmpty(cart);
         recalculateCart(cart);
 
+        boolean isNewUser = true;
+        List<UserCoupon> userCoupons = Collections.emptyList();
+        if (userDetails != null) {
+            User user = authService.getByEmail(userDetails.getUsername());
+            if (user != null) {
+                userCoupons = userCouponRepository.findByUserIdAndIsUsedFalse(user.getId());
+                List<Order> orders = orderRepository.findByUserIdOrderByCreatedAtDesc(user.getId());
+                if (orders != null && !orders.isEmpty()) {
+                    isNewUser = false;
+                }
+            }
+        }
+
+        model.addAttribute("isNewUser", isNewUser);
+        model.addAttribute("userCoupons", userCoupons);
         model.addAttribute("cart", cart);
         model.addAttribute("stores", storeService.getAllActiveStores());
         return "customer/checkout";
