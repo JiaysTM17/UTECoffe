@@ -828,11 +828,11 @@
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <div class="d-flex align-items-center gap-2">
                                             <i class="fa-solid fa-circle-user text-gold fa-lg"></i>
-                                            <strong class="text-gold font-accent">${rev.user.fullName}</strong>
+                                            <strong class="text-gold font-accent">${not empty rev.user and not empty rev.user.fullName ? rev.user.fullName : 'Khách Hàng UTECoffe'}</strong>
                                             <span class="badge bg-gold-subtle text-gold small border border-gold">Khách Đã Mua</span>
                                         </div>
                                         <div class="text-gold small">
-                                            <c:forEach begin="1" end="${rev.rating}"><i class="fa-solid fa-star"></i></c:forEach>
+                                            <c:forEach begin="1" end="${not empty rev.rating and rev.rating >= 1 ? rev.rating : 5}"><i class="fa-solid fa-star"></i></c:forEach>
                                         </div>
                                     </div>
                                     <p class="text-secondary small mb-0">${rev.comment}</p>
