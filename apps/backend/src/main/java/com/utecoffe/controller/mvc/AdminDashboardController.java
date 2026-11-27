@@ -98,6 +98,12 @@ public class AdminDashboardController {
     @Autowired
     private RefundRepository refundRepository;
 
+    @Autowired
+    private com.utecoffe.service.CustomerIntelligenceService customerIntelligenceService;
+
+    @Autowired
+    private com.utecoffe.service.PredictiveSupplyChainService predictiveSupplyChainService;
+
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         List<Order> allOrders = orderRepository.findAll();
@@ -170,6 +176,11 @@ public class AdminDashboardController {
                 .limit(10)
                 .toList());
         model.addAttribute("analytics", analyticsService.getExecutiveAnalytics());
+
+        try {
+            model.addAttribute("rfmSummary", customerIntelligenceService.analyzeCustomerSegments());
+            model.addAttribute("demandForecast", predictiveSupplyChainService.forecastStoreDemand(1L));
+        } catch (Exception ignored) {}
 
         return "admin/dashboard";
     }
@@ -609,6 +620,18 @@ public class AdminDashboardController {
     @ResponseBody
     public ResponseEntity<com.utecoffe.dto.response.StoreSalesPerformanceDto> getStoreSalesPerformanceApi(@PathVariable Long storeId) {
         return ResponseEntity.ok(analyticsService.getStoreProductSalesAnalytics(storeId));
+    }
+
+    @GetMapping("/api/analytics/rfm")
+    @ResponseBody
+    public ResponseEntity<com.utecoffe.dto.response.CustomerIntelligenceSummaryDto> getRfmAnalyticsApi() {
+        return ResponseEntity.ok(customerIntelligenceService.analyzeCustomerSegments());
+    }
+
+    @GetMapping("/api/analytics/demand-forecast/{storeId}")
+    @ResponseBody
+    public ResponseEntity<com.utecoffe.dto.response.SupplyChainForecastSummaryDto> getDemandForecastApi(@PathVariable Long storeId) {
+        return ResponseEntity.ok(predictiveSupplyChainService.forecastStoreDemand(storeId));
     }
 
     @GetMapping("/audit-logs")

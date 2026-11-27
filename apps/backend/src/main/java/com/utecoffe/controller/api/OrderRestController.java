@@ -30,6 +30,19 @@ public class OrderRestController {
     @Autowired
     private OrderNotificationService notificationService;
 
+    @Autowired
+    private com.utecoffe.service.DeliveryOptimizationService deliveryOptimizationService;
+
+    @GetMapping("/delivery/estimate")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.DeliveryOptimizationDto>> getDeliveryEstimate(
+            @RequestParam(name = "storeId", defaultValue = "1") Long storeId,
+            @RequestParam(name = "lat", required = false) Double lat,
+            @RequestParam(name = "lon", required = false) Double lon,
+            @RequestParam(name = "address", required = false) String address) {
+        com.utecoffe.dto.response.DeliveryOptimizationDto estimate = deliveryOptimizationService.calculateDeliveryEstimate(storeId, lat, lon, address);
+        return ResponseEntity.ok(ApiResponse.success(estimate, "Tính toán lộ trình và thời gian pha chế thành công"));
+    }
+
     @PostMapping
     @Idempotent
     public ResponseEntity<ApiResponse<Order>> createOrder(@Valid @RequestBody OrderCreateRequest request,

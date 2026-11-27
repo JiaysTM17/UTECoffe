@@ -29,17 +29,26 @@ public class AlgorithmShowcaseRestController {
     private final CouponOptimizationService couponOptimizationService;
     private final IdempotencyService idempotencyService;
     private final TasteProfileService tasteProfileService;
+    private final com.utecoffe.service.DeliveryOptimizationService deliveryOptimizationService;
+    private final com.utecoffe.service.CustomerIntelligenceService customerIntelligenceService;
+    private final com.utecoffe.service.PredictiveSupplyChainService predictiveSupplyChainService;
 
     public AlgorithmShowcaseRestController(DynamicPricingService dynamicPricingService,
                                            MarketBasketAnalysisService marketBasketAnalysisService,
                                            CouponOptimizationService couponOptimizationService,
                                            IdempotencyService idempotencyService,
-                                           TasteProfileService tasteProfileService) {
+                                           TasteProfileService tasteProfileService,
+                                           com.utecoffe.service.DeliveryOptimizationService deliveryOptimizationService,
+                                           com.utecoffe.service.CustomerIntelligenceService customerIntelligenceService,
+                                           com.utecoffe.service.PredictiveSupplyChainService predictiveSupplyChainService) {
         this.dynamicPricingService = dynamicPricingService;
         this.marketBasketAnalysisService = marketBasketAnalysisService;
         this.couponOptimizationService = couponOptimizationService;
         this.idempotencyService = idempotencyService;
         this.tasteProfileService = tasteProfileService;
+        this.deliveryOptimizationService = deliveryOptimizationService;
+        this.customerIntelligenceService = customerIntelligenceService;
+        this.predictiveSupplyChainService = predictiveSupplyChainService;
     }
 
     @Operation(summary = "Calculate Dynamic Price for all products (Yield Management)")
@@ -112,5 +121,31 @@ public class AlgorithmShowcaseRestController {
                 "status", allowed ? "ALLOWED (HTTP 200)" : "RATE_LIMITED (HTTP 429)"
         );
         return ResponseEntity.ok(ApiResponse.success(data, "Kiểm tra an toàn kết nối hoàn tất"));
+    }
+
+    @Operation(summary = "Delivery ETA & Barista Queue Optimization (Haversine & M/M/c Erlang-C Queueing Model)")
+    @GetMapping("/delivery-eta")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.DeliveryOptimizationDto>> calculateDeliveryEta(
+            @RequestParam(defaultValue = "1") Long storeId,
+            @RequestParam(required = false) Double lat,
+            @RequestParam(required = false) Double lon,
+            @RequestParam(defaultValue = "01 Võ Văn Ngân, Thủ Đức") String address) {
+        com.utecoffe.dto.response.DeliveryOptimizationDto dto = deliveryOptimizationService.calculateDeliveryEstimate(storeId, lat, lon, address);
+        return ResponseEntity.ok(ApiResponse.success(dto, "Tính toán lộ trình & hàng đợi Barista hoàn tất"));
+    }
+
+    @Operation(summary = "Customer RFM Segmentation & Churn Risk Prediction (Exponential Decay Model)")
+    @GetMapping("/rfm-churn")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.CustomerIntelligenceSummaryDto>> analyzeRfmChurn() {
+        com.utecoffe.dto.response.CustomerIntelligenceSummaryDto summary = customerIntelligenceService.analyzeCustomerSegments();
+        return ResponseEntity.ok(ApiResponse.success(summary, "Phân khúc khách hàng RFM & dự báo nguy cơ rời bỏ hoàn tất"));
+    }
+
+    @Operation(summary = "Ingredient Demand Forecasting (Holt-Winters Triple Exponential Smoothing & Safety Stock)")
+    @GetMapping("/demand-forecast")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.SupplyChainForecastSummaryDto>> forecastDemand(
+            @RequestParam(defaultValue = "1") Long storeId) {
+        com.utecoffe.dto.response.SupplyChainForecastSummaryDto forecast = predictiveSupplyChainService.forecastStoreDemand(storeId);
+        return ResponseEntity.ok(ApiResponse.success(forecast, "Dự báo nhu cầu nguyên vật liệu Holt-Winters hoàn tất"));
     }
 }

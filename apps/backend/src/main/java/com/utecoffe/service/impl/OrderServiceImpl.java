@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -168,14 +169,23 @@ public class OrderServiceImpl implements OrderService {
                 couponRepository.save(coupon);
 
                 if (user != null) {
-                    UserCoupon userCoupon = UserCoupon.builder()
-                            .user(user)
-                            .coupon(coupon)
-                            .order(savedOrder)
-                            .isUsed(true)
-                            .usedAt(LocalDateTime.now())
-                            .build();
-                    userCouponRepository.save(userCoupon);
+                    Optional<UserCoupon> existingUc = userCouponRepository.findByUserIdAndCouponId(user.getId(), coupon.getId());
+                    if (existingUc.isPresent()) {
+                        UserCoupon uc = existingUc.get();
+                        uc.setIsUsed(true);
+                        uc.setUsedAt(LocalDateTime.now());
+                        uc.setOrder(savedOrder);
+                        userCouponRepository.save(uc);
+                    } else {
+                        UserCoupon userCoupon = UserCoupon.builder()
+                                .user(user)
+                                .coupon(coupon)
+                                .order(savedOrder)
+                                .isUsed(true)
+                                .usedAt(LocalDateTime.now())
+                                .build();
+                        userCouponRepository.save(userCoupon);
+                    }
                 }
             }
         }
@@ -268,6 +278,15 @@ public class OrderServiceImpl implements OrderService {
         if (coupon.getMinOrderValue() != null && subtotal.compareTo(coupon.getMinOrderValue()) < 0) {
             return false;
         }
+
+        // Special check: UTE2026 is strictly for first order only
+        if ("UTE2026".equalsIgnoreCase(coupon.getCode()) && userId != null) {
+            List<Order> priorOrders = orderRepository.findByUserIdOrderByCreatedAtDesc(userId);
+            if (priorOrders != null && !priorOrders.isEmpty()) {
+                return false;
+            }
+        }
+
         // Per-user limit enforcement (default: 1 use per customer account)
         if (userId != null && coupon.getId() != null) {
             long usedByUser = userCouponRepository.countByUserIdAndCouponIdAndIsUsedTrue(userId, coupon.getId());
