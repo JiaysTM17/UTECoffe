@@ -68,19 +68,76 @@ public class OrderServiceImpl implements OrderService {
     @Autowired(required = false)
     private com.utecoffe.service.EmailService emailService;
 
+    private static final int MAX_QTY_PER_LINE = 50;
+    private static final java.security.SecureRandom CODE_RANDOM = new java.security.SecureRandom();
+
+    /** Generates UTE-YYMMDD-XXXX and retries on collision (10k codes/day space). */
+    private String generateUniqueOrderCode() {
+        String dateStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
+        for (int attempt = 0; attempt < 20; attempt++) {
+            String code = "UTE-" + dateStr + "-" + String.format("%04d", CODE_RANDOM.nextInt(10000));
+            if (orderRepository.findByOrderCode(code).isEmpty()) {
+                return code;
+            }
+        }
+        // Fallback with wider entropy space
+        return "UTE-" + dateStr + "-" + Long.toString(System.nanoTime() % 1_000_000_000L, 36).toUpperCase();
+    }
+
+    /**
+     * Discount = percentage (capped by maxDiscountAmount) or fixed value,
+     * rounded to whole VND and never exceeding the subtotal.
+     */
+    public static BigDecimal computeCouponDiscount(Coupon coupon, BigDecimal subtotal) {
+        if (coupon == null || subtotal == null || subtotal.signum() <= 0 || coupon.getDiscountValue() == null) {
+            return BigDecimal.ZERO;
+        }
+        BigDecimal discount;
+        if (coupon.getDiscountType() == com.utecoffe.enums.DiscountType.PERCENTAGE) {
+            BigDecimal pct = coupon.getDiscountValue().min(BigDecimal.valueOf(100)).max(BigDecimal.ZERO);
+            discount = subtotal.multiply(pct).divide(BigDecimal.valueOf(100), 0, java.math.RoundingMode.HALF_UP);
+            if (coupon.getMaxDiscountAmount() != null && coupon.getMaxDiscountAmount().signum() > 0
+                    && discount.compareTo(coupon.getMaxDiscountAmount()) > 0) {
+                discount = coupon.getMaxDiscountAmount();
+            }
+        } else {
+            discount = coupon.getDiscountValue().max(BigDecimal.ZERO);
+        }
+        return discount.min(subtotal);
+    }
+
     @Override
     @Transactional
     @Auditable(action = "CREATE_ORDER", entityName = "Order")
     public Order createOrder(OrderCreateRequest request, Long userId) {
+        if (request == null || request.getStoreId() == null) {
+            throw new IllegalArgumentException("Vui lòng chọn chi nhánh đặt hàng");
+        }
+        if (request.getItems() == null || request.getItems().isEmpty()) {
+            throw new IllegalArgumentException("Giỏ hàng trống, không thể tạo đơn hàng");
+        }
+        for (OrderCreateRequest.OrderItemRequest it : request.getItems()) {
+            if (it == null || it.getProductId() == null) {
+                throw new IllegalArgumentException("Sản phẩm trong đơn hàng không hợp lệ");
+            }
+            if (it.getQuantity() == null || it.getQuantity() < 1 || it.getQuantity() > MAX_QTY_PER_LINE) {
+                throw new IllegalArgumentException("Số lượng mỗi món phải từ 1 đến " + MAX_QTY_PER_LINE);
+            }
+        }
+        if (request.getOrderType() == com.utecoffe.enums.OrderType.DELIVERY
+                && (request.getDeliveryAddress() == null || request.getDeliveryAddress().isBlank())) {
+            throw new IllegalArgumentException("Đơn giao hàng bắt buộc phải có địa chỉ nhận");
+        }
+
         Store store = storeRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new RuntimeException("Chi nhanh khong ton tai"));
+        if (Boolean.FALSE.equals(store.getIsActive())) {
+            throw new IllegalStateException("Chi nhánh " + store.getName() + " hiện đang tạm ngưng nhận đơn");
+        }
 
         User user = (userId != null) ? userRepository.findById(userId).orElse(null) : null;
 
-        // Generate Order Code: UTE-YYMMDD-XXXX
-        String dateStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
-        String randStr = String.format("%04d", new Random().nextInt(10000));
-        String orderCode = "UTE-" + dateStr + "-" + randStr;
+        String orderCode = generateUniqueOrderCode();
 
         BigDecimal subtotal = BigDecimal.ZERO;
 
@@ -155,16 +212,9 @@ public class OrderServiceImpl implements OrderService {
         // Coupon calculation
         BigDecimal discount = BigDecimal.ZERO;
         if (request.getCouponCode() != null && !request.getCouponCode().isBlank()) {
-            Coupon coupon = couponRepository.findByCodeAndIsActiveTrue(request.getCouponCode().trim()).orElse(null);
+            Coupon coupon = couponRepository.findByCodeAndIsActiveTrue(request.getCouponCode().trim().toUpperCase()).orElse(null);
             if (isCouponEligible(coupon, subtotal, LocalDateTime.now(), user != null ? user.getId() : null)) {
-                if (coupon.getDiscountType() == com.utecoffe.enums.DiscountType.PERCENTAGE) {
-                    discount = subtotal.multiply(coupon.getDiscountValue()).divide(BigDecimal.valueOf(100));
-                    if (coupon.getMaxDiscountAmount() != null && discount.compareTo(coupon.getMaxDiscountAmount()) > 0) {
-                        discount = coupon.getMaxDiscountAmount();
-                    }
-                } else {
-                    discount = coupon.getDiscountValue();
-                }
+                discount = computeCouponDiscount(coupon, subtotal);
                 coupon.setUsedCount((coupon.getUsedCount() != null ? coupon.getUsedCount() : 0) + 1);
                 couponRepository.save(coupon);
 
@@ -280,9 +330,16 @@ public class OrderServiceImpl implements OrderService {
         }
 
         // Special check: UTE2026 is strictly for first order only
-        if ("UTE2026".equalsIgnoreCase(coupon.getCode()) && userId != null) {
+        if ("UTE2026".equalsIgnoreCase(coupon.getCode())) {
+            if (userId == null) {
+                return false; // welcome voucher requires a registered account
+            }
             List<Order> priorOrders = orderRepository.findByUserIdOrderByCreatedAtDesc(userId);
-            if (priorOrders != null && !priorOrders.isEmpty()) {
+            // Cancelled orders do not count as "purchases"; the order currently being created is still PENDING with zero subtotal
+            boolean hasRealPurchase = priorOrders != null && priorOrders.stream()
+                    .anyMatch(o -> o.getStatus() != OrderStatus.CANCELLED
+                            && o.getSubtotal() != null && o.getSubtotal().signum() > 0);
+            if (hasRealPurchase) {
                 return false;
             }
         }

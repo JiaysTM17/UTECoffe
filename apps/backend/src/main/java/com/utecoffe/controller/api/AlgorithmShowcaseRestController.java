@@ -33,6 +33,12 @@ public class AlgorithmShowcaseRestController {
     private final com.utecoffe.service.CustomerIntelligenceService customerIntelligenceService;
     private final com.utecoffe.service.PredictiveSupplyChainService predictiveSupplyChainService;
 
+    @org.springframework.beans.factory.annotation.Autowired
+    private com.utecoffe.service.RouteOptimizationService routeOptimizationService;
+
+    @org.springframework.beans.factory.annotation.Autowired
+    private com.utecoffe.service.FraudDetectionService fraudDetectionService;
+
     public AlgorithmShowcaseRestController(DynamicPricingService dynamicPricingService,
                                            MarketBasketAnalysisService marketBasketAnalysisService,
                                            CouponOptimizationService couponOptimizationService,
@@ -147,5 +153,21 @@ public class AlgorithmShowcaseRestController {
             @RequestParam(defaultValue = "1") Long storeId) {
         com.utecoffe.dto.response.SupplyChainForecastSummaryDto forecast = predictiveSupplyChainService.forecastStoreDemand(storeId);
         return ResponseEntity.ok(ApiResponse.success(forecast, "Dự báo nhu cầu nguyên vật liệu Holt-Winters hoàn tất"));
+    }
+
+    @Operation(summary = "Multi-stop Shipper Route Planning (Nearest-Neighbor + 2-opt TSP & Freshness Decay)")
+    @GetMapping("/delivery-route")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.DeliveryRoutePlanDto>> planDeliveryRoute(
+            @RequestParam(defaultValue = "1") Long storeId) {
+        return ResponseEntity.ok(ApiResponse.success(
+                routeOptimizationService.planStoreDeliveryRoute(storeId), "Tối ưu lộ trình giao hàng nhiều điểm hoàn tất"));
+    }
+
+    @Operation(summary = "Order Fraud / Abuse Risk Scoring (Bayesian z-score + Logistic model)")
+    @GetMapping("/fraud-risk/{orderId}")
+    public ResponseEntity<ApiResponse<com.utecoffe.dto.response.OrderRiskAssessmentDto>> assessFraud(
+            @PathVariable Long orderId) {
+        return ResponseEntity.ok(ApiResponse.success(
+                fraudDetectionService.assessOrder(orderId), "Đánh giá rủi ro đơn hàng hoàn tất"));
     }
 }

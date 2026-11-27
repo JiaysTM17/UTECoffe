@@ -72,18 +72,20 @@ public class InventoryServiceImpl implements InventoryService {
                         .orElse(null);
 
                 if (inventory != null) {
-                    BigDecimal updatedStock = inventory.getCurrentStock().subtract(needed);
-                    if (updatedStock.compareTo(BigDecimal.ZERO) < 0) {
-                        log.warn("Stock for ingredient {} in store {} fell below zero (current: {})", 
-                                recipe.getIngredient().getName(), order.getStore().getName(), updatedStock);
+                    BigDecimal current = inventory.getCurrentStock() != null ? inventory.getCurrentStock() : BigDecimal.ZERO;
+                    // Never drive physical stock negative: deduct only what is actually on hand
+                    BigDecimal actualDeducted = needed.min(current.max(BigDecimal.ZERO));
+                    if (actualDeducted.compareTo(needed) < 0) {
+                        log.warn("Insufficient stock for ingredient {} in store {}: needed {}, available {}",
+                                recipe.getIngredient().getName(), order.getStore().getName(), needed, current);
                     }
-                    inventory.setCurrentStock(updatedStock);
+                    inventory.setCurrentStock(current.subtract(actualDeducted));
                     storeInventoryRepository.save(inventory);
 
                     InventoryLog invLog = InventoryLog.builder()
                             .store(order.getStore())
                             .ingredient(recipe.getIngredient())
-                            .quantityChange(needed.negate())
+                            .quantityChange(actualDeducted.negate())
                             .transactionType(InventoryTransactionType.EXPORT_ORDER)
                             .referenceOrderId(order.getId())
                             .note("Tự động trừ nguyên liệu cho đơn hàng #" + order.getOrderCode())
@@ -114,6 +116,34 @@ public class InventoryServiceImpl implements InventoryService {
                 order.getId(), InventoryTransactionType.ADJUSTMENT);
         if (alreadyRestored) {
             log.info("Stock already restored for order #{}, skipping duplicate restore.", order.getOrderCode());
+            return;
+        }
+
+        // Preferred path: replay the exact ledger entries (handles recipe edits & partial deductions)
+        List<InventoryLog> exportLogs = inventoryLogRepository.findByReferenceOrderIdAndTransactionType(
+                order.getId(), InventoryTransactionType.EXPORT_ORDER);
+        if (exportLogs != null && !exportLogs.isEmpty()) {
+            for (InventoryLog exp : exportLogs) {
+                if (exp.getIngredient() == null || exp.getQuantityChange() == null) continue;
+                BigDecimal restoreQty = exp.getQuantityChange().abs();
+                if (restoreQty.signum() == 0) continue;
+                StoreInventory inventory = storeInventoryRepository
+                        .findByStoreIdAndIngredientId(order.getStore().getId(), exp.getIngredient().getId())
+                        .orElse(null);
+                if (inventory == null) continue;
+                BigDecimal cur = inventory.getCurrentStock() != null ? inventory.getCurrentStock() : BigDecimal.ZERO;
+                inventory.setCurrentStock(cur.add(restoreQty));
+                storeInventoryRepository.save(inventory);
+                inventoryLogRepository.save(InventoryLog.builder()
+                        .store(order.getStore())
+                        .ingredient(exp.getIngredient())
+                        .quantityChange(restoreQty)
+                        .transactionType(InventoryTransactionType.ADJUSTMENT)
+                        .referenceOrderId(order.getId())
+                        .note("Hoàn trả nguyên liệu do đơn hàng #" + order.getOrderCode() + " bị hủy")
+                        .build());
+            }
+            log.info("Successfully restored inventory ingredients for cancelled order #{}", order.getOrderCode());
             return;
         }
 
